@@ -47,6 +47,11 @@ const en_US = () => {
         no: "No",
         ok: "OK",
         errorTitle: "An error occurred!",
+        input: "Input",
+        compare: "Compare",
+        compareHash: "Your hash here",
+        calculate: "Calculate",
+        output: "Output",
     }
 };
 

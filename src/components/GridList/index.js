@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 
-const ThemeList = ({spacing, children, xs, md, lg}) => {
+const GridList = ({spacing, children, xs, md, lg}) => {
     return (
         <Grid container spacing={spacing}>
             {children.map((e, i) => {
@@ -15,4 +15,4 @@ const ThemeList = ({spacing, children, xs, md, lg}) => {
     );
 };
 
-export default ThemeList;
+export default GridList;

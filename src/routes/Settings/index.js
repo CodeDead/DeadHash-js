@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import ThemeList from "../../components/ThemeList";
+import GridList from "../../components/GridList";
 import Theme from "../../components/Theme";
 import blue from "@material-ui/core/colors/blue";
 import red from "@material-ui/core/colors/red";
@@ -223,7 +223,7 @@ const Settings = () => {
                                 {language.theme}
                             </Typography>
 
-                            <ThemeList spacing={2} xs={12} md={4} lg={3}>
+                            <GridList spacing={2} xs={12} md={4} lg={3}>
                                 <Theme title={language.default} description={language.defaultThemeDescription}
                                        color={blue[500]} selected={themeIndex === 0}
                                        actionText={language.select} onAction={() => changeTheme(0)}/>
@@ -248,7 +248,7 @@ const Settings = () => {
                                 <Theme title={language.grey} description={language.greyDescription}
                                        color={grey[500]} selected={themeIndex === 7}
                                        actionText={language.select} onAction={() => changeTheme(7)}/>
-                            </ThemeList>
+                            </GridList>
                         </Grid>
                     </Grid>
                 </Container>
