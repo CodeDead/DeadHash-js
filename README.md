@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Electron](https://electronjs.org/).
 
 ## Available Scripts
 
@@ -19,13 +19,11 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `dist` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance using electron-builder.
 
-The build is minified and the filenames include the hashes.<br />
+The build is minified.<br />
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `yarn eject`
 
@@ -43,26 +41,13 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+To learn Electron, check out the [Electron documentation](https://electronjs.org/).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## About
+This library is maintained by CodeDead. You can find more about us using the following links:
+* [Website](https://codedead.com)
+* [Twitter](https://twitter.com/C0DEDEAD)
+* [Facebook](https://facebook.com/deadlinecodedead)
+* [Reddit](https://reddit.com/r/CodeDead/)
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+We would also like to thank JetBrains for the open source license that they granted us to work with wonderful tools such as [WebStorm](https://jetbrains.com/webstorm) and [Resharper](https://jetbrains.com/resharper).
