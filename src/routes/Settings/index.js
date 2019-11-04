@@ -58,7 +58,6 @@ const Settings = () => {
     const sha384 = useSelector(state => state.CryptoReducer.sha384);
     const sha512 = useSelector(state => state.CryptoReducer.sha512);
     const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
-    const crc32 = useSelector(state => state.CryptoReducer.crc32);
 
     const dispatch = useDispatch();
     const classes = useStyles();

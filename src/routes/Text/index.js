@@ -15,6 +15,7 @@ import CryptoSha224 from "crypto-js/sha224";
 import CryptoSha3 from "crypto-js/sha3";
 import Hash from "../../components/Hash";
 import GridList from "../../components/GridList";
+import CopyPasteMenu from "../../components/CopyPasteMenu";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -36,7 +37,8 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
     },
     button: {
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1)
     }
 }));
 
@@ -60,13 +62,17 @@ const Text = () => {
     const [hashes, setHashes] = useState();
 
     const compareField = compare ? (
-        <TextField
-            id="outlined-basic"
-            margin="normal"
-            value={compareHash}
-            onChange={(e) => setCompareHash(e.target.value)}
-            label={language.compareHash}
-            variant="outlined"/>
+        <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
+                       pasteData={() => pasteData(setCompareHash)}>
+            <TextField
+                id="outlined-basic"
+                style={{width: '100%'}}
+                margin="normal"
+                value={compareHash}
+                onChange={(e) => setCompareHash(e.target.value)}
+                label={language.compareHash}
+                variant="outlined"/>
+        </CopyPasteMenu>
     ) : null;
 
     useEffect(() => {
@@ -79,14 +85,15 @@ const Text = () => {
                 {language.output}
             </Typography>
             <GridList md={12} lg={12} xs={12} spacing={2}>
-                {hashes.map((e,i) => {
-                    return(
-                        <Hash id={i} key={i} content={e.hash} hashType={e.type} compareString={compare ? compareHash : null}/>
+                {hashes.map((e, i) => {
+                    return (
+                        <Hash id={i} key={i} content={e.hash} hashType={e.type}
+                              compareString={compare ? compareHash : null}/>
                     );
                 })}
             </GridList>
         </>
-     : null;
+        : null;
 
     function calculateHashes() {
         if (!input || input.length === 0) return;
@@ -121,6 +128,20 @@ const Text = () => {
         setHashes(newHashes);
     }
 
+    function pasteData(func) {
+        navigator.clipboard.readText()
+            .then(text => {
+                func(text);
+            })
+    }
+
+    function clearData() {
+        setInput("");
+        setCompare(false);
+        setCompareHash("");
+        setHashes(null);
+    }
+
     return (
         <div>
             <div className={classes.heroContent}>
@@ -141,14 +162,18 @@ const Text = () => {
                                 {language.input}
                             </Typography>
                             <Paper className={classes.paper}>
-                                <TextField
-                                    id="outlined-basic"
-                                    margin="normal"
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    multiline
-                                    rowsMax={6}
-                                    variant="outlined"/>
+                                <CopyPasteMenu id={0} copyData={() => navigator.clipboard.writeText(input)}
+                                               pasteData={() => pasteData(setInput)}>
+                                    <TextField
+                                        style={{width: "100%"}}
+                                        id="outlined-basic"
+                                        margin="normal"
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        multiline
+                                        rowsMax={6}
+                                        variant="outlined"/>
+                                </CopyPasteMenu>
 
                                 <FormControlLabel
                                     control={
@@ -163,6 +188,12 @@ const Text = () => {
                                 />
                                 {compareField}
                             </Paper>
+                            {hashes && hashes.length > 0 ? (
+                                <Button className={classes.button} color={"primary"} variant={"contained"}
+                                        style={{float: 'left'}} onClick={() => clearData()}>
+                                    {language.clear}
+                                </Button>
+                            ) : null}
                             <Button className={classes.button} color={"primary"} variant={"contained"}
                                     disabled={!input || input.length === 0}
                                     style={{float: 'right'}} onClick={() => calculateHashes()}>

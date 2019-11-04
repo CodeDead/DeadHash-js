@@ -53,6 +53,9 @@ const en_US = () => {
         compareHash: "Your hash here",
         calculate: "Calculate",
         output: "Output",
+        copy: "Copy",
+        paste: "Paste",
+        clear: "Clear",
     }
 };
 
