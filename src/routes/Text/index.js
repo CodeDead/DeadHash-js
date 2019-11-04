@@ -11,6 +11,8 @@ import CryptoSha256 from "crypto-js/sha256";
 import CryptoSha384 from "crypto-js/sha384";
 import CryptoSha512 from "crypto-js/sha512";
 import CryptoRipemd160 from "crypto-js/ripemd160";
+import CryptoSha224 from "crypto-js/sha224";
+import CryptoSha3 from "crypto-js/sha3";
 import Hash from "../../components/Hash";
 import GridList from "../../components/GridList";
 
@@ -42,7 +44,9 @@ const Text = () => {
 
     const md5 = useSelector(state => state.CryptoReducer.md5);
     const sha1 = useSelector(state => state.CryptoReducer.sha1);
+    const sha224 = useSelector(state => state.CryptoReducer.sha224);
     const sha256 = useSelector(state => state.CryptoReducer.sha256);
+    const sha3 = useSelector(state => state.CryptoReducer.sha3);
     const sha384 = useSelector(state => state.CryptoReducer.sha384);
     const sha512 = useSelector(state => state.CryptoReducer.sha512);
     const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
@@ -77,7 +81,7 @@ const Text = () => {
             <GridList md={12} lg={12} xs={12} spacing={2}>
                 {hashes.map((e,i) => {
                     return(
-                        <Hash key={i} content={e.hash} hashType={e.type} compareString={compare ? compareHash : null}/>
+                        <Hash id={i} key={i} content={e.hash} hashType={e.type} compareString={compare ? compareHash : null}/>
                     );
                 })}
             </GridList>
@@ -94,8 +98,14 @@ const Text = () => {
         if (sha1) {
             newHashes.push({type: "SHA-1", hash: CryptoSha1(input).toString()});
         }
+        if (sha224) {
+            newHashes.push({type: "SHA-224", hash: CryptoSha224(input).toString()});
+        }
         if (sha256) {
             newHashes.push({type: "SHA-256", hash: CryptoSha256(input).toString()});
+        }
+        if (sha3) {
+            newHashes.push({type: "SHA-3", hash: CryptoSha3(input).toString()});
         }
         if (sha384) {
             newHashes.push({type: "SHA-384", hash: CryptoSha384(input).toString()});

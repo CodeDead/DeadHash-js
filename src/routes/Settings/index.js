@@ -52,7 +52,9 @@ const Settings = () => {
 
     const md5 = useSelector(state => state.CryptoReducer.md5);
     const sha1 = useSelector(state => state.CryptoReducer.sha1);
+    const sha224 = useSelector(state => state.CryptoReducer.sha224);
     const sha256 = useSelector(state => state.CryptoReducer.sha256);
+    const sha3 = useSelector(state => state.CryptoReducer.sha3);
     const sha384 = useSelector(state => state.CryptoReducer.sha384);
     const sha512 = useSelector(state => state.CryptoReducer.sha512);
     const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
@@ -159,6 +161,18 @@ const Settings = () => {
                                     <FormControlLabel
                                         control={
                                             <Checkbox
+                                                checked={sha224}
+                                                onChange={(e) => dispatch({type: 'SET_SHA224_STATE', payload: e.target.checked})}
+                                                value="sha224"
+                                                color="primary"
+                                            />
+                                        }
+                                        label={language.sha224}
+                                    />
+
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
                                                 checked={sha256}
                                                 onChange={(e) => dispatch({type: 'SET_SHA256_STATE', payload: e.target.checked})}
                                                 value="sha256"
@@ -166,6 +180,18 @@ const Settings = () => {
                                             />
                                         }
                                         label={language.sha256}
+                                    />
+
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={sha3}
+                                                onChange={(e) => dispatch({type: 'SET_SHA3_STATE', payload: e.target.checked})}
+                                                value="sha3"
+                                                color="primary"
+                                            />
+                                        }
+                                        label={language.sha3}
                                     />
 
                                     <FormControlLabel
@@ -202,18 +228,6 @@ const Settings = () => {
                                             />
                                         }
                                         label={language.ripemd160}
-                                    />
-
-                                    <FormControlLabel
-                                        control={
-                                            <Checkbox
-                                                checked={crc32}
-                                                onChange={(e) => dispatch({type: 'SET_CRC32_STATE', payload: e.target.checked})}
-                                                value="crc32"
-                                                color="primary"
-                                            />
-                                        }
-                                        label={language.crc32}
                                     />
                                 </div>
                             </Paper>

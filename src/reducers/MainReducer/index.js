@@ -14,7 +14,7 @@ let themeIndex = localStorage['themeIndex'];
 let autoUpdate = localStorage['autoUpdate'];
 
 if (!languageIndex) {
-    languageIndex = 0;
+    languageIndex = 1;
 } else {
     languageIndex = parseInt(languageIndex);
 }

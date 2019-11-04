@@ -36,6 +36,7 @@
     "crypto-js": "^3.1.9-1",
     "electron-is-dev": "^1.1.0",
     "react": "^16.11.0",
+    "react-contexify": "^4.1.1",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
     "react-router": "^5.1.2",
@@ -71,7 +72,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
-    "electron": "^7.0.0",
+    "electron": "^7.0.1",
     "electron-builder": "^22.1.0",
     "wait-on": "^3.3.0"
   }

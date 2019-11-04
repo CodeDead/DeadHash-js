@@ -1,12 +1,13 @@
 import {handleActions} from "redux-actions";
 import {
     setMd5state,
-    setCRC32State,
     setRipeMd160State,
     setSha1State,
     setSha256State,
     setSha384State,
-    setSha512State
+    setSha512State,
+    setSha3State,
+    setSha224State
 } from "./Actions/CryptoActions";
 
 let md5 = localStorage['md5'];
@@ -14,6 +15,12 @@ md5 = !md5 || md5 === "true";
 
 let sha1 = localStorage['sha1'];
 sha1 = !sha1 || sha1 === "true";
+
+let sha3 = localStorage['sha3'];
+sha3 = !sha3 || sha3 === "true";
+
+let sha224 = localStorage['sha224'];
+sha224 = !sha224 || sha224 === "true";
 
 let sha256 = localStorage['sha256'];
 sha256 = !sha256 || sha256 === "true";
@@ -27,17 +34,16 @@ sha512 = !sha512 || sha512 === "true";
 let ripemd160 = localStorage['ripemd160'];
 ripemd160 = !ripemd160 || ripemd160 === "true";
 
-let crc32 = localStorage['crc32'];
-crc32 = !crc32 || crc32 === "true";
 
 const initState = {
     md5: md5,
     sha1: sha1,
+    sha224: sha224,
     sha256: sha256,
+    sha3: sha3,
     sha384: sha384,
     sha512: sha512,
     ripemd160: ripemd160,
-    crc32: crc32
 };
 
 const CryptoReducer = handleActions({
@@ -83,11 +89,18 @@ const CryptoReducer = handleActions({
             ripemd160: action.payload
         }
     },
-    [setCRC32State](state, action) {
-        localStorage['crc32'] = action.payload;
+    [setSha3State](state, action) {
+        localStorage['sha3'] = action.payload;
         return {
             ...state,
-            crc32: action.payload
+            sha3: action.payload
+        }
+    },
+    [setSha224State](state, action) {
+        localStorage['sha224'] = action.payload;
+        return {
+            ...state,
+            sha224: action.payload
         }
     }
 }, initState);
