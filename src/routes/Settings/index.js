@@ -43,7 +43,8 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
     },
     button: {
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1)
     }
 }));
 

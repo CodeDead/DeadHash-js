@@ -57,6 +57,7 @@ const en_US = () => {
         paste: "Paste",
         clear: "Clear",
         reset: "Reset",
+        selectFile: "Select",
     }
 };
 
