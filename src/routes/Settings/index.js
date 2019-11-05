@@ -21,6 +21,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -40,6 +41,9 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column',
+    },
+    button: {
+        marginTop: theme.spacing(1)
     }
 }));
 
@@ -72,6 +76,11 @@ const Settings = () => {
 
     const handleLanguageChange = (e) => {
         dispatch({type: 'SET_LANGUAGEINDEX', index: e.target.value});
+    };
+
+    const resetSettings = () => {
+        dispatch({type: 'RESET_MAIN_REDUCER'});
+        dispatch({type: 'RESET_CRYPTO_REDUCER'});
     };
 
     return (
@@ -264,6 +273,9 @@ const Settings = () => {
                             </GridList>
                         </Grid>
                     </Grid>
+                    <Button color={"primary"} variant={"contained"} onClick={() => resetSettings()} className={classes.button} style={{float: 'right'}}>
+                        {language.reset}
+                    </Button>
                 </Container>
             </main>
         </div>

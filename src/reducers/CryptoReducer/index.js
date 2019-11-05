@@ -7,7 +7,7 @@ import {
     setSha384State,
     setSha512State,
     setSha3State,
-    setSha224State
+    setSha224State, resetCryptoReducer
 } from "./Actions/CryptoActions";
 
 let md5 = localStorage['md5'];
@@ -101,6 +101,26 @@ const CryptoReducer = handleActions({
         return {
             ...state,
             sha224: action.payload
+        }
+    },
+    [resetCryptoReducer]() {
+        localStorage['md5'] = true;
+        localStorage['sha1'] = true;
+        localStorage['sha256'] = true;
+        localStorage['sha384'] = true;
+        localStorage['sha512'] = true;
+        localStorage['ripemd160'] = true;
+        localStorage['sha3'] = true;
+        localStorage['sha224'] = true;
+        return {
+            md5: true,
+            sha1: true,
+            sha224: true,
+            sha256: true,
+            sha3: true,
+            sha384: true,
+            sha512: true,
+            ripemd160: true,
         }
     }
 }, initState);

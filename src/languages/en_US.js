@@ -56,6 +56,7 @@ const en_US = () => {
         copy: "Copy",
         paste: "Paste",
         clear: "Clear",
+        reset: "Reset",
     }
 };
 

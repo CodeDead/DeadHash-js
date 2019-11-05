@@ -1,6 +1,14 @@
 import {handleActions} from 'redux-actions'
 import en_US from "../../languages/en_US";
-import {setLanguageIndex, setActiveListItem, setDrawerOpen, setThemeIndex, setAutoUpdate, setUpdateChecked} from './Actions/MainActions';
+import {
+    setLanguageIndex,
+    setActiveListItem,
+    setDrawerOpen,
+    setThemeIndex,
+    setAutoUpdate,
+    setUpdateChecked,
+    resetMainReducer
+} from './Actions/MainActions';
 import de_DE from "../../languages/de_DE";
 import nl_NL from "../../languages/nl_NL";
 import fr_FR from "../../languages/fr_FR";
@@ -91,6 +99,18 @@ const MainReducer = handleActions({
         return {
             ...state,
             checkedForUpdates: action.payload
+        }
+    },
+    [resetMainReducer](state) {
+        localStorage['languageIndex'] = 1;
+        window.localStorage['themeIndex'] = 0;
+        localStorage['autoUpdate'] = true;
+
+        return {
+            ...state,
+            languageIndex: 1,
+            themeIndex: 0,
+            autoUpdate: true,
         }
     }
 }, initState);
