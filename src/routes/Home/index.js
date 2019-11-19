@@ -13,7 +13,7 @@ import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router";
 import blank from "../../components/Theme/blank.png";
 import UpdateModal from "../../components/UpdateModal";
-import ErrorModal from "../../components/ErrorModal";
+import AlertModal from "../../components/AlertModal";
 import {Updater} from "../../utils/Updater";
 
 const useStyles = makeStyles(theme => ({
@@ -94,8 +94,8 @@ const Home = () => {
             </div>
             <main className={classes.content}>
                 {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
-                {errorMessage && errorMessage.length > 0 ? (<ErrorModal content={errorMessage}/>) : null}
-                <Container className={classes.container}>
+                {errorMessage && errorMessage.length > 0 ? (<AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
+                <Container maxWidth={"sm"} className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6} lg={6}>
                             <Card>

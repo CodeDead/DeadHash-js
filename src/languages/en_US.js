@@ -62,6 +62,8 @@ const en_US = () => {
         information: "Information",
         newVersion: "Version {x} is now available. Would you like to download this version?",
         checkForUpdates: "Check for updates",
+        noUpdatesTitle: "No updates available!",
+        noUpdatesMessage: "You are using the latest version of DeadHash."
     }
 };
 
