@@ -73,7 +73,6 @@ const Settings = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [update, setUpdate] = useState(null);
-    const [updateAvailable, setUpdateAvailable] = useState(false);
 
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -100,24 +99,13 @@ const Settings = () => {
 
         setLoading(true);
         setUpdate(null);
-        setUpdateAvailable(false);
         setErrorMessage(null);
 
-        const data = await Updater();
+        const data = await Updater(os);
         if (data && data.length > 0) {
             setErrorMessage(data);
         } else {
-            const platform = data.platforms[os.platform];
-            console.log(platform);
-            setUpdate(platform);
-            if (platform.version.majorVersion > 1)
-                setUpdateAvailable(true);
-            if (platform.version.minorVersion > 0)
-                setUpdateAvailable(true);
-            if (platform.version.buildVersion > 0)
-                setUpdateAvailable(true);
-            if (platform.version.revisionVersion > 9)
-                setUpdateAvailable(true);
+            setUpdate(data);
         }
         setLoading(false);
     };
@@ -135,7 +123,7 @@ const Settings = () => {
                 </Container>
             </div>
             <main className={classes.content}>
-                {updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version.majorVersion + "." + update.version.minorVersion + "." + update.version.buildVersion + "." + update.version.revisionVersion}/>) : null}
+                {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (<ErrorModal content={errorMessage}/>) : null}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={2}>

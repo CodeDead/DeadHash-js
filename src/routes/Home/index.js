@@ -12,7 +12,6 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router";
 import blank from "../../components/Theme/blank.png";
-import axios from "axios";
 import UpdateModal from "../../components/UpdateModal";
 import ErrorModal from "../../components/ErrorModal";
 import {Updater} from "../../utils/Updater";
@@ -43,7 +42,6 @@ const Home = () => {
     const classes = useStyles();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
-    const [updateAvailable, setUpdateAvailable] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const [update, setUpdate] = useState(null);
 
@@ -59,26 +57,17 @@ const Home = () => {
 
         setLoading(true);
         setErrorMessage(null);
+        setUpdate(null);
 
         if (!updateChecked) {
             dispatch({type: 'SET_UPDATE_CHECKED', payload: true});
         }
 
-        const data = await Updater();
+        const data = await Updater(os);
         if (data && data.length > 0) {
             setErrorMessage(data);
         } else {
-            const platform = data.platforms[os.platform];
-            console.log(platform);
-            setUpdate(platform);
-            if (platform.version.majorVersion > 1)
-                setUpdateAvailable(true);
-            if (platform.version.minorVersion > 0)
-                setUpdateAvailable(true);
-            if (platform.version.buildVersion > 0)
-                setUpdateAvailable(true);
-            if (platform.version.revisionVersion > 9)
-                setUpdateAvailable(true);
+            setUpdate(data);
         }
         setLoading(false);
     };
@@ -104,7 +93,7 @@ const Home = () => {
                 </Container>
             </div>
             <main className={classes.content}>
-                {updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version.majorVersion + "." + update.version.minorVersion + "." + update.version.buildVersion + "." + update.version.revisionVersion}/>) : null}
+                {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (<ErrorModal content={errorMessage}/>) : null}
                 <Container className={classes.container}>
                     <Grid container spacing={2}>
