@@ -8,7 +8,7 @@ const BackButton = () => {
     const history = useHistory();
 
     return (
-        <Button variant={"inline"} color={"primary"} onClick={() => history.goBack()}>
+        <Button color={"primary"} onClick={() => history.goBack()}>
             <ArrowLeftIcon />
         </Button>
     );
