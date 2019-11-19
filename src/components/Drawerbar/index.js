@@ -13,7 +13,6 @@ import {useSelector, useDispatch} from "react-redux";
 import InfoIcon from '@material-ui/icons/Info';
 import BuildIcon from "@material-ui/icons/Build";
 import HelpIcon from "@material-ui/icons/Help";
-import KeyIcon from "@material-ui/icons/VpnKey";
 import {useHistory} from "react-router-dom";
 import CryptographyMenu from "../CryptographyMenu";
 

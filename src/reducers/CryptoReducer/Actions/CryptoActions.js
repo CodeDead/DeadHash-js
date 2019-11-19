@@ -9,3 +9,6 @@ export const setRipeMd160State = createAction("SET_RIPEMD160_STATE");
 export const setSha224State = createAction("SET_SHA224_STATE");
 export const setSha3State = createAction("SET_SHA3_STATE");
 export const resetCryptoReducer = createAction("RESET_CRYPTO_REDUCER");
+export const setFileHashes = createAction("SET_FILE_HASHES");
+export const setTextHashes = createAction("SET_TEXT_HASHES");
+export const setTextInput = createAction("SET_TEXT_INPUT");

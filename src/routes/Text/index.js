@@ -9,6 +9,7 @@ import Hash from "../../components/Hash";
 import GridList from "../../components/GridList";
 import CopyPasteMenu from "../../components/CopyPasteMenu";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
+import BackButton from "../../components/BackButton";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -46,17 +47,22 @@ const Text = () => {
     const sha512 = useSelector(state => state.CryptoReducer.sha512);
     const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
+    const input = useSelector(state => state.CryptoReducer.textInput);
+    const hashes = useSelector(state => state.CryptoReducer.textHashes);
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const [input, setInput] = useState("");
     const [compare, setCompare] = useState(false);
     const [compareHash, setCompareHash] = useState("");
-    const [hashes, setHashes] = useState(null);
 
     const compareField = compare ? (
         <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
-                       pasteData={() => pasteData(setCompareHash)}>
+                       pasteData={() =>
+                           navigator.clipboard.readText()
+                               .then(text => {
+                                   setCompareHash(text);
+                               })
+                       }>
             <TextField
                 id="outlined-basic"
                 style={{width: '100%'}}
@@ -90,36 +96,29 @@ const Text = () => {
 
     function calculateHashes() {
         if (!input || input.length === 0) return;
-        setHashes(null);
+        dispatch({type: "SET_TEXT_HASHES", payload: null});
 
         let newHashes = CryptoCalculator(input, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160);
 
         if (newHashes.length === 0) newHashes = null;
-        setHashes(newHashes);
-    }
-
-    function pasteData(func) {
-        navigator.clipboard.readText()
-            .then(text => {
-                func(text);
-            })
+        dispatch({type: "SET_TEXT_HASHES", payload: newHashes});
     }
 
     function clearData() {
-        setInput("");
+        dispatch({type: "SET_TEXT_INPUT", payload: ""});
         setCompare(false);
         setCompareHash("");
-        setHashes(null);
+        dispatch({type: "SET_TEXT_HASHES", payload: ""});
     }
 
     return (
         <div>
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
-                    <Typography variant="h3" align="center" color="textPrimary" gutterBottom>
+                    <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
                         {language.text}
                     </Typography>
-                    <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    <Typography variant="h6" align="center" color="textSecondary" paragraph>
                         {language.textSubtitle}
                     </Typography>
                 </Container>
@@ -129,17 +128,23 @@ const Text = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                <BackButton/>
                                 {language.input}
                             </Typography>
                             <Paper className={classes.paper}>
                                 <CopyPasteMenu id={0} copyData={() => navigator.clipboard.writeText(input)}
-                                               pasteData={() => pasteData(setInput)}>
+                                               pasteData={() =>
+                                                   navigator.clipboard.readText()
+                                                       .then(text => {
+                                                           dispatch({type: "SET_TEXT_INPUT", payload: text});
+                                                       })
+                                               }>
                                     <TextField
                                         style={{width: "100%"}}
                                         id="outlined-basic"
                                         margin="normal"
                                         value={input}
-                                        onChange={(e) => setInput(e.target.value)}
+                                        onChange={(e) => dispatch({type: "SET_TEXT_INPUT", payload: e.target.value})}
                                         multiline
                                         rowsMax={6}
                                         variant="outlined"/>

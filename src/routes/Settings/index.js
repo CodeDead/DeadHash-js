@@ -88,10 +88,10 @@ const Settings = () => {
         <div>
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
-                    <Typography variant="h3" align="center" color="textPrimary" gutterBottom>
+                    <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
                         {language.settings}
                     </Typography>
-                    <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    <Typography variant="h6" align="center" color="textSecondary" paragraph>
                         {language.settingsSubtitle}
                     </Typography>
                 </Container>

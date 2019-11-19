@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import CryptoJs from "crypto-js/crypto-js";
 import {FileDataReader} from "../../utils/FileDataReader";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
+import BackButton from "../../components/BackButton";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 const File = () => {
 
+    const hashes = useSelector(state => state.CryptoReducer.fileHashes);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -47,7 +49,6 @@ const File = () => {
     const [file, setFile] = useState(null);
     const [compare, setCompare] = useState(false);
     const [compareHash, setCompareHash] = useState("");
-    const [hashes, setHashes] = useState(null);
 
     const md5 = useSelector(state => state.CryptoReducer.md5);
     const sha1 = useSelector(state => state.CryptoReducer.sha1);
@@ -94,7 +95,7 @@ const File = () => {
 
     const calculateHashes = async () => {
         if (!file || file.length === 0) return;
-        setHashes(null);
+        dispatch({type: "SET_FILE_HASHES", payload: null});
 
         const data = await FileDataReader(file);
         if (!data || data.length === 0) return;
@@ -103,7 +104,7 @@ const File = () => {
         let newHashes = CryptoCalculator(encoded, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160);
 
         if (newHashes.length === 0) newHashes = null;
-        setHashes(newHashes);
+        dispatch({type: "SET_FILE_HASHES", payload: newHashes});
     };
 
     const pasteData = (func) => {
@@ -117,17 +118,17 @@ const File = () => {
         setFile(null);
         setCompare(false);
         setCompareHash("");
-        setHashes(null);
+        dispatch({type: "SET_FILE_HASHES", payload: null});
     };
 
     return (
         <div>
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
-                    <Typography variant="h3" align="center" color="textPrimary" gutterBottom>
+                    <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
                         {language.file}
                     </Typography>
-                    <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    <Typography variant="h6" align="center" color="textSecondary" paragraph>
                         {language.fileSubtitle}
                     </Typography>
                 </Container>
@@ -137,6 +138,7 @@ const File = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                <BackButton/>
                                 {language.input}
                             </Typography>
                             <Paper className={classes.paper}>

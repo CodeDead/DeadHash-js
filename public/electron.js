@@ -12,7 +12,7 @@ function createWindow() {
         },
         frame: false,
         title: "DeadHash",
-        width: 1000,
+        width: 950,
         height: 650,
         icon: path.join(__dirname, '../build/Icon-512x512.png')
     });

@@ -7,7 +7,7 @@ import {
     setSha384State,
     setSha512State,
     setSha3State,
-    setSha224State, resetCryptoReducer
+    setSha224State, resetCryptoReducer, setTextHashes, setFileHashes, setTextInput
 } from "./Actions/CryptoActions";
 
 let md5 = localStorage['md5'];
@@ -44,6 +44,9 @@ const initState = {
     sha384: sha384,
     sha512: sha512,
     ripemd160: ripemd160,
+    fileHashes: null,
+    textHashes: null,
+    textInput: "",
 };
 
 const CryptoReducer = handleActions({
@@ -121,6 +124,24 @@ const CryptoReducer = handleActions({
             sha384: true,
             sha512: true,
             ripemd160: true,
+        }
+    },
+    [setTextHashes](state, action) {
+        return {
+            ...state,
+            textHashes: action.payload
+        }
+    },
+    [setFileHashes](state, action) {
+        return {
+            ...state,
+            fileHashes: action.payload
+        }
+    },
+    [setTextInput](state, action) {
+        return {
+            ...state,
+            textInput: action.payload
         }
     }
 }, initState);
