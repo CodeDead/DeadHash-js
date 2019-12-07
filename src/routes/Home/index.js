@@ -95,7 +95,7 @@ const Home = () => {
             <main className={classes.content}>
                 {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (<AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
-                <Container maxWidth={"sm"} className={classes.container}>
+                <Container maxWidth={"lg"} className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6} lg={6}>
                             <Card>
