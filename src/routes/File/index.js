@@ -168,7 +168,7 @@ const File = () => {
                             ) : null}
                             <Button className={classes.button} color={"primary"} variant={"contained"}
                                     disabled={!file || file.length === 0}
-                                    style={{float: 'right'}} onClick={() => calculateHashes()}>
+                                    style={{float: 'right'}} onClick={async () => calculateHashes()}>
                                 {language.calculate}
                             </Button>
                         </Grid>

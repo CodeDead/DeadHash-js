@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -22,6 +22,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import {Updater} from "../../utils/Updater";
+import UpdateModal from "../../components/UpdateModal";
+import AlertModal from "../../components/AlertModal";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -48,6 +52,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const os = window.require('os');
+
 const Settings = () => {
 
     const themeIndex = useSelector(state => state.MainReducer.themeIndex);
@@ -63,6 +69,10 @@ const Settings = () => {
     const sha384 = useSelector(state => state.CryptoReducer.sha384);
     const sha512 = useSelector(state => state.CryptoReducer.sha512);
     const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
+
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [update, setUpdate] = useState(null);
 
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -84,6 +94,22 @@ const Settings = () => {
         dispatch({type: 'RESET_CRYPTO_REDUCER'});
     };
 
+    const checkForUpdates = async () => {
+        if (loading) return;
+
+        setLoading(true);
+        setUpdate(null);
+        setErrorMessage(null);
+
+        const data = await Updater(os);
+        if (data && data.length > 0) {
+            setErrorMessage(data);
+        } else {
+            setUpdate(data);
+        }
+        setLoading(false);
+    };
+
     return (
         <div>
             <div className={classes.heroContent}>
@@ -97,6 +123,9 @@ const Settings = () => {
                 </Container>
             </div>
             <main className={classes.content}>
+                {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
+                {update && !update.updateAvailable ? (<AlertModal title={language.noUpdatesTitle} content={language.noUpdatesMessage} />) : null}
+                {errorMessage && errorMessage.length > 0 ? (<AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
@@ -108,7 +137,10 @@ const Settings = () => {
                                     control={
                                         <Checkbox
                                             checked={autoUpdate}
-                                            onChange={(e) => dispatch({type: 'SET_AUTO_UPDATE', payload: e.target.checked})}
+                                            onChange={(e) => dispatch({
+                                                type: 'SET_AUTO_UPDATE',
+                                                payload: e.target.checked
+                                            })}
                                             value="md5"
                                             color="primary"
                                         />
@@ -147,7 +179,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={md5}
-                                                onChange={(e) => dispatch({type: 'SET_MD5_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_MD5_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="md5"
                                                 color="primary"
                                             />
@@ -159,7 +194,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha1}
-                                                onChange={(e) => dispatch({type: 'SET_SHA1_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_SHA1_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="sha1"
                                                 color="primary"
                                             />
@@ -171,7 +209,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha224}
-                                                onChange={(e) => dispatch({type: 'SET_SHA224_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_SHA224_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="sha224"
                                                 color="primary"
                                             />
@@ -183,7 +224,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha256}
-                                                onChange={(e) => dispatch({type: 'SET_SHA256_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_SHA256_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="sha256"
                                                 color="primary"
                                             />
@@ -195,7 +239,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha3}
-                                                onChange={(e) => dispatch({type: 'SET_SHA3_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_SHA3_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="sha3"
                                                 color="primary"
                                             />
@@ -207,7 +254,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha384}
-                                                onChange={(e) => dispatch({type: 'SET_SHA384_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_SHA384_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="sha384"
                                                 color="primary"
                                             />
@@ -219,7 +269,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha512}
-                                                onChange={(e) => dispatch({type: 'SET_SHA512_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_SHA512_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="sha512"
                                                 color="primary"
                                             />
@@ -231,7 +284,10 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={ripemd160}
-                                                onChange={(e) => dispatch({type: 'SET_RIPEMD160_STATE', payload: e.target.checked})}
+                                                onChange={(e) => dispatch({
+                                                    type: 'SET_RIPEMD160_STATE',
+                                                    payload: e.target.checked
+                                                })}
                                                 value="ripemd160"
                                                 color="primary"
                                             />
@@ -274,7 +330,12 @@ const Settings = () => {
                             </GridList>
                         </Grid>
                     </Grid>
-                    <Button color={"primary"} variant={"contained"} onClick={() => resetSettings()} className={classes.button} style={{float: 'right'}}>
+                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()}>
+                        <RefreshIcon/>
+                        {language.checkForUpdates}
+                    </Button>
+                    <Button color={"primary"} variant={"contained"} onClick={() => resetSettings()}
+                            className={classes.button} style={{float: 'right'}}>
                         {language.reset}
                     </Button>
                 </Container>

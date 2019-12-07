@@ -44,8 +44,8 @@ const en_US = () => {
         text: "Text",
         textSubtitle: "Calculate text hashes",
         license: "License",
-        yes: "Yes",
-        no: "No",
+        download: "Download",
+        cancel: "Cancel",
         ok: "OK",
         errorTitle: "An error occurred!",
         input: "Input",
@@ -58,6 +58,12 @@ const en_US = () => {
         clear: "Clear",
         reset: "Reset",
         selectFile: "Select",
+        updateAvailable: "Update available!",
+        information: "Information",
+        newVersion: "Version {x} is now available. Would you like to download this version?",
+        checkForUpdates: "Check for updates",
+        noUpdatesTitle: "No updates available!",
+        noUpdatesMessage: "You are using the latest version of DeadHash."
     }
 };
 

@@ -15,10 +15,13 @@ const useStyles = makeStyles(theme => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+    },
+    button: {
+        margin: theme.spacing(1)
     }
 }));
 
-const UpdateModal = ({infoUrl}) => {
+const UpdateModal = ({downloadUrl, infoUrl, newVersion}) => {
 
     const classes = useStyles();
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
@@ -28,9 +31,14 @@ const UpdateModal = ({infoUrl}) => {
         setOpen(false);
     };
 
-    function openInformation() {
+    const openInformation = () => {
         window.open(infoUrl, '_blank');
-    }
+    };
+
+    const openDownload = () => {
+        window.open(downloadUrl, '_blank');
+        handleClose();
+    };
 
     return (
         <Modal
@@ -40,20 +48,21 @@ const UpdateModal = ({infoUrl}) => {
             onClose={handleClose}
         >
             <div className={classes.modal}>
-                <h2 id="simple-modal-title">Test text</h2>
+                <h2 id="simple-modal-title">{language.updateAvailable}</h2>
                 <p id="simple-modal-description">
-                    Test text
+                    {language.newVersion.replace("{x}", newVersion)}
                 </p>
                 <div>
-                    <Button onClick={() => openInformation()}>
-                        Information
+                    <Button className={classes.button} onClick={() => openInformation()}>
+                        {language.information}
                     </Button>
-
-                    <Button variant={'contained'} color={'primary'} style={{float: 'right'}}>
-                        {language.yes}
+                    <Button className={classes.button} variant={'contained'} color={'primary'} style={{float: 'right'}}
+                            onClick={() => openDownload()}>
+                        {language.download}
                     </Button>
-                    <Button variant={'contained'} color={'primary'} style={{float: 'right'}}>
-                        {language.no}
+                    <Button className={classes.button} variant={'contained'} color={'primary'} style={{float: 'right'}}
+                            onClick={() => handleClose()}>
+                        {language.cancel}
                     </Button>
                 </div>
             </div>

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const ErrorModal = ({content}) => {
+const AlertModal = ({title, content}) => {
 
     const classes = useStyles();
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
@@ -36,7 +36,7 @@ const ErrorModal = ({content}) => {
             onClose={handleClose}
         >
             <div className={classes.modal}>
-                <h2 id="simple-modal-title">{language.errorTitle}</h2>
+                <h2 id="simple-modal-title">{title}</h2>
                 <p id="simple-modal-description">
                     {content}
                 </p>
@@ -48,4 +48,4 @@ const ErrorModal = ({content}) => {
     );
 };
 
-export default ErrorModal;
+export default AlertModal;

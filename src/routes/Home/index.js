@@ -12,9 +12,9 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router";
 import blank from "../../components/Theme/blank.png";
-import axios from "axios";
 import UpdateModal from "../../components/UpdateModal";
-import ErrorModal from "../../components/ErrorModal";
+import AlertModal from "../../components/AlertModal";
+import {Updater} from "../../utils/Updater";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -42,8 +42,8 @@ const Home = () => {
     const classes = useStyles();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
-    const [updateAvailable, setUpdateAvailable] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [update, setUpdate] = useState(null);
 
     useEffect(() => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 0});
@@ -52,36 +52,33 @@ const Home = () => {
         }
     }, []);
 
-    function checkForUpdates() {
+    const checkForUpdates = async () => {
         if (loading) return;
 
         setLoading(true);
         setErrorMessage(null);
+        setUpdate(null);
 
         if (!updateChecked) {
             dispatch({type: 'SET_UPDATE_CHECKED', payload: true});
         }
 
-        axios.get("https://codedead.com/Software/DeadHash/version.json")
-            .then(res => {
-                const platform = res.data.platforms[os.platform];
-                console.log(platform);
-            })
-            .catch(err => {
-                setErrorMessage(err.message);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    }
+        const data = await Updater(os);
+        if (data && data.length > 0) {
+            setErrorMessage(data);
+        } else {
+            setUpdate(data);
+        }
+        setLoading(false);
+    };
 
-    function openFileHasher() {
+    const openFileHasher = () => {
         history.push("/file");
-    }
+    };
 
-    function openTextHasher() {
+    const openTextHasher = () => {
         history.push("/text");
-    }
+    };
 
     return (
         <div>
@@ -96,9 +93,9 @@ const Home = () => {
                 </Container>
             </div>
             <main className={classes.content}>
-                {updateAvailable ? (<UpdateModal/>) : null}
-                {errorMessage && errorMessage.length > 0 ? (<ErrorModal content={errorMessage}/>) : null}
-                <Container className={classes.container}>
+                {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
+                {errorMessage && errorMessage.length > 0 ? (<AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
+                <Container maxWidth={"lg"} className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6} lg={6}>
                             <Card>
