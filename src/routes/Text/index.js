@@ -94,7 +94,10 @@ const Text = () => {
         </>
         : null;
 
-    function calculateHashes() {
+    /**
+     * Calculate the hashes for the specified input data
+     */
+    const calculateHashes = () => {
         if (!input || input.length === 0) return;
         dispatch({type: "SET_TEXT_HASHES", payload: null});
 
@@ -102,14 +105,17 @@ const Text = () => {
 
         if (newHashes.length === 0) newHashes = null;
         dispatch({type: "SET_TEXT_HASHES", payload: newHashes});
-    }
+    };
 
-    function clearData() {
+    /**
+     * Clear the user interface
+     */
+    const clearData = () => {
         dispatch({type: "SET_TEXT_INPUT", payload: ""});
         setCompare(false);
         setCompareHash("");
         dispatch({type: "SET_TEXT_HASHES", payload: ""});
-    }
+    };
 
     return (
         <div>

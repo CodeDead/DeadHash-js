@@ -22,17 +22,20 @@ const CryptographyMenu = ({handleIndexChange, selectedIndex}) => {
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const [openCollapse, setOpenCollapse] = useState(true);
 
-    function handleOpenSettings() {
+    /**
+     * Open the menu
+     */
+    const handleOpenMenu = () => {
         setOpenCollapse(!openCollapse);
-    }
+    };
 
     return (
         <List>
             <ListItem button selected={selectedIndex === 0}>
                 <ListItemIcon onClick={() => handleIndexChange(0)}><KeyIcon/></ListItemIcon>
                 <ListItemText onClick={() => handleIndexChange(0)} primary={language.cryptography}/>
-                {openCollapse ? <ExpandLessIcon onClick={handleOpenSettings}/> :
-                    <ExpandMoreIcon onClick={handleOpenSettings}/>}
+                {openCollapse ? <ExpandLessIcon onClick={handleOpenMenu}/> :
+                    <ExpandMoreIcon onClick={handleOpenMenu}/>}
             </ListItem>
             <Collapse in={openCollapse} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>

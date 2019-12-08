@@ -27,14 +27,23 @@ const UpdateModal = ({downloadUrl, infoUrl, newVersion}) => {
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const [open, setOpen] = React.useState(true);
 
+    /**
+     * Handle the closing of the update modal
+     */
     const handleClose = () => {
         setOpen(false);
     };
 
+    /**
+     * Open the information page
+     */
     const openInformation = () => {
         window.open(infoUrl, '_blank');
     };
 
+    /**
+     * Open the download page
+     */
     const openDownload = () => {
         window.open(downloadUrl, '_blank');
         handleClose();

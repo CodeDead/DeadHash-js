@@ -62,51 +62,51 @@ const Topbar = () => {
     /**
      * Open the drawer
      */
-    function openDrawer() {
+    const openDrawer = () => {
         dispatch({type: "SET_DRAWEROPEN", drawerOpen: true});
-    }
+    };
 
     /**
      * Change the language of the application
      * @param lang The language index
      */
-    function changeLanguage(lang) {
+    const changeLanguage = (lang) => {
         handleClose();
         dispatch({type: 'SET_LANGUAGEINDEX', index: lang});
-    }
+    };
 
     /**
      * Handle the closing of the top bar
      */
-    function handleClose() {
+    const handleClose = () => {
         setAnchorEl(null);
-    }
+    };
 
     /**
      * Handle menu event
      * @param event The event of the menu
      */
-    function handleMenu(event) {
+    const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
-    }
+    };
 
     /**
      * Minimize the window
      */
-    function minimize() {
+    const minimize = () => {
         remote.getGlobal("mainWindow").minimize();
-    }
+    };
 
     /**
      * Maximize or restore the previous state of the window
      */
-    function maximize() {
+    const maximize = () => {
         if (!remote.getGlobal("mainWindow").isMaximized()) {
             remote.getGlobal("mainWindow").maximize();
         } else {
             remote.getGlobal("mainWindow").unmaximize();
         }
-    }
+    };
 
     return (
         <div className={classes.root}>

@@ -93,6 +93,10 @@ const File = () => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 1});
     }, []);
 
+    /**
+     * Calculate the hashes of a specific file
+     * @returns {Promise<void>}
+     */
     const calculateHashes = async () => {
         if (!file || file.length === 0) return;
         dispatch({type: "SET_FILE_HASHES", payload: null});
@@ -107,6 +111,10 @@ const File = () => {
         dispatch({type: "SET_FILE_HASHES", payload: newHashes});
     };
 
+    /**
+     * Paste data into the clipboard
+     * @param func The function that should be called
+     */
     const pasteData = (func) => {
         navigator.clipboard.readText()
             .then(text => {
@@ -114,6 +122,9 @@ const File = () => {
             })
     };
 
+    /**
+     * Clear the user interface
+     */
     const clearData = () => {
         setFile(null);
         setCompare(false);

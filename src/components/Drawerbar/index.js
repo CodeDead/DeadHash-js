@@ -49,15 +49,15 @@ const Drawerbar = () => {
     /**
      * Function that is called when the drawer should close
      */
-    function handleDrawerClose() {
+    const handleDrawerClose = () => {
         dispatch({type: "SET_DRAWEROPEN", drawerOpen: false});
-    }
+    };
 
     /**
      * Handle a page change
      * @param index The index of the page
      */
-    function handleIndexChange(index) {
+    const handleIndexChange = (index) => {
         dispatch({type: "SET_DRAWEROPEN", drawerOpen: false});
         if (selectedItem === index) return;
 
@@ -82,7 +82,7 @@ const Drawerbar = () => {
                 history.push('/about');
                 break;
         }
-    }
+    };
 
     return (
         <Drawer
@@ -102,7 +102,7 @@ const Drawerbar = () => {
 
             <Divider/>
 
-            <CryptographyMenu handleIndexChange={handleIndexChange} selectedIndex={selectedItem} />
+            <CryptographyMenu handleIndexChange={handleIndexChange} selectedIndex={selectedItem}/>
 
             <Divider/>
 

@@ -24,6 +24,9 @@ const AlertModal = ({title, content}) => {
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const [open, setOpen] = React.useState(true);
 
+    /**
+     * Handle the closing of the alert modal
+     */
     const handleClose = () => {
         setOpen(false);
     };
