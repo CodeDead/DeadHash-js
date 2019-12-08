@@ -31,7 +31,6 @@ export const Updater = (os) => {
     return new Promise(resolve => {
         axios.get("https://codedead.com/Software/DeadHash/version.json")
             .then(res => {
-                console.log(res.data);
                 resolve(parseUpdate(res.data));
             })
             .catch(err => {
