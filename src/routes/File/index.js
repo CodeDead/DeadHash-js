@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Checkbox, FormControlLabel, makeStyles, Paper} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
@@ -58,6 +58,8 @@ const File = () => {
     const sha384 = useSelector(state => state.CryptoReducer.sha384);
     const sha512 = useSelector(state => state.CryptoReducer.sha512);
     const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
+
+    const fileInputRef = useRef(null);
 
     const output = hashes && hashes.length > 0 ?
         <>
@@ -154,8 +156,9 @@ const File = () => {
                             </Typography>
                             <Paper className={classes.paper}>
                                 <Button
+                                    onClick={() => fileInputRef.current.click()}
                                     label={language.selectFile}>
-                                    <input type="file" onChange={e => setFile(e.target.files[0])}/>
+                                    <input type="file" ref={fileInputRef} onChange={e => setFile(e.target.files[0])}/>
                                 </Button>
 
                                 <FormControlLabel

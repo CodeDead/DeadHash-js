@@ -63,7 +63,9 @@ const ru_RU = () => {
         newVersion: "Версия {x} теперь доступна. Хотите скачать эту версию?",
         checkForUpdates: "Проверьте наличие обновлений",
         noUpdatesTitle: "Нет доступных обновлений!",
-        noUpdatesMessage: "Вы используете последнюю версию DeadHash."
+        noUpdatesMessage: "Вы используете последнюю версию DeadHash.",
+        minimizeEnabled: "Кнопка свертывания",
+        maximizeEnabled: "Кнопка увеличения"
     }
 };
 

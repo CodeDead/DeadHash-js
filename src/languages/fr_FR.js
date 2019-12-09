@@ -63,7 +63,9 @@ const fr_FR = () => {
         newVersion: "Version {x} est maintenant disponible. Souhaitez-vous télécharger cette version?",
         checkForUpdates: "Vérifier les mises à jour",
         noUpdatesTitle: "Aucune mise à jour disponible!",
-        noUpdatesMessage: "Vous utilisez la dernière version de DeadHash."
+        noUpdatesMessage: "Vous utilisez la dernière version de DeadHash.",
+        minimizeEnabled: "Bouton Réduire",
+        maximizeEnabled: "Bouton Agrandir"
     }
 };
 
