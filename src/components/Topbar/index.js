@@ -9,7 +9,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useSelector, useDispatch} from "react-redux";
-import clsx from "clsx";
 import Drawerbar from "../Drawerbar";
 import CloseIcon from '@material-ui/icons/Close';
 import MinimizeIcon from "@material-ui/icons/Minimize";
@@ -110,11 +109,9 @@ const Topbar = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" className={clsx(classes.appBar, {
-                [classes.appBarShift]: open,
-            })}>
+            <AppBar position="fixed" className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
                 <Toolbar variant={"dense"}>
-                    <IconButton edge="start" className={clsx(open && classes.hide)} color="inherit"
+                    <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
                         <MenuIcon/>
                     </IconButton>
