@@ -53,6 +53,8 @@ const Topbar = () => {
     const open = useSelector(state => state.MainReducer.drawerOpen);
     const languageIndex = useSelector(state => state.MainReducer.languageIndex);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
+    const minimizeEnabled = useSelector(state => state.MainReducer.minimizeEnabled);
+    const maximizeEnabled = useSelector(state => state.MainReducer.maximizeEnabled);
     const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -163,16 +165,22 @@ const Topbar = () => {
                                       selected={languageIndex === 7}>Türkçe</MenuItem>
                         </Menu>
                     </div>
-                    <IconButton
-                        color="inherit"
-                        onClick={() => minimize()}>
-                        <MinimizeIcon/>
-                    </IconButton>
-                    <IconButton
-                        color="inherit"
-                        onClick={() => maximize()}>
-                        <FullScreenIcon/>
-                    </IconButton>
+                    {minimizeEnabled ?
+                        <IconButton
+                            color="inherit"
+                            onClick={() => minimize()}>
+                            <MinimizeIcon/>
+                        </IconButton>
+                        : null
+                    }
+                    {maximizeEnabled ?
+                        <IconButton
+                            color="inherit"
+                            onClick={() => maximize()}>
+                            <FullScreenIcon/>
+                        </IconButton>
+                        : null
+                    }
                     <IconButton
                         color="inherit"
                         onClick={() => remote.getGlobal("mainWindow").close()}>

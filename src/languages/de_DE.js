@@ -63,7 +63,9 @@ const de_DE = () => {
         newVersion: "Version {x} ist jetzt verfügbar. Möchten Sie diese Version herunterladen?",
         checkForUpdates: "Auf Updates prüfen",
         noUpdatesTitle: "Keine Updates verfügbar!",
-        noUpdatesMessage: "Sie verwenden die neueste Version von DeadHash."
+        noUpdatesMessage: "Sie verwenden die neueste Version von DeadHash.",
+        minimizeEnabled: "Schaltfläche \"Minimieren\"",
+        maximizeEnabled: "Schaltfläche \"Maximieren\""
     }
 };
 

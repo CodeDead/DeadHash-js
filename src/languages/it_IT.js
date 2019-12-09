@@ -63,7 +63,9 @@ const it_IT = () => {
         newVersion: "Versione {x} è ora disponibile. Vuoi scaricare questa versione?",
         checkForUpdates: "Controlla gli aggiornamenti",
         noUpdatesTitle: "Nessun aggiornamento disponibile!",
-        noUpdatesMessage: "Stai utilizzando l'ultima versione di DeadHash."
+        noUpdatesMessage: "Stai utilizzando l'ultima versione di DeadHash.",
+        minimizeEnabled: "Pulsante Riduci a icona",
+        maximizeEnabled: "Pulsante Massimizza"
     }
 };
 

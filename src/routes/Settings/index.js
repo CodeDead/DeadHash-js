@@ -60,6 +60,8 @@ const Settings = () => {
     const languageIndex = useSelector(state => state.MainReducer.languageIndex);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const autoUpdate = useSelector(state => state.MainReducer.autoUpdate);
+    const minimize = useSelector(state => state.MainReducer.minimizeEnabled);
+    const maximize = useSelector(state => state.MainReducer.maximizeEnabled);
 
     const md5 = useSelector(state => state.CryptoReducer.md5);
     const sha1 = useSelector(state => state.CryptoReducer.sha1);
@@ -161,6 +163,34 @@ const Settings = () => {
                                         />
                                     }
                                     label={language.autoUpdate}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={minimize}
+                                            onChange={(e) => dispatch({
+                                                type: 'SET_MINIMIZE_STATUS',
+                                                payload: e.target.checked
+                                            })}
+                                            value="minimize"
+                                            color="primary"
+                                        />
+                                    }
+                                    label={language.minimizeEnabled}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={maximize}
+                                            onChange={(e) => dispatch({
+                                                type: 'SET_MAXIMIZE_STATUS',
+                                                payload: e.target.checked
+                                            })}
+                                            value="maximize"
+                                            color="primary"
+                                        />
+                                    }
+                                    label={language.maximizeEnabled}
                                 />
                                 <FormControl>
                                     <InputLabel htmlFor="language-simple">{language.language}</InputLabel>

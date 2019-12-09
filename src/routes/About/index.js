@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper';
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -53,12 +52,12 @@ const About = () => {
             </div>
             <main className={classes.content}>
                 <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
+                            <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                {language.appName} - {language.about}
+                            </Typography>
                             <Paper className={classes.paper}>
-                                <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                                    <FavoriteIcon style={{color: 'red'}}/> {language.appName} - {language.about}
-                                </Typography>
                                 <div style={{whiteSpace: 'pre-wrap'}}>
                                     <p>
                                         {language.aboutMessage}

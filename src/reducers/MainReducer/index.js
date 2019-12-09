@@ -7,7 +7,7 @@ import {
     setThemeIndex,
     setAutoUpdate,
     setUpdateChecked,
-    resetMainReducer
+    resetMainReducer, setMinimizeStatus, setMaximizeStatus
 } from './Actions/MainActions';
 import de_DE from "../../languages/de_DE";
 import nl_NL from "../../languages/nl_NL";
@@ -20,6 +20,8 @@ import tr_TR from "../../languages/tr_TR";
 let languageIndex = localStorage['languageIndex'];
 let themeIndex = localStorage['themeIndex'];
 let autoUpdate = localStorage['autoUpdate'];
+let minimizeEnabled = localStorage['minimizeEnabled'];
+let maximizeEnabled = localStorage['maximizeEnabled'];
 
 if (!languageIndex) {
     languageIndex = 1;
@@ -33,8 +35,9 @@ if (!themeIndex) {
     themeIndex = parseInt(themeIndex);
 }
 
-if (!autoUpdate || autoUpdate === "true") autoUpdate = true;
-else autoUpdate = "false";
+autoUpdate = !autoUpdate || autoUpdate === "true";
+minimizeEnabled = !minimizeEnabled || minimizeEnabled === "true";
+maximizeEnabled = !maximizeEnabled || maximizeEnabled === "true";
 
 const initState = {
     languageIndex: languageIndex,
@@ -58,7 +61,9 @@ const initState = {
         buildVersion: 0,
         revisionVersion: 0
     },
-    checkedForUpdates: false
+    checkedForUpdates: false,
+    minimizeEnabled: minimizeEnabled,
+    maximizeEnabled: maximizeEnabled
 };
 
 const MainReducer = handleActions({
@@ -82,7 +87,7 @@ const MainReducer = handleActions({
         }
     },
     [setThemeIndex](state, action) {
-        window.localStorage['themeIndex'] = action.payload;
+        localStorage['themeIndex'] = action.payload;
         return {
             ...state,
             themeIndex: action.payload
@@ -103,14 +108,32 @@ const MainReducer = handleActions({
     },
     [resetMainReducer](state) {
         localStorage['languageIndex'] = 1;
-        window.localStorage['themeIndex'] = 0;
+        localStorage['themeIndex'] = 0;
         localStorage['autoUpdate'] = true;
+        localStorage['minimizeEnabled'] = true;
+        localStorage['maximizeEnabled'] = true;
 
         return {
             ...state,
             languageIndex: 1,
             themeIndex: 0,
             autoUpdate: true,
+            minimizeEnabled: true,
+            maximizeEnabled: true
+        }
+    },
+    [setMinimizeStatus](state, action) {
+        localStorage['minimizeEnabled'] = action.payload;
+        return {
+            ...state,
+            minimizeEnabled: action.payload
+        }
+    },
+    [setMaximizeStatus](state, action) {
+        localStorage['maximizeEnabled'] = action.payload;
+        return {
+            ...state,
+            maximizeEnabled: action.payload
         }
     }
 }, initState);

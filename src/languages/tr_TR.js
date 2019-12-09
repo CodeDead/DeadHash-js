@@ -63,7 +63,9 @@ const tr_TR = () => {
         newVersion: "Versiyon {x} kullanılabilir. Bu sürümü indirmek ister misiniz?",
         checkForUpdates: "Güncellemeleri kontrol et",
         noUpdatesTitle: "Güncelleme yok!",
-        noUpdatesMessage: "DeadHash’ın en son sürümünü kullanıyorsunuz."
+        noUpdatesMessage: "DeadHash’ın en son sürümünü kullanıyorsunuz.",
+        minimizeEnabled: "Küçült düğmesi",
+        maximizeEnabled: "Büyüt düğmesi"
     }
 };
 

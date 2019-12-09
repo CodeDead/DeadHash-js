@@ -63,7 +63,9 @@ const nl_NL = () => {
         newVersion: "Versie {x} is nu beschikbaar. Wil je deze nu downloaden?",
         checkForUpdates: "Controleer op updates",
         noUpdatesTitle: "Geen updates beschikbaar!",
-        noUpdatesMessage: "Je gebruikt de laatste versie van DeadHash."
+        noUpdatesMessage: "Je gebruikt de laatste versie van DeadHash.",
+        minimizeEnabled: "Minimaliseer knop",
+        maximizeEnabled: "Maximaliseer knop"
     }
 };
 

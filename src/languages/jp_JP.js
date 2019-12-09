@@ -63,7 +63,9 @@ const jp_JP = () => {
         newVersion: "バージョン{x}が利用可能になりました。 このバージョンをダウンロードしますか？",
         checkForUpdates: "更新を確認する",
         noUpdatesTitle: "利用可能なアップデートはありません！",
-        noUpdatesMessage: "DeadHashの最新バージョンを使用しています。"
+        noUpdatesMessage: "DeadHashの最新バージョンを使用しています。",
+        minimizeEnabled: "最小化ボタン",
+        maximizeEnabled: "最大化ボタン"
     }
 };
 
