@@ -9,7 +9,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useSelector, useDispatch} from "react-redux";
-import clsx from "clsx";
 import Drawerbar from "../Drawerbar";
 import CloseIcon from '@material-ui/icons/Close';
 import MinimizeIcon from "@material-ui/icons/Minimize";
@@ -62,59 +61,57 @@ const Topbar = () => {
     /**
      * Open the drawer
      */
-    function openDrawer() {
+    const openDrawer = () => {
         dispatch({type: "SET_DRAWEROPEN", drawerOpen: true});
-    }
+    };
 
     /**
      * Change the language of the application
      * @param lang The language index
      */
-    function changeLanguage(lang) {
+    const changeLanguage = (lang) => {
         handleClose();
         dispatch({type: 'SET_LANGUAGEINDEX', index: lang});
-    }
+    };
 
     /**
      * Handle the closing of the top bar
      */
-    function handleClose() {
+    const handleClose = () => {
         setAnchorEl(null);
-    }
+    };
 
     /**
      * Handle menu event
      * @param event The event of the menu
      */
-    function handleMenu(event) {
+    const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
-    }
+    };
 
     /**
      * Minimize the window
      */
-    function minimize() {
+    const minimize = () => {
         remote.getGlobal("mainWindow").minimize();
-    }
+    };
 
     /**
      * Maximize or restore the previous state of the window
      */
-    function maximize() {
+    const maximize = () => {
         if (!remote.getGlobal("mainWindow").isMaximized()) {
             remote.getGlobal("mainWindow").maximize();
         } else {
             remote.getGlobal("mainWindow").unmaximize();
         }
-    }
+    };
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" className={clsx(classes.appBar, {
-                [classes.appBarShift]: open,
-            })}>
+            <AppBar position="fixed" className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
                 <Toolbar variant={"dense"}>
-                    <IconButton edge="start" className={clsx(open && classes.hide)} color="inherit"
+                    <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
                         <MenuIcon/>
                     </IconButton>

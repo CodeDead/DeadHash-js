@@ -52,6 +52,10 @@ const Home = () => {
         }
     }, []);
 
+    /**
+     * Check for application updates
+     * @returns {Promise<void>}
+     */
     const checkForUpdates = async () => {
         if (loading) return;
 
@@ -72,10 +76,16 @@ const Home = () => {
         setLoading(false);
     };
 
+    /**
+     * Open the file hasher page
+     */
     const openFileHasher = () => {
         history.push("/file");
     };
 
+    /**
+     * Open the text hasher page
+     */
     const openTextHasher = () => {
         history.push("/text");
     };

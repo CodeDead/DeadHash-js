@@ -81,19 +81,34 @@ const Settings = () => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 3});
     }, []);
 
+    /**
+     * Change the theme
+     * @param index The index of the theme
+     */
     const changeTheme = (index) => {
         dispatch({type: 'SET_THEME_INDEX', payload: index});
     };
 
+    /**
+     * Dispatch an event to change the language
+     * @param e The event that contains the language index
+     */
     const handleLanguageChange = (e) => {
         dispatch({type: 'SET_LANGUAGEINDEX', index: e.target.value});
     };
 
+    /**
+     * Reset all settings to their default values
+     */
     const resetSettings = () => {
         dispatch({type: 'RESET_MAIN_REDUCER'});
         dispatch({type: 'RESET_CRYPTO_REDUCER'});
     };
 
+    /**
+     * Check for application updates
+     * @returns {Promise<void>}
+     */
     const checkForUpdates = async () => {
         if (loading) return;
 
