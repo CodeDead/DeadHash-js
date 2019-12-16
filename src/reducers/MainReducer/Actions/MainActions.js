@@ -9,3 +9,4 @@ export const setUpdateChecked = createAction("SET_UPDATE_CHECKED");
 export const resetMainReducer = createAction("RESET_MAIN_REDUCER");
 export const setMinimizeStatus = createAction("SET_MINIMIZE_STATUS");
 export const setMaximizeStatus = createAction("SET_MAXIMIZE_STATUS");
+export const setLanguageButtonStatus = createAction("SET_LANGUAGE_STATUS");

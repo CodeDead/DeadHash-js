@@ -63,6 +63,7 @@ const Settings = () => {
     const autoUpdate = useSelector(state => state.MainReducer.autoUpdate);
     const minimize = useSelector(state => state.MainReducer.minimizeEnabled);
     const maximize = useSelector(state => state.MainReducer.maximizeEnabled);
+    const languageStatus = useSelector(state => state.MainReducer.languageEnabled);
 
     const md5 = useSelector(state => state.CryptoReducer.md5);
     const sha1 = useSelector(state => state.CryptoReducer.sha1);
@@ -193,6 +194,20 @@ const Settings = () => {
                                         />
                                     }
                                     label={language.maximizeEnabled}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={languageStatus}
+                                            onChange={(e) => dispatch({
+                                                type: 'SET_LANGUAGE_STATUS',
+                                                payload: e.target.checked
+                                            })}
+                                            value="language"
+                                            color="primary"
+                                        />
+                                    }
+                                    label={language.languageEnabled}
                                 />
                                 <FormControl>
                                     <InputLabel htmlFor="language-simple">{language.language}</InputLabel>

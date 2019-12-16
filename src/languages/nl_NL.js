@@ -57,7 +57,6 @@ const nl_NL = () => {
         paste: "Plakken",
         clear: "Wissen",
         reset: "Reset",
-        selectFile: "Selecteren",
         updateAvailable: "Update beschikbaar!",
         information: "Informatie",
         newVersion: "Versie {x} is nu beschikbaar. Wil je deze nu downloaden?",
@@ -65,7 +64,8 @@ const nl_NL = () => {
         noUpdatesTitle: "Geen updates beschikbaar!",
         noUpdatesMessage: "Je gebruikt de laatste versie van DeadHash.",
         minimizeEnabled: "Minimaliseer knop",
-        maximizeEnabled: "Maximaliseer knop"
+        maximizeEnabled: "Maximaliseer knop",
+        languageEnabled: "Taal knop"
     }
 };
 

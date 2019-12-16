@@ -7,7 +7,7 @@ import {
     setThemeIndex,
     setAutoUpdate,
     setUpdateChecked,
-    resetMainReducer, setMinimizeStatus, setMaximizeStatus
+    resetMainReducer, setMinimizeStatus, setMaximizeStatus, setLanguageButtonStatus
 } from './Actions/MainActions';
 import de_DE from "../../languages/de_DE";
 import nl_NL from "../../languages/nl_NL";
@@ -22,6 +22,7 @@ let themeIndex = localStorage['themeIndex'];
 let autoUpdate = localStorage['autoUpdate'];
 let minimizeEnabled = localStorage['minimizeEnabled'];
 let maximizeEnabled = localStorage['maximizeEnabled'];
+let languageEnabled = localStorage['languageEnabled'];
 
 if (!languageIndex) {
     languageIndex = 1;
@@ -38,6 +39,7 @@ if (!themeIndex) {
 autoUpdate = !autoUpdate || autoUpdate === "true";
 minimizeEnabled = !minimizeEnabled || minimizeEnabled === "true";
 maximizeEnabled = !maximizeEnabled || maximizeEnabled === "true";
+languageEnabled = !languageEnabled || languageEnabled === "true";
 
 const initState = {
     languageIndex: languageIndex,
@@ -63,7 +65,8 @@ const initState = {
     },
     checkedForUpdates: false,
     minimizeEnabled: minimizeEnabled,
-    maximizeEnabled: maximizeEnabled
+    maximizeEnabled: maximizeEnabled,
+    languageEnabled: languageEnabled
 };
 
 const MainReducer = handleActions({
@@ -112,6 +115,7 @@ const MainReducer = handleActions({
         localStorage['autoUpdate'] = true;
         localStorage['minimizeEnabled'] = true;
         localStorage['maximizeEnabled'] = true;
+        localStorage['languageEnabled'] = true;
 
         return {
             ...state,
@@ -119,7 +123,8 @@ const MainReducer = handleActions({
             themeIndex: 0,
             autoUpdate: true,
             minimizeEnabled: true,
-            maximizeEnabled: true
+            maximizeEnabled: true,
+            languageEnabled: true
         }
     },
     [setMinimizeStatus](state, action) {
@@ -134,6 +139,13 @@ const MainReducer = handleActions({
         return {
             ...state,
             maximizeEnabled: action.payload
+        }
+    },
+    [setLanguageButtonStatus](state, action) {
+        localStorage['languageEnabled'] = action.payload;
+        return {
+            ...state,
+            languageEnabled: action.payload
         }
     }
 }, initState);

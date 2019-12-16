@@ -57,7 +57,6 @@ const ru_RU = () => {
         paste: "Вставить",
         clear: "ясно",
         reset: "Сброс",
-        selectFile: "Выбрать",
         updateAvailable: "Доступно обновление!",
         information: "Информация",
         newVersion: "Версия {x} теперь доступна. Хотите скачать эту версию?",
@@ -65,7 +64,8 @@ const ru_RU = () => {
         noUpdatesTitle: "Нет доступных обновлений!",
         noUpdatesMessage: "Вы используете последнюю версию DeadHash.",
         minimizeEnabled: "Кнопка свертывания",
-        maximizeEnabled: "Кнопка увеличения"
+        maximizeEnabled: "Кнопка увеличения",
+        languageEnabled: "Языковая кнопка"
     }
 };
 

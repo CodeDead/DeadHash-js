@@ -57,7 +57,6 @@ const de_DE = () => {
         paste: "Einfügen",
         clear: "Löschen",
         reset: "Zurücksetzen",
-        selectFile: "Wählen",
         updateAvailable: "Update verfügbar!",
         information: "Information",
         newVersion: "Version {x} ist jetzt verfügbar. Möchten Sie diese Version herunterladen?",
@@ -65,7 +64,8 @@ const de_DE = () => {
         noUpdatesTitle: "Keine Updates verfügbar!",
         noUpdatesMessage: "Sie verwenden die neueste Version von DeadHash.",
         minimizeEnabled: "Schaltfläche \"Minimieren\"",
-        maximizeEnabled: "Schaltfläche \"Maximieren\""
+        maximizeEnabled: "Schaltfläche \"Maximieren\"",
+        languageEnabled: "Schaltfläche \"Sprache\""
     }
 };
 
