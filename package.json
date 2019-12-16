@@ -50,8 +50,8 @@
     "react-test": "react-scripts test",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "yarn react-build && electron-builder -w --publish=always",
-    "build": "yarn react-build && yarn electron-build -w",
+    "release": "yarn react-build && electron-builder -wl --publish=always",
+    "build": "yarn react-build && yarn electron-build -wl",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
