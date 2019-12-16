@@ -55,6 +55,7 @@ const Topbar = () => {
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const minimizeEnabled = useSelector(state => state.MainReducer.minimizeEnabled);
     const maximizeEnabled = useSelector(state => state.MainReducer.maximizeEnabled);
+    const languageEnabled = useSelector(state => state.MainReducer.languageEnabled);
     const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -121,50 +122,52 @@ const Topbar = () => {
                         {language.appName}
                     </Typography>
 
-                    <div>
-                        <IconButton
-                            aria-label="Account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
-                        >
-                            <LanguageIcon/>
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={languageOpen}
-                            onClose={handleClose}
-                        >
+                    {languageEnabled ?
+                        <div>
+                            <IconButton
+                                aria-label="Account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleMenu}
+                                color="inherit"
+                            >
+                                <LanguageIcon/>
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={languageOpen}
+                                onClose={handleClose}
+                            >
 
-                            <MenuItem onClick={() => changeLanguage(0)}
-                                      selected={languageIndex === 0}>Deutsch</MenuItem>
-                            <MenuItem onClick={() => changeLanguage(1)}
-                                      selected={languageIndex === 1}>English</MenuItem>
-                            <MenuItem onClick={() => changeLanguage(2)}
-                                      selected={languageIndex === 2}>Français</MenuItem>
-                            <MenuItem onClick={() => changeLanguage(3)}
-                                      selected={languageIndex === 3}>Italiano</MenuItem>
-                            <MenuItem onClick={() => changeLanguage(4)}
-                                      selected={languageIndex === 4}>日本語</MenuItem>
-                            <MenuItem onClick={() => changeLanguage(5)}
-                                      selected={languageIndex === 5}>Nederlands</MenuItem>
-                            <MenuItem onClick={() => changeLanguage(6)}
-                                      selected={languageIndex === 6}>Pусский</MenuItem>
-                            <MenuItem onClick={() => changeLanguage(7)}
-                                      selected={languageIndex === 7}>Türkçe</MenuItem>
-                        </Menu>
-                    </div>
+                                <MenuItem onClick={() => changeLanguage(0)}
+                                          selected={languageIndex === 0}>Deutsch</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(1)}
+                                          selected={languageIndex === 1}>English</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(2)}
+                                          selected={languageIndex === 2}>Français</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(3)}
+                                          selected={languageIndex === 3}>Italiano</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(4)}
+                                          selected={languageIndex === 4}>日本語</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(5)}
+                                          selected={languageIndex === 5}>Nederlands</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(6)}
+                                          selected={languageIndex === 6}>Pусский</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(7)}
+                                          selected={languageIndex === 7}>Türkçe</MenuItem>
+                            </Menu>
+                        </div>
+                    : null}
                     {minimizeEnabled ?
                         <IconButton
                             color="inherit"

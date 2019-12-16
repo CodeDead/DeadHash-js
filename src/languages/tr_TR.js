@@ -57,7 +57,6 @@ const tr_TR = () => {
         paste: "Yapıştırmak",
         clear: "Açık",
         reset: "Sıfırlama",
-        selectFile: "Seçmek",
         updateAvailable: "Güncelleme uygun!",
         information: "Bilgi",
         newVersion: "Versiyon {x} kullanılabilir. Bu sürümü indirmek ister misiniz?",
@@ -65,7 +64,8 @@ const tr_TR = () => {
         noUpdatesTitle: "Güncelleme yok!",
         noUpdatesMessage: "DeadHash’ın en son sürümünü kullanıyorsunuz.",
         minimizeEnabled: "Küçült düğmesi",
-        maximizeEnabled: "Büyüt düğmesi"
+        maximizeEnabled: "Büyüt düğmesi",
+        languageEnabled: "Dil düğmesi"
     }
 };
 

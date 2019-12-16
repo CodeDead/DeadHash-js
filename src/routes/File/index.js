@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Checkbox, FormControlLabel, makeStyles, Paper} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
@@ -13,6 +13,7 @@ import CryptoJs from "crypto-js/crypto-js";
 import {FileDataReader} from "../../utils/FileDataReader";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
+import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -58,8 +59,6 @@ const File = () => {
     const sha384 = useSelector(state => state.CryptoReducer.sha384);
     const sha512 = useSelector(state => state.CryptoReducer.sha512);
     const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
-
-    const fileInputRef = useRef(null);
 
     const output = hashes && hashes.length > 0 ?
         <>
@@ -155,11 +154,7 @@ const File = () => {
                                 {language.input}
                             </Typography>
                             <Paper className={classes.paper}>
-                                <Button
-                                    onClick={() => fileInputRef.current.click()}
-                                    label={language.selectFile}>
-                                    <input type="file" ref={fileInputRef} onChange={e => setFile(e.target.files[0])}/>
-                                </Button>
+                                <Input type={"file"} onChange={e => setFile(e.target.files[0])} disableUnderline={true} />
 
                                 <FormControlLabel
                                     control={

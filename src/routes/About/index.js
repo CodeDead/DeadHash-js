@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import BackButton from "../../components/BackButton";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -55,6 +56,7 @@ const About = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                <BackButton/>
                                 {language.appName} - {language.about}
                             </Typography>
                             <Paper className={classes.paper}>

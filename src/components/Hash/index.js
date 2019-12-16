@@ -6,6 +6,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import {Menu, Item, MenuProvider} from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import {useSelector} from "react-redux";
+import CopyIcon from "@material-ui/icons/FileCopy"
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -38,7 +39,7 @@ const Hash = ({hashType, content, compareString, id}) => {
                     <span style={compareColor}>{content}</span>
                 </MenuProvider>
                 <Menu id={'hashMenu' + id}>
-                    <Item onClick={() => navigator.clipboard.writeText(content)}>{language.copy}</Item>
+                    <Item onClick={() => navigator.clipboard.writeText(content)}><CopyIcon/> {language.copy}</Item>
                 </Menu>
             </Paper>
         </>

@@ -57,7 +57,6 @@ const fr_FR = () => {
         paste: "Coller",
         clear: "Clair",
         reset: "Réinitialiser",
-        selectFile: "Sélectionner",
         updateAvailable: "Mise à jour disponible!",
         information: "Information",
         newVersion: "Version {x} est maintenant disponible. Souhaitez-vous télécharger cette version?",
@@ -65,7 +64,8 @@ const fr_FR = () => {
         noUpdatesTitle: "Aucune mise à jour disponible!",
         noUpdatesMessage: "Vous utilisez la dernière version de DeadHash.",
         minimizeEnabled: "Bouton Réduire",
-        maximizeEnabled: "Bouton Agrandir"
+        maximizeEnabled: "Bouton Agrandir",
+        languageEnabled: "Bouton de langue"
     }
 };
 

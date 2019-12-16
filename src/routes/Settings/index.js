@@ -26,6 +26,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import {Updater} from "../../utils/Updater";
 import UpdateModal from "../../components/UpdateModal";
 import AlertModal from "../../components/AlertModal";
+import BackButton from "../../components/BackButton";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -62,6 +63,7 @@ const Settings = () => {
     const autoUpdate = useSelector(state => state.MainReducer.autoUpdate);
     const minimize = useSelector(state => state.MainReducer.minimizeEnabled);
     const maximize = useSelector(state => state.MainReducer.maximizeEnabled);
+    const languageStatus = useSelector(state => state.MainReducer.languageEnabled);
 
     const md5 = useSelector(state => state.CryptoReducer.md5);
     const sha1 = useSelector(state => state.CryptoReducer.sha1);
@@ -147,6 +149,7 @@ const Settings = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                <BackButton/>
                                 {language.general}
                             </Typography>
                             <Paper className={classes.paper}>
@@ -191,6 +194,20 @@ const Settings = () => {
                                         />
                                     }
                                     label={language.maximizeEnabled}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={languageStatus}
+                                            onChange={(e) => dispatch({
+                                                type: 'SET_LANGUAGE_STATUS',
+                                                payload: e.target.checked
+                                            })}
+                                            value="language"
+                                            color="primary"
+                                        />
+                                    }
+                                    label={language.languageEnabled}
                                 />
                                 <FormControl>
                                     <InputLabel htmlFor="language-simple">{language.language}</InputLabel>

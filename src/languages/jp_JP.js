@@ -57,7 +57,6 @@ const jp_JP = () => {
         paste: "ペースト",
         clear: "クリア",
         reset: "リセットする",
-        selectFile: "選択してください",
         updateAvailable: "更新可能！",
         information: "情報",
         newVersion: "バージョン{x}が利用可能になりました。 このバージョンをダウンロードしますか？",
@@ -65,7 +64,8 @@ const jp_JP = () => {
         noUpdatesTitle: "利用可能なアップデートはありません！",
         noUpdatesMessage: "DeadHashの最新バージョンを使用しています。",
         minimizeEnabled: "最小化ボタン",
-        maximizeEnabled: "最大化ボタン"
+        maximizeEnabled: "最大化ボタン",
+        languageEnabled: "言語ボタン"
     }
 };
 
