@@ -26,6 +26,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import {Updater} from "../../utils/Updater";
 import UpdateModal from "../../components/UpdateModal";
 import AlertModal from "../../components/AlertModal";
+import BackButton from "../../components/BackButton";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -147,6 +148,7 @@ const Settings = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                <BackButton/>
                                 {language.general}
                             </Typography>
                             <Paper className={classes.paper}>
