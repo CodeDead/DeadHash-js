@@ -15,7 +15,7 @@
     "copyright": "Copyright © 2020 ${author}",
     "win": {
       "target": [
-        "portable"
+        "nsis"
       ],
       "icon": "assets/Icon-512x512.png"
     },
