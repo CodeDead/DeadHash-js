@@ -15,7 +15,7 @@
     "copyright": "Copyright © 2020 ${author}",
     "win": {
       "target": [
-        "nsis"
+        "nsis", "portable"
       ],
       "icon": "assets/Icon-512x512.png"
     },
@@ -24,6 +24,9 @@
         "AppImage"
       ],
       "icon": "assets/Icon-512x512.png"
+    },
+    "nsis": {
+      "license": "LICENSE"
     }
   },
   "main": "public/electron.js",
