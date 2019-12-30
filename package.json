@@ -27,7 +27,10 @@
       "icon": "assets/Icon-512x512.png"
     },
     "nsis": {
-      "license": "LICENSE"
+      "license": "LICENSE",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
     }
   },
   "main": "public/electron.js",
