@@ -1,17 +1,65 @@
 {
   "name": "deadhash",
-  "version": "0.1.0",
+  "version": "2.0.0",
+  "description": "Hash calculator",
+  "homepage": "./",
   "private": true,
+  "author": {
+    "name": "CodeDead",
+    "email": "admin@codedead.com",
+    "url": "https://codedead.com"
+  },
+  "build": {
+    "appId": "com.codedead.deadhash",
+    "productName": "DeadHash",
+    "copyright": "Copyright © 2020 ${author}",
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "assets/Icon-512x512.png"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "assets/Icon-512x512.png"
+    },
+    "nsis": {
+      "license": "LICENSE",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "main": "public/electron.js",
   "dependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "@material-ui/core": "^4.8.2",
+    "@material-ui/icons": "^4.5.1",
+    "axios": "^0.19.0",
+    "cross-env": "^6.0.3",
+    "crypto-js": "^3.1.9-1",
+    "electron-is-dev": "^1.1.0",
+    "react": "^16.12.0",
+    "react-contexify": "^4.1.1",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
+    "redux": "^4.0.5",
+    "redux-actions": "^2.6.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "release": "yarn react-build && electron-builder -wl --publish=always",
+    "build": "yarn react-build && yarn electron-build -wl",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +75,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.0.2",
+    "electron": "^7.1.7",
+    "electron-builder": "^21.2.0",
+    "wait-on": "^3.3.0"
   }
 }
