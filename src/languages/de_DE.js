@@ -65,7 +65,8 @@ const de_DE = () => {
         noUpdatesMessage: "Sie verwenden die neueste Version von DeadHash.",
         minimizeEnabled: "Schaltfläche \"Minimieren\"",
         maximizeEnabled: "Schaltfläche \"Maximieren\"",
-        languageEnabled: "Schaltfläche \"Sprache\""
+        languageEnabled: "Schaltfläche \"Sprache\"",
+        exit: "Schließen"
     }
 };
 

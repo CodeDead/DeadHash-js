@@ -65,7 +65,8 @@ const nl_NL = () => {
         noUpdatesMessage: "Je gebruikt de laatste versie van DeadHash.",
         minimizeEnabled: "Minimaliseer knop",
         maximizeEnabled: "Maximaliseer knop",
-        languageEnabled: "Taal knop"
+        languageEnabled: "Taal knop",
+        exit: "Sluiten"
     }
 };
 
