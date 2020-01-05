@@ -368,7 +368,7 @@ const Settings = () => {
                                 {language.theme}
                             </Typography>
 
-                            <GridList spacing={2} xs={12} md={4} lg={3}>
+                            <GridList spacing={2} xs={12} md={4} lg={4}>
                                 <Theme title={language.default} description={language.defaultThemeDescription}
                                        color={blue[500]} selected={themeIndex === 0}
                                        actionText={language.select} onAction={() => changeTheme(0)}/>
