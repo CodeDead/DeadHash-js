@@ -66,7 +66,9 @@ const fr_FR = () => {
         minimizeEnabled: "Bouton Réduire",
         maximizeEnabled: "Bouton Agrandir",
         languageEnabled: "Bouton de langue",
-        exit: "Fermer"
+        exit: "Fermer",
+        darkTheme: "Foncé",
+        darkThemeDescription: "Facile sur les yeux."
     }
 };
 

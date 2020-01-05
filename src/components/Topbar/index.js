@@ -25,10 +25,6 @@ const useStyles = makeStyles(theme => ({
     hide: {
         display: 'none'
     },
-    offset: {
-        ...theme.mixins.toolbar,
-        flexGrow: 1
-    },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
@@ -112,7 +108,7 @@ const Topbar = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
+            <AppBar position="fixed" color={"primary"} className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
                 <Toolbar variant={"dense"}>
                     <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
@@ -191,8 +187,7 @@ const Topbar = () => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <div className={classes.offset}/>
-            <Drawerbar/>
+            <Toolbar />
         </div>
     );
 };

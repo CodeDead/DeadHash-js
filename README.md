@@ -1,4 +1,4 @@
-![DeadHash](https://codedead.com/wp-content/uploads/2019/12/deadhash.png)
+![DeadHash](https://codedead.com/wp-content/uploads/2020/01/deadhash-dark.png)
 
 # DeadHash
 DeadHash is a freeware utility to calculate file and text hashes. The following hash calculations are supported:

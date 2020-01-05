@@ -34,8 +34,8 @@ const CryptographyMenu = ({handleIndexChange, selectedIndex}) => {
             <ListItem button selected={selectedIndex === 0}>
                 <ListItemIcon onClick={() => handleIndexChange(0)}><KeyIcon/></ListItemIcon>
                 <ListItemText onClick={() => handleIndexChange(0)} primary={language.cryptography}/>
-                {openCollapse ? <ExpandLessIcon onClick={handleOpenMenu}/> :
-                    <ExpandMoreIcon onClick={handleOpenMenu}/>}
+                {openCollapse ? <ExpandLessIcon color="inherit" onClick={handleOpenMenu}/> :
+                    <ExpandMoreIcon color="inherit" onClick={handleOpenMenu}/>}
             </ListItem>
             <Collapse in={openCollapse} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>

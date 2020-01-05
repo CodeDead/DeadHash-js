@@ -66,7 +66,9 @@ const nl_NL = () => {
         minimizeEnabled: "Minimaliseer knop",
         maximizeEnabled: "Maximaliseer knop",
         languageEnabled: "Taal knop",
-        exit: "Sluiten"
+        exit: "Sluiten",
+        darkTheme: "Donker",
+        darkThemeDescription: "Makkelijk voor de ogen."
     }
 };
 

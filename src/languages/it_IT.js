@@ -66,7 +66,9 @@ const it_IT = () => {
         minimizeEnabled: "Pulsante Riduci a icona",
         maximizeEnabled: "Pulsante Massimizza",
         languageEnabled: "Pulsante lingua",
-        exit: "Uscire"
+        exit: "Uscire",
+        darkTheme: "Buio",
+        darkThemeDescription: "Facile per gli occhi."
     }
 };
 
