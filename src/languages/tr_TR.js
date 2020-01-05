@@ -66,7 +66,9 @@ const tr_TR = () => {
         minimizeEnabled: "Küçült düğmesi",
         maximizeEnabled: "Büyüt düğmesi",
         languageEnabled: "Dil düğmesi",
-        exit: "Kapatmak"
+        exit: "Kapatmak",
+        darkTheme: "Karanlık",
+        darkThemeDescription: "Gözleri kolay."
     }
 };
 

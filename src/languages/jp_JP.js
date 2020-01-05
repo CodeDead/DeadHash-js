@@ -66,7 +66,9 @@ const jp_JP = () => {
         minimizeEnabled: "最小化ボタン",
         maximizeEnabled: "最大化ボタン",
         languageEnabled: "言語ボタン",
-        exit: "出口"
+        exit: "出口",
+        darkTheme: "闇",
+        darkThemeDescription: "目に優しい。"
     }
 };
 

@@ -111,7 +111,7 @@ const Drawerbar = () => {
 
             <List>
                 <ListItem onClick={() => handleIndexChange(3)} selected={selectedItem === 3} button>
-                    <ListItemIcon><BuildIcon/></ListItemIcon>
+                    <ListItemIcon><BuildIcon color="inherit"/></ListItemIcon>
                     <ListItemText primary={language.settings}/>
                 </ListItem>
             </List>
@@ -120,12 +120,12 @@ const Drawerbar = () => {
 
             <List>
                 <ListItem onClick={() => handleIndexChange(4)} button>
-                    <ListItemIcon><HelpIcon/></ListItemIcon>
+                    <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
                     <ListItemText primary={language.help}/>
                 </ListItem>
 
                 <ListItem onClick={() => handleIndexChange(5)} selected={selectedItem === 5} button>
-                    <ListItemIcon><InfoIcon/></ListItemIcon>
+                    <ListItemIcon><InfoIcon color="inherit"/></ListItemIcon>
                     <ListItemText primary={language.about}/>
                 </ListItem>
             </List>
@@ -134,7 +134,7 @@ const Drawerbar = () => {
 
             <List>
                 <ListItem onClick={() => remote.getGlobal("mainWindow").close()} button>
-                    <ListItemIcon><CloseIcon /></ListItemIcon>
+                    <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
                     <ListItemText primary={language.exit} />
                 </ListItem>
             </List>

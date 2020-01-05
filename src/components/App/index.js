@@ -9,15 +9,19 @@ import Topbar from "../Topbar";
 import About from "../../routes/About";
 import File from "../../routes/File";
 import Text from "../../routes/Text";
+import Drawerbar from "../Drawerbar";
+import {CssBaseline} from "@material-ui/core";
 
 function App() {
 
     const themeIndex = useSelector(state => state.MainReducer.themeIndex);
     const color = ThemeSelector(themeIndex);
+    const themeType = themeIndex === 8 ? 'dark' : 'light';
 
     const theme = createMuiTheme({
         palette: {
             primary: color,
+            type: themeType
         }
     });
 
@@ -26,6 +30,8 @@ function App() {
             <BrowserRouter>
                 <div className="App">
                     <Topbar/>
+                    <Drawerbar/>
+                    <CssBaseline/>
                     <Switch>
                         <Route path={"/settings"}>
                             <Settings/>

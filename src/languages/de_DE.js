@@ -66,7 +66,9 @@ const de_DE = () => {
         minimizeEnabled: "Schaltfläche \"Minimieren\"",
         maximizeEnabled: "Schaltfläche \"Maximieren\"",
         languageEnabled: "Schaltfläche \"Sprache\"",
-        exit: "Schließen"
+        exit: "Schließen",
+        darkTheme: "Dunkel",
+        darkThemeDescription: "Schont die Augen."
     }
 };
 

@@ -66,7 +66,9 @@ const en_US = () => {
         minimizeEnabled: "Minimize button",
         maximizeEnabled: "Maximize button",
         languageEnabled: "Language button",
-        exit: "Exit"
+        exit: "Exit",
+        darkTheme: "Dark",
+        darkThemeDescription: "Easy on the eyes."
     }
 };
 

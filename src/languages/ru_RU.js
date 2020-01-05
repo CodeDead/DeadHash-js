@@ -66,7 +66,9 @@ const ru_RU = () => {
         minimizeEnabled: "Кнопка свертывания",
         maximizeEnabled: "Кнопка увеличения",
         languageEnabled: "Языковая кнопка",
-        exit: "Выход"
+        exit: "Выход",
+        darkTheme: "Темно",
+        darkThemeDescription: "Легко на глазах."
     }
 };
 

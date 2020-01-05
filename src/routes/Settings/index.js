@@ -142,9 +142,13 @@ const Settings = () => {
                 </Container>
             </div>
             <main className={classes.content}>
-                {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
-                {update && !update.updateAvailable ? (<AlertModal title={language.noUpdatesTitle} content={language.noUpdatesMessage} />) : null}
-                {errorMessage && errorMessage.length > 0 ? (<AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
+                {update && update.updateAvailable ? (
+                    <UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
+                                 newVersion={update.version}/>) : null}
+                {update && !update.updateAvailable ? (
+                    <AlertModal title={language.noUpdatesTitle} content={language.noUpdatesMessage}/>) : null}
+                {errorMessage && errorMessage.length > 0 ? (
+                    <AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
@@ -389,6 +393,9 @@ const Settings = () => {
                                 <Theme title={language.grey} description={language.greyDescription}
                                        color={grey[500]} selected={themeIndex === 7}
                                        actionText={language.select} onAction={() => changeTheme(7)}/>
+                                <Theme title={language.darkTheme} description={language.darkThemeDescription}
+                                       color={"black"} selected={themeIndex === 8} actionText={language.select}
+                                       onAction={() => changeTheme(8)}/>
                             </GridList>
                         </Grid>
                     </Grid>
