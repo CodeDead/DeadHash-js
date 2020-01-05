@@ -13,6 +13,7 @@ import {useSelector, useDispatch} from "react-redux";
 import InfoIcon from '@material-ui/icons/Info';
 import BuildIcon from "@material-ui/icons/Build";
 import HelpIcon from "@material-ui/icons/Help";
+import CloseIcon from "@material-ui/icons/Close";
 import {useHistory} from "react-router-dom";
 import CryptographyMenu from "../CryptographyMenu";
 
@@ -33,6 +34,8 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-end',
     }
 }));
+
+const remote = window.require('electron').remote;
 
 const Drawerbar = () => {
 
@@ -126,6 +129,16 @@ const Drawerbar = () => {
                     <ListItemText primary={language.about}/>
                 </ListItem>
             </List>
+
+            <Divider />
+
+            <List>
+                <ListItem onClick={() => remote.getGlobal("mainWindow").close()} button>
+                    <ListItemIcon><CloseIcon /></ListItemIcon>
+                    <ListItemText primary={language.exit} />
+                </ListItem>
+            </List>
+
         </Drawer>
     );
 };
