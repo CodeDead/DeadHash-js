@@ -14,9 +14,13 @@ import {CssBaseline} from "@material-ui/core";
 
 function App() {
 
-    const themeIndex = useSelector(state => state.MainReducer.themeIndex);
+    let themeIndex = useSelector(state => state.MainReducer.themeIndex);
+    let themeType = "light";
+    if (themeIndex === 8) {
+        themeType = "dark";
+        themeIndex = 2;
+    }
     const color = ThemeSelector(themeIndex);
-    const themeType = themeIndex === 8 ? 'dark' : 'light';
 
     const theme = createMuiTheme({
         palette: {
