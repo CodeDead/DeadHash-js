@@ -65,7 +65,8 @@ const it_IT = () => {
         noUpdatesMessage: "Stai utilizzando l'ultima versione di DeadHash.",
         minimizeEnabled: "Pulsante Riduci a icona",
         maximizeEnabled: "Pulsante Massimizza",
-        languageEnabled: "Pulsante lingua"
+        languageEnabled: "Pulsante lingua",
+        exit: "Uscire"
     }
 };
 

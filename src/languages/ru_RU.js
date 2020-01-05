@@ -65,7 +65,8 @@ const ru_RU = () => {
         noUpdatesMessage: "Вы используете последнюю версию DeadHash.",
         minimizeEnabled: "Кнопка свертывания",
         maximizeEnabled: "Кнопка увеличения",
-        languageEnabled: "Языковая кнопка"
+        languageEnabled: "Языковая кнопка",
+        exit: "Выход"
     }
 };
 

@@ -65,7 +65,8 @@ const en_US = () => {
         noUpdatesMessage: "You are using the latest version of DeadHash.",
         minimizeEnabled: "Minimize button",
         maximizeEnabled: "Maximize button",
-        languageEnabled: "Language button"
+        languageEnabled: "Language button",
+        exit: "Exit"
     }
 };
 

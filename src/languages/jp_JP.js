@@ -65,7 +65,8 @@ const jp_JP = () => {
         noUpdatesMessage: "DeadHashの最新バージョンを使用しています。",
         minimizeEnabled: "最小化ボタン",
         maximizeEnabled: "最大化ボタン",
-        languageEnabled: "言語ボタン"
+        languageEnabled: "言語ボタン",
+        exit: "出口"
     }
 };
 

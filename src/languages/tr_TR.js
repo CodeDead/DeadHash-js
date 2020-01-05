@@ -65,7 +65,8 @@ const tr_TR = () => {
         noUpdatesMessage: "DeadHash’ın en son sürümünü kullanıyorsunuz.",
         minimizeEnabled: "Küçült düğmesi",
         maximizeEnabled: "Büyüt düğmesi",
-        languageEnabled: "Dil düğmesi"
+        languageEnabled: "Dil düğmesi",
+        exit: "Kapatmak"
     }
 };
 

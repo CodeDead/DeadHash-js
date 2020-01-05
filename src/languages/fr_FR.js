@@ -65,7 +65,8 @@ const fr_FR = () => {
         noUpdatesMessage: "Vous utilisez la dernière version de DeadHash.",
         minimizeEnabled: "Bouton Réduire",
         maximizeEnabled: "Bouton Agrandir",
-        languageEnabled: "Bouton de langue"
+        languageEnabled: "Bouton de langue",
+        exit: "Fermer"
     }
 };
 
