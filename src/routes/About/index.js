@@ -29,6 +29,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const appVersion = window.require('electron').remote.app.getVersion();
+
 const About = () => {
 
     const classes = useStyles();
@@ -62,7 +64,7 @@ const About = () => {
                             <Paper className={classes.paper}>
                                 <div style={{whiteSpace: 'pre-wrap'}}>
                                     <p>
-                                        {language.aboutMessage}
+                                        {language.aboutMessage.replace("{x}", appVersion)}
                                     </p>
                                 </div>
 

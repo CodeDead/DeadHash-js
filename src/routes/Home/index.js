@@ -12,9 +12,9 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router";
 import blank from "../../components/Theme/blank.png";
-import UpdateModal from "../../components/UpdateModal";
 import AlertModal from "../../components/AlertModal";
 import {Updater} from "../../utils/Updater";
+import UpdateDialog from "../../components/UpdateDialog";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -103,7 +103,7 @@ const Home = () => {
                 </Container>
             </div>
             <main className={classes.content}>
-                {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
+                {update && update.updateAvailable ? (<UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version} />) : null}
                 {errorMessage && errorMessage.length > 0 ? (<AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
                 <Container maxWidth={"lg"} className={classes.container}>
                     <Grid container spacing={2}>

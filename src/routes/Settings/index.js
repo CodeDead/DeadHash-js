@@ -24,9 +24,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import {Updater} from "../../utils/Updater";
-import UpdateModal from "../../components/UpdateModal";
 import AlertModal from "../../components/AlertModal";
 import BackButton from "../../components/BackButton";
+import UpdateDialog from "../../components/UpdateDialog";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -143,8 +143,8 @@ const Settings = () => {
             </div>
             <main className={classes.content}>
                 {update && update.updateAvailable ? (
-                    <UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
-                                 newVersion={update.version}/>) : null}
+                    <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
+                                  newVersion={update.version} />) : null}
                 {update && !update.updateAvailable ? (
                     <AlertModal title={language.noUpdatesTitle} content={language.noUpdatesMessage}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (
