@@ -7,7 +7,7 @@ const jp_JP = () => {
         help: "助けて",
         language: "言語",
         aboutSubtitle: "DeadHashの詳細",
-        aboutMessage: "DeadHashはDeadLineによって作成されました。\n\n一部の画像は、icons8によって提供されました：https://icons8.com\nライセンス：GPLv3\nバージョン：2.0\n\n著作権©2020 CodeDead",
+        aboutMessage: "DeadHashはDeadLineによって作成されました。\n\n一部の画像は、icons8によって提供されました：https://icons8.com\nライセンス：GPLv3\nバージョン：{x}\n\n著作権©2020 CodeDead",
         codedead: "CodeDead",
         theme: "テーマ",
         general: "全般",

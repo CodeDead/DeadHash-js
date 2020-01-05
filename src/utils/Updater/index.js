@@ -3,7 +3,6 @@ import axios from "axios";
 export const Updater = (os) => {
 
     const parseUpdate = (update) => {
-
         const platform = update.platforms[os.platform];
         const data = {
             updateUrl: false,
@@ -16,7 +15,7 @@ export const Updater = (os) => {
             data.updateAvailable = true;
         else if (platform.version.minorVersion > 0)
             data.updateAvailable = true;
-        else if (platform.version.buildVersion > 0)
+        else if (platform.version.buildVersion > 1)
             data.updateAvailable = true;
         else if (platform.version.revisionVersion > 0)
             data.updateAvailable = true;
