@@ -120,7 +120,6 @@ const Topbar = () => {
                     {languageEnabled ?
                         <div>
                             <IconButton
-                                aria-label="Account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
                                 onClick={handleMenu}
