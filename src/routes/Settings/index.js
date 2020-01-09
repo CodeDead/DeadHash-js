@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         overflow: 'auto',
     },
     heroContent: {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(4, 0, 2),
     },
     container: {

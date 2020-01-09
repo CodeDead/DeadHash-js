@@ -108,7 +108,7 @@ const Topbar = () => {
     return (
         <div className={classes.root}>
             <AppBar position="fixed" color={"primary"} className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
-                <Toolbar variant={"dense"}>
+                <Toolbar>
                     <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
                         <MenuIcon/>
@@ -120,7 +120,6 @@ const Topbar = () => {
                     {languageEnabled ?
                         <div>
                             <IconButton
-                                aria-label="Account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
                                 onClick={handleMenu}
