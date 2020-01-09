@@ -108,7 +108,7 @@ const Topbar = () => {
     return (
         <div className={classes.root}>
             <AppBar position="fixed" color={"primary"} className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
-                <Toolbar variant={"dense"}>
+                <Toolbar>
                     <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
                         <MenuIcon/>

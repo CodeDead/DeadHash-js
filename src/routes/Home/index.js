@@ -18,7 +18,7 @@ import AlertDialog from "../../components/AlertDialog";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(4, 0, 2),
     },
     content: {
