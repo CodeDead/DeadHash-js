@@ -1,7 +1,7 @@
 ![DeadHash](https://codedead.com/wp-content/uploads/2020/01/deadhash-dark.png)
 
 # DeadHash
-DeadHash is a freeware utility to calculate file and text hashes. The following hash calculations are supported:
+DeadHash is a free and open-source utility to calculate file and text hashes. The following hash calculations are supported:
 * MD5
 * SHA1
 * SHA224
@@ -11,7 +11,7 @@ DeadHash is a freeware utility to calculate file and text hashes. The following 
 * SHA512
 * RIPEMD160
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Electron](https://electronjs.org/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and built using [Electron](https://electronjs.org/).
 
 ## Learn More
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
