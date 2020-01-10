@@ -16,6 +16,7 @@ import jp_JP from "../../languages/jp_JP";
 import ru_RU from "../../languages/ru_RU";
 import it_IT from "../../languages/it_IT";
 import tr_TR from "../../languages/tr_TR";
+import es_ES from "../../languages/es_ES";
 
 let languageIndex = localStorage['languageIndex'];
 let themeIndex = localStorage['themeIndex'];
@@ -46,6 +47,7 @@ const initState = {
     languages: [
         de_DE(),
         en_US(),
+        es_ES(),
         fr_FR(),
         it_IT(),
         jp_JP(),
