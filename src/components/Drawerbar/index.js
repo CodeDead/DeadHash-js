@@ -17,7 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {useHistory} from "react-router-dom";
 import CryptographyMenu from "../CryptographyMenu";
 
-const drawerWidth = 220;
+const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
