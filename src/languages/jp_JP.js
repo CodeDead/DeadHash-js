@@ -12,6 +12,7 @@ const jp_JP = () => {
         theme: "テーマ",
         general: "全般",
         autoUpdate: "更新を自動的に確認する",
+        dragAndDrop: "ドラッグアンドドロップを有効にする",
         select: "選択してください",
         default: "デフォルト",
         defaultThemeDescription: "デフォルトのテーマ。",

@@ -60,6 +60,7 @@ const Settings = () => {
     const themeIndex = useSelector(state => state.MainReducer.themeIndex);
     const languageIndex = useSelector(state => state.MainReducer.languageIndex);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
+    const dragDrop = useSelector(state => state.MainReducer.canDragDrop);
     const autoUpdate = useSelector(state => state.MainReducer.autoUpdate);
     const minimize = useSelector(state => state.MainReducer.minimizeEnabled);
     const maximize = useSelector(state => state.MainReducer.maximizeEnabled);
@@ -165,11 +166,25 @@ const Settings = () => {
                                                 type: 'SET_AUTO_UPDATE',
                                                 payload: e.target.checked
                                             })}
-                                            value="md5"
+                                            value="autoUpdate"
                                             color="primary"
                                         />
                                     }
                                     label={language.autoUpdate}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={dragDrop}
+                                            onChange={(e) => dispatch({
+                                                type: 'SET_CAN_DRAG_DROP',
+                                                payload: e.target.checked
+                                            })}
+                                            value="dragDrop"
+                                            color="primary"
+                                        />
+                                    }
+                                    label={language.dragAndDrop}
                                 />
                                 <FormControlLabel
                                     control={

@@ -12,6 +12,7 @@ const fr_FR = () => {
         theme: "Thème",
         general: "Général",
         autoUpdate: "Vérifier automatiquement les mises à jour",
+        dragAndDrop: "Activer le glisser-déposer",
         select: "Sélectionner",
         default: "Défaut",
         defaultThemeDescription: "Le thème par défaut.",

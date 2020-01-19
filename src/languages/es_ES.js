@@ -12,6 +12,7 @@ const es_ES = () => {
         theme: "Tema",
         general: "General",
         autoUpdate: "Buscar actualizaciones automáticamente",
+        dragAndDrop: "Habilitar arrastrar y soltar",
         select: "Seleccione",
         default: "Defecto",
         defaultThemeDescription: "El tema por defecto.",

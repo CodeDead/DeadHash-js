@@ -12,6 +12,7 @@ const en_US = () => {
         theme: "Theme",
         general: "General",
         autoUpdate: "Automatically check for updates",
+        dragAndDrop: "Enable drag-and-drop",
         select: "Select",
         default: "Default",
         defaultThemeDescription: "The default theme.",
