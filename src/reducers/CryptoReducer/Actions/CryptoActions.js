@@ -12,3 +12,4 @@ export const resetCryptoReducer = createAction("RESET_CRYPTO_REDUCER");
 export const setFileHashes = createAction("SET_FILE_HASHES");
 export const setTextHashes = createAction("SET_TEXT_HASHES");
 export const setTextInput = createAction("SET_TEXT_INPUT");
+export const setCurrentFile = createAction("SET_CURRENT_FILE");

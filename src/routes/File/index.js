@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Checkbox, FormControlLabel, makeStyles, Paper} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
@@ -13,7 +13,6 @@ import CryptoJs from "crypto-js/crypto-js";
 import {FileDataReader} from "../../utils/FileDataReader";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
-import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -43,13 +42,15 @@ const useStyles = makeStyles(theme => ({
 const File = () => {
 
     const hashes = useSelector(state => state.CryptoReducer.fileHashes);
+    const file = useSelector(state => state.CryptoReducer.currentFile);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const [file, setFile] = useState(null);
     const [compare, setCompare] = useState(false);
     const [compareHash, setCompareHash] = useState("");
+
+    const fileRef = useRef(null);
 
     const md5 = useSelector(state => state.CryptoReducer.md5);
     const sha1 = useSelector(state => state.CryptoReducer.sha1);
@@ -80,7 +81,6 @@ const File = () => {
         <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
                        pasteData={() => pasteData(setCompareHash)}>
             <TextField
-                id="outlined-basic"
                 style={{width: '100%'}}
                 margin="normal"
                 value={compareHash}
@@ -127,10 +127,18 @@ const File = () => {
      * Clear the user interface
      */
     const clearData = () => {
-        setFile(null);
         setCompare(false);
         setCompareHash("");
-        dispatch({type: "SET_FILE_HASHES", payload: null});
+        dispatch({type: 'SET_CURRENT_FILE', payload: null});
+    };
+
+    /**
+     * Change the currently selected file
+     * @param event The event that called this function
+     */
+    const onFileChange = function(event) {
+        dispatch({type: 'SET_CURRENT_FILE', payload: event.target.files[0]});
+        fileRef.current.value = "";
     };
 
     return (
@@ -154,7 +162,19 @@ const File = () => {
                                 {language.input}
                             </Typography>
                             <Paper className={classes.paper}>
-                                <Input type={"file"} onChange={e => setFile(e.target.files[0])} disableUnderline={true} />
+                                <TextField
+                                    margin="normal"
+                                    onClick={() => fileRef.current.click()}
+                                    disabled
+                                    id="filled-disabled"
+                                    value={file && file.path ? file.path  : ""}
+                                    variant="outlined"
+                                />
+
+                                <input ref={fileRef} type="file" onChange={onFileChange}
+                                       style={{display: 'none'}}/>
+
+                                <Button color={"primary"} variant={"contained"} onClick={() => fileRef.current.click()}>{language.select}</Button>
 
                                 <FormControlLabel
                                     control={
