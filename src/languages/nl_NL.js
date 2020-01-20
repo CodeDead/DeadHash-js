@@ -12,6 +12,7 @@ const nl_NL = () => {
         theme: "Thema",
         general: "Algemeen",
         autoUpdate: "Zoek automatisch naar updates",
+        dragAndDrop: "Slepen en neerzetten inschakelen",
         select: "Selecteren",
         default: "Standaard",
         defaultThemeDescription: "Het standaard thema.",

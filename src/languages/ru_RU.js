@@ -12,6 +12,7 @@ const ru_RU = () => {
         theme: "тема",
         general: "генеральный",
         autoUpdate: "Автоматически проверять наличие обновлений",
+        dragAndDrop: "Включить перетаскивание",
         select: "Выбрать",
         default: "По умолчанию",
         defaultThemeDescription: "Тема по умолчанию.",

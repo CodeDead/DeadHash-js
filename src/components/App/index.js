@@ -11,10 +11,12 @@ import File from "../../routes/File";
 import Text from "../../routes/Text";
 import Drawerbar from "../Drawerbar";
 import {CssBaseline} from "@material-ui/core";
+import DropZone from "../DropZone";
 
 function App() {
 
     let themeIndex = useSelector(state => state.MainReducer.themeIndex);
+
     let themeType = "light";
     if (themeIndex === 8) {
         themeType = "dark";
@@ -32,7 +34,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <div className="App">
+                <DropZone>
                     <Topbar/>
                     <Drawerbar/>
                     <CssBaseline/>
@@ -53,7 +55,7 @@ function App() {
                             <Home/>
                         </Route>
                     </Switch>
-                </div>
+                </DropZone>
             </BrowserRouter>
         </ThemeProvider>
     );

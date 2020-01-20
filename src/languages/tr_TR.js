@@ -12,6 +12,7 @@ const tr_TR = () => {
         theme: "Tema",
         general: "Genel",
         autoUpdate: "Güncellemeleri otomatik olarak kontrol et",
+        dragAndDrop: "Sürükle ve bırak özelliğini etkinleştir",
         select: "Seçmek",
         default: "Varsayılan",
         defaultThemeDescription: "Varsayılan tema.",

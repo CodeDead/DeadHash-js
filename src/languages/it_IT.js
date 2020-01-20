@@ -12,6 +12,7 @@ const it_IT = () => {
         theme: "Tema",
         general: "Generale",
         autoUpdate: "Controlla automaticamente gli aggiornamenti",
+        dragAndDrop: "Abilita il trascinamento della selezione",
         select: "Selezionare",
         default: "Predefinito",
         defaultThemeDescription: "Il tema predefinito",

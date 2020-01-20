@@ -12,6 +12,7 @@ const de_DE = () => {
         theme: "Thema",
         general: "Allgemeines",
         autoUpdate: "Automatisch nach Aktualisierungen suchen",
+        dragAndDrop: "Aktivieren Sie Drag & Drop",
         select: "Wählen",
         default: "Standard",
         defaultThemeDescription: "Das Standarddesign.",
