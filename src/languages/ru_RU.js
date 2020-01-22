@@ -69,7 +69,8 @@ const ru_RU = () => {
         languageEnabled: "Языковая кнопка",
         exit: "Выход",
         darkTheme: "Темно",
-        darkThemeDescription: "Легко на глазах."
+        darkThemeDescription: "Легко на глазах.",
+        export: "экспорт"
     }
 };
 

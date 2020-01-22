@@ -69,7 +69,8 @@ const jp_JP = () => {
         languageEnabled: "言語ボタン",
         exit: "出口",
         darkTheme: "闇",
-        darkThemeDescription: "目に優しい。"
+        darkThemeDescription: "目に優しい。",
+        export: "書き出す"
     }
 };
 

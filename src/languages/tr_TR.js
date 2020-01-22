@@ -69,7 +69,8 @@ const tr_TR = () => {
         languageEnabled: "Dil düğmesi",
         exit: "Kapatmak",
         darkTheme: "Karanlık",
-        darkThemeDescription: "Gözleri kolay."
+        darkThemeDescription: "Gözleri kolay.",
+        export: "Ihracat"
     }
 };
 

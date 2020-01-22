@@ -69,7 +69,8 @@ const de_DE = () => {
         languageEnabled: "Schaltfläche \"Sprache\"",
         exit: "Schließen",
         darkTheme: "Dunkel",
-        darkThemeDescription: "Schont die Augen."
+        darkThemeDescription: "Schont die Augen.",
+        export: "Export"
     }
 };
 

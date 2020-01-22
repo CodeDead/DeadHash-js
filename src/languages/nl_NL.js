@@ -69,7 +69,8 @@ const nl_NL = () => {
         languageEnabled: "Taal knop",
         exit: "Sluiten",
         darkTheme: "Donker",
-        darkThemeDescription: "Makkelijk voor de ogen."
+        darkThemeDescription: "Makkelijk voor de ogen.",
+        export: "Exporteren"
     }
 };
 

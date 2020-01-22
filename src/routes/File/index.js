@@ -13,6 +13,7 @@ import CryptoJs from "crypto-js/crypto-js";
 import {FileDataReader} from "../../utils/FileDataReader";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
+import CsvExport from "../../components/CsvExport";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -136,7 +137,7 @@ const File = () => {
      * Change the currently selected file
      * @param event The event that called this function
      */
-    const onFileChange = function(event) {
+    const onFileChange = function (event) {
         dispatch({type: 'SET_CURRENT_FILE', payload: event.target.files[0]});
         fileRef.current.value = "";
     };
@@ -167,14 +168,15 @@ const File = () => {
                                     onClick={() => fileRef.current.click()}
                                     disabled
                                     id="filled-disabled"
-                                    value={file && file.path ? file.path  : ""}
+                                    value={file && file.path ? file.path : ""}
                                     variant="outlined"
                                 />
 
                                 <input ref={fileRef} type="file" onChange={onFileChange}
                                        style={{display: 'none'}}/>
 
-                                <Button color={"primary"} variant={"contained"} onClick={() => fileRef.current.click()}>{language.select}</Button>
+                                <Button color={"primary"} variant={"contained"}
+                                        onClick={() => fileRef.current.click()}>{language.select}</Button>
 
                                 <FormControlLabel
                                     control={
@@ -190,10 +192,20 @@ const File = () => {
                                 {compareField}
                             </Paper>
                             {hashes && hashes.length > 0 ? (
-                                <Button className={classes.button} color={"primary"} variant={"contained"}
-                                        style={{float: 'left'}} onClick={() => clearData()}>
-                                    {language.clear}
-                                </Button>
+                                <>
+                                    <Button className={classes.button} color={"primary"} variant={"contained"}
+                                            onClick={() => clearData()}>
+                                        {language.clear}
+                                    </Button>
+
+                                    <CsvExport fileName={"DeadHash Export " + new Date() + ".csv"} data={hashes}>
+                                        <Button className={classes.button} color={"primary"} variant={"contained"}
+                                                style={{marginLeft: 5}}>
+                                            {language.export}
+                                        </Button>
+                                    </CsvExport>
+                                </>
+
                             ) : null}
                             <Button className={classes.button} color={"primary"} variant={"contained"}
                                     disabled={!file || file.length === 0}
