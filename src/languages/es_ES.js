@@ -69,7 +69,8 @@ const es_ES = () => {
         languageEnabled: "Botón de idioma",
         exit: "Salida",
         darkTheme: "Oscuro",
-        darkThemeDescription: "Fácil para los ojos."
+        darkThemeDescription: "Fácil para los ojos.",
+        export: "Exportar"
     }
 };
 

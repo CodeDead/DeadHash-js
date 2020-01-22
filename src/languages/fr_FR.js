@@ -69,7 +69,8 @@ const fr_FR = () => {
         languageEnabled: "Bouton de langue",
         exit: "Fermer",
         darkTheme: "Foncé",
-        darkThemeDescription: "Facile sur les yeux."
+        darkThemeDescription: "Facile sur les yeux.",
+        export: "Exporter"
     }
 };
 
