@@ -9,7 +9,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useSelector, useDispatch} from "react-redux";
-import Drawerbar from "../Drawerbar";
 import CloseIcon from '@material-ui/icons/Close';
 import MinimizeIcon from "@material-ui/icons/Minimize";
 import FullScreenIcon from "@material-ui/icons/Fullscreen";
@@ -24,10 +23,6 @@ const useStyles = makeStyles(theme => ({
     },
     hide: {
         display: 'none'
-    },
-    offset: {
-        ...theme.mixins.toolbar,
-        flexGrow: 1
     },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
@@ -112,8 +107,9 @@ const Topbar = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
-                <Toolbar variant={"dense"}>
+            <AppBar position="fixed" color={"primary"}
+                    className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
+                <Toolbar>
                     <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
                         <MenuIcon/>
@@ -125,7 +121,6 @@ const Topbar = () => {
                     {languageEnabled ?
                         <div>
                             <IconButton
-                                aria-label="Account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
                                 onClick={handleMenu}
@@ -154,20 +149,22 @@ const Topbar = () => {
                                 <MenuItem onClick={() => changeLanguage(1)}
                                           selected={languageIndex === 1}>English</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(2)}
-                                          selected={languageIndex === 2}>Français</MenuItem>
+                                          selected={languageIndex === 2}>Español</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(3)}
-                                          selected={languageIndex === 3}>Italiano</MenuItem>
+                                          selected={languageIndex === 3}>Français</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(4)}
-                                          selected={languageIndex === 4}>日本語</MenuItem>
+                                          selected={languageIndex === 4}>Italiano</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(5)}
-                                          selected={languageIndex === 5}>Nederlands</MenuItem>
+                                          selected={languageIndex === 5}>日本語</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(6)}
-                                          selected={languageIndex === 6}>Pусский</MenuItem>
+                                          selected={languageIndex === 6}>Nederlands</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(7)}
-                                          selected={languageIndex === 7}>Türkçe</MenuItem>
+                                          selected={languageIndex === 7}>Pусский</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(8)}
+                                          selected={languageIndex === 8}>Türkçe</MenuItem>
                             </Menu>
                         </div>
-                    : null}
+                        : null}
                     {minimizeEnabled ?
                         <IconButton
                             color="inherit"
@@ -191,8 +188,7 @@ const Topbar = () => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <div className={classes.offset}/>
-            <Drawerbar/>
+            <Toolbar/>
         </div>
     );
 };

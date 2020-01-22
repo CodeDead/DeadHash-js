@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         overflow: 'auto',
     },
     heroContent: {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(4, 0, 2),
     },
     container: {
@@ -28,6 +28,8 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
     }
 }));
+
+const appVersion = window.require('electron').remote.app.getVersion();
 
 const About = () => {
 
@@ -62,7 +64,7 @@ const About = () => {
                             <Paper className={classes.paper}>
                                 <div style={{whiteSpace: 'pre-wrap'}}>
                                     <p>
-                                        {language.aboutMessage}
+                                        {language.aboutMessage.replace("{x}", appVersion)}
                                     </p>
                                 </div>
 

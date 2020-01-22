@@ -7,7 +7,7 @@ import {
     setThemeIndex,
     setAutoUpdate,
     setUpdateChecked,
-    resetMainReducer, setMinimizeStatus, setMaximizeStatus, setLanguageButtonStatus
+    resetMainReducer, setMinimizeStatus, setMaximizeStatus, setLanguageButtonStatus, setCanDragDrop
 } from './Actions/MainActions';
 import de_DE from "../../languages/de_DE";
 import nl_NL from "../../languages/nl_NL";
@@ -16,6 +16,7 @@ import jp_JP from "../../languages/jp_JP";
 import ru_RU from "../../languages/ru_RU";
 import it_IT from "../../languages/it_IT";
 import tr_TR from "../../languages/tr_TR";
+import es_ES from "../../languages/es_ES";
 
 let languageIndex = localStorage['languageIndex'];
 let themeIndex = localStorage['themeIndex'];
@@ -23,6 +24,7 @@ let autoUpdate = localStorage['autoUpdate'];
 let minimizeEnabled = localStorage['minimizeEnabled'];
 let maximizeEnabled = localStorage['maximizeEnabled'];
 let languageEnabled = localStorage['languageEnabled'];
+let canDragDrop = localStorage['canDragDrop'];
 
 if (!languageIndex) {
     languageIndex = 1;
@@ -40,12 +42,14 @@ autoUpdate = !autoUpdate || autoUpdate === "true";
 minimizeEnabled = !minimizeEnabled || minimizeEnabled === "true";
 maximizeEnabled = !maximizeEnabled || maximizeEnabled === "true";
 languageEnabled = !languageEnabled || languageEnabled === "true";
+canDragDrop = !canDragDrop || canDragDrop === "true";
 
 const initState = {
     languageIndex: languageIndex,
     languages: [
         de_DE(),
         en_US(),
+        es_ES(),
         fr_FR(),
         it_IT(),
         jp_JP(),
@@ -66,7 +70,8 @@ const initState = {
     checkedForUpdates: false,
     minimizeEnabled: minimizeEnabled,
     maximizeEnabled: maximizeEnabled,
-    languageEnabled: languageEnabled
+    languageEnabled: languageEnabled,
+    canDragDrop: canDragDrop
 };
 
 const MainReducer = handleActions({
@@ -116,6 +121,7 @@ const MainReducer = handleActions({
         localStorage['minimizeEnabled'] = true;
         localStorage['maximizeEnabled'] = true;
         localStorage['languageEnabled'] = true;
+        localStorage['canDragDrop'] = true;
 
         return {
             ...state,
@@ -124,7 +130,8 @@ const MainReducer = handleActions({
             autoUpdate: true,
             minimizeEnabled: true,
             maximizeEnabled: true,
-            languageEnabled: true
+            languageEnabled: true,
+            canDragDrop: true
         }
     },
     [setMinimizeStatus](state, action) {
@@ -146,6 +153,13 @@ const MainReducer = handleActions({
         return {
             ...state,
             languageEnabled: action.payload
+        }
+    },
+    [setCanDragDrop](state,action) {
+        localStorage['canDragDrop'] = action.payload;
+        return {
+            ...state,
+            canDragDrop : action.payload
         }
     }
 }, initState);

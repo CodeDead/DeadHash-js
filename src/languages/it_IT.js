@@ -7,11 +7,12 @@ const it_IT = () => {
         help: "Aiuto",
         language: "Linguaggio",
         aboutSubtitle: "Ulteriori informazioni su DeadHash",
-        aboutMessage: "DeadHash è stato creato da DeadLine.\n\nAlcune immagini sono state fornite da icons8: https://icons8.com\nLicenza: GPLv3\nVersione: 2.0\n\nCopyright © 2020 CodeDead",
+        aboutMessage: "DeadHash è stato creato da DeadLine.\n\nAlcune immagini sono state fornite da icons8: https://icons8.com\nLicenza: GPLv3\nVersione: {x}\n\nCopyright © 2020 CodeDead",
         codedead: "CodeDead",
         theme: "Tema",
         general: "Generale",
         autoUpdate: "Controlla automaticamente gli aggiornamenti",
+        dragAndDrop: "Abilita il trascinamento della selezione",
         select: "Selezionare",
         default: "Predefinito",
         defaultThemeDescription: "Il tema predefinito",
@@ -65,7 +66,11 @@ const it_IT = () => {
         noUpdatesMessage: "Stai utilizzando l'ultima versione di DeadHash.",
         minimizeEnabled: "Pulsante Riduci a icona",
         maximizeEnabled: "Pulsante Massimizza",
-        languageEnabled: "Pulsante lingua"
+        languageEnabled: "Pulsante lingua",
+        exit: "Uscire",
+        darkTheme: "Buio",
+        darkThemeDescription: "Facile per gli occhi.",
+        export: "Esportare"
     }
 };
 

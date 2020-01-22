@@ -24,9 +24,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import {Updater} from "../../utils/Updater";
-import UpdateModal from "../../components/UpdateModal";
-import AlertModal from "../../components/AlertModal";
 import BackButton from "../../components/BackButton";
+import UpdateDialog from "../../components/UpdateDialog";
+import AlertDialog from "../../components/AlertDialog";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         overflow: 'auto',
     },
     heroContent: {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(4, 0, 2),
     },
     container: {
@@ -60,6 +60,7 @@ const Settings = () => {
     const themeIndex = useSelector(state => state.MainReducer.themeIndex);
     const languageIndex = useSelector(state => state.MainReducer.languageIndex);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
+    const dragDrop = useSelector(state => state.MainReducer.canDragDrop);
     const autoUpdate = useSelector(state => state.MainReducer.autoUpdate);
     const minimize = useSelector(state => state.MainReducer.minimizeEnabled);
     const maximize = useSelector(state => state.MainReducer.maximizeEnabled);
@@ -142,9 +143,13 @@ const Settings = () => {
                 </Container>
             </div>
             <main className={classes.content}>
-                {update && update.updateAvailable ? (<UpdateModal downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version}/>) : null}
-                {update && !update.updateAvailable ? (<AlertModal title={language.noUpdatesTitle} content={language.noUpdatesMessage} />) : null}
-                {errorMessage && errorMessage.length > 0 ? (<AlertModal title={language.errorTitle} content={errorMessage}/>) : null}
+                {update && update.updateAvailable ? (
+                    <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
+                                  newVersion={update.version} />) : null}
+                {update && !update.updateAvailable ? (
+                    <AlertDialog title={language.noUpdatesTitle} content={language.noUpdatesMessage}/>) : null}
+                {errorMessage && errorMessage.length > 0 ? (
+                    <AlertDialog title={language.errorTitle} content={errorMessage}/>) : null}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
@@ -161,11 +166,25 @@ const Settings = () => {
                                                 type: 'SET_AUTO_UPDATE',
                                                 payload: e.target.checked
                                             })}
-                                            value="md5"
+                                            value="autoUpdate"
                                             color="primary"
                                         />
                                     }
                                     label={language.autoUpdate}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={dragDrop}
+                                            onChange={(e) => dispatch({
+                                                type: 'SET_CAN_DRAG_DROP',
+                                                payload: e.target.checked
+                                            })}
+                                            value="dragDrop"
+                                            color="primary"
+                                        />
+                                    }
+                                    label={language.dragAndDrop}
                                 />
                                 <FormControlLabel
                                     control={
@@ -221,12 +240,13 @@ const Settings = () => {
                                     >
                                         <MenuItem value={0}>Deutsch</MenuItem>
                                         <MenuItem value={1}>English</MenuItem>
-                                        <MenuItem value={2}>Français</MenuItem>
-                                        <MenuItem value={3}>Italiano</MenuItem>
-                                        <MenuItem value={4}>日本語</MenuItem>
-                                        <MenuItem value={5}>Nederlands</MenuItem>
-                                        <MenuItem value={6}>Pусский</MenuItem>
-                                        <MenuItem value={7}>Türkçe</MenuItem>
+                                        <MenuItem value={2}>Español</MenuItem>
+                                        <MenuItem value={3}>Français</MenuItem>
+                                        <MenuItem value={4}>Italiano</MenuItem>
+                                        <MenuItem value={5}>日本語</MenuItem>
+                                        <MenuItem value={6}>Nederlands</MenuItem>
+                                        <MenuItem value={7}>Pусский</MenuItem>
+                                        <MenuItem value={8}>Türkçe</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Paper>
@@ -364,7 +384,7 @@ const Settings = () => {
                                 {language.theme}
                             </Typography>
 
-                            <GridList spacing={2} xs={12} md={4} lg={3}>
+                            <GridList spacing={2} xs={12} md={4} lg={4}>
                                 <Theme title={language.default} description={language.defaultThemeDescription}
                                        color={blue[500]} selected={themeIndex === 0}
                                        actionText={language.select} onAction={() => changeTheme(0)}/>
@@ -389,6 +409,9 @@ const Settings = () => {
                                 <Theme title={language.grey} description={language.greyDescription}
                                        color={grey[500]} selected={themeIndex === 7}
                                        actionText={language.select} onAction={() => changeTheme(7)}/>
+                                <Theme title={language.darkTheme} description={language.darkThemeDescription}
+                                       color={"black"} selected={themeIndex === 8} actionText={language.select}
+                                       onAction={() => changeTheme(8)}/>
                             </GridList>
                         </Grid>
                     </Grid>

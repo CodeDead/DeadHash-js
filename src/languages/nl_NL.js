@@ -7,11 +7,12 @@ const nl_NL = () => {
         help: "Help",
         language: "Taal",
         aboutSubtitle: "Leer meer over DeadHash",
-        aboutMessage: "DeadHash werd gemaakt door DeadLine.\n\nSommige afbeeldingen werden afgeleverd door icons8: https://icons8.com\nLicentie: GPLv3\nVersie: 2.0\n\nCopyright © 2020 CodeDead",
+        aboutMessage: "DeadHash werd gemaakt door DeadLine.\n\nSommige afbeeldingen werden afgeleverd door icons8: https://icons8.com\nLicentie: GPLv3\nVersie: {x}\n\nCopyright © 2020 CodeDead",
         codedead: "CodeDead",
         theme: "Thema",
         general: "Algemeen",
         autoUpdate: "Zoek automatisch naar updates",
+        dragAndDrop: "Slepen en neerzetten inschakelen",
         select: "Selecteren",
         default: "Standaard",
         defaultThemeDescription: "Het standaard thema.",
@@ -59,13 +60,17 @@ const nl_NL = () => {
         reset: "Reset",
         updateAvailable: "Update beschikbaar!",
         information: "Informatie",
-        newVersion: "Versie {x} is nu beschikbaar. Wil je deze nu downloaden?",
+        newVersion: "Versie {x} is nu beschikbaar. Wil je deze versie nu downloaden?",
         checkForUpdates: "Controleer op updates",
         noUpdatesTitle: "Geen updates beschikbaar!",
         noUpdatesMessage: "Je gebruikt de laatste versie van DeadHash.",
         minimizeEnabled: "Minimaliseer knop",
         maximizeEnabled: "Maximaliseer knop",
-        languageEnabled: "Taal knop"
+        languageEnabled: "Taal knop",
+        exit: "Sluiten",
+        darkTheme: "Donker",
+        darkThemeDescription: "Makkelijk voor de ogen.",
+        export: "Exporteren"
     }
 };
 

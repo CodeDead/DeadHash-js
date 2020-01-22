@@ -13,10 +13,11 @@ import {useSelector, useDispatch} from "react-redux";
 import InfoIcon from '@material-ui/icons/Info';
 import BuildIcon from "@material-ui/icons/Build";
 import HelpIcon from "@material-ui/icons/Help";
+import CloseIcon from "@material-ui/icons/Close";
 import {useHistory} from "react-router-dom";
 import CryptographyMenu from "../CryptographyMenu";
 
-const drawerWidth = 220;
+const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
@@ -33,6 +34,8 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-end',
     }
 }));
+
+const remote = window.require('electron').remote;
 
 const Drawerbar = () => {
 
@@ -108,7 +111,7 @@ const Drawerbar = () => {
 
             <List>
                 <ListItem onClick={() => handleIndexChange(3)} selected={selectedItem === 3} button>
-                    <ListItemIcon><BuildIcon/></ListItemIcon>
+                    <ListItemIcon><BuildIcon color="inherit"/></ListItemIcon>
                     <ListItemText primary={language.settings}/>
                 </ListItem>
             </List>
@@ -117,15 +120,25 @@ const Drawerbar = () => {
 
             <List>
                 <ListItem onClick={() => handleIndexChange(4)} button>
-                    <ListItemIcon><HelpIcon/></ListItemIcon>
+                    <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
                     <ListItemText primary={language.help}/>
                 </ListItem>
 
                 <ListItem onClick={() => handleIndexChange(5)} selected={selectedItem === 5} button>
-                    <ListItemIcon><InfoIcon/></ListItemIcon>
+                    <ListItemIcon><InfoIcon color="inherit"/></ListItemIcon>
                     <ListItemText primary={language.about}/>
                 </ListItem>
             </List>
+
+            <Divider />
+
+            <List>
+                <ListItem onClick={() => remote.getGlobal("mainWindow").close()} button>
+                    <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
+                    <ListItemText primary={language.exit} />
+                </ListItem>
+            </List>
+
         </Drawer>
     );
 };

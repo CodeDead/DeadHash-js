@@ -7,11 +7,12 @@ const tr_TR = () => {
         help: "Yardım",
         language: "Dil",
         aboutSubtitle: "DeadHash hakkında daha fazla bilgi edinin",
-        aboutMessage: "DeadHash, DeadLine tarafından oluşturuldu.\n\nBazı resimler icons8 tarafından sağlandı: https://icons8.com\nLisans: GPLv3\nSürüm: 2.0\n\nTelif Hakkı © 2020 CodeDead",
+        aboutMessage: "DeadHash, DeadLine tarafından oluşturuldu.\n\nBazı resimler icons8 tarafından sağlandı: https://icons8.com\nLisans: GPLv3\nSürüm: {x}\n\nTelif Hakkı © 2020 CodeDead",
         codedead: "CodeDead",
         theme: "Tema",
         general: "Genel",
         autoUpdate: "Güncellemeleri otomatik olarak kontrol et",
+        dragAndDrop: "Sürükle ve bırak özelliğini etkinleştir",
         select: "Seçmek",
         default: "Varsayılan",
         defaultThemeDescription: "Varsayılan tema.",
@@ -65,7 +66,11 @@ const tr_TR = () => {
         noUpdatesMessage: "DeadHash’ın en son sürümünü kullanıyorsunuz.",
         minimizeEnabled: "Küçült düğmesi",
         maximizeEnabled: "Büyüt düğmesi",
-        languageEnabled: "Dil düğmesi"
+        languageEnabled: "Dil düğmesi",
+        exit: "Kapatmak",
+        darkTheme: "Karanlık",
+        darkThemeDescription: "Gözleri kolay.",
+        export: "Ihracat"
     }
 };
 

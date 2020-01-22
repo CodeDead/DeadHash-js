@@ -10,10 +10,11 @@ import GridList from "../../components/GridList";
 import CopyPasteMenu from "../../components/CopyPasteMenu";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
+import CsvExport from "../../components/CsvExport";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(4, 0, 2),
     },
     content: {
@@ -170,10 +171,19 @@ const Text = () => {
                                 {compareField}
                             </Paper>
                             {hashes && hashes.length > 0 ? (
-                                <Button className={classes.button} color={"primary"} variant={"contained"}
-                                        style={{float: 'left'}} onClick={() => clearData()}>
-                                    {language.clear}
-                                </Button>
+                                <>
+                                    <Button className={classes.button} color={"primary"} variant={"contained"}
+                                            onClick={() => clearData()}>
+                                        {language.clear}
+                                    </Button>
+
+                                    <CsvExport fileName={"DeadHash Export " + new Date() + ".csv"} data={hashes}>
+                                        <Button className={classes.button} color={"primary"} variant={"contained"}
+                                                style={{marginLeft: 5}}>
+                                            {language.export}
+                                        </Button>
+                                    </CsvExport>
+                                </>
                             ) : null}
                             <Button className={classes.button} color={"primary"} variant={"contained"}
                                     disabled={!input || input.length === 0}

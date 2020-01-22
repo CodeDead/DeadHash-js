@@ -7,11 +7,12 @@ const jp_JP = () => {
         help: "助けて",
         language: "言語",
         aboutSubtitle: "DeadHashの詳細",
-        aboutMessage: "DeadHashはDeadLineによって作成されました。\n\n一部の画像は、icons8によって提供されました：https://icons8.com\nライセンス：GPLv3\nバージョン：2.0\n\n著作権©2020 CodeDead",
+        aboutMessage: "DeadHashはDeadLineによって作成されました。\n\n一部の画像は、icons8によって提供されました：https://icons8.com\nライセンス：GPLv3\nバージョン：{x}\n\n著作権©2020 CodeDead",
         codedead: "CodeDead",
         theme: "テーマ",
         general: "全般",
         autoUpdate: "更新を自動的に確認する",
+        dragAndDrop: "ドラッグアンドドロップを有効にする",
         select: "選択してください",
         default: "デフォルト",
         defaultThemeDescription: "デフォルトのテーマ。",
@@ -65,7 +66,11 @@ const jp_JP = () => {
         noUpdatesMessage: "DeadHashの最新バージョンを使用しています。",
         minimizeEnabled: "最小化ボタン",
         maximizeEnabled: "最大化ボタン",
-        languageEnabled: "言語ボタン"
+        languageEnabled: "言語ボタン",
+        exit: "出口",
+        darkTheme: "闇",
+        darkThemeDescription: "目に優しい。",
+        export: "書き出す"
     }
 };
 
