@@ -90,9 +90,9 @@ const Drawerbar = () => {
     return (
         <Drawer
             className={classes.drawer}
-            variant="persistent"
             anchor="left"
             open={open}
+            onClose={handleDrawerClose}
             classes={{
                 paper: classes.drawerPaper,
             }}
@@ -120,7 +120,7 @@ const Drawerbar = () => {
 
             <List>
                 <ListItem onClick={() => handleIndexChange(4)} button>
-                    <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
+                    <ListItemIcon><HelpIcon color="inherit"/></ListItemIcon>
                     <ListItemText primary={language.help}/>
                 </ListItem>
 
@@ -130,12 +130,12 @@ const Drawerbar = () => {
                 </ListItem>
             </List>
 
-            <Divider />
+            <Divider/>
 
             <List>
                 <ListItem onClick={() => remote.getGlobal("mainWindow").close()} button>
-                    <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
-                    <ListItemText primary={language.exit} />
+                    <ListItemIcon><CloseIcon color="inherit"/></ListItemIcon>
+                    <ListItemText primary={language.exit}/>
                 </ListItem>
             </List>
 
