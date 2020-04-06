@@ -15,7 +15,7 @@ export const Updater = (os) => {
             data.updateAvailable = true;
         else if (platform.version.minorVersion > 0)
             data.updateAvailable = true;
-        else if (platform.version.buildVersion > 1)
+        else if (platform.version.buildVersion > 2)
             data.updateAvailable = true;
         else if (platform.version.revisionVersion > 0)
             data.updateAvailable = true;
