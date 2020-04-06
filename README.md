@@ -26,5 +26,3 @@ This library is maintained by CodeDead. You can find more about us using the fol
 * [Twitter](https://twitter.com/C0DEDEAD)
 * [Facebook](https://facebook.com/deadlinecodedead)
 * [Reddit](https://reddit.com/r/CodeDead/)
-
-We would also like to thank JetBrains for the open source license that they granted us to work with wonderful tools such as [WebStorm](https://jetbrains.com/webstorm) and [Resharper](https://jetbrains.com/resharper).
