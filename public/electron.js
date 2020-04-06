@@ -5,7 +5,7 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 let mainWindow;
 
-function createWindow() {
+const createWindow = () => {
     mainWindow = new BrowserWindow({
         webPreferences: {
             nodeIntegration: true
@@ -34,7 +34,7 @@ function createWindow() {
         event.preventDefault();
         electron.shell.openExternal(arg);
     });
-}
+};
 
 app.on("ready", createWindow);
 
