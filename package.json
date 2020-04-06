@@ -1,7 +1,7 @@
 {
   "name": "deadhash",
-  "version": "2.0.1",
-  "description": "Hash calculator",
+  "version": "2.0.2",
+  "description": "File and text hash calculator",
   "homepage": "./",
   "private": true,
   "author": {
@@ -35,12 +35,12 @@
   },
   "main": "public/electron.js",
   "dependencies": {
-    "@material-ui/core": "^4.9.7",
+    "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "cross-env": "^7.0.2",
     "crypto-js": "^4.0.0",
-    "electron-is-dev": "^1.1.0",
+    "electron-is-dev": "^1.2.0",
     "react": "^16.13.1",
     "react-contexify": "^4.1.1",
     "react-dom": "^16.13.1",
