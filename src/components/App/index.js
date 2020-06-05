@@ -36,7 +36,6 @@ function App() {
             <BrowserRouter>
                 <DropZone>
                     <Topbar/>
-                    <Drawerbar/>
                     <CssBaseline/>
                     <Switch>
                         <Route path={"/settings"}>

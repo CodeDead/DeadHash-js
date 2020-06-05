@@ -40,7 +40,6 @@ const About = () => {
 
     ipcRenderer.on('get-version-reply', (e, version) => {
         setAppVersion(version);
-        console.log(version);
     });
     ipcRenderer.send('get-version');
 

@@ -3,7 +3,6 @@ import en_US from "../../languages/en_US";
 import {
     setLanguageIndex,
     setActiveListItem,
-    setDrawerOpen,
     setThemeIndex,
     setAutoUpdate,
     setUpdateChecked,
@@ -86,12 +85,6 @@ const MainReducer = handleActions({
         return {
             ...state,
             selectedListItem: action.index
-        }
-    },
-    [setDrawerOpen](state, action) {
-        return {
-            ...state,
-            drawerOpen: action.drawerOpen
         }
     },
     [setThemeIndex](state, action) {

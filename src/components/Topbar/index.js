@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import MinimizeIcon from "@material-ui/icons/Minimize";
 import FullScreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
+import Drawerbar from "../Drawerbar";
 
 const drawerWidth = 220;
 const useStyles = makeStyles(theme => ({
@@ -46,7 +47,6 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 const Topbar = () => {
 
     const classes = useStyles();
-    const open = useSelector(state => state.MainReducer.drawerOpen);
     const languageIndex = useSelector(state => state.MainReducer.languageIndex);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const minimizeEnabled = useSelector(state => state.MainReducer.minimizeEnabled);
@@ -56,6 +56,7 @@ const Topbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [fullScreen, setFullScreen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const languageOpen = Boolean(anchorEl);
 
     ipcRenderer.on("window-maximized", () => {
@@ -70,7 +71,7 @@ const Topbar = () => {
      * Open the drawer
      */
     const openDrawer = () => {
-        dispatch({type: "SET_DRAWEROPEN", drawerOpen: true});
+        setDrawerOpen(true);
     };
 
     /**
@@ -114,9 +115,9 @@ const Topbar = () => {
     return (
         <div className={classes.root}>
             <AppBar position="fixed" color={"primary"}
-                    className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
+                    className={drawerOpen ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
                 <Toolbar>
-                    <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
+                    <IconButton edge="start" className={drawerOpen ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
                         <MenuIcon/>
                     </IconButton>
@@ -194,6 +195,7 @@ const Topbar = () => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
+            <Drawerbar open={drawerOpen} onClose={() => setDrawerOpen(false)}/>
             <Toolbar/>
         </div>
     );
