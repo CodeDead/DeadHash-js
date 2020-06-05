@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -29,17 +29,24 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const appVersion = window.require('electron').remote.app.getVersion();
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 const About = () => {
 
     const classes = useStyles();
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const dispatch = useDispatch();
+    let [appVersion, setAppVersion] = useState("");
+
+    ipcRenderer.on('get-version-reply', (e, version) => {
+        setAppVersion(version);
+        console.log(version);
+    });
+    ipcRenderer.send('get-version');
 
     useEffect(() => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 5});
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

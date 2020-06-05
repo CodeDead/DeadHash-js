@@ -12,6 +12,7 @@ import {useSelector, useDispatch} from "react-redux";
 import CloseIcon from '@material-ui/icons/Close';
 import MinimizeIcon from "@material-ui/icons/Minimize";
 import FullScreenIcon from "@material-ui/icons/Fullscreen";
+import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
 const drawerWidth = 220;
 const useStyles = makeStyles(theme => ({
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const remote = window.require('electron').remote;
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 const Topbar = () => {
 
@@ -54,7 +55,16 @@ const Topbar = () => {
     const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [fullScreen, setFullScreen] = useState(false);
     const languageOpen = Boolean(anchorEl);
+
+    ipcRenderer.on("window-maximized", () => {
+        setFullScreen(true);
+    })
+
+    ipcRenderer.on("window-unmaximized", () => {
+        setFullScreen(false);
+    });
 
     /**
      * Open the drawer
@@ -91,18 +101,14 @@ const Topbar = () => {
      * Minimize the window
      */
     const minimize = () => {
-        remote.getGlobal("mainWindow").minimize();
+        ipcRenderer.send('handle-minimize');
     };
 
     /**
      * Maximize or restore the previous state of the window
      */
     const maximize = () => {
-        if (!remote.getGlobal("mainWindow").isMaximized()) {
-            remote.getGlobal("mainWindow").maximize();
-        } else {
-            remote.getGlobal("mainWindow").unmaximize();
-        }
+        ipcRenderer.send('handle-maximize');
     };
 
     return (
@@ -177,13 +183,13 @@ const Topbar = () => {
                         <IconButton
                             color="inherit"
                             onClick={() => maximize()}>
-                            <FullScreenIcon/>
+                            {fullScreen ? <FullscreenExitIcon/> : <FullScreenIcon/>}
                         </IconButton>
                         : null
                     }
                     <IconButton
                         color="inherit"
-                        onClick={() => remote.getGlobal("mainWindow").close()}>
+                        onClick={() => ipcRenderer.send('handle-close')}>
                         <CloseIcon/>
                     </IconButton>
                 </Toolbar>

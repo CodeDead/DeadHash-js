@@ -34,6 +34,14 @@ const createWindow = () => {
         event.preventDefault();
         electron.shell.openExternal(arg);
     });
+
+    mainWindow.on("maximize", () => {
+        mainWindow.webContents.send("window-maximized");
+    });
+
+    mainWindow.on("unmaximize", () => {
+        mainWindow.webContents.send("window-unmaximized");
+    })
 };
 
 app.on("ready", createWindow);
@@ -48,4 +56,24 @@ app.on("activate", () => {
     if (mainWindow === null) {
         createWindow();
     }
+});
+
+electron.ipcMain.on("handle-close", () => {
+    mainWindow.close();
+});
+
+electron.ipcMain.on("handle-maximize", () => {
+    if (!mainWindow.isMaximized()) {
+        mainWindow.maximize();
+    } else {
+        mainWindow.unmaximize();
+    }
+});
+
+electron.ipcMain.on("handle-minimize", () => {
+    mainWindow.minimize();
+});
+
+electron.ipcMain.on("get-version", (e) => {
+    e.reply('get-version-reply', app.getVersion());
 });

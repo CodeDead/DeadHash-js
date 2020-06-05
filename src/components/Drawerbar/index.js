@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const remote = window.require('electron').remote;
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 const Drawerbar = () => {
 
@@ -133,7 +133,7 @@ const Drawerbar = () => {
             <Divider/>
 
             <List>
-                <ListItem onClick={() => remote.getGlobal("mainWindow").close()} button>
+                <ListItem onClick={() => ipcRenderer.send('handle-close')} button>
                     <ListItemIcon><CloseIcon color="inherit"/></ListItemIcon>
                     <ListItemText primary={language.exit}/>
                 </ListItem>

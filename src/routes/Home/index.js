@@ -50,7 +50,7 @@ const Home = () => {
         if (autoUpdate && !updateChecked) {
             checkForUpdates();
         }
-    }, []);
+    }, [dispatch]);
 
     /**
      * Check for application updates

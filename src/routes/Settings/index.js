@@ -84,7 +84,7 @@ const Settings = () => {
 
     useEffect(() => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 3});
-    }, []);
+    }, [dispatch]);
 
     /**
      * Change the theme

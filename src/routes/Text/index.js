@@ -77,7 +77,7 @@ const Text = () => {
 
     useEffect(() => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 2});
-    }, []);
+    }, [dispatch]);
 
     const output = hashes && hashes.length > 0 ?
         <>

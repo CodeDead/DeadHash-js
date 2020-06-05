@@ -93,7 +93,7 @@ const File = () => {
 
     useEffect(() => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 1});
-    }, []);
+    }, [dispatch]);
 
     /**
      * Calculate the hashes of a specific file
