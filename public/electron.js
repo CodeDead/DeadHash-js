@@ -1,5 +1,6 @@
 const electron = require("electron");
 const app = electron.app;
+const ipcMain = electron.ipcMain;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
@@ -55,11 +56,11 @@ app.on("activate", () => {
     }
 });
 
-electron.ipcMain.on("handle-close", () => {
+ipcMain.on("handle-close", () => {
     mainWindow.close();
 });
 
-electron.ipcMain.on("handle-maximize", () => {
+ipcMain.on("handle-maximize", () => {
     if (!mainWindow.isMaximized()) {
         mainWindow.maximize();
     } else {
@@ -67,10 +68,10 @@ electron.ipcMain.on("handle-maximize", () => {
     }
 });
 
-electron.ipcMain.on("handle-minimize", () => {
+ipcMain.on("handle-minimize", () => {
     mainWindow.minimize();
 });
 
-electron.ipcMain.on("get-version", (e) => {
+ipcMain.on("get-version", (e) => {
     e.reply('get-version-reply', app.getVersion());
 });
