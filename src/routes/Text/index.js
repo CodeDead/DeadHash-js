@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {Checkbox, makeStyles, Paper, FormControlLabel, Button} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 import Hash from "../../components/Hash";
 import GridList from "../../components/GridList";
@@ -132,66 +131,62 @@ const Text = () => {
             </div>
             <main className={classes.content}>
                 <Container className={classes.container}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                                <BackButton/>
-                                {language.input}
-                            </Typography>
-                            <Paper className={classes.paper}>
-                                <CopyPasteMenu id={0} copyData={() => navigator.clipboard.writeText(input)}
-                                               pasteData={() =>
-                                                   navigator.clipboard.readText()
-                                                       .then(text => {
-                                                           dispatch({type: "SET_TEXT_INPUT", payload: text});
-                                                       })
-                                               }>
-                                    <TextField
-                                        style={{width: "100%"}}
-                                        id="outlined-basic"
-                                        margin="normal"
-                                        value={input}
-                                        onChange={(e) => dispatch({type: "SET_TEXT_INPUT", payload: e.target.value})}
-                                        multiline
-                                        rowsMax={6}
-                                        variant="outlined"/>
-                                </CopyPasteMenu>
+                    <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                        <BackButton/>
+                        {language.input}
+                    </Typography>
+                    <Paper className={classes.paper}>
+                        <CopyPasteMenu id={0} copyData={() => navigator.clipboard.writeText(input)}
+                                       pasteData={() =>
+                                           navigator.clipboard.readText()
+                                               .then(text => {
+                                                   dispatch({type: "SET_TEXT_INPUT", payload: text});
+                                               })
+                                       }>
+                            <TextField
+                                style={{width: "100%"}}
+                                id="outlined-basic"
+                                margin="normal"
+                                value={input}
+                                onChange={(e) => dispatch({type: "SET_TEXT_INPUT", payload: e.target.value})}
+                                multiline
+                                rowsMax={6}
+                                variant="outlined"/>
+                        </CopyPasteMenu>
 
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={compare}
-                                            onChange={(e) => setCompare(e.target.checked)}
-                                            value="compare"
-                                            color="primary"
-                                        />
-                                    }
-                                    label={language.compare}
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={compare}
+                                    onChange={(e) => setCompare(e.target.checked)}
+                                    value="compare"
+                                    color="primary"
                                 />
-                                {compareField}
-                            </Paper>
-                            {hashes && hashes.length > 0 ? (
-                                <>
-                                    <Button className={classes.button} color={"primary"} variant={"contained"}
-                                            onClick={() => clearData()}>
-                                        {language.clear}
-                                    </Button>
-
-                                    <CsvExport fileName={"DeadHash Export " + new Date() + ".csv"} data={hashes}>
-                                        <Button className={classes.button} color={"primary"} variant={"contained"}
-                                                style={{marginLeft: 5}}>
-                                            {language.export}
-                                        </Button>
-                                    </CsvExport>
-                                </>
-                            ) : null}
+                            }
+                            label={language.compare}
+                        />
+                        {compareField}
+                    </Paper>
+                    {hashes && hashes.length > 0 ? (
+                        <>
                             <Button className={classes.button} color={"primary"} variant={"contained"}
-                                    disabled={!input || input.length === 0}
-                                    style={{float: 'right'}} onClick={() => calculateHashes()}>
-                                {language.calculate}
+                                    onClick={() => clearData()}>
+                                {language.clear}
                             </Button>
-                        </Grid>
-                    </Grid>
+
+                            <CsvExport fileName={"DeadHash Export " + new Date() + ".csv"} data={hashes}>
+                                <Button className={classes.button} color={"primary"} variant={"contained"}
+                                        style={{marginLeft: 5}}>
+                                    {language.export}
+                                </Button>
+                            </CsvExport>
+                        </>
+                    ) : null}
+                    <Button className={classes.button} color={"primary"} variant={"contained"}
+                            disabled={!input || input.length === 0}
+                            style={{float: 'right'}} onClick={() => calculateHashes()}>
+                        {language.calculate}
+                    </Button>
                     {output}
                 </Container>
             </main>

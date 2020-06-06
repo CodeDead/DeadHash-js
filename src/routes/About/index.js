@@ -7,6 +7,10 @@ import {useDispatch, useSelector} from "react-redux";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import BackButton from "../../components/BackButton";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import {Updater} from "../../utils/Updater";
+import UpdateDialog from "../../components/UpdateDialog";
+import AlertDialog from "../../components/AlertDialog";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -29,23 +33,49 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const os = window.require('os');
 const ipcRenderer = window.require('electron').ipcRenderer;
+
+let appVersion;
+
+ipcRenderer.on('get-version-reply', (e, version) => {
+    appVersion = version;
+});
+ipcRenderer.send('get-version');
 
 const About = () => {
 
     const classes = useStyles();
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const dispatch = useDispatch();
-    let [appVersion, setAppVersion] = useState("");
 
-    ipcRenderer.on('get-version-reply', (e, version) => {
-        setAppVersion(version);
-    });
-    ipcRenderer.send('get-version');
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [update, setUpdate] = useState(null);
 
     useEffect(() => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 5});
     }, [dispatch]);
+
+    /**
+     * Check for application updates
+     * @returns {Promise<void>}
+     */
+    const checkForUpdates = async () => {
+        if (loading) return;
+
+        setLoading(true);
+        setUpdate(null);
+        setErrorMessage(null);
+
+        const data = await Updater(os);
+        if (data && data.length > 0) {
+            setErrorMessage(data);
+        } else {
+            setUpdate(data);
+        }
+        setLoading(false);
+    };
 
     return (
         <div>
@@ -60,41 +90,48 @@ const About = () => {
                 </Container>
             </div>
             <main className={classes.content}>
+                {update && update.updateAvailable ? (
+                    <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
+                                  newVersion={update.version}/>) : null}
+                {update && !update.updateAvailable ? (
+                    <AlertDialog title={language.noUpdatesTitle} content={language.noUpdatesMessage}/>) : null}
+                {errorMessage && errorMessage.length > 0 ? (
+                    <AlertDialog title={language.errorTitle} content={errorMessage}/>) : null}
                 <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                                <BackButton/>
-                                {language.appName} - {language.about}
-                            </Typography>
-                            <Paper className={classes.paper}>
-                                <div style={{whiteSpace: 'pre-wrap'}}>
-                                    <p>
-                                        {language.aboutMessage.replace("{x}", appVersion)}
-                                    </p>
-                                </div>
+                    <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                        <BackButton/>
+                        {language.appName} - {language.about}
+                    </Typography>
+                    <Paper className={classes.paper}>
+                        <div style={{whiteSpace: 'pre-wrap'}}>
+                            <p>
+                                {language.aboutMessage.replace("{x}", appVersion)}
+                            </p>
+                        </div>
 
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} md={6} lg={6}>
-                                        <Button target={"_blank"}
-                                                style={{width: '100%'}}
-                                                href={"http://codedead.com/Software/DeadHash/gpl.pdf"}
-                                                color={"primary"} variant={"contained"}>
-                                            {language.license}
-                                        </Button>
-                                    </Grid>
-                                    <Grid item xs={12} md={6} lg={6}>
-                                        <Button target={"_blank"}
-                                                style={{width: '100%'}}
-                                                href={"http://codedead.com"}
-                                                color={"primary"} variant={"contained"}>
-                                            {language.codedead}
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={6} lg={6}>
+                                <Button target={"_blank"}
+                                        style={{width: '100%'}}
+                                        href={"http://codedead.com/Software/DeadHash/gpl.pdf"}
+                                        color={"primary"} variant={"contained"}>
+                                    {language.license}
+                                </Button>
+                            </Grid>
+                            <Grid item xs={12} md={6} lg={6}>
+                                <Button target={"_blank"}
+                                        style={{width: '100%'}}
+                                        href={"http://codedead.com"}
+                                        color={"primary"} variant={"contained"}>
+                                    {language.codedead}
+                                </Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </Paper>
+                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()}>
+                        <RefreshIcon/>
+                        {language.checkForUpdates}
+                    </Button>
                 </Container>
             </main>
         </div>

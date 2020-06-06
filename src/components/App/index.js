@@ -9,7 +9,6 @@ import Topbar from "../Topbar";
 import About from "../../routes/About";
 import File from "../../routes/File";
 import Text from "../../routes/Text";
-import Drawerbar from "../Drawerbar";
 import {CssBaseline} from "@material-ui/core";
 import DropZone from "../DropZone";
 

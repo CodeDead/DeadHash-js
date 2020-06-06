@@ -145,7 +145,7 @@ const Settings = () => {
             <main className={classes.content}>
                 {update && update.updateAvailable ? (
                     <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
-                                  newVersion={update.version} />) : null}
+                                  newVersion={update.version}/>) : null}
                 {update && !update.updateAvailable ? (
                     <AlertDialog title={language.noUpdatesTitle} content={language.noUpdatesMessage}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (
