@@ -243,8 +243,9 @@ const Settings = () => {
                                         <MenuItem value={4}>Italiano</MenuItem>
                                         <MenuItem value={5}>日本語</MenuItem>
                                         <MenuItem value={6}>Nederlands</MenuItem>
-                                        <MenuItem value={7}>Pусский</MenuItem>
-                                        <MenuItem value={8}>Türkçe</MenuItem>
+                                        <MenuItem value={7}>Português</MenuItem>
+                                        <MenuItem value={8}>Pусский</MenuItem>
+                                        <MenuItem value={9}>Türkçe</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Paper>
