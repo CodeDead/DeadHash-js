@@ -228,15 +228,13 @@ const Settings = () => {
                                     }
                                     label={language.languageEnabled}
                                 />
-                                <FormControl>
-                                    <InputLabel htmlFor="language-simple">{language.language}</InputLabel>
+                                <FormControl variant={"outlined"}>
+                                    <InputLabel id={"language-label"}>{language.language}</InputLabel>
                                     <Select
                                         value={languageIndex}
                                         onChange={handleLanguageChange}
-                                        inputProps={{
-                                            name: 'language',
-                                            id: 'language-simple',
-                                        }}
+                                        id={"language-simple"}
+                                        labelId={"language-label"}
                                     >
                                         <MenuItem value={0}>Deutsch</MenuItem>
                                         <MenuItem value={1}>English</MenuItem>
