@@ -144,11 +144,11 @@ const MainReducer = handleActions({
             languageEnabled: action.payload
         }
     },
-    [setCanDragDrop](state,action) {
+    [setCanDragDrop](state, action) {
         localStorage['canDragDrop'] = action.payload;
         return {
             ...state,
-            canDragDrop : action.payload
+            canDragDrop: action.payload
         }
     }
 }, initState);
