@@ -23,9 +23,6 @@ const createWindow = () => {
         electron.Menu.setApplicationMenu(null);
     }
 
-    // noinspection JSUndefinedPropertyAssignment
-    global.mainWindow = mainWindow;
-
     mainWindow.removeMenu();
     mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
     mainWindow.on("closed", () => (mainWindow = null));
