@@ -70,7 +70,9 @@ const nl_NL = () => {
         exit: "Sluiten",
         darkTheme: "Donker",
         darkThemeDescription: "Makkelijk voor de ogen.",
-        export: "Exporteren"
+        export: "Exporteren",
+        yourTextHere: "Jouw text hier",
+        filePath: "Bestandspad"
     }
 };
 

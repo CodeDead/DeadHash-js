@@ -146,6 +146,7 @@ const Text = () => {
                             <TextField
                                 style={{width: "100%"}}
                                 id="outlined-basic"
+                                label={language.yourTextHere}
                                 margin="normal"
                                 value={input}
                                 onChange={(e) => dispatch({type: "SET_TEXT_INPUT", payload: e.target.value})}

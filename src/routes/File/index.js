@@ -167,6 +167,7 @@ const File = () => {
                             id="filled-disabled"
                             value={file && file.path ? file.path : ""}
                             variant="outlined"
+                            label={language.filePath}
                         />
 
                         <input ref={fileRef} type="file" onChange={onFileChange}

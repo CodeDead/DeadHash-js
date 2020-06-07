@@ -70,7 +70,9 @@ const tr_TR = () => {
         exit: "Kapatmak",
         darkTheme: "Karanlık",
         darkThemeDescription: "Gözleri kolay.",
-        export: "Ihracat"
+        export: "Ihracat",
+        yourTextHere: "Buraya yazın",
+        filePath: "Dosya yolu"
     }
 };
 

@@ -13,8 +13,8 @@ const createWindow = () => {
         },
         frame: false,
         title: "DeadHash",
-        width: 980,
-        height: 550,
+        width: 960,
+        height: 520,
         icon: path.join(__dirname, '../build/Icon-512x512.png')
     });
 

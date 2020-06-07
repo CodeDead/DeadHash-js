@@ -70,7 +70,9 @@ const pt_PT = () => {
         exit: "Saída",
         darkTheme: "Sombrio",
         darkThemeDescription: "Fácil para os olhos.",
-        export: "Exportação"
+        export: "Exportação",
+        yourTextHere: "Seu texto aqui",
+        filePath: "Caminho de arquivo"
     }
 };
 

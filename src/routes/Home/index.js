@@ -7,8 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router";
 import blank from "../../components/Theme/blank.png";
@@ -45,13 +43,6 @@ const Home = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [update, setUpdate] = useState(null);
 
-    useEffect(() => {
-        dispatch({type: 'SET_ACTIVE_LISTITEM', index: 0});
-        if (autoUpdate && !updateChecked) {
-            checkForUpdates();
-        }
-    }, [dispatch]);
-
     /**
      * Check for application updates
      * @returns {Promise<void>}
@@ -75,6 +66,13 @@ const Home = () => {
         }
         setLoading(false);
     };
+
+    useEffect(() => {
+        dispatch({type: 'SET_ACTIVE_LISTITEM', index: 0});
+        if (autoUpdate && !updateChecked) {
+            checkForUpdates();
+        }
+    }, [dispatch, checkForUpdates]);
 
     /**
      * Open the file hasher page
@@ -103,8 +101,11 @@ const Home = () => {
                 </Container>
             </div>
             <main className={classes.content}>
-                {update && update.updateAvailable ? (<UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl} newVersion={update.version} />) : null}
-                {errorMessage && errorMessage.length > 0 ? (<AlertDialog title={language.errorTitle} content={errorMessage}/>) : null}
+                {update && update.updateAvailable ? (
+                    <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
+                                  newVersion={update.version}/>) : null}
+                {errorMessage && errorMessage.length > 0 ? (
+                    <AlertDialog title={language.errorTitle} content={errorMessage}/>) : null}
                 <Container maxWidth={"lg"} className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6} lg={6}>
@@ -123,12 +124,6 @@ const Home = () => {
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <CardActions>
-                                    <Button size="small" color="primary" variant={"contained"}
-                                            onClick={() => openFileHasher()}>
-                                        {language.select}
-                                    </Button>
-                                </CardActions>
                             </Card>
                         </Grid>
                         <Grid item xs={12} md={6} lg={6}>
@@ -147,12 +142,6 @@ const Home = () => {
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <CardActions>
-                                    <Button size="small" color="primary" variant={"contained"}
-                                            onClick={() => openTextHasher()}>
-                                        {language.select}
-                                    </Button>
-                                </CardActions>
                             </Card>
                         </Grid>
                     </Grid>

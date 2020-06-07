@@ -70,7 +70,9 @@ const fr_FR = () => {
         exit: "Fermer",
         darkTheme: "Foncé",
         darkThemeDescription: "Facile sur les yeux.",
-        export: "Exporter"
+        export: "Exporter",
+        yourTextHere: "Votre texte ici",
+        filePath: "Chemin du fichier"
     }
 };
 

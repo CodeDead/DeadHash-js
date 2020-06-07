@@ -70,7 +70,9 @@ const ru_RU = () => {
         exit: "Выход",
         darkTheme: "Темно",
         darkThemeDescription: "Легко на глазах.",
-        export: "экспорт"
+        export: "экспорт",
+        yourTextHere: "Здесь ваш текст",
+        filePath: "Путь файла"
     }
 };
 
