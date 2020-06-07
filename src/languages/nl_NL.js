@@ -3,7 +3,7 @@ const nl_NL = () => {
         appName: "DeadHash",
         about: "Over",
         settings: "Instellingen",
-        settingsSubtitle: "Voorkeuren",
+        settingsSubtitle: "Jouw voorkeuren",
         help: "Help",
         language: "Taal",
         aboutSubtitle: "Leer meer over DeadHash",
