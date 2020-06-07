@@ -128,7 +128,8 @@ const About = () => {
                             </Grid>
                         </Grid>
                     </Paper>
-                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()}>
+                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()}
+                            style={{marginTop: 5}}>
                         <RefreshIcon/>
                         {language.checkForUpdates}
                     </Button>
