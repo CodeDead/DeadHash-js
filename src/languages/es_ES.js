@@ -70,7 +70,13 @@ const es_ES = () => {
         exit: "Salida",
         darkTheme: "Oscuro",
         darkThemeDescription: "Fácil para los ojos.",
-        export: "Exportar"
+        export: "Exportar",
+        yourTextHere: "Tu texto aqui",
+        filePath: "Ruta de archivo",
+        yes: "Sí",
+        no: "No",
+        confirmation: "Confirmación",
+        confirmResetSettings: "¿Estás seguro de que quieres restablecer todos los ajustes?"
     }
 };
 

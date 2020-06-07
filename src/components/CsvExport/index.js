@@ -15,11 +15,11 @@ const CsvExport = ({children, data, fileName}) => {
 
     return (
         data ? (
-                <a href={href} download={fileName} target={"_self"}
-                   style={{textDecoration: "none"}}>
-                    {children}
-                </a>
-            ) : {children}
+            <a href={href} download={fileName} target={"_self"}
+               style={{textDecoration: "none"}}>
+                {children}
+            </a>
+        ) : {children}
     );
 };
 

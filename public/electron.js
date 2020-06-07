@@ -1,5 +1,6 @@
 const electron = require("electron");
 const app = electron.app;
+const ipcMain = electron.ipcMain;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
@@ -12,8 +13,8 @@ const createWindow = () => {
         },
         frame: false,
         title: "DeadHash",
-        width: 980,
-        height: 550,
+        width: 960,
+        height: 520,
         icon: path.join(__dirname, '../build/Icon-512x512.png')
     });
 
@@ -23,9 +24,6 @@ const createWindow = () => {
         electron.Menu.setApplicationMenu(null);
     }
 
-    // noinspection JSUndefinedPropertyAssignment
-    global.mainWindow = mainWindow;
-
     mainWindow.removeMenu();
     mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
     mainWindow.on("closed", () => (mainWindow = null));
@@ -34,9 +32,17 @@ const createWindow = () => {
         event.preventDefault();
         electron.shell.openExternal(arg);
     });
+
+    mainWindow.on("maximize", () => {
+        mainWindow.webContents.send("window-maximized");
+    });
+
+    mainWindow.on("unmaximize", () => {
+        mainWindow.webContents.send("window-unmaximized");
+    })
 };
 
-app.on("ready", createWindow);
+app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
     if (process.platform !== "darwin") {
@@ -45,7 +51,27 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-    if (mainWindow === null) {
+    if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
+});
+
+ipcMain.on("handle-close", () => {
+    mainWindow.close();
+});
+
+ipcMain.on("handle-maximize", () => {
+    if (!mainWindow.isMaximized()) {
+        mainWindow.maximize();
+    } else {
+        mainWindow.unmaximize();
+    }
+});
+
+ipcMain.on("handle-minimize", () => {
+    mainWindow.minimize();
+});
+
+ipcMain.on("get-version", (e) => {
+    e.reply('get-version-reply', app.getVersion());
 });

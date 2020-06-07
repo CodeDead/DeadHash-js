@@ -35,7 +35,6 @@ const DropZone = ({children}) => {
             {children}
         </div>
     );
-
 };
 
 export default DropZone;

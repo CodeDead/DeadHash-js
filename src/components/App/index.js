@@ -9,11 +9,10 @@ import Topbar from "../Topbar";
 import About from "../../routes/About";
 import File from "../../routes/File";
 import Text from "../../routes/Text";
-import Drawerbar from "../Drawerbar";
 import {CssBaseline} from "@material-ui/core";
 import DropZone from "../DropZone";
 
-function App() {
+const App = () => {
 
     let themeIndex = useSelector(state => state.MainReducer.themeIndex);
 
@@ -36,7 +35,6 @@ function App() {
             <BrowserRouter>
                 <DropZone>
                     <Topbar/>
-                    <Drawerbar/>
                     <CssBaseline/>
                     <Switch>
                         <Route path={"/settings"}>
@@ -59,6 +57,6 @@ function App() {
             </BrowserRouter>
         </ThemeProvider>
     );
-}
+};
 
 export default App;
