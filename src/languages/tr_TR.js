@@ -72,7 +72,11 @@ const tr_TR = () => {
         darkThemeDescription: "Gözleri kolay.",
         export: "Ihracat",
         yourTextHere: "Buraya yazın",
-        filePath: "Dosya yolu"
+        filePath: "Dosya yolu",
+        yes: "Evet",
+        no: "Hayır",
+        confirmation: "Onayla",
+        confirmResetSettings: "Tüm ayarları sıfırlamak istediğinizden emin misiniz?"
     }
 };
 

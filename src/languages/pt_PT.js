@@ -72,7 +72,11 @@ const pt_PT = () => {
         darkThemeDescription: "Fácil para os olhos.",
         export: "Exportação",
         yourTextHere: "Seu texto aqui",
-        filePath: "Caminho de arquivo"
+        filePath: "Caminho de arquivo",
+        yes: "Sim",
+        no: "Não",
+        confirmation: "Confirmação",
+        confirmResetSettings: "Tem certeza de que deseja redefinir todas as configurações?"
     }
 };
 

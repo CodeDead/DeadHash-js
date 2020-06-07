@@ -72,7 +72,11 @@ const ru_RU = () => {
         darkThemeDescription: "Легко на глазах.",
         export: "экспорт",
         yourTextHere: "Здесь ваш текст",
-        filePath: "Путь файла"
+        filePath: "Путь файла",
+        yes: "да",
+        no: "нет",
+        confirmation: "подтверждение",
+        confirmResetSettings: "Вы уверены, что хотите сбросить все настройки?"
     }
 };
 

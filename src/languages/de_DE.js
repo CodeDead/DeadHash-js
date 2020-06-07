@@ -72,7 +72,11 @@ const de_DE = () => {
         darkThemeDescription: "Schont die Augen.",
         export: "Export",
         yourTextHere: "Dein Text hier",
-        filePath: "Dateipfad"
+        filePath: "Dateipfad",
+        yes: "Ja",
+        no: "Nein",
+        confirmation: "Bestätigung",
+        confirmResetSettings: "Möchten Sie wirklich alle Einstellungen zurücksetzen?"
     }
 };
 

@@ -27,6 +27,7 @@ import {Updater} from "../../utils/Updater";
 import BackButton from "../../components/BackButton";
 import UpdateDialog from "../../components/UpdateDialog";
 import AlertDialog from "../../components/AlertDialog";
+import ConfirmationDialog from "../../components/ConfirmationDialog";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -78,6 +79,7 @@ const Settings = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [update, setUpdate] = useState(null);
+    const [confirmOpen, setConfirmOpen] = useState(false);
 
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -418,11 +420,14 @@ const Settings = () => {
                         <RefreshIcon/>
                         {language.checkForUpdates}
                     </Button>
-                    <Button color={"primary"} variant={"contained"} onClick={() => resetSettings()}
+                    <Button color={"primary"} variant={"contained"} onClick={() => setConfirmOpen(true)}
                             className={classes.button} style={{float: 'right'}}>
                         {language.reset}
                     </Button>
                 </Container>
+                <ConfirmationDialog open={confirmOpen} onClose={() => setConfirmOpen(false)}
+                                    title={language.confirmation} content={language.confirmResetSettings}
+                                    onAccept={() => resetSettings()}/>
             </main>
         </div>
     );

@@ -72,7 +72,11 @@ const jp_JP = () => {
         darkThemeDescription: "目に優しい。",
         export: "書き出す",
         yourTextHere: "ここにあなたのテキスト",
-        filePath: "ファイルパス"
+        filePath: "ファイルパス",
+        yes: "はい",
+        no: "番号",
+        confirmation: "確認",
+        confirmResetSettings: "すべての設定をリセットしてもよろしいですか？"
     }
 };
 

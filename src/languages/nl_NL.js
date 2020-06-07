@@ -72,7 +72,11 @@ const nl_NL = () => {
         darkThemeDescription: "Makkelijk voor de ogen.",
         export: "Exporteren",
         yourTextHere: "Jouw text hier",
-        filePath: "Bestandspad"
+        filePath: "Bestandspad",
+        yes: "Ja",
+        no: "Nee",
+        confirmation: "Bevestiging",
+        confirmResetSettings: "Bent u zeker dat u alle instellingen wenst te resetten?"
     }
 };
 

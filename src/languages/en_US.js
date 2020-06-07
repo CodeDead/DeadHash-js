@@ -72,7 +72,11 @@ const en_US = () => {
         darkThemeDescription: "Easy on the eyes.",
         export: "Export",
         yourTextHere: "Your text here",
-        filePath: "File path"
+        filePath: "File path",
+        yes: "Yes",
+        no: "No",
+        confirmation: "Confirmation",
+        confirmResetSettings: "Are you sure you want to reset all settings?"
     }
 };
 
