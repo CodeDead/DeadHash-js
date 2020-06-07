@@ -9,7 +9,7 @@ const BackButton = () => {
 
     return (
         <Button color={"primary"} onClick={() => history.goBack()}>
-            <ArrowLeftIcon />
+            <ArrowLeftIcon/>
         </Button>
     );
 };

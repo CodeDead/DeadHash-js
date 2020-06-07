@@ -12,7 +12,7 @@ import Text from "../../routes/Text";
 import {CssBaseline} from "@material-ui/core";
 import DropZone from "../DropZone";
 
-function App() {
+const App = () => {
 
     let themeIndex = useSelector(state => state.MainReducer.themeIndex);
 
@@ -57,6 +57,6 @@ function App() {
             </BrowserRouter>
         </ThemeProvider>
     );
-}
+};
 
 export default App;

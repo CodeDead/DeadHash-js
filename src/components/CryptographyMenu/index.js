@@ -13,7 +13,7 @@ import KeyIcon from "@material-ui/icons/VpnKey";
 const useStyles = makeStyles(theme => ({
     nested: {
         paddingLeft: theme.spacing(4),
-    },
+    }
 }));
 
 const CryptographyMenu = ({handleIndexChange, selectedIndex}) => {
