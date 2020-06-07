@@ -1,4 +1,4 @@
-![DeadHash](https://codedead.com/wp-content/uploads/2020/01/deadhash-dark.png)
+![DeadHash](https://codedead.com/wp-content/uploads/2020/06/DeadHash.png)
 
 # DeadHash
 
