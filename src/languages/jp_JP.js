@@ -70,7 +70,13 @@ const jp_JP = () => {
         exit: "出口",
         darkTheme: "闇",
         darkThemeDescription: "目に優しい。",
-        export: "書き出す"
+        export: "書き出す",
+        yourTextHere: "ここにあなたのテキスト",
+        filePath: "ファイルパス",
+        yes: "はい",
+        no: "番号",
+        confirmation: "確認",
+        confirmResetSettings: "すべての設定をリセットしてもよろしいですか？"
     }
 };
 

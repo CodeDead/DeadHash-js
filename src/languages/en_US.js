@@ -70,7 +70,13 @@ const en_US = () => {
         exit: "Exit",
         darkTheme: "Dark",
         darkThemeDescription: "Easy on the eyes.",
-        export: "Export"
+        export: "Export",
+        yourTextHere: "Your text here",
+        filePath: "File path",
+        yes: "Yes",
+        no: "No",
+        confirmation: "Confirmation",
+        confirmResetSettings: "Are you sure you want to reset all settings?"
     }
 };
 

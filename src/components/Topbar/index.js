@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -12,6 +12,8 @@ import {useSelector, useDispatch} from "react-redux";
 import CloseIcon from '@material-ui/icons/Close';
 import MinimizeIcon from "@material-ui/icons/Minimize";
 import FullScreenIcon from "@material-ui/icons/Fullscreen";
+import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
+import Drawerbar from "../Drawerbar";
 
 const drawerWidth = 220;
 const useStyles = makeStyles(theme => ({
@@ -40,12 +42,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const remote = window.require('electron').remote;
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 const Topbar = () => {
 
     const classes = useStyles();
-    const open = useSelector(state => state.MainReducer.drawerOpen);
     const languageIndex = useSelector(state => state.MainReducer.languageIndex);
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const minimizeEnabled = useSelector(state => state.MainReducer.minimizeEnabled);
@@ -54,13 +55,28 @@ const Topbar = () => {
     const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [fullScreen, setFullScreen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const languageOpen = Boolean(anchorEl);
+
+    const fullScreenEvent = () => {
+        setFullScreen(true);
+    }
+
+    const exitFullScreenEvent = () => {
+        setFullScreen(false);
+    }
+
+    useEffect(() => {
+        ipcRenderer.on("window-maximized", fullScreenEvent);
+        ipcRenderer.on("window-unmaximized", exitFullScreenEvent);
+    }, []);
 
     /**
      * Open the drawer
      */
     const openDrawer = () => {
-        dispatch({type: "SET_DRAWEROPEN", drawerOpen: true});
+        setDrawerOpen(true);
     };
 
     /**
@@ -91,26 +107,22 @@ const Topbar = () => {
      * Minimize the window
      */
     const minimize = () => {
-        remote.getGlobal("mainWindow").minimize();
+        ipcRenderer.send('handle-minimize');
     };
 
     /**
      * Maximize or restore the previous state of the window
      */
     const maximize = () => {
-        if (!remote.getGlobal("mainWindow").isMaximized()) {
-            remote.getGlobal("mainWindow").maximize();
-        } else {
-            remote.getGlobal("mainWindow").unmaximize();
-        }
+        ipcRenderer.send('handle-maximize');
     };
 
     return (
         <div className={classes.root}>
             <AppBar position="fixed" color={"primary"}
-                    className={open ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
+                    className={drawerOpen ? classes.appBarShift + ' ' + classes.appBar : classes.appBar}>
                 <Toolbar>
-                    <IconButton edge="start" className={open ? classes.hide : null} color="inherit"
+                    <IconButton edge="start" className={drawerOpen ? classes.hide : null} color="inherit"
                                 aria-label="menu" onClick={openDrawer}>
                         <MenuIcon/>
                     </IconButton>
@@ -159,9 +171,11 @@ const Topbar = () => {
                                 <MenuItem onClick={() => changeLanguage(6)}
                                           selected={languageIndex === 6}>Nederlands</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(7)}
-                                          selected={languageIndex === 7}>Pусский</MenuItem>
+                                          selected={languageIndex === 7}>Português</MenuItem>
                                 <MenuItem onClick={() => changeLanguage(8)}
-                                          selected={languageIndex === 8}>Türkçe</MenuItem>
+                                          selected={languageIndex === 8}>Pусский</MenuItem>
+                                <MenuItem onClick={() => changeLanguage(9)}
+                                          selected={languageIndex === 9}>Türkçe</MenuItem>
                             </Menu>
                         </div>
                         : null}
@@ -177,17 +191,18 @@ const Topbar = () => {
                         <IconButton
                             color="inherit"
                             onClick={() => maximize()}>
-                            <FullScreenIcon/>
+                            {fullScreen ? <FullscreenExitIcon/> : <FullScreenIcon/>}
                         </IconButton>
                         : null
                     }
                     <IconButton
                         color="inherit"
-                        onClick={() => remote.getGlobal("mainWindow").close()}>
+                        onClick={() => ipcRenderer.send('handle-close')}>
                         <CloseIcon/>
                     </IconButton>
                 </Toolbar>
             </AppBar>
+            <Drawerbar open={drawerOpen} onClose={() => setDrawerOpen(false)}/>
             <Toolbar/>
         </div>
     );

@@ -70,7 +70,13 @@ const de_DE = () => {
         exit: "Schließen",
         darkTheme: "Dunkel",
         darkThemeDescription: "Schont die Augen.",
-        export: "Export"
+        export: "Export",
+        yourTextHere: "Dein Text hier",
+        filePath: "Dateipfad",
+        yes: "Ja",
+        no: "Nein",
+        confirmation: "Bestätigung",
+        confirmResetSettings: "Möchten Sie wirklich alle Einstellungen zurücksetzen?"
     }
 };
 

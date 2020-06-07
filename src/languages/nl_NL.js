@@ -3,7 +3,7 @@ const nl_NL = () => {
         appName: "DeadHash",
         about: "Over",
         settings: "Instellingen",
-        settingsSubtitle: "Voorkeuren",
+        settingsSubtitle: "Jouw voorkeuren",
         help: "Help",
         language: "Taal",
         aboutSubtitle: "Leer meer over DeadHash",
@@ -70,7 +70,13 @@ const nl_NL = () => {
         exit: "Sluiten",
         darkTheme: "Donker",
         darkThemeDescription: "Makkelijk voor de ogen.",
-        export: "Exporteren"
+        export: "Exporteren",
+        yourTextHere: "Jouw text hier",
+        filePath: "Bestandspad",
+        yes: "Ja",
+        no: "Nee",
+        confirmation: "Bevestiging",
+        confirmResetSettings: "Bent u zeker dat u alle instellingen wenst te resetten?"
     }
 };
 

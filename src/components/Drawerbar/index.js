@@ -9,7 +9,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 import InfoIcon from '@material-ui/icons/Info';
 import BuildIcon from "@material-ui/icons/Build";
 import HelpIcon from "@material-ui/icons/Help";
@@ -35,25 +35,23 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const remote = window.require('electron').remote;
+const ipcRenderer = window.require('electron').ipcRenderer;
 
-const Drawerbar = () => {
+const Drawerbar = ({open, onClose}) => {
 
     const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
-    const open = useSelector(state => state.MainReducer.drawerOpen);
     const selectedItem = useSelector(state => state.MainReducer.selectedListItem);
 
     const history = useHistory();
 
     const classes = useStyles();
     const theme = useTheme();
-    const dispatch = useDispatch();
 
     /**
      * Function that is called when the drawer should close
      */
     const handleDrawerClose = () => {
-        dispatch({type: "SET_DRAWEROPEN", drawerOpen: false});
+        onClose();
     };
 
     /**
@@ -61,7 +59,7 @@ const Drawerbar = () => {
      * @param index The index of the page
      */
     const handleIndexChange = (index) => {
-        dispatch({type: "SET_DRAWEROPEN", drawerOpen: false});
+        onClose();
         if (selectedItem === index) return;
 
         switch (index) {
@@ -133,12 +131,11 @@ const Drawerbar = () => {
             <Divider/>
 
             <List>
-                <ListItem onClick={() => remote.getGlobal("mainWindow").close()} button>
+                <ListItem onClick={() => ipcRenderer.send('handle-close')} button>
                     <ListItemIcon><CloseIcon color="inherit"/></ListItemIcon>
                     <ListItemText primary={language.exit}/>
                 </ListItem>
             </List>
-
         </Drawer>
     );
 };

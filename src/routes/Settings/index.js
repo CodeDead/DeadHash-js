@@ -27,6 +27,7 @@ import {Updater} from "../../utils/Updater";
 import BackButton from "../../components/BackButton";
 import UpdateDialog from "../../components/UpdateDialog";
 import AlertDialog from "../../components/AlertDialog";
+import ConfirmationDialog from "../../components/ConfirmationDialog";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -78,13 +79,14 @@ const Settings = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [update, setUpdate] = useState(null);
+    const [confirmOpen, setConfirmOpen] = useState(false);
 
     const dispatch = useDispatch();
     const classes = useStyles();
 
     useEffect(() => {
         dispatch({type: 'SET_ACTIVE_LISTITEM', index: 3});
-    }, []);
+    }, [dispatch]);
 
     /**
      * Change the theme
@@ -145,7 +147,7 @@ const Settings = () => {
             <main className={classes.content}>
                 {update && update.updateAvailable ? (
                     <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
-                                  newVersion={update.version} />) : null}
+                                  newVersion={update.version}/>) : null}
                 {update && !update.updateAvailable ? (
                     <AlertDialog title={language.noUpdatesTitle} content={language.noUpdatesMessage}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (
@@ -228,15 +230,13 @@ const Settings = () => {
                                     }
                                     label={language.languageEnabled}
                                 />
-                                <FormControl>
-                                    <InputLabel htmlFor="language-simple">{language.language}</InputLabel>
+                                <FormControl variant={"outlined"} style={{marginTop: 5}}>
+                                    <InputLabel id={"language-label"}>{language.language}</InputLabel>
                                     <Select
                                         value={languageIndex}
                                         onChange={handleLanguageChange}
-                                        inputProps={{
-                                            name: 'language',
-                                            id: 'language-simple',
-                                        }}
+                                        id={"language-simple"}
+                                        labelId={"language-label"}
                                     >
                                         <MenuItem value={0}>Deutsch</MenuItem>
                                         <MenuItem value={1}>English</MenuItem>
@@ -245,8 +245,9 @@ const Settings = () => {
                                         <MenuItem value={4}>Italiano</MenuItem>
                                         <MenuItem value={5}>日本語</MenuItem>
                                         <MenuItem value={6}>Nederlands</MenuItem>
-                                        <MenuItem value={7}>Pусский</MenuItem>
-                                        <MenuItem value={8}>Türkçe</MenuItem>
+                                        <MenuItem value={7}>Português</MenuItem>
+                                        <MenuItem value={8}>Pусский</MenuItem>
+                                        <MenuItem value={9}>Türkçe</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Paper>
@@ -384,33 +385,33 @@ const Settings = () => {
                                 {language.theme}
                             </Typography>
 
-                            <GridList spacing={2} xs={12} md={4} lg={4}>
+                            <GridList spacing={2} xs={6} md={4} lg={4}>
                                 <Theme title={language.default} description={language.defaultThemeDescription}
                                        color={blue[500]} selected={themeIndex === 0}
-                                       actionText={language.select} onAction={() => changeTheme(0)}/>
+                                       onAction={() => changeTheme(0)}/>
                                 <Theme title={language.lightBlue} description={language.lightBlueDescription}
                                        color={lightBlue[500]} selected={themeIndex === 1}
-                                       actionText={language.select} onAction={() => changeTheme(1)}/>
+                                       onAction={() => changeTheme(1)}/>
                                 <Theme title={language.red} description={language.redDescription}
                                        color={red[500]} selected={themeIndex === 2}
-                                       actionText={language.select} onAction={() => changeTheme(2)}/>
+                                       onAction={() => changeTheme(2)}/>
                                 <Theme title={language.green} description={language.greenDescription}
                                        color={green[500]} selected={themeIndex === 3}
-                                       actionText={language.select} onAction={() => changeTheme(3)}/>
+                                       onAction={() => changeTheme(3)}/>
                                 <Theme title={language.lightGreen} description={language.lightGreenDescription}
                                        color={lightGreen[500]} selected={themeIndex === 4}
-                                       actionText={language.select} onAction={() => changeTheme(4)}/>
+                                       onAction={() => changeTheme(4)}/>
                                 <Theme title={language.purple} description={language.purpleDescription}
                                        color={purple[500]} selected={themeIndex === 5}
-                                       actionText={language.select} onAction={() => changeTheme(5)}/>
+                                       onAction={() => changeTheme(5)}/>
                                 <Theme title={language.deepPurple} description={language.deepPurpleDescription}
                                        color={deepPurple[500]} selected={themeIndex === 6}
-                                       actionText={language.select} onAction={() => changeTheme(6)}/>
+                                       onAction={() => changeTheme(6)}/>
                                 <Theme title={language.grey} description={language.greyDescription}
                                        color={grey[500]} selected={themeIndex === 7}
-                                       actionText={language.select} onAction={() => changeTheme(7)}/>
+                                       onAction={() => changeTheme(7)}/>
                                 <Theme title={language.darkTheme} description={language.darkThemeDescription}
-                                       color={"black"} selected={themeIndex === 8} actionText={language.select}
+                                       color={"black"} selected={themeIndex === 8}
                                        onAction={() => changeTheme(8)}/>
                             </GridList>
                         </Grid>
@@ -419,11 +420,14 @@ const Settings = () => {
                         <RefreshIcon/>
                         {language.checkForUpdates}
                     </Button>
-                    <Button color={"primary"} variant={"contained"} onClick={() => resetSettings()}
+                    <Button color={"primary"} variant={"contained"} onClick={() => setConfirmOpen(true)}
                             className={classes.button} style={{float: 'right'}}>
                         {language.reset}
                     </Button>
                 </Container>
+                <ConfirmationDialog open={confirmOpen} onClose={() => setConfirmOpen(false)}
+                                    title={language.confirmation} content={language.confirmResetSettings}
+                                    onAccept={() => resetSettings()}/>
             </main>
         </div>
     );
