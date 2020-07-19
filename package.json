@@ -1,6 +1,6 @@
 {
   "name": "deadhash",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "File and text hash calculator",
   "homepage": "./",
   "private": true,
@@ -35,7 +35,7 @@
   },
   "main": "public/electron.js",
   "dependencies": {
-    "@material-ui/core": "^4.10.1",
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "cross-env": "^7.0.2",
@@ -78,8 +78,8 @@
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "electron": "^9.0.2",
+    "electron": "^9.1.0",
     "electron-builder": "^22.7.0",
-    "wait-on": "^5.0.1"
+    "wait-on": "^5.1.0"
   }
 }
