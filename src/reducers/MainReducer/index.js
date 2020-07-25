@@ -7,7 +7,7 @@ import {
     setAutoUpdate,
     setUpdateChecked,
     resetMainReducer, setMinimizeStatus, setMaximizeStatus, setLanguageButtonStatus, setCanDragDrop
-} from './Actions/MainActions';
+} from './Actions';
 import de_DE from "../../languages/de_DE";
 import nl_NL from "../../languages/nl_NL";
 import fr_FR from "../../languages/fr_FR";
@@ -18,31 +18,13 @@ import tr_TR from "../../languages/tr_TR";
 import es_ES from "../../languages/es_ES";
 import pt_PT from "../../languages/pt_PT";
 
-let languageIndex = localStorage['languageIndex'];
-let themeIndex = localStorage['themeIndex'];
-let autoUpdate = localStorage['autoUpdate'];
-let minimizeEnabled = localStorage['minimizeEnabled'];
-let maximizeEnabled = localStorage['maximizeEnabled'];
-let languageEnabled = localStorage['languageEnabled'];
-let canDragDrop = localStorage['canDragDrop'];
-
-if (!languageIndex) {
-    languageIndex = 1;
-} else {
-    languageIndex = parseInt(languageIndex);
-}
-
-if (!themeIndex) {
-    themeIndex = 0;
-} else {
-    themeIndex = parseInt(themeIndex);
-}
-
-autoUpdate = !autoUpdate || autoUpdate === "true";
-minimizeEnabled = !minimizeEnabled || minimizeEnabled === "true";
-maximizeEnabled = !maximizeEnabled || maximizeEnabled === "true";
-languageEnabled = !languageEnabled || languageEnabled === "true";
-canDragDrop = !canDragDrop || canDragDrop === "true";
+const languageIndex = localStorage['languageIndex'] ? parseInt(localStorage['languageIndex']) : 1;
+const themeIndex = localStorage['themeIndex'] ? parseInt(localStorage['themeIndex']) : 0;
+const autoUpdate = !!(localStorage['autoUpdate'] && localStorage['autoUpdate'] === "true");
+const minimizeEnabled = !!(localStorage['minimizeEnabled'] && localStorage['minimizeEnabled'] === "true");
+const maximizeEnabled = !!(localStorage['maximizeEnabled'] && localStorage['maximizeEnabled'] === "true");
+const languageEnabled = !!(localStorage['languageEnabled'] && localStorage['languageEnabled'] === "true");
+const canDragDrop = !!(localStorage['canDragDrop'] && localStorage['canDragDrop'] === "true");
 
 const initState = {
     languageIndex: languageIndex,

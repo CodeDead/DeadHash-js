@@ -8,32 +8,16 @@ import {
     setSha512State,
     setSha3State,
     setSha224State, resetCryptoReducer, setTextHashes, setFileHashes, setTextInput, setCurrentFile
-} from "./Actions/CryptoActions";
+} from "./Actions";
 
-let md5 = localStorage['md5'];
-md5 = !md5 || md5 === "true";
-
-let sha1 = localStorage['sha1'];
-sha1 = !sha1 || sha1 === "true";
-
-let sha3 = localStorage['sha3'];
-sha3 = !sha3 || sha3 === "true";
-
-let sha224 = localStorage['sha224'];
-sha224 = !sha224 || sha224 === "true";
-
-let sha256 = localStorage['sha256'];
-sha256 = !sha256 || sha256 === "true";
-
-let sha384 = localStorage['sha384'];
-sha384 = !sha384 || sha384 === "true";
-
-let sha512 = localStorage['sha512'];
-sha512 = !sha512 || sha512 === "true";
-
-let ripemd160 = localStorage['ripemd160'];
-ripemd160 = !ripemd160 || ripemd160 === "true";
-
+const md5 = !!(localStorage['md5'] && localStorage['md5'] === "true");
+const sha1 = !!(localStorage['sha1'] && localStorage['sha1'] === "true");
+const sha3 = !!(localStorage['sha3'] && localStorage['sha3'] === "true");
+const sha224 = !!(localStorage['sha224'] && localStorage['sha224'] === "true");
+const sha256 = !!(localStorage['sha256'] && localStorage['sha256'] === "true");
+const sha384 = !!(localStorage['sha384'] && localStorage['sha384'] === "true");
+const sha512 = !!(localStorage['sha512'] && localStorage['sha512'] === "true");
+const ripemd160 = !!(localStorage['ripemd160'] && localStorage['ripemd160'] === "true");
 
 const initState = {
     md5: md5,
