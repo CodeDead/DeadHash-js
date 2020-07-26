@@ -15,7 +15,7 @@ export const Updater = (os) => {
             data.updateAvailable = true;
         else if (platform.version.minorVersion > 0)
             data.updateAvailable = true;
-        else if (platform.version.buildVersion > 3)
+        else if (platform.version.buildVersion > 4)
             data.updateAvailable = true;
         else if (platform.version.revisionVersion > 0)
             data.updateAvailable = true;
@@ -27,13 +27,13 @@ export const Updater = (os) => {
         return data;
     };
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         axios.get("https://codedead.com/Software/DeadHash/version.json")
             .then(res => {
                 resolve(parseUpdate(res.data));
             })
             .catch(err => {
-                resolve(err.message);
-            })
+                reject(err.message);
+            });
     });
 };

@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useSelector} from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -7,9 +6,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
 
-const UpdateDialog = ({downloadUrl, infoUrl, newVersion}) => {
+const UpdateDialog = ({downloadUrl, infoUrl, newVersion, updateAvailable, newVersionText, information, download, cancel}) => {
 
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const [open, setOpen] = useState(true);
 
     /**
@@ -41,21 +39,21 @@ const UpdateDialog = ({downloadUrl, infoUrl, newVersion}) => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{language.updateAvailable}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{updateAvailable}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    {language.newVersion.replace("{x}", newVersion)}
+                    {newVersionText.replace("{x}", newVersion)}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>
-                    {language.cancel}
+                    {cancel}
                 </Button>
                 <Button onClick={() => openInformation()} color="primary">
-                    {language.information}
+                    {information}
                 </Button>
                 <Button onClick={openDownload} color="primary" autoFocus>
-                    {language.download}
+                    {download}
                 </Button>
             </DialogActions>
         </Dialog>

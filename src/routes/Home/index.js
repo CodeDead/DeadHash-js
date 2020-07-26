@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useContext, useEffect, useState} from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core";
@@ -13,19 +12,21 @@ import blank from "../../components/Theme/blank.png";
 import {Updater} from "../../utils/Updater";
 import UpdateDialog from "../../components/UpdateDialog";
 import AlertDialog from "../../components/AlertDialog";
+import {setActiveListItem, setUpdateChecked} from "../../reducers/MainReducer/Actions";
+import {MainContext} from "../../contexts/MainContextProvider";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(4, 0, 2),
+        padding: theme.spacing(4, 0, 2)
     },
     content: {
         flexGrow: 1,
-        overflow: 'auto',
+        overflow: 'auto'
     },
     container: {
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),
+        paddingBottom: theme.spacing(2)
     }
 }));
 
@@ -33,21 +34,23 @@ const os = window.require('os');
 
 const Home = () => {
 
-    const autoUpdate = useSelector(state => state.MainReducer.autoUpdate);
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
-    const updateChecked = useSelector(state => state.MainReducer.checkedForUpdates);
-    const dispatch = useDispatch();
-    const classes = useStyles();
-    const history = useHistory();
+    const [state, dispatch] = useContext(MainContext);
+
+    const autoUpdate = state.autoUpdate;
+    const language = state.languages[state.languageIndex];
+    const updateChecked = state.checkedForUpdates;
+
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const [update, setUpdate] = useState(null);
 
+    const classes = useStyles();
+    const history = useHistory();
+
     /**
      * Check for application updates
-     * @returns {Promise<void>}
      */
-    const checkForUpdates = async () => {
+    const checkForUpdates = () => {
         if (loading) return;
 
         setLoading(true);
@@ -55,24 +58,27 @@ const Home = () => {
         setUpdate(null);
 
         if (!updateChecked) {
-            dispatch({type: 'SET_UPDATE_CHECKED', payload: true});
+            dispatch(setUpdateChecked(true));
         }
 
-        const data = await Updater(os);
-        if (data && data.length > 0) {
-            setErrorMessage(data);
-        } else {
-            setUpdate(data);
-        }
-        setLoading(false);
+        Updater(os)
+            .then(res => {
+                setUpdate(res);
+            })
+            .catch(error => {
+                setErrorMessage(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     useEffect(() => {
-        dispatch({type: 'SET_ACTIVE_LISTITEM', index: 0});
+        dispatch(setActiveListItem(0));
         if (autoUpdate && !updateChecked) {
             checkForUpdates();
         }
-    }, [dispatch, checkForUpdates]);
+    }, []);
 
     /**
      * Open the file hasher page
@@ -103,9 +109,12 @@ const Home = () => {
             <main className={classes.content}>
                 {update && update.updateAvailable ? (
                     <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
+                                  information={language.information} updateAvailable={language.updateAvailable}
+                                  newVersionText={language.newVersion} download={language.download}
+                                  cancel={language.cancel}
                                   newVersion={update.version}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (
-                    <AlertDialog title={language.errorTitle} content={errorMessage}/>) : null}
+                    <AlertDialog title={language.errorTitle} content={errorMessage} ok={language.ok}/>) : null}
                 <Container maxWidth={"lg"} className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6} lg={6}>

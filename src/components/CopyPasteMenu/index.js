@@ -1,12 +1,9 @@
 import React from "react";
 import {Item, Menu, MenuProvider} from "react-contexify";
-import {useSelector} from "react-redux";
 import CopyIcon from "@material-ui/icons/FileCopy"
 import PasteIcon from "@material-ui/icons/Assignment";
 
-const CopyPasteMenu = ({id, children, copyData, pasteData}) => {
-
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
+const CopyPasteMenu = ({id, children, copyData, pasteData, copy, paste}) => {
 
     return (
         <>
@@ -14,8 +11,8 @@ const CopyPasteMenu = ({id, children, copyData, pasteData}) => {
                 {children}
             </MenuProvider>
             <Menu id={'copyPasteMenu' + id}>
-                <Item onClick={() => copyData()}><CopyIcon/> {language.copy}</Item>
-                <Item onClick={() => pasteData()}><PasteIcon/> {language.paste}</Item>
+                <Item onClick={() => copyData()}><CopyIcon/> {copy}</Item>
+                <Item onClick={() => pasteData()}><PasteIcon/> {paste}</Item>
             </Menu>
         </>
     );

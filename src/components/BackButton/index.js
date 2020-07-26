@@ -1,14 +1,20 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import ArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-import {useHistory} from "react-router";
 
-const BackButton = () => {
+const BackButton = ({goBack}) => {
 
-    const history = useHistory();
+    /**
+     * Call the goBack event
+     * @param e The event argument
+     */
+    const back = (e) => {
+        if (e) e.preventDefault();
+        if (goBack) goBack();
+    };
 
     return (
-        <Button color={"primary"} onClick={() => history.goBack()}>
+        <Button color={"primary"} onClick={back}>
             <ArrowLeftIcon/>
         </Button>
     );

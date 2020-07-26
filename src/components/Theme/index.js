@@ -9,8 +9,8 @@ import blank from "./blank.png";
 
 const useStyles = makeStyles({
     media: {
-        height: 60,
-    },
+        height: 60
+    }
 });
 
 const Theme = ({title, description, color, selected, onAction}) => {

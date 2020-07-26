@@ -1,23 +1,21 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router";
 
-const DropZone = ({children}) => {
+
+const DropZone = ({children, onDrop, enabled, reRoute}) => {
 
     const history = useHistory();
-    const enabled = useSelector(state => state.MainReducer.canDragDrop);
-    const dispatch = useDispatch();
 
     /**
      * Event that is fired when one or more files are dropped
-     * @param event The event that contains the drop details
+     * @param e The event that contains the drop details
      */
-    const onDrop = (event) => {
-        event.preventDefault();
+    const drop = (e) => {
+        if (e) e.preventDefault();
         if (!enabled) return;
 
-        dispatch({type: 'SET_CURRENT_FILE', payload: event.dataTransfer.files[0]});
-        history.push("/file");
+        if (onDrop) onDrop(e.dataTransfer.files[0]);
+        if (reRoute) history.push(reRoute);
     };
 
     /**
@@ -31,7 +29,7 @@ const DropZone = ({children}) => {
     return (
         <div
             onDragOver={onDragOver}
-            onDrop={onDrop}>
+            onDrop={drop}>
             {children}
         </div>
     );

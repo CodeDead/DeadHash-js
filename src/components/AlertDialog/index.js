@@ -5,11 +5,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import {useSelector} from "react-redux";
 
-const AlertDialog = ({title, content}) => {
+const AlertDialog = ({title, content, ok}) => {
 
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const [open, setOpen] = useState(true);
 
     /**
@@ -34,7 +32,7 @@ const AlertDialog = ({title, content}) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary" autoFocus>
-                    {language.ok}
+                    {ok}
                 </Button>
             </DialogActions>
         </Dialog>

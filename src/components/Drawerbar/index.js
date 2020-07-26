@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -9,29 +9,29 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import {useSelector} from "react-redux";
 import InfoIcon from '@material-ui/icons/Info';
 import BuildIcon from "@material-ui/icons/Build";
 import HelpIcon from "@material-ui/icons/Help";
 import CloseIcon from "@material-ui/icons/Close";
 import {useHistory} from "react-router-dom";
 import CryptographyMenu from "../CryptographyMenu";
+import {MainContext} from "../../contexts/MainContextProvider";
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
-        flexShrink: 0,
+        flexShrink: 0
     },
     drawerPaper: {
-        width: drawerWidth,
+        width: drawerWidth
     },
     drawerHeader: {
         display: 'flex',
         alignItems: 'center',
         padding: '0 8px',
         ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-end'
     }
 }));
 
@@ -39,11 +39,11 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 const Drawerbar = ({open, onClose}) => {
 
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
-    const selectedItem = useSelector(state => state.MainReducer.selectedListItem);
+    const [state] = useContext(MainContext);
+    const language = state.languages[state.languageIndex];
+    const selectedItem = state.selectedListItem;
 
     const history = useHistory();
-
     const classes = useStyles();
     const theme = useTheme();
 
@@ -103,7 +103,8 @@ const Drawerbar = ({open, onClose}) => {
 
             <Divider/>
 
-            <CryptographyMenu handleIndexChange={handleIndexChange} selectedIndex={selectedItem}/>
+            <CryptographyMenu handleIndexChange={handleIndexChange} selectedIndex={selectedItem}
+                              cryptography={language.cryptography} file={language.file} text={language.text}/>
 
             <Divider/>
 

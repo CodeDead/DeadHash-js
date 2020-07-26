@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useContext, useEffect, useState} from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core";
@@ -28,25 +27,42 @@ import BackButton from "../../components/BackButton";
 import UpdateDialog from "../../components/UpdateDialog";
 import AlertDialog from "../../components/AlertDialog";
 import ConfirmationDialog from "../../components/ConfirmationDialog";
+import {useHistory} from "react-router";
+import {
+    resetMainReducer,
+    setActiveListItem,
+    setAutoUpdate, setCanDragDrop, setLanguageButtonStatus,
+    setLanguageIndex, setMaximizeStatus, setMinimizeStatus,
+    setThemeIndex
+} from "../../reducers/MainReducer/Actions";
+import {MainContext} from "../../contexts/MainContextProvider";
+import {CryptoContext} from "../../contexts/CryptoContextReducer";
+import {
+    resetCryptoReducer,
+    setMd5State, setRipeMd160State,
+    setSha1State,
+    setSha224State, setSha256State, setSha384State, setSha3State,
+    setSha512State
+} from "../../reducers/CryptoReducer/Actions";
 
 const useStyles = makeStyles(theme => ({
     content: {
         flexGrow: 1,
-        overflow: 'auto',
+        overflow: 'auto'
     },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(4, 0, 2),
+        padding: theme.spacing(4, 0, 2)
     },
     container: {
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),
+        paddingBottom: theme.spacing(2)
     },
     paper: {
         padding: theme.spacing(2),
         display: 'flex',
         overflow: 'auto',
-        flexDirection: 'column',
+        flexDirection: 'column'
     },
     button: {
         marginTop: theme.spacing(1),
@@ -58,42 +74,45 @@ const os = window.require('os');
 
 const Settings = () => {
 
-    const themeIndex = useSelector(state => state.MainReducer.themeIndex);
-    const languageIndex = useSelector(state => state.MainReducer.languageIndex);
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
-    const dragDrop = useSelector(state => state.MainReducer.canDragDrop);
-    const autoUpdate = useSelector(state => state.MainReducer.autoUpdate);
-    const minimize = useSelector(state => state.MainReducer.minimizeEnabled);
-    const maximize = useSelector(state => state.MainReducer.maximizeEnabled);
-    const languageStatus = useSelector(state => state.MainReducer.languageEnabled);
+    const [state, d1] = useContext(MainContext);
+    const [crypto, d2] = useContext(CryptoContext);
 
-    const md5 = useSelector(state => state.CryptoReducer.md5);
-    const sha1 = useSelector(state => state.CryptoReducer.sha1);
-    const sha224 = useSelector(state => state.CryptoReducer.sha224);
-    const sha256 = useSelector(state => state.CryptoReducer.sha256);
-    const sha3 = useSelector(state => state.CryptoReducer.sha3);
-    const sha384 = useSelector(state => state.CryptoReducer.sha384);
-    const sha512 = useSelector(state => state.CryptoReducer.sha512);
-    const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
+    const themeIndex = state.themeIndex;
+    const languageIndex = state.languageIndex;
+    const language = state.languages[languageIndex];
+    const dragDrop = state.canDragDrop;
+    const autoUpdate = state.autoUpdate;
+    const minimize = state.minimizeEnabled;
+    const maximize = state.maximizeEnabled;
+    const languageStatus = state.languageEnabled;
+
+    const md5 = crypto.md5;
+    const sha1 = crypto.sha1;
+    const sha224 = crypto.sha224;
+    const sha256 = crypto.sha256;
+    const sha3 = crypto.sha3;
+    const sha384 = crypto.sha384;
+    const sha512 = crypto.sha512;
+    const ripemd160 = crypto.ripemd160;
 
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [update, setUpdate] = useState(null);
     const [confirmOpen, setConfirmOpen] = useState(false);
 
-    const dispatch = useDispatch();
     const classes = useStyles();
+    const history = useHistory();
 
     useEffect(() => {
-        dispatch({type: 'SET_ACTIVE_LISTITEM', index: 3});
-    }, [dispatch]);
+        d1(setActiveListItem(3));
+    }, []);
 
     /**
      * Change the theme
      * @param index The index of the theme
      */
     const changeTheme = (index) => {
-        dispatch({type: 'SET_THEME_INDEX', payload: index});
+        d1(setThemeIndex(index));
     };
 
     /**
@@ -101,35 +120,44 @@ const Settings = () => {
      * @param e The event that contains the language index
      */
     const handleLanguageChange = (e) => {
-        dispatch({type: 'SET_LANGUAGEINDEX', index: e.target.value});
+        d1(setLanguageIndex(e.target.value));
     };
 
     /**
      * Reset all settings to their default values
      */
     const resetSettings = () => {
-        dispatch({type: 'RESET_MAIN_REDUCER'});
-        dispatch({type: 'RESET_CRYPTO_REDUCER'});
+        d1(resetMainReducer());
+        d2(resetCryptoReducer());
     };
 
     /**
      * Check for application updates
-     * @returns {Promise<void>}
      */
-    const checkForUpdates = async () => {
+    const checkForUpdates = () => {
         if (loading) return;
 
         setLoading(true);
         setUpdate(null);
         setErrorMessage(null);
 
-        const data = await Updater(os);
-        if (data && data.length > 0) {
-            setErrorMessage(data);
-        } else {
-            setUpdate(data);
-        }
-        setLoading(false);
+        Updater(os)
+            .then(res => {
+                setUpdate(res);
+            })
+            .catch(error => {
+                setErrorMessage(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    };
+
+    /**
+     * Go back to the previous page
+     */
+    const goBack = () => {
+        history.goBack();
     };
 
     return (
@@ -147,16 +175,20 @@ const Settings = () => {
             <main className={classes.content}>
                 {update && update.updateAvailable ? (
                     <UpdateDialog downloadUrl={update.updateUrl} infoUrl={update.infoUrl}
+                                  download={language.download} cancel={language.cancel}
+                                  newVersionText={language.newVersion} updateAvailable={language.updateAvailable}
+                                  information={language.information}
                                   newVersion={update.version}/>) : null}
                 {update && !update.updateAvailable ? (
-                    <AlertDialog title={language.noUpdatesTitle} content={language.noUpdatesMessage}/>) : null}
+                    <AlertDialog title={language.noUpdatesTitle} content={language.noUpdatesMessage}
+                                 ok={language.ok}/>) : null}
                 {errorMessage && errorMessage.length > 0 ? (
-                    <AlertDialog title={language.errorTitle} content={errorMessage}/>) : null}
+                    <AlertDialog title={language.errorTitle} content={errorMessage} ok={language.ok}/>) : null}
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={12} lg={12}>
                             <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                                <BackButton/>
+                                <BackButton goBack={goBack}/>
                                 {language.general}
                             </Typography>
                             <Paper className={classes.paper}>
@@ -164,10 +196,7 @@ const Settings = () => {
                                     control={
                                         <Checkbox
                                             checked={autoUpdate}
-                                            onChange={(e) => dispatch({
-                                                type: 'SET_AUTO_UPDATE',
-                                                payload: e.target.checked
-                                            })}
+                                            onChange={(e) => d1(setAutoUpdate(e.target.checked))}
                                             value="autoUpdate"
                                             color="primary"
                                         />
@@ -178,10 +207,7 @@ const Settings = () => {
                                     control={
                                         <Checkbox
                                             checked={dragDrop}
-                                            onChange={(e) => dispatch({
-                                                type: 'SET_CAN_DRAG_DROP',
-                                                payload: e.target.checked
-                                            })}
+                                            onChange={(e) => d1(setCanDragDrop(e.target.checked))}
                                             value="dragDrop"
                                             color="primary"
                                         />
@@ -192,10 +218,7 @@ const Settings = () => {
                                     control={
                                         <Checkbox
                                             checked={minimize}
-                                            onChange={(e) => dispatch({
-                                                type: 'SET_MINIMIZE_STATUS',
-                                                payload: e.target.checked
-                                            })}
+                                            onChange={(e) => d1(setMinimizeStatus(e.target.checked))}
                                             value="minimize"
                                             color="primary"
                                         />
@@ -206,10 +229,7 @@ const Settings = () => {
                                     control={
                                         <Checkbox
                                             checked={maximize}
-                                            onChange={(e) => dispatch({
-                                                type: 'SET_MAXIMIZE_STATUS',
-                                                payload: e.target.checked
-                                            })}
+                                            onChange={(e) => d1(setMaximizeStatus(e.target.checked))}
                                             value="maximize"
                                             color="primary"
                                         />
@@ -220,10 +240,7 @@ const Settings = () => {
                                     control={
                                         <Checkbox
                                             checked={languageStatus}
-                                            onChange={(e) => dispatch({
-                                                type: 'SET_LANGUAGE_STATUS',
-                                                payload: e.target.checked
-                                            })}
+                                            onChange={(e) => d1(setLanguageButtonStatus(e.target.checked))}
                                             value="language"
                                             color="primary"
                                         />
@@ -262,10 +279,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={md5}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_MD5_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setMd5State(e.target.checked))}
                                                 value="md5"
                                                 color="primary"
                                             />
@@ -277,10 +291,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha1}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_SHA1_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setSha1State(e.target.checked))}
                                                 value="sha1"
                                                 color="primary"
                                             />
@@ -292,10 +303,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha224}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_SHA224_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setSha224State(e.target.checked))}
                                                 value="sha224"
                                                 color="primary"
                                             />
@@ -307,10 +315,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha256}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_SHA256_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setSha256State(e.target.checked))}
                                                 value="sha256"
                                                 color="primary"
                                             />
@@ -322,10 +327,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha3}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_SHA3_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setSha3State(e.target.checked))}
                                                 value="sha3"
                                                 color="primary"
                                             />
@@ -337,10 +339,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha384}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_SHA384_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setSha384State(e.target.checked))}
                                                 value="sha384"
                                                 color="primary"
                                             />
@@ -352,10 +351,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={sha512}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_SHA512_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setSha512State(e.target.checked))}
                                                 value="sha512"
                                                 color="primary"
                                             />
@@ -367,10 +363,7 @@ const Settings = () => {
                                         control={
                                             <Checkbox
                                                 checked={ripemd160}
-                                                onChange={(e) => dispatch({
-                                                    type: 'SET_RIPEMD160_STATE',
-                                                    payload: e.target.checked
-                                                })}
+                                                onChange={(e) => d2(setRipeMd160State(e.target.checked))}
                                                 value="ripemd160"
                                                 color="primary"
                                             />
@@ -426,6 +419,7 @@ const Settings = () => {
                     </Button>
                 </Container>
                 <ConfirmationDialog open={confirmOpen} onClose={() => setConfirmOpen(false)}
+                                    yes={language.yes} no={language.no}
                                     title={language.confirmation} content={language.confirmResetSettings}
                                     onAccept={() => resetSettings()}/>
             </main>
