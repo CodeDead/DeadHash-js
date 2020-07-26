@@ -22,7 +22,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import RefreshIcon from "@material-ui/icons/Refresh";
-import {Updater} from "../../utils/Updater";
+import Updater from "../../utils/Updater";
 import BackButton from "../../components/BackButton";
 import UpdateDialog from "../../components/UpdateDialog";
 import AlertDialog from "../../components/AlertDialog";
@@ -409,7 +409,7 @@ const Settings = () => {
                             </GridList>
                         </Grid>
                     </Grid>
-                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()}>
+                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()} disabled={loading}>
                         <RefreshIcon/>
                         {language.checkForUpdates}
                     </Button>

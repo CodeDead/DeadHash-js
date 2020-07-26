@@ -1,6 +1,4 @@
-import axios from "axios";
-
-export const Updater = (os) => {
+const Updater = (os) => {
 
     const parseUpdate = (update) => {
         const platform = update.platforms[os.platform];
@@ -28,12 +26,20 @@ export const Updater = (os) => {
     };
 
     return new Promise((resolve, reject) => {
-        axios.get("https://codedead.com/Software/DeadHash/version.json")
+        fetch("https://codedead.com/Software/DeadHash/version.json")
             .then(res => {
-                resolve(parseUpdate(res.data));
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+                return res.json();
             })
-            .catch(err => {
-                reject(err.message);
+            .then(data => {
+                resolve(parseUpdate(data));
+            })
+            .catch(error => {
+                reject(error.toString());
             });
     });
 };
+
+export default Updater;

@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import BackButton from "../../components/BackButton";
 import RefreshIcon from "@material-ui/icons/Refresh";
-import {Updater} from "../../utils/Updater";
+import Updater from "../../utils/Updater";
 import UpdateDialog from "../../components/UpdateDialog";
 import AlertDialog from "../../components/AlertDialog";
 import {useHistory} from "react-router";
@@ -146,7 +146,7 @@ const About = () => {
                         </Grid>
                     </Paper>
                     <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()}
-                            style={{marginTop: 5}}>
+                            disabled={loading} style={{marginTop: 5}}>
                         <RefreshIcon/>
                         {language.checkForUpdates}
                     </Button>

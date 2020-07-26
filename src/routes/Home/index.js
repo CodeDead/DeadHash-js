@@ -9,7 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import {useHistory} from "react-router";
 import blank from "../../components/Theme/blank.png";
-import {Updater} from "../../utils/Updater";
+import Updater from "../../utils/Updater";
 import UpdateDialog from "../../components/UpdateDialog";
 import AlertDialog from "../../components/AlertDialog";
 import {setActiveListItem, setUpdateChecked} from "../../reducers/MainReducer/Actions";
