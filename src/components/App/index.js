@@ -3,7 +3,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Home from "../../routes/Home";
 import Settings from "../../routes/Settings";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
-import {ThemeSelector} from "../../utils/ThemeSelector";
+import ThemeSelector from "../../utils/ThemeSelector";
 import Topbar from "../Topbar";
 import About from "../../routes/About";
 import File from "../../routes/File";

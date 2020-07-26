@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Hash from "../../components/Hash";
 import GridList from "../../components/GridList";
 import CopyPasteMenu from "../../components/CopyPasteMenu";
-import {CryptoCalculator} from "../../utils/CryptoCalculator";
+import CryptoCalculator from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
 import CsvExport from "../../components/CsvExport";
 import {useHistory} from "react-router";
@@ -14,6 +14,7 @@ import {setActiveListItem} from "../../reducers/MainReducer/Actions";
 import {MainContext} from "../../contexts/MainContextProvider";
 import {CryptoContext} from "../../contexts/CryptoContextReducer";
 import {setTextHashes, setTextInput} from "../../reducers/CryptoReducer/Actions";
+import Loadingbar from "../../components/Loadingbar";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         padding: theme.spacing(2),
+        marginBottom: theme.spacing(1),
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column'
@@ -63,6 +65,7 @@ const Text = () => {
 
     const [compare, setCompare] = useState(false);
     const [compareHash, setCompareHash] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const compareField = compare ? (
         <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
@@ -109,12 +112,17 @@ const Text = () => {
      */
     const calculateHashes = () => {
         if (!input || input.length === 0) return;
+
         d2(setTextHashes(null));
+        setLoading(true);
 
-        let newHashes = CryptoCalculator(input, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160);
-
-        if (newHashes.length === 0) newHashes = null;
-        d2(setTextHashes(newHashes));
+        CryptoCalculator(input, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160)
+            .then(res => {
+                d2(setTextHashes(res));
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     /**
@@ -122,8 +130,10 @@ const Text = () => {
      */
     const clearData = () => {
         d2(setTextInput(""));
+
         setCompare(false);
         setCompareHash("");
+
         d2(setTextHashes(""));
     };
 
@@ -164,6 +174,7 @@ const Text = () => {
                                 label={language.yourTextHere}
                                 margin="normal"
                                 value={input}
+                                disabled={loading}
                                 onChange={(e) => d2(setTextInput(e.target.value))}
                                 multiline
                                 rowsMax={6}
@@ -183,6 +194,7 @@ const Text = () => {
                         />
                         {compareField}
                     </Paper>
+                    {loading ? <Loadingbar/> : null}
                     {hashes && hashes.length > 0 ? (
                         <>
                             <Button className={classes.button} color={"primary"} variant={"contained"}
@@ -199,7 +211,7 @@ const Text = () => {
                         </>
                     ) : null}
                     <Button className={classes.button} color={"primary"} variant={"contained"}
-                            disabled={!input || input.length === 0}
+                            disabled={!input || input.length === 0 || loading}
                             style={{float: 'right'}} onClick={() => calculateHashes()}>
                         {language.calculate}
                     </Button>

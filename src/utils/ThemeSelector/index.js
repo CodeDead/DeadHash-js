@@ -7,7 +7,7 @@ import purple from "@material-ui/core/colors/purple";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import grey from "@material-ui/core/colors/grey";
 
-export const ThemeSelector = (index) => {
+const ThemeSelector = (index) => {
     switch (index) {
         default:
             return blue;
@@ -27,3 +27,5 @@ export const ThemeSelector = (index) => {
             return grey;
     }
 };
+
+export default ThemeSelector;

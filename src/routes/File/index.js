@@ -7,9 +7,7 @@ import GridList from "../../components/GridList";
 import Hash from "../../components/Hash";
 import CopyPasteMenu from "../../components/CopyPasteMenu";
 import TextField from "@material-ui/core/TextField";
-import CryptoJs from "crypto-js/crypto-js";
-import {FileDataReader} from "../../utils/FileDataReader";
-import {CryptoCalculator} from "../../utils/CryptoCalculator";
+import FileDataReader from "../../utils/FileDataReader";
 import BackButton from "../../components/BackButton";
 import CsvExport from "../../components/CsvExport";
 import {useHistory} from "react-router";
@@ -17,6 +15,7 @@ import {setActiveListItem} from "../../reducers/MainReducer/Actions";
 import {MainContext} from "../../contexts/MainContextProvider";
 import {CryptoContext} from "../../contexts/CryptoContextReducer";
 import {setCurrentFile, setFileHashes} from "../../reducers/CryptoReducer/Actions";
+import Loadingbar from "../../components/Loadingbar";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -29,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         padding: theme.spacing(2),
+        marginBottom: theme.spacing(1),
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column'
@@ -50,12 +50,6 @@ const File = () => {
 
     const hashes = crypto.fileHashes;
     const file = crypto.currentFile;
-    const language = state.languages[state.languageIndex];
-
-    const [compare, setCompare] = useState(false);
-    const [compareHash, setCompareHash] = useState("");
-
-    const fileRef = useRef(null);
 
     const md5 = crypto.md5;
     const sha1 = crypto.sha1;
@@ -65,6 +59,14 @@ const File = () => {
     const sha384 = crypto.sha384;
     const sha512 = crypto.sha512;
     const ripemd160 = crypto.ripemd160;
+
+    const language = state.languages[state.languageIndex];
+
+    const [compare, setCompare] = useState(false);
+    const [compareHash, setCompareHash] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const fileRef = useRef(null);
 
     const history = useHistory();
     const classes = useStyles();
@@ -105,21 +107,21 @@ const File = () => {
 
     /**
      * Calculate the hashes of a specific file
-     * @returns {Promise<void>}
      */
-    const calculateHashes = async () => {
+    const calculateHashes = (e) => {
+        if (e) e.preventDefault();
         if (!file || file.length === 0) return;
 
         d2(setFileHashes(null));
+        setLoading(true);
 
-        const data = await FileDataReader(file);
-        if (!data || data.length === 0) return;
-
-        const encoded = CryptoJs.enc.Latin1.parse(data);
-        let newHashes = CryptoCalculator(encoded, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160);
-
-        if (newHashes.length === 0) newHashes = null;
-        d2(setFileHashes(newHashes));
+        FileDataReader(file, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160)
+            .then(data => {
+                d2(setFileHashes(data));
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     /**
@@ -146,7 +148,7 @@ const File = () => {
      * Change the currently selected file
      * @param event The event that called this function
      */
-    const onFileChange = function (event) {
+    const onFileChange = (event) => {
         d2(setCurrentFile(event.target.files[0]));
         fileRef.current.value = "";
     };
@@ -179,7 +181,9 @@ const File = () => {
                     <Paper className={classes.paper}>
                         <TextField
                             margin="normal"
-                            onClick={() => fileRef.current.click()}
+                            onClick={() => {
+                                if (!loading) fileRef.current.click()
+                            }}
                             disabled
                             id="filled-disabled"
                             value={file && file.path ? file.path : ""}
@@ -190,7 +194,7 @@ const File = () => {
                         <input ref={fileRef} type="file" onChange={onFileChange}
                                style={{display: 'none'}}/>
 
-                        <Button color={"primary"} variant={"contained"}
+                        <Button color={"primary"} variant={"contained"} disabled={loading}
                                 onClick={() => fileRef.current.click()}>{language.select}</Button>
 
                         <FormControlLabel
@@ -206,6 +210,7 @@ const File = () => {
                         />
                         {compareField}
                     </Paper>
+                    {loading ? <Loadingbar/> : null}
                     {hashes && hashes.length > 0 ? (
                         <>
                             <Button className={classes.button} color={"primary"} variant={"contained"}
@@ -223,8 +228,8 @@ const File = () => {
 
                     ) : null}
                     <Button className={classes.button} color={"primary"} variant={"contained"}
-                            disabled={!file || file.length === 0}
-                            style={{float: 'right'}} onClick={async () => calculateHashes()}>
+                            disabled={!file || file.length === 0 || loading}
+                            style={{float: 'right'}} onClick={calculateHashes}>
                         {language.calculate}
                     </Button>
                     {output}
