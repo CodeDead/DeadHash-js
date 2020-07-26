@@ -1,157 +1,105 @@
-import {handleActions} from "redux-actions";
 import {
-    setMd5state,
-    setRipeMd160State,
-    setSha1State,
-    setSha256State,
-    setSha384State,
-    setSha512State,
-    setSha3State,
-    setSha224State, resetCryptoReducer, setTextHashes, setFileHashes, setTextInput, setCurrentFile
-} from "./Actions/CryptoActions";
+    RESET_CRYPTO_REDUCER, SET_CURRENT_FILE, SET_FILE_HASHES,
+    SET_MD5_STATE, SET_RIPEMD160_STATE,
+    SET_SHA1_STATE, SET_SHA224_STATE,
+    SET_SHA256_STATE,
+    SET_SHA384_STATE, SET_SHA3_STATE,
+    SET_SHA512_STATE, SET_TEXT_HASHES, SET_TEXT_INPUT
+} from "./Actions/actionTypes";
 
-let md5 = localStorage['md5'];
-md5 = !md5 || md5 === "true";
-
-let sha1 = localStorage['sha1'];
-sha1 = !sha1 || sha1 === "true";
-
-let sha3 = localStorage['sha3'];
-sha3 = !sha3 || sha3 === "true";
-
-let sha224 = localStorage['sha224'];
-sha224 = !sha224 || sha224 === "true";
-
-let sha256 = localStorage['sha256'];
-sha256 = !sha256 || sha256 === "true";
-
-let sha384 = localStorage['sha384'];
-sha384 = !sha384 || sha384 === "true";
-
-let sha512 = localStorage['sha512'];
-sha512 = !sha512 || sha512 === "true";
-
-let ripemd160 = localStorage['ripemd160'];
-ripemd160 = !ripemd160 || ripemd160 === "true";
-
-
-const initState = {
-    md5: md5,
-    sha1: sha1,
-    sha224: sha224,
-    sha256: sha256,
-    sha3: sha3,
-    sha384: sha384,
-    sha512: sha512,
-    ripemd160: ripemd160,
-    fileHashes: null,
-    textHashes: null,
-    textInput: "",
-    currentFile: null
-};
-
-const CryptoReducer = handleActions({
-    [setMd5state](state, action) {
-        localStorage['md5'] = action.payload;
-        return {
-            ...state,
-            md5: action.payload
-        }
-    },
-    [setSha1State](state, action) {
-        localStorage['sha1'] = action.payload;
-        return {
-            ...state,
-            sha1: action.payload
-        }
-    },
-    [setSha256State](state, action) {
-        localStorage['sha256'] = action.payload;
-        return {
-            ...state,
-            sha256: action.payload
-        }
-    },
-    [setSha384State](state, action) {
-        localStorage['sha384'] = action.payload;
-        return {
-            ...state,
-            sha384: action.payload
-        }
-    },
-    [setSha512State](state, action) {
-        localStorage['sha512'] = action.payload;
-        return {
-            ...state,
-            sha512: action.payload
-        }
-    },
-    [setRipeMd160State](state, action) {
-        localStorage['ripemd160'] = action.payload;
-        return {
-            ...state,
-            ripemd160: action.payload
-        }
-    },
-    [setSha3State](state, action) {
-        localStorage['sha3'] = action.payload;
-        return {
-            ...state,
-            sha3: action.payload
-        }
-    },
-    [setSha224State](state, action) {
-        localStorage['sha224'] = action.payload;
-        return {
-            ...state,
-            sha224: action.payload
-        }
-    },
-    [resetCryptoReducer]() {
-        localStorage['md5'] = true;
-        localStorage['sha1'] = true;
-        localStorage['sha256'] = true;
-        localStorage['sha384'] = true;
-        localStorage['sha512'] = true;
-        localStorage['ripemd160'] = true;
-        localStorage['sha3'] = true;
-        localStorage['sha224'] = true;
-        return {
-            md5: true,
-            sha1: true,
-            sha224: true,
-            sha256: true,
-            sha3: true,
-            sha384: true,
-            sha512: true,
-            ripemd160: true,
-        }
-    },
-    [setTextHashes](state, action) {
-        return {
-            ...state,
-            textHashes: action.payload
-        }
-    },
-    [setFileHashes](state, action) {
-        return {
-            ...state,
-            fileHashes: action.payload
-        }
-    },
-    [setTextInput](state, action) {
-        return {
-            ...state,
-            textInput: action.payload
-        }
-    },
-    [setCurrentFile](state, action) {
-        return {
-            ...state,
-            currentFile: action.payload,
-            fileHashes: null
-        }
+const CryptoReducer = (state, action) => {
+    switch (action.type) {
+        default:
+            return state;
+        case SET_MD5_STATE:
+            localStorage['md5'] = action.payload;
+            return {
+                ...state,
+                md5: action.payload
+            };
+        case SET_SHA1_STATE:
+            localStorage['sha1'] = action.payload;
+            return {
+                ...state,
+                sha1: action.payload
+            };
+        case SET_SHA256_STATE:
+            localStorage['sha256'] = action.payload;
+            return {
+                ...state,
+                sha256: action.payload
+            };
+        case SET_SHA384_STATE:
+            localStorage['sha384'] = action.payload;
+            return {
+                ...state,
+                sha384: action.payload
+            };
+        case SET_SHA512_STATE:
+            localStorage['sha512'] = action.payload;
+            return {
+                ...state,
+                sha512: action.payload
+            };
+        case SET_RIPEMD160_STATE:
+            localStorage['ripemd160'] = action.payload;
+            return {
+                ...state,
+                ripemd160: action.payload
+            };
+        case SET_SHA3_STATE:
+            localStorage['sha3'] = action.payload;
+            return {
+                ...state,
+                sha3: action.payload
+            };
+        case SET_SHA224_STATE:
+            localStorage['sha224'] = action.payload;
+            return {
+                ...state,
+                sha224: action.payload
+            };
+        case RESET_CRYPTO_REDUCER:
+            localStorage['md5'] = true;
+            localStorage['sha1'] = true;
+            localStorage['sha256'] = true;
+            localStorage['sha384'] = true;
+            localStorage['sha512'] = true;
+            localStorage['ripemd160'] = true;
+            localStorage['sha3'] = true;
+            localStorage['sha224'] = true;
+            return {
+                md5: true,
+                sha1: true,
+                sha224: true,
+                sha256: true,
+                sha3: true,
+                sha384: true,
+                sha512: true,
+                ripemd160: true,
+            };
+        case SET_TEXT_HASHES:
+            return {
+                ...state,
+                textHashes: action.payload
+            };
+        case SET_FILE_HASHES:
+            return {
+                ...state,
+                fileHashes: action.payload
+            };
+        case SET_TEXT_INPUT:
+            return {
+                ...state,
+                textInput: action.payload
+            };
+        case SET_CURRENT_FILE:
+            return {
+                ...state,
+                currentFile: action.payload,
+                fileHashes: null
+            };
     }
-}, initState);
+};
 
 export default CryptoReducer;

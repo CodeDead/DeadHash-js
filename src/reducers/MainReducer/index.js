@@ -1,156 +1,88 @@
-import {handleActions} from 'redux-actions'
-import en_US from "../../languages/en_US";
 import {
-    setLanguageIndex,
-    setActiveListItem,
-    setThemeIndex,
-    setAutoUpdate,
-    setUpdateChecked,
-    resetMainReducer, setMinimizeStatus, setMaximizeStatus, setLanguageButtonStatus, setCanDragDrop
-} from './Actions/MainActions';
-import de_DE from "../../languages/de_DE";
-import nl_NL from "../../languages/nl_NL";
-import fr_FR from "../../languages/fr_FR";
-import jp_JP from "../../languages/jp_JP";
-import ru_RU from "../../languages/ru_RU";
-import it_IT from "../../languages/it_IT";
-import tr_TR from "../../languages/tr_TR";
-import es_ES from "../../languages/es_ES";
-import pt_PT from "../../languages/pt_PT";
+    RESET_MAIN_REDUCER,
+    SET_ACTIVE_LIST_ITEM,
+    SET_AUTO_UPDATE, SET_CAN_DRAG_DROP,
+    SET_LANGUAGE_INDEX, SET_LANGUAGE_STATUS, SET_MAXIMIZE_STATUS, SET_MINIMIZE_STATUS,
+    SET_THEME_INDEX,
+    SET_UPDATE_CHECKED
+} from "./Actions/actionTypes";
 
-let languageIndex = localStorage['languageIndex'];
-let themeIndex = localStorage['themeIndex'];
-let autoUpdate = localStorage['autoUpdate'];
-let minimizeEnabled = localStorage['minimizeEnabled'];
-let maximizeEnabled = localStorage['maximizeEnabled'];
-let languageEnabled = localStorage['languageEnabled'];
-let canDragDrop = localStorage['canDragDrop'];
+const MainReducer = (state, action) => {
+    switch (action.type) {
+        default:
+            return state;
+        case SET_LANGUAGE_INDEX:
+            localStorage['languageIndex'] = action.payload;
+            return {
+                ...state,
+                languageIndex: action.payload
+            };
+        case SET_ACTIVE_LIST_ITEM:
+            return {
+                ...state,
+                selectedListItem: action.payload
+            };
+        case SET_THEME_INDEX:
+            localStorage['themeIndex'] = action.payload;
+            return {
+                ...state,
+                themeIndex: action.payload
+            };
+        case SET_AUTO_UPDATE:
+            localStorage['autoUpdate'] = action.payload;
+            return {
+                ...state,
+                autoUpdate: action.payload
+            };
+        case SET_UPDATE_CHECKED:
+            return {
+                ...state,
+                checkedForUpdates: action.payload
+            };
+        case RESET_MAIN_REDUCER:
+            localStorage['languageIndex'] = 1;
+            localStorage['themeIndex'] = 0;
+            localStorage['autoUpdate'] = true;
+            localStorage['minimizeEnabled'] = true;
+            localStorage['maximizeEnabled'] = true;
+            localStorage['languageEnabled'] = true;
+            localStorage['canDragDrop'] = true;
 
-if (!languageIndex) {
-    languageIndex = 1;
-} else {
-    languageIndex = parseInt(languageIndex);
-}
-
-if (!themeIndex) {
-    themeIndex = 0;
-} else {
-    themeIndex = parseInt(themeIndex);
-}
-
-autoUpdate = !autoUpdate || autoUpdate === "true";
-minimizeEnabled = !minimizeEnabled || minimizeEnabled === "true";
-maximizeEnabled = !maximizeEnabled || maximizeEnabled === "true";
-languageEnabled = !languageEnabled || languageEnabled === "true";
-canDragDrop = !canDragDrop || canDragDrop === "true";
-
-const initState = {
-    languageIndex: languageIndex,
-    languages: [
-        de_DE(),
-        en_US(),
-        es_ES(),
-        fr_FR(),
-        it_IT(),
-        jp_JP(),
-        nl_NL(),
-        pt_PT(),
-        ru_RU(),
-        tr_TR()
-    ],
-    drawerOpen: false,
-    selectedListItem: 0,
-    themeIndex: themeIndex,
-    autoUpdate: autoUpdate,
-    checkedForUpdates: false,
-    minimizeEnabled: minimizeEnabled,
-    maximizeEnabled: maximizeEnabled,
-    languageEnabled: languageEnabled,
-    canDragDrop: canDragDrop
-};
-
-const MainReducer = handleActions({
-    [setLanguageIndex](state, action) {
-        localStorage['languageIndex'] = action.index;
-        return {
-            ...state,
-            languageIndex: action.index
-        }
-    },
-    [setActiveListItem](state, action) {
-        return {
-            ...state,
-            selectedListItem: action.index
-        }
-    },
-    [setThemeIndex](state, action) {
-        localStorage['themeIndex'] = action.payload;
-        return {
-            ...state,
-            themeIndex: action.payload
-        }
-    },
-    [setAutoUpdate](state, action) {
-        localStorage['autoUpdate'] = action.payload;
-        return {
-            ...state,
-            autoUpdate: action.payload
-        }
-    },
-    [setUpdateChecked](state, action) {
-        return {
-            ...state,
-            checkedForUpdates: action.payload
-        }
-    },
-    [resetMainReducer](state) {
-        localStorage['languageIndex'] = 1;
-        localStorage['themeIndex'] = 0;
-        localStorage['autoUpdate'] = true;
-        localStorage['minimizeEnabled'] = true;
-        localStorage['maximizeEnabled'] = true;
-        localStorage['languageEnabled'] = true;
-        localStorage['canDragDrop'] = true;
-
-        return {
-            ...state,
-            languageIndex: 1,
-            themeIndex: 0,
-            autoUpdate: true,
-            minimizeEnabled: true,
-            maximizeEnabled: true,
-            languageEnabled: true,
-            canDragDrop: true
-        }
-    },
-    [setMinimizeStatus](state, action) {
-        localStorage['minimizeEnabled'] = action.payload;
-        return {
-            ...state,
-            minimizeEnabled: action.payload
-        }
-    },
-    [setMaximizeStatus](state, action) {
-        localStorage['maximizeEnabled'] = action.payload;
-        return {
-            ...state,
-            maximizeEnabled: action.payload
-        }
-    },
-    [setLanguageButtonStatus](state, action) {
-        localStorage['languageEnabled'] = action.payload;
-        return {
-            ...state,
-            languageEnabled: action.payload
-        }
-    },
-    [setCanDragDrop](state, action) {
-        localStorage['canDragDrop'] = action.payload;
-        return {
-            ...state,
-            canDragDrop: action.payload
-        }
+            return {
+                ...state,
+                languageIndex: 1,
+                themeIndex: 0,
+                autoUpdate: true,
+                minimizeEnabled: true,
+                maximizeEnabled: true,
+                languageEnabled: true,
+                canDragDrop: true
+            };
+        case SET_MINIMIZE_STATUS:
+            localStorage['minimizeEnabled'] = action.payload;
+            return {
+                ...state,
+                minimizeEnabled: action.payload
+            };
+        case SET_MAXIMIZE_STATUS:
+            localStorage['maximizeEnabled'] = action.payload;
+            return {
+                ...state,
+                maximizeEnabled: action.payload
+            };
+        case SET_LANGUAGE_STATUS:
+            localStorage['languageEnabled'] = action.payload;
+            return {
+                ...state,
+                languageEnabled: action.payload
+            };
+        case SET_CAN_DRAG_DROP:
+            localStorage['canDragDrop'] = action.payload;
+            return {
+                ...state,
+                canDragDrop: action.payload
+            };
     }
-}, initState);
+};
 
 export default MainReducer;

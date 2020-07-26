@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useContext, useEffect, useState} from "react";
 import {Checkbox, makeStyles, Paper, FormControlLabel, Button} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -10,25 +9,30 @@ import CopyPasteMenu from "../../components/CopyPasteMenu";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
 import CsvExport from "../../components/CsvExport";
+import {useHistory} from "react-router";
+import {setActiveListItem} from "../../reducers/MainReducer/Actions";
+import {MainContext} from "../../contexts/MainContextProvider";
+import {CryptoContext} from "../../contexts/CryptoContextReducer";
+import {setTextHashes, setTextInput} from "../../reducers/CryptoReducer/Actions";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(4, 0, 2),
+        padding: theme.spacing(4, 0, 2)
     },
     content: {
         flexGrow: 1,
-        overflow: 'auto',
+        overflow: 'auto'
     },
     container: {
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),
+        paddingBottom: theme.spacing(2)
     },
     paper: {
         padding: theme.spacing(2),
         display: 'flex',
         overflow: 'auto',
-        flexDirection: 'column',
+        flexDirection: 'column'
     },
     button: {
         marginTop: theme.spacing(1),
@@ -38,25 +42,31 @@ const useStyles = makeStyles(theme => ({
 
 const Text = () => {
 
-    const md5 = useSelector(state => state.CryptoReducer.md5);
-    const sha1 = useSelector(state => state.CryptoReducer.sha1);
-    const sha224 = useSelector(state => state.CryptoReducer.sha224);
-    const sha256 = useSelector(state => state.CryptoReducer.sha256);
-    const sha3 = useSelector(state => state.CryptoReducer.sha3);
-    const sha384 = useSelector(state => state.CryptoReducer.sha384);
-    const sha512 = useSelector(state => state.CryptoReducer.sha512);
-    const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
-    const input = useSelector(state => state.CryptoReducer.textInput);
-    const hashes = useSelector(state => state.CryptoReducer.textHashes);
-    const dispatch = useDispatch();
+    const [state, d1] = useContext(MainContext);
+    const [crypto, d2] = useContext(CryptoContext);
+
+    const language = state.languages[state.languageIndex];
+
+    const md5 = crypto.md5;
+    const sha1 = crypto.sha1;
+    const sha224 = crypto.sha224;
+    const sha256 = crypto.sha256;
+    const sha3 = crypto.sha3;
+    const sha384 = crypto.sha384;
+    const sha512 = crypto.sha512;
+    const ripemd160 = crypto.ripemd160;
+    const input = crypto.textInput;
+    const hashes = crypto.textHashes;
+
     const classes = useStyles();
+    const history = useHistory();
 
     const [compare, setCompare] = useState(false);
     const [compareHash, setCompareHash] = useState("");
 
     const compareField = compare ? (
         <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
+                       copy={language.copy} paste={language.paste}
                        pasteData={() =>
                            navigator.clipboard.readText()
                                .then(text => {
@@ -75,8 +85,8 @@ const Text = () => {
     ) : null;
 
     useEffect(() => {
-        dispatch({type: 'SET_ACTIVE_LISTITEM', index: 2});
-    }, [dispatch]);
+        d1(setActiveListItem(2));
+    }, []);
 
     const output = hashes && hashes.length > 0 ?
         <>
@@ -86,7 +96,7 @@ const Text = () => {
             <GridList md={12} lg={12} xs={12} spacing={2}>
                 {hashes.map((e, i) => {
                     return (
-                        <Hash id={i} key={i} content={e.hash} hashType={e.type}
+                        <Hash id={i} key={i} content={e.hash} hashType={e.type} copy={language.copy}
                               compareString={compare ? compareHash : null}/>
                     );
                 })}
@@ -99,22 +109,29 @@ const Text = () => {
      */
     const calculateHashes = () => {
         if (!input || input.length === 0) return;
-        dispatch({type: "SET_TEXT_HASHES", payload: null});
+        d2(setTextHashes(null));
 
         let newHashes = CryptoCalculator(input, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160);
 
         if (newHashes.length === 0) newHashes = null;
-        dispatch({type: "SET_TEXT_HASHES", payload: newHashes});
+        d2(setTextHashes(newHashes));
     };
 
     /**
      * Clear the user interface
      */
     const clearData = () => {
-        dispatch({type: "SET_TEXT_INPUT", payload: ""});
+        d2(setTextInput(""));
         setCompare(false);
         setCompareHash("");
-        dispatch({type: "SET_TEXT_HASHES", payload: ""});
+        d2(setTextHashes(""));
+    };
+
+    /**
+     * Go back to the previous page
+     */
+    const goBack = () => {
+        history.goBack();
     };
 
     return (
@@ -132,24 +149,22 @@ const Text = () => {
             <main className={classes.content}>
                 <Container className={classes.container}>
                     <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                        <BackButton/>
+                        <BackButton goBack={goBack}/>
                         {language.input}
                     </Typography>
                     <Paper className={classes.paper}>
                         <CopyPasteMenu id={0} copyData={() => navigator.clipboard.writeText(input)}
-                                       pasteData={() =>
-                                           navigator.clipboard.readText()
-                                               .then(text => {
-                                                   dispatch({type: "SET_TEXT_INPUT", payload: text});
-                                               })
-                                       }>
+                                       copy={language.copy} paste={language.paste}
+                                       pasteData={() => navigator.clipboard.readText().then(text => {
+                                           d2(setTextInput(text));
+                                       })}>
                             <TextField
                                 style={{width: "100%"}}
                                 id="outlined-basic"
                                 label={language.yourTextHere}
                                 margin="normal"
                                 value={input}
-                                onChange={(e) => dispatch({type: "SET_TEXT_INPUT", payload: e.target.value})}
+                                onChange={(e) => d2(setTextInput(e.target.value))}
                                 multiline
                                 rowsMax={6}
                                 variant="outlined"/>

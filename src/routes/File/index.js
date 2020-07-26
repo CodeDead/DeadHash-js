@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect, useState, useRef, useContext} from "react";
 import {Checkbox, FormControlLabel, makeStyles, Paper} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -13,25 +12,30 @@ import {FileDataReader} from "../../utils/FileDataReader";
 import {CryptoCalculator} from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
 import CsvExport from "../../components/CsvExport";
+import {useHistory} from "react-router";
+import {setActiveListItem} from "../../reducers/MainReducer/Actions";
+import {MainContext} from "../../contexts/MainContextProvider";
+import {CryptoContext} from "../../contexts/CryptoContextReducer";
+import {setCurrentFile, setFileHashes} from "../../reducers/CryptoReducer/Actions";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(4, 0, 2),
+        padding: theme.spacing(4, 0, 2)
     },
     content: {
         flexGrow: 1,
-        overflow: 'auto',
+        overflow: 'auto'
     },
     paper: {
         padding: theme.spacing(2),
         display: 'flex',
         overflow: 'auto',
-        flexDirection: 'column',
+        flexDirection: 'column'
     },
     container: {
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2),
+        paddingBottom: theme.spacing(2)
     },
     button: {
         marginTop: theme.spacing(1),
@@ -41,25 +45,29 @@ const useStyles = makeStyles(theme => ({
 
 const File = () => {
 
-    const hashes = useSelector(state => state.CryptoReducer.fileHashes);
-    const file = useSelector(state => state.CryptoReducer.currentFile);
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
-    const dispatch = useDispatch();
-    const classes = useStyles();
+    const [state, d1] = useContext(MainContext);
+    const [crypto, d2] = useContext(CryptoContext);
+
+    const hashes = crypto.fileHashes;
+    const file = crypto.currentFile;
+    const language = state.languages[state.languageIndex];
 
     const [compare, setCompare] = useState(false);
     const [compareHash, setCompareHash] = useState("");
 
     const fileRef = useRef(null);
 
-    const md5 = useSelector(state => state.CryptoReducer.md5);
-    const sha1 = useSelector(state => state.CryptoReducer.sha1);
-    const sha224 = useSelector(state => state.CryptoReducer.sha224);
-    const sha256 = useSelector(state => state.CryptoReducer.sha256);
-    const sha3 = useSelector(state => state.CryptoReducer.sha3);
-    const sha384 = useSelector(state => state.CryptoReducer.sha384);
-    const sha512 = useSelector(state => state.CryptoReducer.sha512);
-    const ripemd160 = useSelector(state => state.CryptoReducer.ripemd160);
+    const md5 = crypto.md5;
+    const sha1 = crypto.sha1;
+    const sha224 = crypto.sha224;
+    const sha256 = crypto.sha256;
+    const sha3 = crypto.sha3;
+    const sha384 = crypto.sha384;
+    const sha512 = crypto.sha512;
+    const ripemd160 = crypto.ripemd160;
+
+    const history = useHistory();
+    const classes = useStyles();
 
     const output = hashes && hashes.length > 0 ?
         <>
@@ -69,7 +77,7 @@ const File = () => {
             <GridList md={12} lg={12} xs={12} spacing={2}>
                 {hashes.map((e, i) => {
                     return (
-                        <Hash id={i} key={i} content={e.hash} hashType={e.type}
+                        <Hash id={i} key={i} content={e.hash} hashType={e.type} copy={language.copy}
                               compareString={compare ? compareHash : null}/>
                     );
                 })}
@@ -79,6 +87,7 @@ const File = () => {
 
     const compareField = compare ? (
         <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
+                       copy={language.copy} paste={language.paste}
                        pasteData={() => pasteData(setCompareHash)}>
             <TextField
                 style={{width: '100%'}}
@@ -91,8 +100,8 @@ const File = () => {
     ) : null;
 
     useEffect(() => {
-        dispatch({type: 'SET_ACTIVE_LISTITEM', index: 1});
-    }, [dispatch]);
+        d1(setActiveListItem(1));
+    }, []);
 
     /**
      * Calculate the hashes of a specific file
@@ -100,7 +109,8 @@ const File = () => {
      */
     const calculateHashes = async () => {
         if (!file || file.length === 0) return;
-        dispatch({type: "SET_FILE_HASHES", payload: null});
+
+        d2(setFileHashes(null));
 
         const data = await FileDataReader(file);
         if (!data || data.length === 0) return;
@@ -109,7 +119,7 @@ const File = () => {
         let newHashes = CryptoCalculator(encoded, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160);
 
         if (newHashes.length === 0) newHashes = null;
-        dispatch({type: "SET_FILE_HASHES", payload: newHashes});
+        d2(setFileHashes(newHashes));
     };
 
     /**
@@ -129,7 +139,7 @@ const File = () => {
     const clearData = () => {
         setCompare(false);
         setCompareHash("");
-        dispatch({type: 'SET_CURRENT_FILE', payload: null});
+        d2(setCurrentFile(null));
     };
 
     /**
@@ -137,8 +147,15 @@ const File = () => {
      * @param event The event that called this function
      */
     const onFileChange = function (event) {
-        dispatch({type: 'SET_CURRENT_FILE', payload: event.target.files[0]});
+        d2(setCurrentFile(event.target.files[0]));
         fileRef.current.value = "";
+    };
+
+    /**
+     * Go back to the previous page
+     */
+    const goBack = () => {
+        history.goBack();
     };
 
     return (
@@ -156,7 +173,7 @@ const File = () => {
             <main className={classes.content}>
                 <Container className={classes.container}>
                     <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                        <BackButton/>
+                        <BackButton goBack={goBack}/>
                         {language.input}
                     </Typography>
                     <Paper className={classes.paper}>

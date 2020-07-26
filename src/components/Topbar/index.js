@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,12 +8,13 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import {useSelector, useDispatch} from "react-redux";
 import CloseIcon from '@material-ui/icons/Close';
 import MinimizeIcon from "@material-ui/icons/Minimize";
 import FullScreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import Drawerbar from "../Drawerbar";
+import {setLanguageIndex} from "../../reducers/MainReducer/Actions";
+import {MainContext} from "../../contexts/MainContextProvider";
 
 const drawerWidth = 220;
 const useStyles = makeStyles(theme => ({
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
+            duration: theme.transitions.duration.leavingScreen
         })
     },
     appBarShift: {
@@ -37,35 +38,42 @@ const useStyles = makeStyles(theme => ({
         marginLeft: drawerWidth,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
+            duration: theme.transitions.duration.enteringScreen
+        })
+    }
 }));
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
 const Topbar = () => {
 
-    const classes = useStyles();
-    const languageIndex = useSelector(state => state.MainReducer.languageIndex);
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
-    const minimizeEnabled = useSelector(state => state.MainReducer.minimizeEnabled);
-    const maximizeEnabled = useSelector(state => state.MainReducer.maximizeEnabled);
-    const languageEnabled = useSelector(state => state.MainReducer.languageEnabled);
-    const dispatch = useDispatch();
+    const [state, dispatch] = useContext(MainContext);
+    const languageIndex = state.languageIndex;
+    const language = state.languages[languageIndex];
+    const minimizeEnabled = state.minimizeEnabled;
+    const maximizeEnabled = state.maximizeEnabled;
+    const languageEnabled = state.languageEnabled;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [fullScreen, setFullScreen] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const languageOpen = Boolean(anchorEl);
 
+    const classes = useStyles();
+
+    /**
+     * Set full screen to true
+     */
     const fullScreenEvent = () => {
         setFullScreen(true);
-    }
+    };
 
+    /**
+     * Set fullscreen to false
+     */
     const exitFullScreenEvent = () => {
         setFullScreen(false);
-    }
+    };
 
     useEffect(() => {
         ipcRenderer.on("window-maximized", fullScreenEvent);
@@ -85,7 +93,7 @@ const Topbar = () => {
      */
     const changeLanguage = (lang) => {
         handleClose();
-        dispatch({type: 'SET_LANGUAGEINDEX', index: lang});
+        dispatch(setLanguageIndex(lang));
     };
 
     /**

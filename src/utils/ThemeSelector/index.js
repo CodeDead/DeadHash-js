@@ -8,33 +8,22 @@ import deepPurple from "@material-ui/core/colors/deepPurple";
 import grey from "@material-ui/core/colors/grey";
 
 export const ThemeSelector = (index) => {
-    let primary;
     switch (index) {
         default:
-            primary = blue;
-            break;
+            return blue;
         case 1:
-            primary = lightBlue;
-            break;
+            return lightBlue;
         case 2:
-            primary = red;
-            break;
+            return red;
         case 3:
-            primary = green;
-            break;
+            return green;
         case 4:
-            primary = lightGreen;
-            break;
+            return lightGreen;
         case 5:
-            primary = purple;
-            break;
+            return purple;
         case 6:
-            primary = deepPurple;
-            break;
+            return deepPurple;
         case 7:
-            primary = grey;
-            break;
+            return grey;
     }
-
-    return primary;
 };

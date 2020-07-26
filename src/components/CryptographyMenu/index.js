@@ -7,19 +7,17 @@ import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {useSelector} from "react-redux";
 import KeyIcon from "@material-ui/icons/VpnKey";
 
 const useStyles = makeStyles(theme => ({
     nested: {
-        paddingLeft: theme.spacing(4),
+        paddingLeft: theme.spacing(4)
     }
 }));
 
-const CryptographyMenu = ({handleIndexChange, selectedIndex}) => {
+const CryptographyMenu = ({handleIndexChange, selectedIndex, cryptography, file, text}) => {
 
     const classes = useStyles();
-    const language = useSelector(state => state.MainReducer.languages[state.MainReducer.languageIndex]);
     const [openCollapse, setOpenCollapse] = useState(true);
 
     /**
@@ -33,7 +31,7 @@ const CryptographyMenu = ({handleIndexChange, selectedIndex}) => {
         <List>
             <ListItem button selected={selectedIndex === 0}>
                 <ListItemIcon onClick={() => handleIndexChange(0)}><KeyIcon/></ListItemIcon>
-                <ListItemText onClick={() => handleIndexChange(0)} primary={language.cryptography}/>
+                <ListItemText onClick={() => handleIndexChange(0)} primary={cryptography}/>
                 {openCollapse ? <ExpandLessIcon color="inherit" onClick={handleOpenMenu}/> :
                     <ExpandMoreIcon color="inherit" onClick={handleOpenMenu}/>}
             </ListItem>
@@ -41,11 +39,11 @@ const CryptographyMenu = ({handleIndexChange, selectedIndex}) => {
                 <List component="div" disablePadding>
                     <ListItem selected={selectedIndex === 1} button className={classes.nested}
                               onClick={() => handleIndexChange(1)}>
-                        <ListItemText inset primary={language.file}/>
+                        <ListItemText inset primary={file}/>
                     </ListItem>
                     <ListItem selected={selectedIndex === 2} button className={classes.nested}
                               onClick={() => handleIndexChange(2)}>
-                        <ListItemText inset primary={language.text}/>
+                        <ListItemText inset primary={text}/>
                     </ListItem>
                 </List>
             </Collapse>
