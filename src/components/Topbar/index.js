@@ -47,7 +47,8 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 const Topbar = () => {
 
-    const [state, dispatch] = useContext(MainContext);
+    const [state, d1] = useContext(MainContext);
+
     const languageIndex = state.languageIndex;
     const language = state.languages[languageIndex];
     const minimizeEnabled = state.minimizeEnabled;
@@ -93,7 +94,7 @@ const Topbar = () => {
      */
     const changeLanguage = (lang) => {
         handleClose();
-        dispatch(setLanguageIndex(lang));
+        d1(setLanguageIndex(lang));
     };
 
     /**

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {Checkbox, makeStyles, Paper, FormControlLabel, Button} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -6,15 +6,20 @@ import TextField from '@material-ui/core/TextField';
 import Hash from "../../components/Hash";
 import GridList from "../../components/GridList";
 import CopyPasteMenu from "../../components/CopyPasteMenu";
-import CryptoCalculator from "../../utils/CryptoCalculator";
 import BackButton from "../../components/BackButton";
 import CsvExport from "../../components/CsvExport";
 import {useHistory} from "react-router";
 import {setActiveListItem} from "../../reducers/MainReducer/Actions";
 import {MainContext} from "../../contexts/MainContextProvider";
 import {CryptoContext} from "../../contexts/CryptoContextReducer";
-import {setTextHashes, setTextInput} from "../../reducers/CryptoReducer/Actions";
+import {
+    setTextCompareHash, setTextHashComparing, setTextHashError,
+    setTextHashes,
+    setTextHashLoading,
+    setTextInput
+} from "../../reducers/CryptoReducer/Actions";
 import Loadingbar from "../../components/Loadingbar";
+import AlertDialog from "../../components/AlertDialog";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -42,6 +47,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const ipcRenderer = window.require('electron').ipcRenderer;
+
 const Text = () => {
 
     const [state, d1] = useContext(MainContext);
@@ -49,23 +56,32 @@ const Text = () => {
 
     const language = state.languages[state.languageIndex];
 
+    const md4 = crypto.md4;
     const md5 = crypto.md5;
     const sha1 = crypto.sha1;
     const sha224 = crypto.sha224;
     const sha256 = crypto.sha256;
-    const sha3 = crypto.sha3;
+    const sha3_224 = crypto.sha3_224;
+    const sha3_256 = crypto.sha3_256;
+    const sha3_384 = crypto.sha3_384;
+    const sha3_512 = crypto.sha3_512;
     const sha384 = crypto.sha384;
     const sha512 = crypto.sha512;
     const ripemd160 = crypto.ripemd160;
     const input = crypto.textInput;
     const hashes = crypto.textHashes;
 
+    const compare = crypto.textComparing;
+    const compareHash = crypto.textCompareHash;
+    const loading = crypto.textHashLoading;
+    const errorMessage = crypto.textErrorMessage;
+
     const classes = useStyles();
     const history = useHistory();
 
-    const [compare, setCompare] = useState(false);
-    const [compareHash, setCompareHash] = useState("");
-    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        d1(setActiveListItem(2));
+    }, []);
 
     const compareField = compare ? (
         <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
@@ -73,7 +89,7 @@ const Text = () => {
                        pasteData={() =>
                            navigator.clipboard.readText()
                                .then(text => {
-                                   setCompareHash(text);
+                                   d2(setTextCompareHash(text));
                                })
                        }>
             <TextField
@@ -81,15 +97,11 @@ const Text = () => {
                 style={{width: '100%'}}
                 margin="normal"
                 value={compareHash}
-                onChange={(e) => setCompareHash(e.target.value)}
+                onChange={(e) => d2(setTextCompareHash(e.target.value))}
                 label={language.compareHash}
                 variant="outlined"/>
         </CopyPasteMenu>
     ) : null;
-
-    useEffect(() => {
-        d1(setActiveListItem(2));
-    }, []);
 
     const output = hashes && hashes.length > 0 ?
         <>
@@ -114,26 +126,34 @@ const Text = () => {
         if (!input || input.length === 0) return;
 
         d2(setTextHashes(null));
-        setLoading(true);
+        d2(setTextHashLoading(true));
+        d2(setTextHashError(null));
 
-        CryptoCalculator(input, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160)
-            .then(res => {
-                d2(setTextHashes(res));
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        ipcRenderer.send("calculate-text-hash", {
+            text: input,
+            md4: md4,
+            md5: md5,
+            sha1: sha1,
+            sha224: sha224,
+            sha256: sha256,
+            sha3_224: sha3_224,
+            sha3_256: sha3_256,
+            sha3_384: sha3_384,
+            sha3_512: sha3_512,
+            sha384: sha384,
+            sha512: sha512,
+            ripemd160: ripemd160
+        });
     };
 
     /**
      * Clear the user interface
      */
     const clearData = () => {
+        d2(setTextHashError(null));
         d2(setTextInput(""));
-
-        setCompare(false);
-        setCompareHash("");
-
+        d2(setTextCompareHash(""));
+        d2(setTextHashComparing(false));
         d2(setTextHashes(""));
     };
 
@@ -157,6 +177,8 @@ const Text = () => {
                 </Container>
             </div>
             <main className={classes.content}>
+                {errorMessage && errorMessage.length > 0 ? (
+                    <AlertDialog title={language.errorTitle} content={errorMessage} ok={language.ok}/>) : null}
                 <Container className={classes.container}>
                     <Typography component="h2" variant="h5" color="primary" gutterBottom>
                         <BackButton goBack={goBack}/>
@@ -185,7 +207,7 @@ const Text = () => {
                             control={
                                 <Checkbox
                                     checked={compare}
-                                    onChange={(e) => setCompare(e.target.checked)}
+                                    onChange={(e) => d2(setTextHashComparing(e.target.checked))}
                                     value="compare"
                                     color="primary"
                                 />
@@ -210,11 +232,13 @@ const Text = () => {
                             </CsvExport>
                         </>
                     ) : null}
-                    <Button className={classes.button} color={"primary"} variant={"contained"}
-                            disabled={!input || input.length === 0 || loading}
-                            style={{float: 'right'}} onClick={() => calculateHashes()}>
-                        {language.calculate}
-                    </Button>
+                    {loading ? null : (
+                        <Button className={classes.button} color={"primary"} variant={"contained"}
+                                disabled={!input || input.length === 0 || loading}
+                                style={{float: 'right'}} onClick={() => calculateHashes()}>
+                            {language.calculate}
+                        </Button>
+                    )}
                     {output}
                 </Container>
             </main>

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Home from "../../routes/Home";
 import Settings from "../../routes/Settings";
@@ -12,21 +12,29 @@ import {CssBaseline} from "@material-ui/core";
 import DropZone from "../DropZone";
 import {MainContext} from "../../contexts/MainContextProvider";
 import {CryptoContext} from "../../contexts/CryptoContextReducer";
-import {setCurrentFile} from "../../reducers/CryptoReducer/Actions";
+import {
+    setCurrentFile,
+    setFileHashError,
+    setFileHashes,
+    setFileHashLoading, setTextHashError, setTextHashes, setTextHashLoading
+} from "../../reducers/CryptoReducer/Actions";
+
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 const App = () => {
 
     const [state] = useContext(MainContext);
     const [crypto, dispatch] = useContext(CryptoContext);
 
-    let themeIndex = state.themeIndex;
     const enabled = state.canDragDrop;
+    let themeIndex = state.themeIndex;
 
     let themeType = "light";
     if (themeIndex === 8) {
         themeType = "dark";
         themeIndex = 2;
     }
+
     const color = ThemeSelector(themeIndex);
 
     const theme = createMuiTheme({
@@ -35,6 +43,28 @@ const App = () => {
             type: themeType
         }
     });
+
+    useEffect(() => {
+        ipcRenderer.on("file-hash-calculated", (e, data) => {
+            dispatch(setFileHashes(data));
+            dispatch(setFileHashLoading(false));
+        });
+
+        ipcRenderer.on("text-hash-calculated", (e, data) => {
+            dispatch(setTextHashes(data));
+            dispatch(setTextHashLoading(false));
+        });
+
+        ipcRenderer.on("file-hash-calculation-error", (e, data) => {
+            dispatch(setFileHashError(data.message));
+            dispatch(setFileHashLoading(false));
+        });
+
+        ipcRenderer.on("text-hash-calculation-error", (e, data) => {
+            dispatch(setTextHashError(data.message));
+            dispatch(setTextHashLoading(false));
+        });
+    }, []);
 
     /**
      * Method that is called when a file is dropped

@@ -38,10 +38,14 @@ import {
 import {MainContext} from "../../contexts/MainContextProvider";
 import {CryptoContext} from "../../contexts/CryptoContextReducer";
 import {
-    resetCryptoReducer,
-    setMd5State, setRipeMd160State,
+    resetCryptoReducer, setMd4State,
+    setMd5State,
+    setRipeMd160State,
     setSha1State,
-    setSha224State, setSha256State, setSha384State, setSha3State,
+    setSha224State,
+    setSha256State,
+    setSha384State,
+    setSha3_224State, setSha3_256State, setSha3_384State, setSha3_512State,
     setSha512State
 } from "../../reducers/CryptoReducer/Actions";
 
@@ -86,11 +90,17 @@ const Settings = () => {
     const maximize = state.maximizeEnabled;
     const languageStatus = state.languageEnabled;
 
+    const md4 = crypto.md4;
     const md5 = crypto.md5;
     const sha1 = crypto.sha1;
     const sha224 = crypto.sha224;
     const sha256 = crypto.sha256;
-    const sha3 = crypto.sha3;
+
+    const sha3_224 = crypto.sha3_224;
+    const sha3_256 = crypto.sha3_256;
+    const sha3_384 = crypto.sha3_384;
+    const sha3_512 = crypto.sha3_512;
+
     const sha384 = crypto.sha384;
     const sha512 = crypto.sha512;
     const ripemd160 = crypto.ripemd160;
@@ -278,6 +288,18 @@ const Settings = () => {
                                     <FormControlLabel
                                         control={
                                             <Checkbox
+                                                checked={md4}
+                                                onChange={(e) => d2(setMd4State(e.target.checked))}
+                                                value="md4"
+                                                color="primary"
+                                            />
+                                        }
+                                        label={language.md4}
+                                    />
+
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
                                                 checked={md5}
                                                 onChange={(e) => d2(setMd5State(e.target.checked))}
                                                 value="md5"
@@ -326,13 +348,49 @@ const Settings = () => {
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                checked={sha3}
-                                                onChange={(e) => d2(setSha3State(e.target.checked))}
-                                                value="sha3"
+                                                checked={sha3_224}
+                                                onChange={(e) => d2(setSha3_224State(e.target.checked))}
+                                                value="sha3_224"
                                                 color="primary"
                                             />
                                         }
-                                        label={language.sha3}
+                                        label={language.sha3_224}
+                                    />
+
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={sha3_256}
+                                                onChange={(e) => d2(setSha3_256State(e.target.checked))}
+                                                value="sha3_256"
+                                                color="primary"
+                                            />
+                                        }
+                                        label={language.sha3_256}
+                                    />
+
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={sha3_384}
+                                                onChange={(e) => d2(setSha3_384State(e.target.checked))}
+                                                value="sha3_384"
+                                                color="primary"
+                                            />
+                                        }
+                                        label={language.sha3_384}
+                                    />
+
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={sha3_512}
+                                                onChange={(e) => d2(setSha3_512State(e.target.checked))}
+                                                value="sha3_512"
+                                                color="primary"
+                                            />
+                                        }
+                                        label={language.sha3_512}
                                     />
 
                                     <FormControlLabel
@@ -409,7 +467,8 @@ const Settings = () => {
                             </GridList>
                         </Grid>
                     </Grid>
-                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()} disabled={loading}>
+                    <Button className={classes.button} color={"primary"} onClick={() => checkForUpdates()}
+                            disabled={loading}>
                         <RefreshIcon/>
                         {language.checkForUpdates}
                     </Button>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Worker Window</title>
+</head>
+<body>
+<script>
+    const ipcRenderer = window.require('electron').ipcRenderer;
+    const crypto = window.require("crypto");
+
+    const textHash = (text, md4, md5, sha1, sha224, sha256, sha3_224, sha3_256, sha3_384, sha3_512, sha384, sha512, ripemd160) => {
+        return new Promise((resolve, reject) => {
+            let newHashes = [];
+            try {
+                if (md4) {
+                    newHashes.push({
+                        type: "MD4",
+                        hash: crypto.createHash('md4').update(text).digest('hex').toString()
+                    })
+                }
+                if (md5) {
+                    newHashes.push({
+                        type: "MD5",
+                        hash: crypto.createHash('md5').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha1) {
+                    newHashes.push({
+                        type: "SHA-1",
+                        hash: crypto.createHash('sha1').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha224) {
+                    newHashes.push({
+                        type: "SHA-224",
+                        hash: crypto.createHash('sha224').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha256) {
+                    newHashes.push({
+                        type: "SHA-256",
+                        hash: crypto.createHash('sha256').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha3_224) {
+                    newHashes.push({
+                        type: "SHA3-224",
+                        hash: crypto.createHash('sha3-224').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha3_256) {
+                    newHashes.push({
+                        type: "SHA3-256",
+                        hash: crypto.createHash('sha3-256').update(text).digest('hex').toString()
+                    });
+                }
+
+                if (sha3_384) {
+                    newHashes.push({
+                        type: "SHA3-384",
+                        hash: crypto.createHash('sha3-384').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha3_512) {
+                    newHashes.push({
+                        type: "SHA3-512",
+                        hash: crypto.createHash('sha3-512').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha384) {
+                    newHashes.push({
+                        type: "SHA-384",
+                        hash: crypto.createHash('sha384').update(text).digest('hex').toString()
+                    });
+                }
+                if (sha512) {
+                    newHashes.push({
+                        type: "SHA-512",
+                        hash: crypto.createHash('sha512').update(text).digest('hex').toString()
+                    });
+                }
+                if (ripemd160) {
+                    newHashes.push({
+                        type: "RIPEMD-160",
+                        hash: crypto.createHash('ripemd160').update(text).digest('hex').toString()
+                    });
+                }
+
+                if (newHashes.length === 0) newHashes = null;
+
+                return resolve(newHashes);
+            } catch (ex) {
+                return reject(ex);
+            }
+        })
+    };
+
+    ipcRenderer.on("calculate-text-hash", (e, data) => {
+        textHash(data.text, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha3_224, data.sha3_256, data.sha3_384, data.sha3_512, data.sha3, data.sha384, data.sha512, data.ripemd160)
+            .then(data => {
+                ipcRenderer.send("text-hash-calculated", data);
+            })
+            .catch(error => {
+                ipcRenderer.send("text-hash-calculation-error", error);
+            });
+    });
+</script>
+</body>
+</html>

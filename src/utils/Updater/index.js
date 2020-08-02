@@ -1,5 +1,10 @@
 const Updater = (os) => {
 
+    /**
+     * Parse the information inside an external update
+     * @param update The update data
+     * @returns {{infoUrl: null, updateUrl: boolean, downloadUrl: null, version: null}}
+     */
     const parseUpdate = (update) => {
         const platform = update.platforms[os.platform];
         const data = {
@@ -34,10 +39,10 @@ const Updater = (os) => {
                 return res.json();
             })
             .then(data => {
-                resolve(parseUpdate(data));
+                return resolve(parseUpdate(data));
             })
             .catch(error => {
-                reject(error.toString());
+                return reject(error.toString());
             });
     });
 };

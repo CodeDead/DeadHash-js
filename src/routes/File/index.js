@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useContext} from "react";
+import React, {useEffect, useRef, useContext} from "react";
 import {Checkbox, FormControlLabel, makeStyles, Paper} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -7,15 +7,19 @@ import GridList from "../../components/GridList";
 import Hash from "../../components/Hash";
 import CopyPasteMenu from "../../components/CopyPasteMenu";
 import TextField from "@material-ui/core/TextField";
-import FileDataReader from "../../utils/FileDataReader";
 import BackButton from "../../components/BackButton";
 import CsvExport from "../../components/CsvExport";
 import {useHistory} from "react-router";
 import {setActiveListItem} from "../../reducers/MainReducer/Actions";
 import {MainContext} from "../../contexts/MainContextProvider";
 import {CryptoContext} from "../../contexts/CryptoContextReducer";
-import {setCurrentFile, setFileHashes} from "../../reducers/CryptoReducer/Actions";
+import {
+    setCurrentFile, setFileCompareHash, setFileHashComparing, setFileHashError,
+    setFileHashes,
+    setFileHashLoading,
+} from "../../reducers/CryptoReducer/Actions";
 import Loadingbar from "../../components/Loadingbar";
+import AlertDialog from "../../components/AlertDialog";
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -43,6 +47,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const ipcRenderer = window.require('electron').ipcRenderer;
+
 const File = () => {
 
     const [state, d1] = useContext(MainContext);
@@ -51,25 +57,34 @@ const File = () => {
     const hashes = crypto.fileHashes;
     const file = crypto.currentFile;
 
+    const md4 = crypto.md4;
     const md5 = crypto.md5;
     const sha1 = crypto.sha1;
     const sha224 = crypto.sha224;
     const sha256 = crypto.sha256;
-    const sha3 = crypto.sha3;
+    const sha3_224 = crypto.sha3_224;
+    const sha3_256 = crypto.sha3_256;
+    const sha3_384 = crypto.sha3_384;
+    const sha3_512 = crypto.sha3_512;
     const sha384 = crypto.sha384;
     const sha512 = crypto.sha512;
     const ripemd160 = crypto.ripemd160;
 
-    const language = state.languages[state.languageIndex];
+    const compare = crypto.fileComparing;
+    const compareHash = crypto.fileCompareHash;
+    const loading = crypto.fileHashLoading;
+    const errorMessage = crypto.fileErrorMessage;
 
-    const [compare, setCompare] = useState(false);
-    const [compareHash, setCompareHash] = useState("");
-    const [loading, setLoading] = useState(false);
+    const language = state.languages[state.languageIndex];
 
     const fileRef = useRef(null);
 
     const history = useHistory();
     const classes = useStyles();
+
+    useEffect(() => {
+        d1(setActiveListItem(1));
+    }, []);
 
     const output = hashes && hashes.length > 0 ?
         <>
@@ -90,20 +105,21 @@ const File = () => {
     const compareField = compare ? (
         <CopyPasteMenu id={1} copyData={() => navigator.clipboard.writeText(compareHash)}
                        copy={language.copy} paste={language.paste}
-                       pasteData={() => pasteData(setCompareHash)}>
+                       pasteData={() => {
+                           navigator.clipboard.readText()
+                               .then(text => {
+                                   d2(setFileCompareHash(text));
+                               });
+                       }}>
             <TextField
                 style={{width: '100%'}}
                 margin="normal"
                 value={compareHash}
-                onChange={(e) => setCompareHash(e.target.value)}
+                onChange={(e) => d2(setFileCompareHash(e.target.value))}
                 label={language.compareHash}
                 variant="outlined"/>
         </CopyPasteMenu>
     ) : null;
-
-    useEffect(() => {
-        d1(setActiveListItem(1));
-    }, []);
 
     /**
      * Calculate the hashes of a specific file
@@ -112,35 +128,34 @@ const File = () => {
         if (e) e.preventDefault();
         if (!file || file.length === 0) return;
 
+        d2(setFileHashError(null));
         d2(setFileHashes(null));
-        setLoading(true);
+        d2(setFileHashLoading(true));
 
-        FileDataReader(file, md5, sha1, sha224, sha256, sha3, sha384, sha512, ripemd160)
-            .then(data => {
-                d2(setFileHashes(data));
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
-
-    /**
-     * Paste data into the clipboard
-     * @param func The function that should be called
-     */
-    const pasteData = (func) => {
-        navigator.clipboard.readText()
-            .then(text => {
-                func(text);
-            })
+        ipcRenderer.send("calculate-file-hash", {
+            filePath: file.path,
+            md4: md4,
+            md5: md5,
+            sha1: sha1,
+            sha224: sha224,
+            sha256: sha256,
+            sha3_224: sha3_224,
+            sha3_256: sha3_256,
+            sha3_384: sha3_384,
+            sha3_512: sha3_512,
+            sha384: sha384,
+            sha512: sha512,
+            ripemd160: ripemd160
+        });
     };
 
     /**
      * Clear the user interface
      */
     const clearData = () => {
-        setCompare(false);
-        setCompareHash("");
+        d2(setFileHashError(null));
+        d2(setFileCompareHash(""));
+        d2(setFileHashComparing(false));
         d2(setCurrentFile(null));
     };
 
@@ -173,6 +188,8 @@ const File = () => {
                 </Container>
             </div>
             <main className={classes.content}>
+                {errorMessage && errorMessage.length > 0 ? (
+                    <AlertDialog title={language.errorTitle} content={errorMessage} ok={language.ok}/>) : null}
                 <Container className={classes.container}>
                     <Typography component="h2" variant="h5" color="primary" gutterBottom>
                         <BackButton goBack={goBack}/>
@@ -201,7 +218,7 @@ const File = () => {
                             control={
                                 <Checkbox
                                     checked={compare}
-                                    onChange={(e) => setCompare(e.target.checked)}
+                                    onChange={(e) => d2(setFileHashComparing(e.target.checked))}
                                     value="compare"
                                     color="primary"
                                 />
@@ -227,11 +244,13 @@ const File = () => {
                         </>
 
                     ) : null}
-                    <Button className={classes.button} color={"primary"} variant={"contained"}
-                            disabled={!file || file.length === 0 || loading}
-                            style={{float: 'right'}} onClick={calculateHashes}>
-                        {language.calculate}
-                    </Button>
+                    {loading ? null : (
+                        <Button className={classes.button} color={"primary"} variant={"contained"}
+                                disabled={!file || file.length === 0 || loading}
+                                style={{float: 'right'}} onClick={calculateHashes}>
+                            {language.calculate}
+                        </Button>
+                    )}
                     {output}
                 </Container>
             </main>
