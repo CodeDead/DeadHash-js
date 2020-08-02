@@ -3,11 +3,11 @@
 # DeadHash
 
 DeadHash is a free and open-source utility to calculate file and text hashes. The following hash calculations are supported:
+* MD4
 * MD5
 * SHA1
 * SHA224
 * SHA256
-* SHA3
 * SHA384
 * SHA512
 * RIPEMD160
