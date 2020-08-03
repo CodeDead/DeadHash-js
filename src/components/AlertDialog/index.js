@@ -6,7 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
-const AlertDialog = ({title, content, ok}) => {
+const AlertDialog = ({title, content, ok, onClose}) => {
 
     const [open, setOpen] = useState(true);
 
@@ -15,6 +15,7 @@ const AlertDialog = ({title, content, ok}) => {
      */
     const handleClose = () => {
         setOpen(false);
+        if (onClose) onClose();
     };
 
     return (

@@ -16,7 +16,7 @@ import {CryptoContext} from "../../contexts/CryptoContextReducer";
 import {
     setCurrentFile, setFileCompareHash, setFileHashComparing, setFileHashError,
     setFileHashes,
-    setFileHashLoading,
+    setFileHashLoading, setTextHashError,
 } from "../../reducers/CryptoReducer/Actions";
 import Loadingbar from "../../components/Loadingbar";
 import AlertDialog from "../../components/AlertDialog";
@@ -175,6 +175,13 @@ const File = () => {
         history.goBack();
     };
 
+    /**
+     * Method that is called when the error dialog is called
+     */
+    const onErrorClose = () => {
+        d2(setFileHashError(null));
+    };
+
     return (
         <div>
             <div className={classes.heroContent}>
@@ -189,7 +196,8 @@ const File = () => {
             </div>
             <main className={classes.content}>
                 {errorMessage && errorMessage.length > 0 ? (
-                    <AlertDialog title={language.errorTitle} content={errorMessage} ok={language.ok}/>) : null}
+                    <AlertDialog title={language.errorTitle} content={errorMessage} ok={language.ok}
+                                 onClose={onErrorClose}/>) : null}
                 <Container className={classes.container}>
                     <Typography component="h2" variant="h5" color="primary" gutterBottom>
                         <BackButton goBack={goBack}/>

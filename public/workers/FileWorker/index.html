@@ -82,7 +82,6 @@
                 ipcRenderer.send("file-hash-calculated", data);
             })
             .catch(error => {
-                console.log(error.stack);
                 ipcRenderer.send("file-hash-calculation-error", error);
             });
     });
