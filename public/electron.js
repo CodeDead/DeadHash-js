@@ -17,18 +17,18 @@ const createWindow = () => {
         title: "DeadHash",
         width: 960,
         height: 520,
-        icon: path.join(__dirname, '../build/Icon-512x512.png')
+        icon: path.join(__dirname, '../build/logo512.png')
     });
 
     fileWorkerWindow = new BrowserWindow({
         show: isDev,
-        icon: path.join(__dirname, '../build/Icon-512x512.png'),
+        icon: path.join(__dirname, '../build/logo512.png'),
         webPreferences: {nodeIntegration: true}
     });
 
     textWorkerWindow = new BrowserWindow({
         show: isDev,
-        icon: path.join(__dirname, '../build/Icon-512x512.png'),
+        icon: path.join(__dirname, '../build/logo512.png'),
         webPreferences: {nodeIntegration: true}
     });
 

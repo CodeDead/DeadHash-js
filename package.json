@@ -18,13 +18,13 @@
         "nsis",
         "portable"
       ],
-      "icon": "assets/Icon-512x512.png"
+      "icon": "public/logo512.png"
     },
     "linux": {
       "target": [
         "AppImage"
       ],
-      "icon": "assets/Icon-512x512.png"
+      "icon": "public/logo512.png"
     },
     "nsis": {
       "license": "LICENSE",
