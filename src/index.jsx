@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import MainContextProvider from "./contexts/MainContextProvider";
-import CryptoContextProvider from "./contexts/CryptoContextReducer";
+import MainContextProvider from './contexts/MainContextProvider';
+import CryptoContextProvider from './contexts/CryptoContextReducer';
 
 ReactDOM.render(
-    <MainContextProvider>
-        <CryptoContextProvider>
-            <App/>
-        </CryptoContextProvider>
-    </MainContextProvider>,
-    document.getElementById('root')
+  <MainContextProvider>
+    <CryptoContextProvider>
+      <App />
+    </CryptoContextProvider>
+  </MainContextProvider>,
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
