@@ -24,29 +24,27 @@ const Hash = ({
   let compareColor = null;
   let compareIcon = null;
   if (compareString && compareString === content) {
-    compareIcon = <CheckIcon color="inherit" style={{ float: 'right' }} />;
+    compareIcon = <CheckIcon color="inherit" style={{ float: 'right' }}/>;
     compareColor = { color: 'green' };
   }
 
   return (
-    <>
-      <Paper className={classes.paper}>
-        <Typography variant="subtitle1" color="primary" gutterBottom>
-          {hashType}
-          {compareIcon}
-        </Typography>
-        <MenuProvider id={`hashMenu${id}`}>
-          <span style={compareColor}>{content}</span>
-        </MenuProvider>
-        <Menu id={`hashMenu${id}`}>
-          <Item onClick={() => navigator.clipboard.writeText(content)}>
-            <CopyIcon />
-            {' '}
-            {copy}
-          </Item>
-        </Menu>
-      </Paper>
-    </>
+    <Paper className={classes.paper}>
+      <Typography variant="subtitle1" color="primary" gutterBottom>
+        {hashType}
+        {compareIcon}
+      </Typography>
+      <MenuProvider id={`hashMenu${id}`}>
+        <span style={compareColor}>{content}</span>
+      </MenuProvider>
+      <Menu id={`hashMenu${id}`}>
+        <Item onClick={() => navigator.clipboard.writeText(content)}>
+          <CopyIcon/>
+          {' '}
+          {copy}
+        </Item>
+      </Menu>
+    </Paper>
   );
 };
 
