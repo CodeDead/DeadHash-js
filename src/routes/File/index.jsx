@@ -59,10 +59,7 @@ const File = () => {
   const file = crypto.currentFile;
 
   const {
-    // eslint-disable-next-line camelcase
-    md4, md5, sha1, sha224, sha256, sha3_224, sha3_256,
-    // eslint-disable-next-line camelcase
-    sha3_384, sha3_512, sha384, sha512, ripemd160,
+    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
   } = crypto;
 
   const compare = crypto.fileComparing;
@@ -146,10 +143,6 @@ const File = () => {
       sha1,
       sha224,
       sha256,
-      sha3_224,
-      sha3_256,
-      sha3_384,
-      sha3_512,
       sha384,
       sha512,
       ripemd160,

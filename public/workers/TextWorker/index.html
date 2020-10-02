@@ -9,7 +9,7 @@
   const ipcRenderer = window.require('electron').ipcRenderer;
   const crypto = window.require('crypto');
 
-  const textHash = (text, md4, md5, sha1, sha224, sha256, sha3_224, sha3_256, sha3_384, sha3_512, sha384, sha512, ripemd160) => {
+  const textHash = (text, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160) => {
     return new Promise((resolve, reject) => {
       let newHashes = [];
       try {
@@ -58,43 +58,6 @@
               .toString()
           });
         }
-        if (sha3_224) {
-          newHashes.push({
-            type: 'SHA3-224',
-            hash: crypto.createHash('sha3-224')
-              .update(text)
-              .digest('hex')
-              .toString()
-          });
-        }
-        if (sha3_256) {
-          newHashes.push({
-            type: 'SHA3-256',
-            hash: crypto.createHash('sha3-256')
-              .update(text)
-              .digest('hex')
-              .toString()
-          });
-        }
-
-        if (sha3_384) {
-          newHashes.push({
-            type: 'SHA3-384',
-            hash: crypto.createHash('sha3-384')
-              .update(text)
-              .digest('hex')
-              .toString()
-          });
-        }
-        if (sha3_512) {
-          newHashes.push({
-            type: 'SHA3-512',
-            hash: crypto.createHash('sha3-512')
-              .update(text)
-              .digest('hex')
-              .toString()
-          });
-        }
         if (sha384) {
           newHashes.push({
             type: 'SHA-384',
@@ -133,7 +96,7 @@
   };
 
   ipcRenderer.on('calculate-text-hash', (e, data) => {
-    textHash(data.text, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha3_224, data.sha3_256, data.sha3_384, data.sha3_512, data.sha3, data.sha384, data.sha512, data.ripemd160)
+    textHash(data.text, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512, data.ripemd160)
       .then(data => {
         ipcRenderer.send('text-hash-calculated', data);
       })

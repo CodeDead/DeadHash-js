@@ -13,10 +13,6 @@ import {
   SET_SHA224_STATE,
   SET_SHA256_STATE,
   SET_SHA384_STATE,
-  SET_SHA3_224_STATE,
-  SET_SHA3_256_STATE,
-  SET_SHA3_384_STATE,
-  SET_SHA3_512_STATE,
   SET_SHA512_STATE,
   SET_TEXT_COMPARE_HASH,
   SET_TEXT_COMPARING,
@@ -63,30 +59,6 @@ export const setRipeMd160State = (state) => ({
 
 export const setSha224State = (state) => ({
   type: SET_SHA224_STATE,
-  payload: state,
-});
-
-// eslint-disable-next-line camelcase
-export const setSha3_224State = (state) => ({
-  type: SET_SHA3_224_STATE,
-  payload: state,
-});
-
-// eslint-disable-next-line camelcase
-export const setSha3_256State = (state) => ({
-  type: SET_SHA3_256_STATE,
-  payload: state,
-});
-
-// eslint-disable-next-line camelcase
-export const setSha3_384State = (state) => ({
-  type: SET_SHA3_384_STATE,
-  payload: state,
-});
-
-// eslint-disable-next-line camelcase
-export const setSha3_512State = (state) => ({
-  type: SET_SHA3_512_STATE,
   payload: state,
 });
 

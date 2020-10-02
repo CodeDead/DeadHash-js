@@ -13,10 +13,6 @@ import {
   SET_SHA224_STATE,
   SET_SHA256_STATE,
   SET_SHA384_STATE,
-  SET_SHA3_224_STATE,
-  SET_SHA3_256_STATE,
-  SET_SHA3_384_STATE,
-  SET_SHA3_512_STATE,
   SET_SHA512_STATE,
   SET_TEXT_COMPARE_HASH,
   SET_TEXT_COMPARING,
@@ -72,30 +68,6 @@ const CryptoReducer = (state, action) => {
         ...state,
         ripemd160: action.payload,
       };
-    case SET_SHA3_224_STATE:
-      localStorage.sha3_224 = action.payload;
-      return {
-        ...state,
-        sha3_224: action.payload,
-      };
-    case SET_SHA3_256_STATE:
-      localStorage.sha3_256 = action.payload;
-      return {
-        ...state,
-        sha3_256: action.payload,
-      };
-    case SET_SHA3_384_STATE:
-      localStorage.sha3_384 = action.payload;
-      return {
-        ...state,
-        sha3_384: action.payload,
-      };
-    case SET_SHA3_512_STATE:
-      localStorage.sha3_512 = action.payload;
-      return {
-        ...state,
-        sha3_512: action.payload,
-      };
     case SET_SHA224_STATE:
       localStorage.sha224 = action.payload;
       return {
@@ -110,10 +82,6 @@ const CryptoReducer = (state, action) => {
       localStorage.sha384 = true;
       localStorage.sha512 = true;
       localStorage.ripemd160 = true;
-      localStorage.sha3_224 = true;
-      localStorage.sha3_256 = true;
-      localStorage.sha3_384 = true;
-      localStorage.sha3_512 = true;
       localStorage.sha224 = true;
 
       return {
@@ -123,10 +91,6 @@ const CryptoReducer = (state, action) => {
         sha1: true,
         sha224: true,
         sha256: true,
-        sha3_224: true,
-        sha3_256: true,
-        sha3_384: true,
-        sha3_512: true,
         sha384: true,
         sha512: true,
         ripemd160: true,

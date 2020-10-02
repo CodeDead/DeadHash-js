@@ -45,8 +45,6 @@ import {
   setSha224State,
   setSha256State,
   setSha384State,
-  // eslint-disable-next-line camelcase
-  setSha3_224State, setSha3_256State, setSha3_384State, setSha3_512State,
   setSha512State,
 } from '../../reducers/CryptoReducer/Actions';
 
@@ -91,10 +89,7 @@ const Settings = () => {
   const languageStatus = state.languageEnabled;
 
   const {
-    // eslint-disable-next-line camelcase
-    md4, md5, sha1, sha224, sha256, sha3_224, sha3_256,
-    // eslint-disable-next-line camelcase
-    sha3_384, sha3_512, sha384, sha512, ripemd160,
+    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
   } = crypto;
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -350,58 +345,6 @@ const Settings = () => {
                       />
                     )}
                     label={language.sha256}
-                  />
-
-                  <FormControlLabel
-                    control={(
-                      <Checkbox
-                        /* eslint-disable-next-line camelcase */
-                        checked={sha3_224}
-                        onChange={(e) => d2(setSha3_224State(e.target.checked))}
-                        value="sha3_224"
-                        color="primary"
-                      />
-                    )}
-                    label={language.sha3_224}
-                  />
-
-                  <FormControlLabel
-                    control={(
-                      <Checkbox
-                        /* eslint-disable-next-line camelcase */
-                        checked={sha3_256}
-                        onChange={(e) => d2(setSha3_256State(e.target.checked))}
-                        value="sha3_256"
-                        color="primary"
-                      />
-                    )}
-                    label={language.sha3_256}
-                  />
-
-                  <FormControlLabel
-                    control={(
-                      <Checkbox
-                        /* eslint-disable-next-line camelcase */
-                        checked={sha3_384}
-                        onChange={(e) => d2(setSha3_384State(e.target.checked))}
-                        value="sha3_384"
-                        color="primary"
-                      />
-                    )}
-                    label={language.sha3_384}
-                  />
-
-                  <FormControlLabel
-                    control={(
-                      <Checkbox
-                        /* eslint-disable-next-line camelcase */
-                        checked={sha3_512}
-                        onChange={(e) => d2(setSha3_512State(e.target.checked))}
-                        value="sha3_512"
-                        color="primary"
-                      />
-                    )}
-                    label={language.sha3_512}
                   />
 
                   <FormControlLabel
