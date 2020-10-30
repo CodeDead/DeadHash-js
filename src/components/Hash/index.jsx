@@ -24,7 +24,7 @@ const Hash = ({
   let compareColor = null;
   let compareIcon = null;
   if (compareString && compareString === content) {
-    compareIcon = <CheckIcon color="inherit" style={{ float: 'right' }}/>;
+    compareIcon = <CheckIcon color="inherit" style={{ float: 'right' }} />;
     compareColor = { color: 'green' };
   }
 
@@ -39,7 +39,7 @@ const Hash = ({
       </MenuProvider>
       <Menu id={`hashMenu${id}`}>
         <Item onClick={() => navigator.clipboard.writeText(content)}>
-          <CopyIcon/>
+          <CopyIcon />
           {' '}
           {copy}
         </Item>
