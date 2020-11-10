@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Worker Window</title>
+</head>
+<body>
+<script>
+  const ipcRenderer = window.require('electron').ipcRenderer;
+  const fs = window.require('fs');
+  const crypto = window.require('crypto');
+
+  const fileHash = (filePath, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160) => {
+    return new Promise((resolve, reject) => {
+      let MD4,
+        MD5,
+        SHA1,
+        SHA224,
+        SHA256,
+        SHA384,
+        SHA512,
+        RIPEMD160;
+
+      if (md4) MD4 = crypto.createHash('md4');
+      if (md5) MD5 = crypto.createHash('md5');
+      if (sha1) SHA1 = crypto.createHash('sha1');
+      if (sha224) SHA224 = crypto.createHash('sha224');
+      if (sha256) SHA256 = crypto.createHash('sha256');
+      if (sha384) SHA384 = crypto.createHash('sha384');
+      if (sha512) SHA512 = crypto.createHash('sha512');
+      if (ripemd160) RIPEMD160 = crypto.createHash('ripemd160');
+
+      try {
+        const s = fs.createReadStream(filePath.toString());
+
+        s.on('data', data => {
+          if (md4) MD4.update(data);
+          if (md5) MD5.update(data);
+          if (sha1) SHA1.update(data);
+          if (sha224) SHA224.update(data);
+          if (sha256) SHA256.update(data);
+          if (sha384) SHA384.update(data);
+          if (sha512) SHA512.update(data);
+          if (ripemd160) RIPEMD160.update(data);
+        });
+
+        s.on('end', () => {
+          let newHashes = [];
+
+          if (md4) {
+            newHashes.push({
+              type: 'MD4',
+              hash: MD4.digest('hex')
+                .toString()
+            });
+          }
+          if (md5) {
+            newHashes.push({
+              type: 'MD5',
+              hash: MD5.digest('hex')
+                .toString()
+            });
+          }
+          if (sha1) {
+            newHashes.push({
+              type: 'SHA-1',
+              hash: SHA1.digest('hex')
+                .toString()
+            });
+          }
+          if (sha224) {
+            newHashes.push({
+              type: 'SHA-224',
+              hash: SHA224.digest('hex')
+                .toString()
+            });
+          }
+          if (sha256) {
+            newHashes.push({
+              type: 'SHA-256',
+              hash: SHA256.digest('hex')
+                .toString()
+            });
+          }
+          if (sha384) {
+            newHashes.push({
+              type: 'SHA-384',
+              hash: SHA384.digest('hex')
+                .toString()
+            });
+          }
+          if (sha512) {
+            newHashes.push({
+              type: 'SHA-512',
+              hash: SHA512.digest('hex')
+                .toString()
+            });
+          }
+          if (ripemd160) {
+            newHashes.push({
+              type: 'RIPEMD-160',
+              hash: RIPEMD160.digest('hex')
+                .toString()
+            });
+          }
+
+          if (newHashes.length === 0) newHashes = null;
+
+          return resolve(newHashes);
+        });
+
+        s.on('error', error => {
+
+          return reject(error);
+        });
+      } catch (error) {
+        return reject(error);
+      }
+    });
+  }
+
+  ipcRenderer.on("calculate-file-hash", (e, data) => {
+    fileHash(data.filePath, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512, data.ripemd160)
+      .then(data => {
+        ipcRenderer.send("file-hash-calculated", data);
+      })
+      .catch(error => {
+        ipcRenderer.send("file-hash-calculation-error", error);
+      });
+  });
+</script>
+</body>
+</html>

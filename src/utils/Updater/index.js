@@ -1,39 +1,60 @@
-import axios from "axios";
+const Updater = (os) => {
+  /**
+   * Check whether version b is newer than version a
+   * @param a Version a
+   * @param b Verion b
+   * @returns {boolean} True if version b is newer than version a, otherwise false
+   */
+  const isNewer = (a, b) => {
+    const partsA = a.split('.');
+    const partsB = b.split('.');
+    const numParts = partsA.length > partsB.length ? partsA.length : partsB.length;
 
-export const Updater = (os) => {
+    for (let i = 0; i < numParts; i += 1) {
+      if ((parseInt(partsB[i], 10) || 0) !== (parseInt(partsA[i], 10) || 0)) {
+        return ((parseInt(partsB[i], 10) || 0) > (parseInt(partsA[i], 10) || 0));
+      }
+    }
 
-    const parseUpdate = (update) => {
-        const platform = update.platforms[os.platform];
-        const data = {
-            updateUrl: false,
-            downloadUrl: null,
-            infoUrl: null,
-            version: null
-        };
+    return false;
+  };
 
-        if (platform.version.majorVersion > 2)
-            data.updateAvailable = true;
-        else if (platform.version.minorVersion > 0)
-            data.updateAvailable = true;
-        else if (platform.version.buildVersion > 3)
-            data.updateAvailable = true;
-        else if (platform.version.revisionVersion > 0)
-            data.updateAvailable = true;
-
-        data.updateUrl = platform.updateUrl;
-        data.infoUrl = platform.infoUrl;
-        data.version = platform.version.majorVersion + "." + platform.version.minorVersion + "." + platform.version.buildVersion + "." + platform.version.revisionVersion;
-
-        return data;
+  /**
+   * Parse the information inside an external update
+   * @param update The update data
+   * @returns {{infoUrl: null, updateUrl: boolean, downloadUrl: null, version: null}}
+   */
+  const parseUpdate = (update) => {
+    const platform = update.platforms[os.platform];
+    const data = {
+      updateUrl: false,
+      downloadUrl: null,
+      infoUrl: null,
+      version: null,
     };
 
-    return new Promise(resolve => {
-        axios.get("https://codedead.com/Software/DeadHash/version.json")
-            .then(res => {
-                resolve(parseUpdate(res.data));
-            })
-            .catch(err => {
-                resolve(err.message);
-            })
-    });
+    if (isNewer('2.0.4', `${platform.version.majorVersion}.${platform.version.minorVersion}.${platform.version.buildVersion}.${platform.version.revisionVersion}`)) {
+      data.updateAvailable = true;
+    }
+
+    data.updateUrl = platform.updateUrl;
+    data.infoUrl = platform.infoUrl;
+    data.version = `${platform.version.majorVersion}.${platform.version.minorVersion}.${platform.version.buildVersion}.${platform.version.revisionVersion}`;
+
+    return data;
+  };
+
+  return new Promise((resolve, reject) => {
+    fetch('https://codedead.com/Software/DeadHash/version.json')
+      .then((res) => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then((data) => resolve(parseUpdate(data)))
+      .catch((error) => reject(error.toString()));
+  });
 };
+
+export default Updater;
