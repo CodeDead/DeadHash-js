@@ -9,12 +9,12 @@
 DeadHash is a free and open-source utility to calculate file and text hashes. The following hash calculations are supported:
 * MD4
 * MD5
-* SHA1
-* SHA224
-* SHA256
-* SHA384
-* SHA512
-* RIPEMD160
+* SHA-1
+* SHA-224
+* SHA-256
+* SHA-384
+* SHA-512
+* RIPEMD-160
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and built using [Electron](https://electronjs.org/).
 
