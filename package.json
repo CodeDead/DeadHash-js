@@ -1,6 +1,6 @@
 {
   "name": "deadhash",
-  "version": "2.1.0",
+  "version": "2.0.4",
   "description": "File and text hash calculator",
   "homepage": "./",
   "private": true,
@@ -72,7 +72,7 @@
     "concurrently": "^5.3.0",
     "electron": "^10.1.5",
     "electron-builder": "^22.9.1",
-    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
