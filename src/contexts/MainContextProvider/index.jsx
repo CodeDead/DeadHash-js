@@ -22,6 +22,7 @@ import ru_RU from '../../languages/ru_RU';
 import tr_TR from '../../languages/tr_TR';
 
 const languageIndex = localStorage.languageIndex ? parseFloat(localStorage.languageIndex) : 1;
+const themeStyle = localStorage.themeStyle ? localStorage.themeStyle : 'light';
 const themeIndex = localStorage.themeIndex ? parseFloat(localStorage.themeIndex) : 0;
 const autoUpdate = localStorage.autoUpdate && localStorage.autoUpdate === 'true' ? true : !localStorage.autoUpdate;
 const minimizeEnabled = localStorage.minimizeEnabled && localStorage.minimizeEnabled === 'true' ? true : !localStorage.minimizeEnabled;
@@ -45,6 +46,7 @@ const initState = {
   ],
   drawerOpen: false,
   selectedListItem: 0,
+  themeStyle,
   themeIndex,
   autoUpdate,
   checkedForUpdates: false,

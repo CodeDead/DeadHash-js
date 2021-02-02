@@ -1,28 +1,52 @@
 import React from 'react';
-import { Item, Menu, MenuProvider } from 'react-contexify';
+import { Item, Menu, useContextMenu } from 'react-contexify';
 import CopyIcon from '@material-ui/icons/FileCopy';
 import PasteIcon from '@material-ui/icons/Assignment';
 
 const CopyPasteMenu = ({
   id, children, copyData, pasteData, copy, paste,
-}) => (
-  <>
-    <MenuProvider id={`copyPasteMenu${id}`} style={{ width: '100%' }}>
-      {children}
-    </MenuProvider>
-    <Menu id={`copyPasteMenu${id}`}>
-      <Item onClick={() => copyData()}>
-        <CopyIcon />
-        {' '}
-        {copy}
-      </Item>
-      <Item onClick={() => pasteData()}>
-        <PasteIcon />
-        {' '}
-        {paste}
-      </Item>
-    </Menu>
-  </>
-);
+}) => {
+  const MENU_ID = `copyPasteMenu${id}`;
+
+  const { show } = useContextMenu({
+    id: MENU_ID,
+  });
+
+  /**
+   * Handle the context menu event
+   * @param event The event argument
+   */
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    show(event, {
+      props: {
+        key: 'value',
+      },
+    });
+  };
+
+  return (
+    <>
+      <div
+        style={{ width: '100%' }}
+        onContextMenu={handleContextMenu}
+      >
+        {children}
+      </div>
+      <Menu id={MENU_ID}>
+        <Item onClick={() => copyData()}>
+          <CopyIcon />
+          {' '}
+          {copy}
+        </Item>
+        <Item onClick={() => pasteData()}>
+          <PasteIcon />
+          {' '}
+          {paste}
+        </Item>
+      </Menu>
+    </>
+  );
+};
 
 export default CopyPasteMenu;

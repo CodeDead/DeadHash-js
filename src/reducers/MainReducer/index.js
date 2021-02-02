@@ -1,9 +1,14 @@
 import {
   RESET_MAIN_REDUCER,
   SET_ACTIVE_LIST_ITEM,
-  SET_AUTO_UPDATE, SET_CAN_DRAG_DROP,
-  SET_LANGUAGE_INDEX, SET_LANGUAGE_STATUS, SET_MAXIMIZE_STATUS, SET_MINIMIZE_STATUS,
+  SET_AUTO_UPDATE,
+  SET_CAN_DRAG_DROP,
+  SET_LANGUAGE_INDEX,
+  SET_LANGUAGE_STATUS,
+  SET_MAXIMIZE_STATUS,
+  SET_MINIMIZE_STATUS,
   SET_THEME_INDEX,
+  SET_THEME_STYLE,
   SET_UPDATE_CHECKED,
 } from './Actions/actionTypes';
 
@@ -27,6 +32,12 @@ const MainReducer = (state, action) => {
       return {
         ...state,
         themeIndex: action.payload,
+      };
+    case SET_THEME_STYLE:
+      localStorage.themeStyle = action.payload;
+      return {
+        ...state,
+        themeStyle: action.payload,
       };
     case SET_AUTO_UPDATE:
       localStorage.autoUpdate = action.payload;
