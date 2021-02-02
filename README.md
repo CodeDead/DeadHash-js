@@ -19,6 +19,24 @@ DeadHash is a free and open-source utility to calculate file and text hashes. Th
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and built using [Electron](https://electronjs.org/).
 
+## Building
+
+In order to produce binary distributable files or to start a development build, you must first issue the following command,
+in order to ensure that the React build is up-to-date:
+```
+yarn react-build
+```
+
+After running `yarn react-build`, you can issue the following command in order to produce the binary distributable files:
+```
+yarn build
+```
+
+If you want to start the development version, you can issue the following command, after running `yarn react-build`:
+```
+yarn start
+```
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
