@@ -68,8 +68,6 @@ const de_DE = () => ({
   maximizeEnabled: 'Schaltfläche "Maximieren"',
   languageEnabled: 'Schaltfläche "Sprache"',
   exit: 'Schließen',
-  darkTheme: 'Dunkel',
-  darkThemeDescription: 'Schont die Augen.',
   export: 'Export',
   yourTextHere: 'Dein Text hier',
   filePath: 'Dateipfad',
@@ -77,6 +75,11 @@ const de_DE = () => ({
   no: 'Nein',
   confirmation: 'Bestätigung',
   confirmResetSettings: 'Möchten Sie wirklich alle Einstellungen zurücksetzen?',
+  themeStyle: 'Themenstil',
+  light: 'Licht',
+  dark: 'Dunkel',
+  orange: 'Orange',
+  orangeThemeDescription: 'Lass uns Niederländisch werden.',
 });
 
 // eslint-disable-next-line camelcase

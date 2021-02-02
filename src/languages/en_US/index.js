@@ -68,8 +68,6 @@ const en_US = () => ({
   maximizeEnabled: 'Maximize button',
   languageEnabled: 'Language button',
   exit: 'Exit',
-  darkTheme: 'Dark',
-  darkThemeDescription: 'Easy on the eyes.',
   export: 'Export',
   yourTextHere: 'Your text here',
   filePath: 'File path',
@@ -77,6 +75,11 @@ const en_US = () => ({
   no: 'No',
   confirmation: 'Confirmation',
   confirmResetSettings: 'Are you sure you want to reset all settings?',
+  themeStyle: 'Theme style',
+  light: 'Light',
+  dark: 'Dark',
+  orange: 'Orange',
+  orangeThemeDescription: 'Let\'s get Dutch.',
 });
 
 // eslint-disable-next-line camelcase

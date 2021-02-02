@@ -68,8 +68,6 @@ const nl_NL = () => ({
   maximizeEnabled: 'Maximaliseer knop',
   languageEnabled: 'Taal knop',
   exit: 'Sluiten',
-  darkTheme: 'Donker',
-  darkThemeDescription: 'Makkelijk voor de ogen.',
   export: 'Exporteren',
   yourTextHere: 'Jouw text hier',
   filePath: 'Bestandspad',
@@ -77,6 +75,11 @@ const nl_NL = () => ({
   no: 'Nee',
   confirmation: 'Bevestiging',
   confirmResetSettings: 'Bent u zeker dat u alle instellingen wenst te resetten?',
+  themeStyle: 'Thema stijl',
+  light: 'Licht',
+  dark: 'Donker',
+  orange: 'Oranje',
+  orangeThemeDescription: 'Op z\'n Nederlands.',
 });
 
 // eslint-disable-next-line camelcase

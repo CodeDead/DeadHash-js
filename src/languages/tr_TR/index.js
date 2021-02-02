@@ -68,8 +68,6 @@ const tr_TR = () => ({
   maximizeEnabled: 'Büyüt düğmesi',
   languageEnabled: 'Dil düğmesi',
   exit: 'Kapatmak',
-  darkTheme: 'Karanlık',
-  darkThemeDescription: 'Gözleri kolay.',
   export: 'Ihracat',
   yourTextHere: 'Buraya yazın',
   filePath: 'Dosya yolu',
@@ -77,6 +75,11 @@ const tr_TR = () => ({
   no: 'Hayır',
   confirmation: 'Onayla',
   confirmResetSettings: 'Tüm ayarları sıfırlamak istediğinizden emin misiniz?',
+  themeStyle: 'Tema stili',
+  light: 'Işık',
+  dark: 'Karanlık',
+  orange: 'Turuncu',
+  orangeThemeDescription: 'Dutch alalım.',
 });
 
 // eslint-disable-next-line camelcase

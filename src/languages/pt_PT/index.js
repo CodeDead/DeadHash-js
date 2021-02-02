@@ -68,8 +68,6 @@ const pt_PT = () => ({
   maximizeEnabled: 'Botão Maximizar',
   languageEnabled: 'Botão de idioma',
   exit: 'Saída',
-  darkTheme: 'Sombrio',
-  darkThemeDescription: 'Fácil para os olhos.',
   export: 'Exportação',
   yourTextHere: 'Seu texto aqui',
   filePath: 'Caminho de arquivo',
@@ -77,6 +75,11 @@ const pt_PT = () => ({
   no: 'Não',
   confirmation: 'Confirmação',
   confirmResetSettings: 'Tem certeza de que deseja redefinir todas as configurações?',
+  themeStyle: 'Estilo do tema',
+  light: 'Luz',
+  dark: 'Sombrio',
+  orange: 'Laranja',
+  orangeThemeDescription: 'Vamos para o holandês.',
 });
 
 // eslint-disable-next-line camelcase

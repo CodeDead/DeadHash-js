@@ -1,9 +1,14 @@
 import {
   RESET_MAIN_REDUCER,
   SET_ACTIVE_LIST_ITEM,
-  SET_AUTO_UPDATE, SET_CAN_DRAG_DROP,
-  SET_LANGUAGE_INDEX, SET_LANGUAGE_STATUS, SET_MAXIMIZE_STATUS, SET_MINIMIZE_STATUS,
+  SET_AUTO_UPDATE,
+  SET_CAN_DRAG_DROP,
+  SET_LANGUAGE_INDEX,
+  SET_LANGUAGE_STATUS,
+  SET_MAXIMIZE_STATUS,
+  SET_MINIMIZE_STATUS,
   SET_THEME_INDEX,
+  SET_THEME_STYLE,
   SET_UPDATE_CHECKED,
 } from './actionTypes';
 
@@ -20,6 +25,11 @@ export const setActiveListItem = (item) => ({
 export const setThemeIndex = (index) => ({
   type: SET_THEME_INDEX,
   payload: index,
+});
+
+export const setThemeStyle = (style) => ({
+  type: SET_THEME_STYLE,
+  payload: style,
 });
 
 export const setAutoUpdate = (autoUpdate) => ({

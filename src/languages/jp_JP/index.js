@@ -68,8 +68,6 @@ const jp_JP = () => ({
   maximizeEnabled: '最大化ボタン',
   languageEnabled: '言語ボタン',
   exit: '出口',
-  darkTheme: '闇',
-  darkThemeDescription: '目に優しい。',
   export: '書き出す',
   yourTextHere: 'ここにあなたのテキスト',
   filePath: 'ファイルパス',
@@ -77,6 +75,11 @@ const jp_JP = () => ({
   no: '番号',
   confirmation: '確認',
   confirmResetSettings: 'すべての設定をリセットしてもよろしいですか？',
+  themeStyle: 'テーマスタイル',
+  light: '光',
+  dark: '闇',
+  orange: 'オレンジ',
+  orangeThemeDescription: 'オランダ語を取得しましょう。',
 });
 
 // eslint-disable-next-line camelcase
