@@ -1,6 +1,6 @@
 {
   "name": "deadhash",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "File and text hash calculator",
   "homepage": "./",
   "private": true,
