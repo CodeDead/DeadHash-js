@@ -52,6 +52,7 @@ const MainReducer = (state, action) => {
       };
     case RESET_MAIN_REDUCER:
       localStorage.languageIndex = 1;
+      localStorage.themeStyle = 'light';
       localStorage.themeIndex = 0;
       localStorage.autoUpdate = true;
       localStorage.minimizeEnabled = true;
@@ -62,6 +63,7 @@ const MainReducer = (state, action) => {
       return {
         ...state,
         languageIndex: 1,
+        themeStyle: 'light',
         themeIndex: 0,
         autoUpdate: true,
         minimizeEnabled: true,
