@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core';
+import {
+  FormLabel, makeStyles, Radio, RadioGroup,
+} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import blue from '@material-ui/core/colors/blue';
 import purple from '@material-ui/core/colors/purple';
@@ -11,6 +13,7 @@ import red from '@material-ui/core/colors/red';
 import green from '@material-ui/core/colors/green';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import grey from '@material-ui/core/colors/grey';
+import orange from '@material-ui/core/colors/orange';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -33,7 +36,7 @@ import {
   setActiveListItem,
   setAutoUpdate, setCanDragDrop, setLanguageButtonStatus,
   setLanguageIndex, setMaximizeStatus, setMinimizeStatus,
-  setThemeIndex,
+  setThemeIndex, setThemeStyle,
 } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
 import { CryptoContext } from '../../contexts/CryptoContextReducer';
@@ -79,7 +82,7 @@ const Settings = () => {
   const [state, d1] = useContext(MainContext);
   const [crypto, d2] = useContext(CryptoContext);
 
-  const { themeIndex } = state;
+  const { themeIndex, themeStyle } = state;
   const { languageIndex } = state;
   const language = state.languages[languageIndex];
   const dragDrop = state.canDragDrop;
@@ -148,6 +151,14 @@ const Settings = () => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  /**
+   * Change the theme style
+   * @param event The event argument
+   */
+  const changeThemeStyle = (event) => {
+    d1(setThemeStyle(event.target.value));
   };
 
   /**
@@ -448,13 +459,22 @@ const Settings = () => {
                   onAction={() => changeTheme(7)}
                 />
                 <Theme
-                  title={language.darkTheme}
-                  description={language.darkThemeDescription}
-                  color="black"
+                  title={language.orange}
+                  description={language.orangeThemeDescription}
+                  color={orange[500]}
                   selected={themeIndex === 8}
                   onAction={() => changeTheme(8)}
                 />
               </GridList>
+            </Grid>
+            <Grid item xs={12} md={12} lg={12}>
+              <FormControl style={{ marginTop: 10 }}>
+                <FormLabel>{language.themeStyle}</FormLabel>
+                <RadioGroup value={themeStyle} onChange={changeThemeStyle}>
+                  <FormControlLabel value="light" control={<Radio />} label={language.light} />
+                  <FormControlLabel value="dark" control={<Radio />} label={language.dark} />
+                </RadioGroup>
+              </FormControl>
             </Grid>
           </Grid>
           <Button

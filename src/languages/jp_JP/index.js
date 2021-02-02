@@ -7,7 +7,7 @@ const jp_JP = () => ({
   help: '助けて',
   language: '言語',
   aboutSubtitle: 'DeadHashの詳細',
-  aboutMessage: 'DeadHashはDeadLineによって作成されました。\n\n一部の画像は、icons8によって提供されました：https://icons8.com\nライセンス：GPLv3\nバージョン：{x}\n\n著作権©2020 CodeDead',
+  aboutMessage: 'DeadHashはDeadLineによって作成されました。\n\n一部の画像は、icons8によって提供されました：https://icons8.com\nライセンス：GPLv3\nバージョン：{x}\n\n著作権©2021 CodeDead',
   codedead: 'CodeDead',
   theme: 'テーマ',
   general: '全般',
@@ -68,8 +68,6 @@ const jp_JP = () => ({
   maximizeEnabled: '最大化ボタン',
   languageEnabled: '言語ボタン',
   exit: '出口',
-  darkTheme: '闇',
-  darkThemeDescription: '目に優しい。',
   export: '書き出す',
   yourTextHere: 'ここにあなたのテキスト',
   filePath: 'ファイルパス',
@@ -77,6 +75,11 @@ const jp_JP = () => ({
   no: '番号',
   confirmation: '確認',
   confirmResetSettings: 'すべての設定をリセットしてもよろしいですか？',
+  themeStyle: 'テーマスタイル',
+  light: '光',
+  dark: '闇',
+  orange: 'オレンジ',
+  orangeThemeDescription: 'オランダ語を取得しましょう。',
 });
 
 // eslint-disable-next-line camelcase

@@ -15,6 +15,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
     },
     frame: false,
     title: 'DeadHash',
@@ -26,13 +27,13 @@ const createWindow = () => {
   fileWorkerWindow = new BrowserWindow({
     show: isDev,
     icon: path.join(__dirname, '../build/logo512.png'),
-    webPreferences: { nodeIntegration: true },
+    webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
 
   textWorkerWindow = new BrowserWindow({
     show: isDev,
     icon: path.join(__dirname, '../build/logo512.png'),
-    webPreferences: { nodeIntegration: true },
+    webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
 
   if (isDev) {

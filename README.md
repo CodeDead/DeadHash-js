@@ -1,12 +1,13 @@
-![DeadHash](https://codedead.com/wp-content/uploads/2020/06/DeadHash.png)
+![DeadHash](https://i.imgur.com/PWrqQ67.png)
 
 # DeadHash
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/CodeDead/DeadHash-js)
 ![GitHub](https://img.shields.io/github/license/CodeDead/DeadHash-Js)
-![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/2.0.4/total)
+![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/2.1.0/total)
 
 DeadHash is a free and open-source utility to calculate file and text hashes. The following hash calculations are supported:
+
 * MD4
 * MD5
 * SHA-1

@@ -26,20 +26,14 @@ const App = () => {
   const [, dispatch] = useContext(CryptoContext);
 
   const enabled = state.canDragDrop;
-  let { themeIndex } = state;
-
-  let themeType = 'light';
-  if (themeIndex === 8) {
-    themeType = 'dark';
-    themeIndex = 2;
-  }
+  const { themeIndex, themeStyle } = state;
 
   const color = ThemeSelector(themeIndex);
 
   const theme = createMuiTheme({
     palette: {
       primary: color,
-      type: themeType,
+      type: themeStyle,
     },
   });
 

@@ -7,7 +7,7 @@ const es_ES = () => ({
   help: 'Ayuda',
   language: 'Idioma',
   aboutSubtitle: 'Obtenga más información sobre DeadHash',
-  aboutMessage: 'DeadHash fue creado por DeadLine.\n\nAlgunas imágenes fueron proporcionadas por icons8: https://icons8.com\nLicencia: GPLv3\nVersión: {x}\n\nCopyright © 2020 CodeDead',
+  aboutMessage: 'DeadHash fue creado por DeadLine.\n\nAlgunas imágenes fueron proporcionadas por icons8: https://icons8.com\nLicencia: GPLv3\nVersión: {x}\n\nCopyright © 2021 CodeDead',
   codedead: 'CodeDead',
   theme: 'Tema',
   general: 'General',
@@ -68,8 +68,6 @@ const es_ES = () => ({
   maximizeEnabled: 'Botón Maximizar',
   languageEnabled: 'Botón de idioma',
   exit: 'Salida',
-  darkTheme: 'Oscuro',
-  darkThemeDescription: 'Fácil para los ojos.',
   export: 'Exportar',
   yourTextHere: 'Tu texto aqui',
   filePath: 'Ruta de archivo',
@@ -77,6 +75,11 @@ const es_ES = () => ({
   no: 'No',
   confirmation: 'Confirmación',
   confirmResetSettings: '¿Estás seguro de que quieres restablecer todos los ajustes?',
+  themeStyle: 'Estilo del tema',
+  light: 'Ligero',
+  dark: 'Oscuro',
+  orange: 'Naranja',
+  orangeThemeDescription: 'Vamos a holandeses.',
 });
 
 // eslint-disable-next-line camelcase

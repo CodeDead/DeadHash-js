@@ -7,7 +7,7 @@ const ru_RU = () => ({
   help: 'Помогите',
   language: 'язык',
   aboutSubtitle: 'Узнайте больше о DeadHash',
-  aboutMessage: 'DeadHash был создан DeadLine.\n\nНекоторые изображения предоставлены icons8: https://icons8.com\nЛицензия: GPLv3\nВерсия: {x}\n\nCopyright © 2020 CodeDead',
+  aboutMessage: 'DeadHash был создан DeadLine.\n\nНекоторые изображения предоставлены icons8: https://icons8.com\nЛицензия: GPLv3\nВерсия: {x}\n\nCopyright © 2021 CodeDead',
   codedead: 'CodeDead',
   theme: 'тема',
   general: 'генеральный',
@@ -68,8 +68,6 @@ const ru_RU = () => ({
   maximizeEnabled: 'Кнопка увеличения',
   languageEnabled: 'Языковая кнопка',
   exit: 'Выход',
-  darkTheme: 'Темно',
-  darkThemeDescription: 'Легко на глазах.',
   export: 'экспорт',
   yourTextHere: 'Здесь ваш текст',
   filePath: 'Путь файла',
@@ -77,6 +75,11 @@ const ru_RU = () => ({
   no: 'нет',
   confirmation: 'подтверждение',
   confirmResetSettings: 'Вы уверены, что хотите сбросить все настройки?',
+  themeStyle: 'Стиль темы',
+  light: 'Свет',
+  dark: 'Тьма',
+  orange: 'Оранжевый',
+  orangeThemeDescription: 'Давайте перейдем к голландскому.',
 });
 
 // eslint-disable-next-line camelcase
