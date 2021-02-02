@@ -68,8 +68,6 @@ const fr_FR = () => ({
   maximizeEnabled: 'Bouton Agrandir',
   languageEnabled: 'Bouton de langue',
   exit: 'Fermer',
-  darkTheme: 'Foncé',
-  darkThemeDescription: 'Facile sur les yeux.',
   export: 'Exporter',
   yourTextHere: 'Votre texte ici',
   filePath: 'Chemin du fichier',
@@ -77,6 +75,11 @@ const fr_FR = () => ({
   no: 'Non',
   confirmation: 'Confirmation',
   confirmResetSettings: 'Voulez-vous vraiment réinitialiser tous les paramètres?',
+  themeStyle: 'Style de thème',
+  light: 'Clair',
+  dark: 'Foncé',
+  orange: 'Orange',
+  orangeThemeDescription: 'Il faut que ça Néerlandais.',
 });
 
 // eslint-disable-next-line camelcase
