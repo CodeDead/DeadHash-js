@@ -7,7 +7,7 @@ const ru_RU = () => ({
   help: 'Помогите',
   language: 'язык',
   aboutSubtitle: 'Узнайте больше о DeadHash',
-  aboutMessage: 'DeadHash был создан DeadLine.\n\nНекоторые изображения предоставлены icons8: https://icons8.com\nЛицензия: GPLv3\nВерсия: {x}\n\nCopyright © 2020 CodeDead',
+  aboutMessage: 'DeadHash был создан DeadLine.\n\nНекоторые изображения предоставлены icons8: https://icons8.com\nЛицензия: GPLv3\nВерсия: {x}\n\nCopyright © 2021 CodeDead',
   codedead: 'CodeDead',
   theme: 'тема',
   general: 'генеральный',

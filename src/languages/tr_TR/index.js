@@ -7,7 +7,7 @@ const tr_TR = () => ({
   help: 'Yardım',
   language: 'Dil',
   aboutSubtitle: 'DeadHash hakkında daha fazla bilgi edinin',
-  aboutMessage: 'DeadHash, DeadLine tarafından oluşturuldu.\n\nBazı resimler icons8 tarafından sağlandı: https://icons8.com\nLisans: GPLv3\nSürüm: {x}\n\nTelif Hakkı © 2020 CodeDead',
+  aboutMessage: 'DeadHash, DeadLine tarafından oluşturuldu.\n\nBazı resimler icons8 tarafından sağlandı: https://icons8.com\nLisans: GPLv3\nSürüm: {x}\n\nTelif Hakkı © 2021 CodeDead',
   codedead: 'CodeDead',
   theme: 'Tema',
   general: 'Genel',
