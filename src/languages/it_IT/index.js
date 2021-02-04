@@ -81,6 +81,7 @@ const it_IT = () => ({
   dark: 'Buio',
   orange: 'Arancia',
   orangeThemeDescription: 'Prendiamo l\'olandese.',
+  themeToggleEnabled: 'Commutazione del tema',
 });
 
 // eslint-disable-next-line camelcase

@@ -9,6 +9,7 @@ import {
   SET_MINIMIZE_STATUS,
   SET_THEME_INDEX,
   SET_THEME_STYLE,
+  SET_THEME_TOGGLE_STATUS,
   SET_UPDATE_CHECKED,
 } from './Actions/actionTypes';
 
@@ -59,6 +60,7 @@ const MainReducer = (state, action) => {
       localStorage.maximizeEnabled = true;
       localStorage.languageEnabled = true;
       localStorage.canDragDrop = true;
+      localStorage.themeToggleEnabled = true;
 
       return {
         ...state,
@@ -70,6 +72,7 @@ const MainReducer = (state, action) => {
         maximizeEnabled: true,
         languageEnabled: true,
         canDragDrop: true,
+        themeToggleEnabled: true,
       };
     case SET_MINIMIZE_STATUS:
       localStorage.minimizeEnabled = action.payload;
@@ -88,6 +91,12 @@ const MainReducer = (state, action) => {
       return {
         ...state,
         languageEnabled: action.payload,
+      };
+    case SET_THEME_TOGGLE_STATUS:
+      localStorage.themeToggleEnabled = action.payload;
+      return {
+        ...state,
+        themeToggleEnabled: action.payload,
       };
     case SET_CAN_DRAG_DROP:
       localStorage.canDragDrop = action.payload;

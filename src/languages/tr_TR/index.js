@@ -81,6 +81,7 @@ const tr_TR = () => ({
   dark: 'Karanlık',
   orange: 'Turuncu',
   orangeThemeDescription: 'Dutch alalım.',
+  themeToggleEnabled: 'Tema geçişi',
 });
 
 // eslint-disable-next-line camelcase

@@ -51,7 +51,12 @@ const TopBar = () => {
   const [state, d1] = useContext(MainContext);
 
   const {
-    languageIndex, minimizeEnabled, maximizeEnabled, languageEnabled, themeStyle,
+    languageIndex,
+    minimizeEnabled,
+    maximizeEnabled,
+    languageEnabled,
+    themeStyle,
+    themeToggleEnabled,
   } = state;
   const language = state.languages[languageIndex];
 
@@ -154,9 +159,11 @@ const TopBar = () => {
             {language.appName}
           </Typography>
 
-          <IconButton color="inherit" onClick={changeThemeStyle}>
-            {themeStyle === 'dark' ? <Brightness5Icon /> : <Brightness7Icon />}
-          </IconButton>
+          {themeToggleEnabled ? (
+            <IconButton color="inherit" onClick={changeThemeStyle}>
+              {themeStyle === 'dark' ? <Brightness5Icon /> : <Brightness7Icon />}
+            </IconButton>
+          ) : null}
 
           {languageEnabled
             ? (

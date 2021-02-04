@@ -81,6 +81,7 @@ const ru_RU = () => ({
   dark: 'Тьма',
   orange: 'Оранжевый',
   orangeThemeDescription: 'Давайте перейдем к голландскому.',
+  themeToggleEnabled: 'Переключение темы',
 });
 
 // eslint-disable-next-line camelcase

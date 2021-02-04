@@ -9,6 +9,7 @@ import {
   SET_MINIMIZE_STATUS,
   SET_THEME_INDEX,
   SET_THEME_STYLE,
+  SET_THEME_TOGGLE_STATUS,
   SET_UPDATE_CHECKED,
 } from './actionTypes';
 
@@ -58,6 +59,11 @@ export const setMaximizeStatus = (status) => ({
 
 export const setLanguageButtonStatus = (status) => ({
   type: SET_LANGUAGE_STATUS,
+  payload: status,
+});
+
+export const setThemeToggleStatus = (status) => ({
+  type: SET_THEME_TOGGLE_STATUS,
   payload: status,
 });
 

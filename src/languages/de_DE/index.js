@@ -81,6 +81,7 @@ const de_DE = () => ({
   dark: 'Dunkel',
   orange: 'Orange',
   orangeThemeDescription: 'Lass uns Niederländisch werden.',
+  themeToggleEnabled: 'Thema umschalten',
 });
 
 // eslint-disable-next-line camelcase

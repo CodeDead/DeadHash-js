@@ -34,9 +34,15 @@ import GridList from '../../components/GridList';
 import {
   resetMainReducer,
   setActiveListItem,
-  setAutoUpdate, setCanDragDrop, setLanguageButtonStatus,
-  setLanguageIndex, setMaximizeStatus, setMinimizeStatus,
-  setThemeIndex, setThemeStyle,
+  setAutoUpdate,
+  setCanDragDrop,
+  setLanguageButtonStatus,
+  setLanguageIndex,
+  setMaximizeStatus,
+  setMinimizeStatus,
+  setThemeIndex,
+  setThemeStyle,
+  setThemeToggleStatus,
 } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
 import { CryptoContext } from '../../contexts/CryptoContextReducer';
@@ -84,14 +90,19 @@ const Settings = () => {
   const [state, d1] = useContext(MainContext);
   const [crypto, d2] = useContext(CryptoContext);
 
-  const { themeIndex, themeStyle } = state;
-  const { languageIndex } = state;
+  const {
+    themeIndex,
+    themeStyle,
+    languageIndex,
+    canDragDrop,
+    minimizeEnabled,
+    maximizeEnabled,
+    languageEnabled,
+    autoUpdate,
+    themeToggleEnabled,
+  } = state;
+
   const language = state.languages[languageIndex];
-  const dragDrop = state.canDragDrop;
-  const { autoUpdate } = state;
-  const minimize = state.minimizeEnabled;
-  const maximize = state.maximizeEnabled;
-  const languageStatus = state.languageEnabled;
 
   const {
     md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32,
@@ -231,9 +242,9 @@ const Settings = () => {
                 <FormControlLabel
                   control={(
                     <Checkbox
-                      checked={dragDrop}
+                      checked={canDragDrop}
                       onChange={(e) => d1(setCanDragDrop(e.target.checked))}
-                      value="dragDrop"
+                      value="canDragDrop"
                       color="primary"
                     />
                   )}
@@ -242,9 +253,9 @@ const Settings = () => {
                 <FormControlLabel
                   control={(
                     <Checkbox
-                      checked={minimize}
+                      checked={minimizeEnabled}
                       onChange={(e) => d1(setMinimizeStatus(e.target.checked))}
-                      value="minimize"
+                      value="minimizeEnabled"
                       color="primary"
                     />
                   )}
@@ -253,9 +264,9 @@ const Settings = () => {
                 <FormControlLabel
                   control={(
                     <Checkbox
-                      checked={maximize}
+                      checked={maximizeEnabled}
                       onChange={(e) => d1(setMaximizeStatus(e.target.checked))}
-                      value="maximize"
+                      value="maximizeEnabled"
                       color="primary"
                     />
                   )}
@@ -264,13 +275,24 @@ const Settings = () => {
                 <FormControlLabel
                   control={(
                     <Checkbox
-                      checked={languageStatus}
+                      checked={languageEnabled}
                       onChange={(e) => d1(setLanguageButtonStatus(e.target.checked))}
-                      value="language"
+                      value="languageEnabled"
                       color="primary"
                     />
                   )}
                   label={language.languageEnabled}
+                />
+                <FormControlLabel
+                  control={(
+                    <Checkbox
+                      checked={themeToggleEnabled}
+                      onChange={(e) => d1(setThemeToggleStatus(e.target.checked))}
+                      value="themeToggleEnabled"
+                      color="primary"
+                    />
+                  )}
+                  label={language.themeToggleEnabled}
                 />
                 <FormControl variant="outlined" style={{ marginTop: 5 }}>
                   <InputLabel id="language-label">{language.language}</InputLabel>

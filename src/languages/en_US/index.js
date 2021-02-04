@@ -81,6 +81,7 @@ const en_US = () => ({
   dark: 'Dark',
   orange: 'Orange',
   orangeThemeDescription: 'Let\'s get Dutch.',
+  themeToggleEnabled: 'Theme toggle',
 });
 
 // eslint-disable-next-line camelcase
