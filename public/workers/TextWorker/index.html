@@ -9,7 +9,7 @@
   const ipcRenderer = window.require('electron').ipcRenderer;
   const crypto = window.require('crypto');
 
-  const textHash = (text, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160) => {
+  const textHash = (text, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32) => {
     return new Promise((resolve, reject) => {
       let newHashes = [];
       try {
@@ -85,6 +85,13 @@
               .toString()
           });
         }
+        if (crc32) {
+          const { crc32 } = require('crc');
+          newHashes.push({
+            type: 'CRC32',
+            hash: crc32(text).toString(16),
+          });
+        }
 
         if (newHashes.length === 0) newHashes = null;
 
@@ -96,7 +103,7 @@
   };
 
   ipcRenderer.on('calculate-text-hash', (e, data) => {
-    textHash(data.text, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512, data.ripemd160)
+    textHash(data.text, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512, data.ripemd160, data.crc32)
       .then(data => {
         ipcRenderer.send('text-hash-calculated', data);
       })

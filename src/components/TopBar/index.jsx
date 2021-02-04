@@ -9,11 +9,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CloseIcon from '@material-ui/icons/Close';
+import Brightness5Icon from '@material-ui/icons/Brightness5';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import MinimizeIcon from '@material-ui/icons/Minimize';
 import FullScreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
-import Drawerbar from '../Drawerbar';
-import { setLanguageIndex } from '../../reducers/MainReducer/Actions';
+import DrawerBar from '../DrawerBar';
+import { setLanguageIndex, setThemeStyle } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
 
 const drawerWidth = 220;
@@ -45,11 +47,16 @@ const useStyles = makeStyles((theme) => ({
 
 const { ipcRenderer } = window.require('electron');
 
-const Topbar = () => {
+const TopBar = () => {
   const [state, d1] = useContext(MainContext);
 
   const {
-    languageIndex, minimizeEnabled, maximizeEnabled, languageEnabled,
+    languageIndex,
+    minimizeEnabled,
+    maximizeEnabled,
+    languageEnabled,
+    themeStyle,
+    themeToggleEnabled,
   } = state;
   const language = state.languages[languageIndex];
 
@@ -124,6 +131,13 @@ const Topbar = () => {
     ipcRenderer.send('handle-maximize');
   };
 
+  /**
+   * Change the theme style
+   */
+  const changeThemeStyle = () => {
+    d1(setThemeStyle(themeStyle === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
     <div className={classes.root}>
       <AppBar
@@ -144,6 +158,12 @@ const Topbar = () => {
           <Typography variant="h6" className={classes.title} style={{ WebkitAppRegion: 'drag' }}>
             {language.appName}
           </Typography>
+
+          {themeToggleEnabled ? (
+            <IconButton color="inherit" onClick={changeThemeStyle}>
+              {themeStyle === 'dark' ? <Brightness5Icon /> : <Brightness7Icon />}
+            </IconButton>
+          ) : null}
 
           {languageEnabled
             ? (
@@ -264,10 +284,10 @@ const Topbar = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawerbar open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <DrawerBar open={drawerOpen} onClose={() => setDrawerOpen(false)} />
       <Toolbar />
     </div>
   );
 };
 
-export default Topbar;
+export default TopBar;

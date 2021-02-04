@@ -9,6 +9,7 @@ const sha256 = localStorage.sha256 && localStorage.sha256 === 'true' ? true : !l
 const sha384 = localStorage.sha384 && localStorage.sha384 === 'true' ? true : !localStorage.sha384;
 const sha512 = localStorage.sha512 && localStorage.sha512 === 'true' ? true : !localStorage.sha512;
 const ripemd160 = localStorage.ripemd160 && localStorage.ripemd160 === 'true' ? true : !localStorage.ripemd160;
+const crc32 = localStorage.crc32 && localStorage.crc32 === 'true' ? true : !localStorage.crc32;
 
 const initState = {
   md4,
@@ -19,6 +20,7 @@ const initState = {
   sha384,
   sha512,
   ripemd160,
+  crc32,
   fileHashes: null,
   textHashes: null,
   textInput: '',

@@ -40,6 +40,7 @@ const it_IT = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc32: 'CRC32',
   file: 'File',
   fileSubtitle: 'Calcola gli hash dei file',
   text: 'Testo',
@@ -80,6 +81,7 @@ const it_IT = () => ({
   dark: 'Buio',
   orange: 'Arancia',
   orangeThemeDescription: 'Prendiamo l\'olandese.',
+  themeToggleEnabled: 'Commutazione del tema',
 });
 
 // eslint-disable-next-line camelcase

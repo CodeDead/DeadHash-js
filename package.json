@@ -1,6 +1,6 @@
 {
   "name": "deadhash",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "File and text hash calculator",
   "homepage": "./",
   "private": true,
@@ -37,6 +37,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "crc": "^3.8.0",
     "cross-env": "^7.0.3",
     "electron-is-dev": "^1.2.0",
     "react": "^17.0.1",
@@ -44,7 +45,7 @@
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^4.0.2"
   },
   "scripts": {
     "react-start": "react-scripts start",
@@ -70,8 +71,9 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
-    "electron": "^11.2.1",
+    "electron": "^11.2.2",
     "electron-builder": "^22.9.1",
+    "eslint": "^7.19.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",

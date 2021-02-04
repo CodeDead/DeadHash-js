@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const { ipcRenderer } = window.require('electron');
 
-const Drawerbar = ({ open, onClose }) => {
+const DrawerBar = ({ open, onClose }) => {
   const [state] = useContext(MainContext);
   const language = state.languages[state.languageIndex];
   const selectedItem = state.selectedListItem;
@@ -145,4 +145,4 @@ const Drawerbar = ({ open, onClose }) => {
   );
 };
 
-export default Drawerbar;
+export default DrawerBar;
