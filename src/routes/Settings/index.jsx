@@ -41,7 +41,8 @@ import {
 import { MainContext } from '../../contexts/MainContextProvider';
 import { CryptoContext } from '../../contexts/CryptoContextReducer';
 import {
-  resetCryptoReducer, setMd4State,
+  resetCryptoReducer,
+  setMd4State,
   setMd5State,
   setRipeMd160State,
   setSha1State,
@@ -49,6 +50,7 @@ import {
   setSha256State,
   setSha384State,
   setSha512State,
+  setCrc32State,
 } from '../../reducers/CryptoReducer/Actions';
 
 const useStyles = makeStyles((theme) => ({
@@ -92,7 +94,7 @@ const Settings = () => {
   const languageStatus = state.languageEnabled;
 
   const {
-    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
+    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32,
   } = crypto;
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -392,6 +394,18 @@ const Settings = () => {
                       />
                     )}
                     label={language.ripemd160}
+                  />
+
+                  <FormControlLabel
+                    control={(
+                      <Checkbox
+                        checked={crc32}
+                        onChange={(e) => d2(setCrc32State(e.target.checked))}
+                        value="crc32"
+                        color="primary"
+                      />
+                    )}
+                    label={language.crc32}
                   />
                 </div>
               </Paper>

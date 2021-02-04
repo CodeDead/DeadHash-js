@@ -40,6 +40,7 @@ const ru_RU = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc32: 'CRC32',
   file: 'файл',
   fileSubtitle: 'Рассчитать хэши файлов',
   text: 'Текст',
