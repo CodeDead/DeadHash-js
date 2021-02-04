@@ -40,6 +40,7 @@ const de_DE = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc32: 'CRC32',
   file: 'Datei',
   fileSubtitle: 'Berechnen Sie Datei-Hashes',
   text: 'Text',

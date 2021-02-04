@@ -40,6 +40,7 @@ const jp_JP = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc32: 'CRC32',
   file: 'ファイル',
   fileSubtitle: 'ファイルハッシュの計算',
   text: 'テキスト',

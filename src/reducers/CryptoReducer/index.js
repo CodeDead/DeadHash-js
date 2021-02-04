@@ -1,5 +1,5 @@
 import {
-  RESET_CRYPTO_REDUCER,
+  RESET_CRYPTO_REDUCER, SET_CRC32_STATE,
   SET_CURRENT_FILE,
   SET_FILE_COMPARE_HASH,
   SET_FILE_COMPARING,
@@ -74,6 +74,12 @@ const CryptoReducer = (state, action) => {
         ...state,
         sha224: action.payload,
       };
+    case SET_CRC32_STATE:
+      localStorage.crc32 = action.payload;
+      return {
+        ...state,
+        crc32: action.payload,
+      };
     case RESET_CRYPTO_REDUCER:
       localStorage.md4 = true;
       localStorage.md5 = true;
@@ -83,6 +89,7 @@ const CryptoReducer = (state, action) => {
       localStorage.sha512 = true;
       localStorage.ripemd160 = true;
       localStorage.sha224 = true;
+      localStorage.crc32 = true;
 
       return {
         ...state,
@@ -94,6 +101,7 @@ const CryptoReducer = (state, action) => {
         sha384: true,
         sha512: true,
         ripemd160: true,
+        crc32: true,
       };
     case SET_TEXT_HASHES:
       return {
