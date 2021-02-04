@@ -81,6 +81,7 @@ const fr_FR = () => ({
   dark: 'Foncé',
   orange: 'Orange',
   orangeThemeDescription: 'Il faut que ça Néerlandais.',
+  themeToggleEnabled: 'Basculer le thème',
 });
 
 // eslint-disable-next-line camelcase

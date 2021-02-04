@@ -81,6 +81,7 @@ const jp_JP = () => ({
   dark: '闇',
   orange: 'オレンジ',
   orangeThemeDescription: 'オランダ語を取得しましょう。',
+  themeToggleEnabled: 'テーマの切り替え',
 });
 
 // eslint-disable-next-line camelcase

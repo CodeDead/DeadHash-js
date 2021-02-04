@@ -81,6 +81,7 @@ const nl_NL = () => ({
   dark: 'Donker',
   orange: 'Oranje',
   orangeThemeDescription: 'Op z\'n Nederlands.',
+  themeToggleEnabled: 'Thema wisselen',
 });
 
 // eslint-disable-next-line camelcase
