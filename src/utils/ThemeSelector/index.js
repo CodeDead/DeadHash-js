@@ -7,6 +7,9 @@ import purple from '@material-ui/core/colors/purple';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import amber from '@material-ui/core/colors/amber';
+import brown from '@material-ui/core/colors/brown';
 
 /**
  * Select the theme, depending on the theme index
@@ -34,6 +37,12 @@ const ThemeSelector = (index) => {
       return grey;
     case 8:
       return orange;
+    case 9:
+      return deepOrange;
+    case 10:
+      return amber;
+    case 11:
+      return brown;
   }
 };
 

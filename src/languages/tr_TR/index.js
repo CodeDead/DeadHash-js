@@ -87,6 +87,12 @@ const tr_TR = () => ({
   orangeThemeDescription: 'Dutch alalım.',
   themeToggleEnabled: 'Tema geçişi',
   cyclicRedundancyCheck: 'Döngüsel artıklık denetimi',
+  deepOrange: 'Koyu turuncu',
+  deepOrangeDescription: 'Portakal yeterli değilse diye.',
+  amber: 'Kehribar',
+  amberDescription: 'Seçici sarı değil.',
+  brown: 'Kahverengi',
+  brownDescription: 'Kesintiden daha iyi.',
 });
 
 // eslint-disable-next-line camelcase

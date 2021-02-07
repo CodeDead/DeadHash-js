@@ -87,6 +87,12 @@ const pt_PT = () => ({
   orangeThemeDescription: 'Vamos para o holandês.',
   themeToggleEnabled: 'Alternar tema',
   cyclicRedundancyCheck: 'Verificação de redundância Cíclica',
+  deepOrange: 'Laranja profundo',
+  deepOrangeDescription: 'No caso de laranja não ser suficiente.',
+  amber: 'Âmbar',
+  amberDescription: 'Amarelo não seletivo.',
+  brown: 'Castanho',
+  brownDescription: 'Melhor do que um brownout.',
 });
 
 // eslint-disable-next-line camelcase

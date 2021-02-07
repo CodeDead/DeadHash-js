@@ -14,6 +14,9 @@ import green from '@material-ui/core/colors/green';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import amber from '@material-ui/core/colors/amber';
+import brown from '@material-ui/core/colors/brown';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -557,6 +560,27 @@ const Settings = () => {
                   color={orange[500]}
                   selected={themeIndex === 8}
                   onAction={() => changeTheme(8)}
+                />
+                <Theme
+                  title={language.deepOrange}
+                  description={language.deepOrangeDescription}
+                  color={deepOrange[500]}
+                  selected={themeIndex === 9}
+                  onAction={() => changeTheme(9)}
+                />
+                <Theme
+                  title={language.amber}
+                  description={language.amberDescription}
+                  color={amber[500]}
+                  selected={themeIndex === 10}
+                  onAction={() => changeTheme(10)}
+                />
+                <Theme
+                  title={language.brown}
+                  description={language.brownDescription}
+                  color={brown[500]}
+                  selected={themeIndex === 11}
+                  onAction={() => changeTheme(11)}
                 />
               </GridList>
             </Grid>

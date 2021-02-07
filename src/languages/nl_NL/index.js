@@ -87,6 +87,12 @@ const nl_NL = () => ({
   orangeThemeDescription: 'Op z\'n Nederlands.',
   themeToggleEnabled: 'Thema wisselen',
   cyclicRedundancyCheck: 'Cyclische redundantiecontrole',
+  deepOrange: 'Diep oranje',
+  deepOrangeDescription: 'Voor het geval oranje niet genoeg was.',
+  amber: 'Amber',
+  amberDescription: 'Niet selectief geel.',
+  brown: 'Bruin',
+  brownDescription: 'Beter dan een brownout.',
 });
 
 // eslint-disable-next-line camelcase

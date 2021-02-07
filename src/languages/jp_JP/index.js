@@ -87,6 +87,12 @@ const jp_JP = () => ({
   orangeThemeDescription: 'オランダ語を取得しましょう。',
   themeToggleEnabled: 'テーマの切り替え',
   cyclicRedundancyCheck: '巡回冗長検査',
+  deepOrange: '濃いオレンジ',
+  deepOrangeDescription: 'オレンジでは不十分な場合に備えて。',
+  amber: 'アンバー',
+  amberDescription: '選択的ではない黄色。',
+  brown: '褐色',
+  brownDescription: '電圧低下よりも優れています。',
 });
 
 // eslint-disable-next-line camelcase

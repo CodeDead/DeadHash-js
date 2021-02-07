@@ -87,6 +87,12 @@ const it_IT = () => ({
   orangeThemeDescription: 'Prendiamo l\'olandese.',
   themeToggleEnabled: 'Commutazione del tema',
   cyclicRedundancyCheck: 'Controllo di ridondanza ciclico',
+  deepOrange: 'Arancio intenso',
+  deepOrangeDescription: 'Nel caso l\'arancione non fosse abbastanza.',
+  amber: 'Ambra',
+  amberDescription: 'Giallo non selettivo.',
+  brown: 'Marrone',
+  brownDescription: 'Meglio di un brownout.',
 });
 
 // eslint-disable-next-line camelcase
