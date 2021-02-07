@@ -87,6 +87,12 @@ const ru_RU = () => ({
   orangeThemeDescription: 'Давайте перейдем к голландскому.',
   themeToggleEnabled: 'Переключение темы',
   cyclicRedundancyCheck: 'Циклическая проверка избыточности',
+  deepOrange: 'Темно-оранжевый',
+  deepOrangeDescription: 'На случай, если оранжевого было недостаточно.',
+  amber: 'Янтарь',
+  amberDescription: 'Неселективный желтый.',
+  brown: 'Коричневый',
+  brownDescription: 'Лучше, чем отключение электричества.',
 });
 
 // eslint-disable-next-line camelcase

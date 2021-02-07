@@ -87,6 +87,12 @@ const fr_FR = () => ({
   orangeThemeDescription: 'Il faut que ça Néerlandais.',
   themeToggleEnabled: 'Basculer le thème',
   cyclicRedundancyCheck: 'Contrôle de redondance cyclique',
+  deepOrange: 'Orange foncé',
+  deepOrangeDescription: 'Au cas où l\'orange ne suffirait pas.',
+  amber: 'Ambre',
+  amberDescription: 'Jaune non sélectif.',
+  brown: 'Marron',
+  brownDescription: 'Mieux qu\'une baisse de tension.',
 });
 
 // eslint-disable-next-line camelcase
