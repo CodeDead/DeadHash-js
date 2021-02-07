@@ -60,7 +60,8 @@ const Text = () => {
   const language = state.languages[state.languageIndex];
 
   const {
-    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32,
+    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
+    crc1, crc8, crc16, crc24, crc32,
   } = crypto;
 
   const input = crypto.textInput;
@@ -144,6 +145,10 @@ const Text = () => {
       sha384,
       sha512,
       ripemd160,
+      crc1,
+      crc8,
+      crc16,
+      crc24,
       crc32,
     });
   };

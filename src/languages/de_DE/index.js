@@ -40,6 +40,10 @@ const de_DE = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'Datei',
   fileSubtitle: 'Berechnen Sie Datei-Hashes',
@@ -82,6 +86,7 @@ const de_DE = () => ({
   orange: 'Orange',
   orangeThemeDescription: 'Lass uns Niederländisch werden.',
   themeToggleEnabled: 'Thema umschalten',
+  cyclicRedundancyCheck: 'Zyklische Redundanzprüfung',
 });
 
 // eslint-disable-next-line camelcase

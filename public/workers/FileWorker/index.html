@@ -9,9 +9,12 @@
   const ipcRenderer = window.require('electron').ipcRenderer;
   const fs = window.require('fs');
   const crypto = window.require('crypto');
-  const crc32Calculator = require('crc').crc32;
+  const crcCalculator = require('crc');
 
-  const fileHash = (filePath, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32) => {
+  const fileHash = (
+    filePath, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
+    crc1, crc8, crc16, crc24, crc32,
+  ) => {
     return new Promise((resolve, reject) => {
       let MD4,
         MD5,
@@ -21,7 +24,11 @@
         SHA384,
         SHA512,
         RIPEMD160,
-      crc32Checksum;
+        crc1Checksum,
+        crc8Checksum,
+        crc16Checksum,
+        crc24Checksum,
+        crc32Checksum;
 
       if (md4) MD4 = crypto.createHash('md4');
       if (md5) MD5 = crypto.createHash('md5');
@@ -31,7 +38,6 @@
       if (sha384) SHA384 = crypto.createHash('sha384');
       if (sha512) SHA512 = crypto.createHash('sha512');
       if (ripemd160) RIPEMD160 = crypto.createHash('ripemd160');
-
 
       try {
         const s = fs.createReadStream(filePath.toString());
@@ -45,7 +51,11 @@
           if (sha384) SHA384.update(data);
           if (sha512) SHA512.update(data);
           if (ripemd160) RIPEMD160.update(data);
-          if (crc32) crc32Checksum = crc32Calculator(data, crc32Checksum);
+          if (crc1) crc1Checksum = crcCalculator.crc1(data, crc1Checksum);
+          if (crc8) crc8Checksum = crcCalculator.crc8(data, crc8Checksum);
+          if (crc16) crc16Checksum = crcCalculator.crc16(data, crc16Checksum);
+          if (crc24) crc24Checksum = crcCalculator.crc24(data, crc24Checksum);
+          if (crc32) crc32Checksum = crcCalculator.crc32(data, crc32Checksum);
         });
 
         s.on('end', () => {
@@ -107,6 +117,30 @@
                 .toString()
             });
           }
+          if (crc1) {
+            newHashes.push({
+              type: 'CRC1',
+              hash: crc1Checksum.toString(16),
+            });
+          }
+          if (crc8) {
+            newHashes.push({
+              type: 'CRC8',
+              hash: crc8Checksum.toString(16),
+            });
+          }
+          if (crc16) {
+            newHashes.push({
+              type: 'CRC16',
+              hash: crc16Checksum.toString(16),
+            });
+          }
+          if (crc24) {
+            newHashes.push({
+              type: 'CRC24',
+              hash: crc24Checksum.toString(16),
+            });
+          }
           if (crc32) {
             newHashes.push({
               type: 'CRC32',
@@ -120,7 +154,6 @@
         });
 
         s.on('error', error => {
-
           return reject(error);
         });
       } catch (error) {
@@ -130,7 +163,10 @@
   }
 
   ipcRenderer.on("calculate-file-hash", (e, data) => {
-    fileHash(data.filePath, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512, data.ripemd160, data.crc32)
+    fileHash(
+      data.filePath, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512,
+      data.ripemd160, data.crc1, data.crc8, data.crc16, data.crc24, data.crc32,
+    )
       .then(data => {
         ipcRenderer.send("file-hash-calculated", data);
       })

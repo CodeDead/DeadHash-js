@@ -1,5 +1,9 @@
 import {
   RESET_CRYPTO_REDUCER,
+  SET_CRC1_STATE,
+  SET_CRC8_STATE,
+  SET_CRC16_STATE,
+  SET_CRC24_STATE,
   SET_CRC32_STATE,
   SET_CURRENT_FILE,
   SET_FILE_COMPARE_HASH,
@@ -60,6 +64,26 @@ export const setRipeMd160State = (state) => ({
 
 export const setSha224State = (state) => ({
   type: SET_SHA224_STATE,
+  payload: state,
+});
+
+export const setCrc1State = (state) => ({
+  type: SET_CRC1_STATE,
+  payload: state,
+});
+
+export const setCrc8State = (state) => ({
+  type: SET_CRC8_STATE,
+  payload: state,
+});
+
+export const setCrc16State = (state) => ({
+  type: SET_CRC16_STATE,
+  payload: state,
+});
+
+export const setCrc24State = (state) => ({
+  type: SET_CRC24_STATE,
   payload: state,
 });
 

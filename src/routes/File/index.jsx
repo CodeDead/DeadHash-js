@@ -59,7 +59,8 @@ const File = () => {
   const file = crypto.currentFile;
 
   const {
-    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32,
+    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
+    crc1, crc8, crc16, crc24, crc32,
   } = crypto;
 
   const compare = crypto.fileComparing;
@@ -146,6 +147,10 @@ const File = () => {
       sha384,
       sha512,
       ripemd160,
+      crc1,
+      crc8,
+      crc16,
+      crc24,
       crc32,
     });
   };

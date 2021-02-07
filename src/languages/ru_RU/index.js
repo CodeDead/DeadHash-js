@@ -40,6 +40,10 @@ const ru_RU = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'файл',
   fileSubtitle: 'Рассчитать хэши файлов',
@@ -82,6 +86,7 @@ const ru_RU = () => ({
   orange: 'Оранжевый',
   orangeThemeDescription: 'Давайте перейдем к голландскому.',
   themeToggleEnabled: 'Переключение темы',
+  cyclicRedundancyCheck: 'Циклическая проверка избыточности',
 });
 
 // eslint-disable-next-line camelcase

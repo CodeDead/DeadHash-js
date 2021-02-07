@@ -40,6 +40,10 @@ const pt_PT = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'Arquivo',
   fileSubtitle: 'Calcular hashes de arquivo',
@@ -82,6 +86,7 @@ const pt_PT = () => ({
   orange: 'Laranja',
   orangeThemeDescription: 'Vamos para o holandês.',
   themeToggleEnabled: 'Alternar tema',
+  cyclicRedundancyCheck: 'Verificação de redundância Cíclica',
 });
 
 // eslint-disable-next-line camelcase
