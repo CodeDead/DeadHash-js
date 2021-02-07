@@ -40,6 +40,10 @@ const en_US = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'File',
   fileSubtitle: 'Calculate file hashes',
@@ -82,6 +86,7 @@ const en_US = () => ({
   orange: 'Orange',
   orangeThemeDescription: 'Let\'s get Dutch.',
   themeToggleEnabled: 'Theme toggle',
+  cyclicRedundancyCheck: 'Cyclic redundancy check',
 });
 
 // eslint-disable-next-line camelcase
