@@ -9,7 +9,10 @@
   const ipcRenderer = window.require('electron').ipcRenderer;
   const crypto = window.require('crypto');
 
-  const textHash = (text, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32) => {
+  const textHash = (
+    text, md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
+    crc1, crc8, crc16, crc24, crc32,
+  ) => {
     return new Promise((resolve, reject) => {
       let newHashes = [];
       try {
@@ -85,6 +88,34 @@
               .toString()
           });
         }
+        if (crc1) {
+          const { crc1 } = require('crc');
+          newHashes.push({
+            type: 'CRC1',
+            hash: crc1(text).toString(16),
+          });
+        }
+        if (crc8) {
+          const { crc8 } = require('crc');
+          newHashes.push({
+            type: 'CRC8',
+            hash: crc8(text).toString(16),
+          });
+        }
+        if (crc16) {
+          const { crc16 } = require('crc');
+          newHashes.push({
+            type: 'CRC16',
+            hash: crc16(text).toString(16),
+          });
+        }
+        if (crc24) {
+          const { crc24 } = require('crc');
+          newHashes.push({
+            type: 'CRC24',
+            hash: crc24(text).toString(16),
+          });
+        }
         if (crc32) {
           const { crc32 } = require('crc');
           newHashes.push({
@@ -94,7 +125,6 @@
         }
 
         if (newHashes.length === 0) newHashes = null;
-
         return resolve(newHashes);
       } catch (ex) {
         return reject(ex);
@@ -103,7 +133,10 @@
   };
 
   ipcRenderer.on('calculate-text-hash', (e, data) => {
-    textHash(data.text, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512, data.ripemd160, data.crc32)
+    textHash(
+      data.text, data.md4, data.md5, data.sha1, data.sha224, data.sha256, data.sha384, data.sha512, data.ripemd160,
+      data.crc1, data.crc8, data.crc16, data.crc24, data.crc32,
+    )
       .then(data => {
         ipcRenderer.send('text-hash-calculated', data);
       })

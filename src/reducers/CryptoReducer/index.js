@@ -1,5 +1,9 @@
 import {
   RESET_CRYPTO_REDUCER,
+  SET_CRC1_STATE,
+  SET_CRC8_STATE,
+  SET_CRC16_STATE,
+  SET_CRC24_STATE,
   SET_CRC32_STATE,
   SET_CURRENT_FILE,
   SET_FILE_COMPARE_HASH,
@@ -75,6 +79,30 @@ const CryptoReducer = (state, action) => {
         ...state,
         sha224: action.payload,
       };
+    case SET_CRC1_STATE:
+      localStorage.crc1 = action.payload;
+      return {
+        ...state,
+        crc1: action.payload,
+      };
+    case SET_CRC8_STATE:
+      localStorage.crc8 = action.payload;
+      return {
+        ...state,
+        crc8: action.payload,
+      };
+    case SET_CRC16_STATE:
+      localStorage.crc16 = action.payload;
+      return {
+        ...state,
+        crc16: action.payload,
+      };
+    case SET_CRC24_STATE:
+      localStorage.crc24 = action.payload;
+      return {
+        ...state,
+        crc24: action.payload,
+      };
     case SET_CRC32_STATE:
       localStorage.crc32 = action.payload;
       return {
@@ -90,6 +118,10 @@ const CryptoReducer = (state, action) => {
       localStorage.sha512 = true;
       localStorage.ripemd160 = true;
       localStorage.sha224 = true;
+      localStorage.crc1 = false;
+      localStorage.crc8 = false;
+      localStorage.crc16 = false;
+      localStorage.crc24 = false;
       localStorage.crc32 = true;
 
       return {
@@ -102,6 +134,10 @@ const CryptoReducer = (state, action) => {
         sha384: true,
         sha512: true,
         ripemd160: true,
+        crc1: false,
+        crc8: false,
+        crc16: false,
+        crc24: false,
         crc32: true,
       };
     case SET_TEXT_HASHES:

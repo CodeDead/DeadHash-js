@@ -40,6 +40,10 @@ const it_IT = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'File',
   fileSubtitle: 'Calcola gli hash dei file',
@@ -82,6 +86,13 @@ const it_IT = () => ({
   orange: 'Arancia',
   orangeThemeDescription: 'Prendiamo l\'olandese.',
   themeToggleEnabled: 'Commutazione del tema',
+  cyclicRedundancyCheck: 'Controllo di ridondanza ciclico',
+  deepOrange: 'Arancio intenso',
+  deepOrangeDescription: 'Nel caso l\'arancione non fosse abbastanza.',
+  amber: 'Ambra',
+  amberDescription: 'Giallo non selettivo.',
+  brown: 'Marrone',
+  brownDescription: 'Meglio di un brownout.',
 });
 
 // eslint-disable-next-line camelcase

@@ -40,6 +40,10 @@ const tr_TR = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'Dosya',
   fileSubtitle: 'Dosya karmaları hesapla',
@@ -82,6 +86,13 @@ const tr_TR = () => ({
   orange: 'Turuncu',
   orangeThemeDescription: 'Dutch alalım.',
   themeToggleEnabled: 'Tema geçişi',
+  cyclicRedundancyCheck: 'Döngüsel artıklık denetimi',
+  deepOrange: 'Koyu turuncu',
+  deepOrangeDescription: 'Portakal yeterli değilse diye.',
+  amber: 'Kehribar',
+  amberDescription: 'Seçici sarı değil.',
+  brown: 'Kahverengi',
+  brownDescription: 'Kesintiden daha iyi.',
 });
 
 // eslint-disable-next-line camelcase

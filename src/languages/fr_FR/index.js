@@ -40,6 +40,10 @@ const fr_FR = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'File',
   fileSubtitle: 'Calculer les hachages de fichier',
@@ -82,6 +86,13 @@ const fr_FR = () => ({
   orange: 'Orange',
   orangeThemeDescription: 'Il faut que ça Néerlandais.',
   themeToggleEnabled: 'Basculer le thème',
+  cyclicRedundancyCheck: 'Contrôle de redondance cyclique',
+  deepOrange: 'Orange foncé',
+  deepOrangeDescription: 'Au cas où l\'orange ne suffirait pas.',
+  amber: 'Ambre',
+  amberDescription: 'Jaune non sélectif.',
+  brown: 'Marron',
+  brownDescription: 'Mieux qu\'une baisse de tension.',
 });
 
 // eslint-disable-next-line camelcase

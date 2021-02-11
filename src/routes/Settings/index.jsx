@@ -14,6 +14,9 @@ import green from '@material-ui/core/colors/green';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import amber from '@material-ui/core/colors/amber';
+import brown from '@material-ui/core/colors/brown';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -56,6 +59,10 @@ import {
   setSha256State,
   setSha384State,
   setSha512State,
+  setCrc1State,
+  setCrc8State,
+  setCrc16State,
+  setCrc24State,
   setCrc32State,
 } from '../../reducers/CryptoReducer/Actions';
 
@@ -105,7 +112,8 @@ const Settings = () => {
   const language = state.languages[languageIndex];
 
   const {
-    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160, crc32,
+    md4, md5, sha1, sha224, sha256, sha384, sha512, ripemd160,
+    crc1, crc8, crc16, crc24, crc32,
   } = crypto;
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -417,7 +425,59 @@ const Settings = () => {
                     )}
                     label={language.ripemd160}
                   />
-
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={12} lg={12}>
+              <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                {language.cyclicRedundancyCheck}
+              </Typography>
+              <Paper className={classes.paper}>
+                <div>
+                  <FormControlLabel
+                    control={(
+                      <Checkbox
+                        checked={crc1}
+                        onChange={(e) => d2(setCrc1State(e.target.checked))}
+                        value="crc1"
+                        color="primary"
+                      />
+                    )}
+                    label={language.crc1}
+                  />
+                  <FormControlLabel
+                    control={(
+                      <Checkbox
+                        checked={crc8}
+                        onChange={(e) => d2(setCrc8State(e.target.checked))}
+                        value="crc8"
+                        color="primary"
+                      />
+                    )}
+                    label={language.crc8}
+                  />
+                  <FormControlLabel
+                    control={(
+                      <Checkbox
+                        checked={crc16}
+                        onChange={(e) => d2(setCrc16State(e.target.checked))}
+                        value="crc16"
+                        color="primary"
+                      />
+                    )}
+                    label={language.crc16}
+                  />
+                  <FormControlLabel
+                    control={(
+                      <Checkbox
+                        checked={crc24}
+                        onChange={(e) => d2(setCrc24State(e.target.checked))}
+                        value="crc24"
+                        color="primary"
+                      />
+                    )}
+                    label={language.crc24}
+                  />
                   <FormControlLabel
                     control={(
                       <Checkbox
@@ -500,6 +560,27 @@ const Settings = () => {
                   color={orange[500]}
                   selected={themeIndex === 8}
                   onAction={() => changeTheme(8)}
+                />
+                <Theme
+                  title={language.deepOrange}
+                  description={language.deepOrangeDescription}
+                  color={deepOrange[500]}
+                  selected={themeIndex === 9}
+                  onAction={() => changeTheme(9)}
+                />
+                <Theme
+                  title={language.amber}
+                  description={language.amberDescription}
+                  color={amber[500]}
+                  selected={themeIndex === 10}
+                  onAction={() => changeTheme(10)}
+                />
+                <Theme
+                  title={language.brown}
+                  description={language.brownDescription}
+                  color={brown[500]}
+                  selected={themeIndex === 11}
+                  onAction={() => changeTheme(11)}
                 />
               </GridList>
             </Grid>

@@ -40,6 +40,10 @@ const jp_JP = () => ({
   sha512: 'SHA-512',
   ripemd160: 'RIPEMD-160',
   sha224: 'SHA-224',
+  crc1: 'CRC1',
+  crc8: 'CRC8',
+  crc16: 'CRC16',
+  crc24: 'CRC24',
   crc32: 'CRC32',
   file: 'ファイル',
   fileSubtitle: 'ファイルハッシュの計算',
@@ -82,6 +86,13 @@ const jp_JP = () => ({
   orange: 'オレンジ',
   orangeThemeDescription: 'オランダ語を取得しましょう。',
   themeToggleEnabled: 'テーマの切り替え',
+  cyclicRedundancyCheck: '巡回冗長検査',
+  deepOrange: '濃いオレンジ',
+  deepOrangeDescription: 'オレンジでは不十分な場合に備えて。',
+  amber: 'アンバー',
+  amberDescription: '選択的ではない黄色。',
+  brown: '褐色',
+  brownDescription: '電圧低下よりも優れています。',
 });
 
 // eslint-disable-next-line camelcase
