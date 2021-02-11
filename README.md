@@ -4,7 +4,7 @@
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/CodeDead/DeadHash-js)
 ![GitHub](https://img.shields.io/github/license/CodeDead/DeadHash-Js)
-![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/2.1.1/total)
+![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/2.1.2/total)
 
 DeadHash is a free and open-source utility to calculate file and text hashes and checksums. The following calculations are supported:
 
@@ -16,6 +16,10 @@ DeadHash is a free and open-source utility to calculate file and text hashes and
 * SHA-384
 * SHA-512
 * RIPEMD-160
+* CRC1
+* CRC8
+* CRC16
+* CRC24
 * CRC32
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and built using [Electron](https://electronjs.org/).
