@@ -1,26 +1,17 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import CheckIcon from '@material-ui/icons/Check';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import CheckIcon from '@mui/icons-material/Check';
+import CopyIcon from '@mui/icons-material/FileCopy';
 import { Menu, Item, useContextMenu } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
-import CopyIcon from '@material-ui/icons/FileCopy';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: theme.spacing(2),
-    overflow: 'auto',
-    flex: 'auto',
-    flexDirection: 'column',
-  },
-}));
+import { useTheme } from '@mui/material/styles';
 
 const Hash = ({
   hashType, content, compareString, id, copy,
 }) => {
+  const theme = useTheme();
   const MENU_ID = `hashMenu${id}`;
-  const classes = useStyles();
 
   let compareColor = null;
   let compareIcon = null;
@@ -47,7 +38,14 @@ const Hash = ({
   };
 
   return (
-    <Paper className={classes.paper}>
+    <Paper
+      sx={{
+        padding: theme.spacing(2),
+        overflow: 'auto',
+        flex: 'auto',
+        flexDirection: 'column',
+      }}
+    >
       <Typography variant="subtitle1" color="primary" gutterBottom>
         {hashType}
         {compareIcon}

@@ -1,39 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import RefreshIcon from '@material-ui/icons/Refresh';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { useHistory } from 'react-router';
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import BackButton from '../../components/BackButton';
 import Updater from '../../utils/Updater';
 import UpdateDialog from '../../components/UpdateDialog';
 import AlertDialog from '../../components/AlertDialog';
 import { setActiveListItem } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
-
-const useStyles = makeStyles((theme) => ({
-  content: {
-    flexGrow: 1,
-    overflow: 'auto',
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4, 0, 2),
-  },
-  container: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-}));
 
 const os = window.require('os');
 const { ipcRenderer } = window.require('electron');
@@ -54,7 +34,7 @@ const About = () => {
   const [loading, setLoading] = useState(false);
   const [update, setUpdate] = useState(null);
 
-  const classes = useStyles();
+  const theme = useTheme();
   const history = useHistory();
 
   useEffect(() => {
@@ -92,7 +72,12 @@ const About = () => {
 
   return (
     <div>
-      <div className={classes.heroContent}>
+      <Box
+        sx={{
+          backgroundColor: 'background.paper',
+          padding: theme.spacing(4, 0, 2),
+        }}
+      >
         <Container maxWidth="sm">
           <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
             {language.about}
@@ -101,8 +86,13 @@ const About = () => {
             {language.aboutSubtitle}
           </Typography>
         </Container>
-      </div>
-      <main className={classes.content}>
+      </Box>
+      <main
+        style={{
+          flexGrow: 1,
+          overflow: 'auto',
+        }}
+      >
         {update && update.updateAvailable ? (
           <UpdateDialog
             downloadUrl={update.updateUrl}
@@ -129,7 +119,13 @@ const About = () => {
             ok={language.ok}
           />
         ) : null}
-        <Container maxWidth="lg" className={classes.container}>
+        <Container
+          maxWidth="lg"
+          sx={{
+            paddingTop: theme.spacing(2),
+            paddingBottom: theme.spacing(2),
+          }}
+        >
           <Typography component="h2" variant="h5" color="primary" gutterBottom>
             <BackButton goBack={goBack} />
             {language.appName}
@@ -137,7 +133,14 @@ const About = () => {
             -
             {language.about}
           </Typography>
-          <Paper className={classes.paper}>
+          <Paper
+            sx={{
+              padding: theme.spacing(2),
+              display: 'flex',
+              overflow: 'auto',
+              flexDirection: 'column',
+            }}
+          >
             <div style={{ whiteSpace: 'pre-wrap' }}>
               <p>
                 {language.aboutMessage.replace('{x}', appVersion)}
@@ -170,7 +173,6 @@ const About = () => {
             </Grid>
           </Paper>
           <Button
-            className={classes.button}
             color="primary"
             onClick={() => checkForUpdates()}
             disabled={loading}

@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import Collapse from '@material-ui/core/Collapse';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import List from '@material-ui/core/List';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import KeyIcon from '@material-ui/icons/VpnKey';
-
-const useStyles = makeStyles((theme) => ({
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));
+import ListItem from '@mui/material/ListItem';
+import Collapse from '@mui/material/Collapse';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import List from '@mui/material/List';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyIcon from '@mui/icons-material/VpnKey';
+import { useTheme } from '@mui/material';
 
 const CryptographyMenu = ({
   handleIndexChange, selectedIndex, cryptography, file, text,
 }) => {
-  const classes = useStyles();
+  const theme = useTheme();
   const [openCollapse, setOpenCollapse] = useState(true);
 
   /**
@@ -41,7 +35,9 @@ const CryptographyMenu = ({
           <ListItem
             selected={selectedIndex === 1}
             button
-            className={classes.nested}
+            sx={{
+              paddingLeft: theme.spacing(4),
+            }}
             onClick={() => handleIndexChange(1)}
           >
             <ListItemText inset primary={file} />
@@ -49,7 +45,9 @@ const CryptographyMenu = ({
           <ListItem
             selected={selectedIndex === 2}
             button
-            className={classes.nested}
+            sx={{
+              paddingLeft: theme.spacing(4),
+            }}
             onClick={() => handleIndexChange(2)}
           >
             <ListItemText inset primary={text} />

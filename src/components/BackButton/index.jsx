@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import ArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import Button from '@mui/material/Button';
+import ArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 const BackButton = ({ goBack }) => {
   /**
