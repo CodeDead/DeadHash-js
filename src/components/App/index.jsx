@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, {
+  useContext, useEffect, lazy, Suspense,
+} from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { CssBaseline } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Home from '../../routes/Home';
-import Settings from '../../routes/Settings';
+import { CssBaseline } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThemeSelector from '../../utils/ThemeSelector';
 import TopBar from '../TopBar';
-import About from '../../routes/About';
-import File from '../../routes/File';
-import Text from '../../routes/Text';
 import DropZone from '../DropZone';
 import { MainContext } from '../../contexts/MainContextProvider';
 import { CryptoContext } from '../../contexts/CryptoContextReducer';
@@ -18,6 +15,13 @@ import {
   setFileHashes,
   setFileHashLoading, setTextHashError, setTextHashes, setTextHashLoading,
 } from '../../reducers/CryptoReducer/Actions';
+import LoadingBar from '../LoadingBar';
+
+const Home = lazy(() => import('../../routes/Home'));
+const About = lazy(() => import('../../routes/About'));
+const File = lazy(() => import('../../routes/File'));
+const Text = lazy(() => import('../../routes/Text'));
+const Settings = lazy(() => import('../../routes/Settings'));
 
 const { ipcRenderer } = window.require('electron');
 
@@ -30,10 +34,10 @@ const App = () => {
 
   const color = ThemeSelector(themeIndex);
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       primary: color,
-      type: themeStyle,
+      mode: themeStyle,
     },
   });
 
@@ -73,23 +77,25 @@ const App = () => {
         <DropZone enabled={enabled} onDrop={onDrop} reRoute="/file">
           <TopBar />
           <CssBaseline />
-          <Switch>
-            <Route path="/settings">
-              <Settings />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/file">
-              <File />
-            </Route>
-            <Route path="/text">
-              <Text />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Suspense fallback={<LoadingBar />}>
+            <Switch>
+              <Route path="/settings">
+                <Settings />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/file">
+                <File />
+              </Route>
+              <Route path="/text">
+                <Text />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </Suspense>
         </DropZone>
       </BrowserRouter>
     </ThemeProvider>

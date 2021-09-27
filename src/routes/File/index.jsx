@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useContext } from 'react';
-import {
-  Checkbox, FormControlLabel, makeStyles, Paper,
-} from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import { useHistory } from 'react-router';
+import { useTheme } from '@mui/material/styles';
 import GridList from '../../components/GridList';
 import Hash from '../../components/Hash';
 import CopyPasteMenu from '../../components/CopyPasteMenu';
@@ -22,32 +23,7 @@ import {
 } from '../../reducers/CryptoReducer/Actions';
 import LoadingBar from '../../components/LoadingBar';
 import AlertDialog from '../../components/AlertDialog';
-
-const useStyles = makeStyles((theme) => ({
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4, 0, 2),
-  },
-  content: {
-    flexGrow: 1,
-    overflow: 'auto',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  container: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}));
+import PageHeader from '../../components/PageHeader';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -73,7 +49,7 @@ const File = () => {
   const fileRef = useRef(null);
 
   const history = useHistory();
-  const classes = useStyles();
+  const theme = useTheme();
 
   useEffect(() => {
     d1(setActiveListItem(1));
@@ -190,17 +166,13 @@ const File = () => {
 
   return (
     <div>
-      <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.file}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.fileSubtitle}
-          </Typography>
-        </Container>
-      </div>
-      <main className={classes.content}>
+      <PageHeader title={language.file} subtitle={language.fileSubtitle} />
+      <main
+        style={{
+          flexGrow: 1,
+          overflow: 'auto',
+        }}
+      >
         {errorMessage && errorMessage.length > 0 ? (
           <AlertDialog
             title={language.errorTitle}
@@ -209,12 +181,25 @@ const File = () => {
             onClose={onErrorClose}
           />
         ) : null}
-        <Container className={classes.container}>
+        <Container
+          sx={{
+            paddingTop: theme.spacing(2),
+            paddingBottom: theme.spacing(2),
+          }}
+        >
           <Typography component="h2" variant="h5" color="primary" gutterBottom>
             <BackButton goBack={goBack} />
             {language.input}
           </Typography>
-          <Paper className={classes.paper}>
+          <Paper
+            sx={{
+              padding: theme.spacing(2),
+              marginBottom: theme.spacing(1),
+              display: 'flex',
+              overflow: 'auto',
+              flexDirection: 'column',
+            }}
+          >
             <TextField
               margin="normal"
               onClick={() => {
@@ -260,7 +245,10 @@ const File = () => {
           {hashes && hashes.length > 0 ? (
             <>
               <Button
-                className={classes.button}
+                sx={{
+                  marginTop: theme.spacing(1),
+                  marginBottom: theme.spacing(1),
+                }}
                 color="primary"
                 variant="contained"
                 onClick={() => clearData()}
@@ -270,10 +258,13 @@ const File = () => {
 
               <CsvExport fileName={`DeadHash Export ${new Date()}.csv`} data={hashes}>
                 <Button
-                  className={classes.button}
                   color="primary"
                   variant="contained"
-                  style={{ marginLeft: 5 }}
+                  sx={{
+                    marginTop: theme.spacing(1),
+                    marginBottom: theme.spacing(1),
+                    marginLeft: 5,
+                  }}
                 >
                   {language.export}
                 </Button>
@@ -283,11 +274,14 @@ const File = () => {
           ) : null}
           {loading ? null : (
             <Button
-              className={classes.button}
+              sx={{
+                marginTop: theme.spacing(1),
+                marginBottom: theme.spacing(1),
+                float: 'right',
+              }}
               color="primary"
               variant="contained"
               disabled={!file || file.length === 0 || loading}
-              style={{ float: 'right' }}
               onClick={calculateHashes}
             >
               {language.calculate}

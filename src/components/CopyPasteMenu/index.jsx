@@ -1,7 +1,7 @@
 import React from 'react';
 import { Item, Menu, useContextMenu } from 'react-contexify';
-import CopyIcon from '@material-ui/icons/FileCopy';
-import PasteIcon from '@material-ui/icons/Assignment';
+import CopyIcon from '@mui/icons-material/FileCopy';
+import PasteIcon from '@mui/icons-material/Assignment';
 
 const CopyPasteMenu = ({
   id, children, copyData, pasteData, copy, paste,

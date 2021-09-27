@@ -1,15 +1,15 @@
-import blue from '@material-ui/core/colors/blue';
-import lightBlue from '@material-ui/core/colors/lightBlue';
-import red from '@material-ui/core/colors/red';
-import green from '@material-ui/core/colors/green';
-import lightGreen from '@material-ui/core/colors/lightGreen';
-import purple from '@material-ui/core/colors/purple';
-import deepPurple from '@material-ui/core/colors/deepPurple';
-import grey from '@material-ui/core/colors/grey';
-import orange from '@material-ui/core/colors/orange';
-import deepOrange from '@material-ui/core/colors/deepOrange';
-import amber from '@material-ui/core/colors/amber';
-import brown from '@material-ui/core/colors/brown';
+import blue from '@mui/material/colors/blue';
+import lightBlue from '@mui/material/colors/lightBlue';
+import red from '@mui/material/colors/red';
+import green from '@mui/material/colors/green';
+import lightGreen from '@mui/material/colors/lightGreen';
+import purple from '@mui/material/colors/purple';
+import deepPurple from '@mui/material/colors/deepPurple';
+import grey from '@mui/material/colors/grey';
+import orange from '@mui/material/colors/orange';
+import deepOrange from '@mui/material/colors/deepOrange';
+import amber from '@mui/material/colors/amber';
+import brown from '@mui/material/colors/brown';
 
 /**
  * Select the theme, depending on the theme index

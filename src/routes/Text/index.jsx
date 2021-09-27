@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import {
-  Checkbox, makeStyles, Paper, FormControlLabel, Button,
-} from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import Paper from '@mui/material/Paper';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 import { useHistory } from 'react-router';
+import { useTheme } from '@mui/material/styles';
 import Hash from '../../components/Hash';
 import GridList from '../../components/GridList';
 import CopyPasteMenu from '../../components/CopyPasteMenu';
@@ -24,32 +26,7 @@ import {
 } from '../../reducers/CryptoReducer/Actions';
 import LoadingBar from '../../components/LoadingBar';
 import AlertDialog from '../../components/AlertDialog';
-
-const useStyles = makeStyles((theme) => ({
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4, 0, 2),
-  },
-  content: {
-    flexGrow: 1,
-    overflow: 'auto',
-  },
-  container: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}));
+import PageHeader from '../../components/PageHeader';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -72,7 +49,7 @@ const Text = () => {
   const loading = crypto.textHashLoading;
   const errorMessage = crypto.textErrorMessage;
 
-  const classes = useStyles();
+  const theme = useTheme();
   const history = useHistory();
 
   useEffect(() => {
@@ -180,17 +157,13 @@ const Text = () => {
 
   return (
     <div>
-      <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.text}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.textSubtitle}
-          </Typography>
-        </Container>
-      </div>
-      <main className={classes.content}>
+      <PageHeader title={language.text} subtitle={language.textSubtitle} />
+      <main
+        style={{
+          flexGrow: 1,
+          overflow: 'auto',
+        }}
+      >
         {errorMessage && errorMessage.length > 0 ? (
           <AlertDialog
             title={language.errorTitle}
@@ -199,12 +172,25 @@ const Text = () => {
             onClose={onErrorClose}
           />
         ) : null}
-        <Container className={classes.container}>
+        <Container
+          sx={{
+            paddingTop: theme.spacing(2),
+            paddingBottom: theme.spacing(2),
+          }}
+        >
           <Typography component="h2" variant="h5" color="primary" gutterBottom>
             <BackButton goBack={goBack} />
             {language.input}
           </Typography>
-          <Paper className={classes.paper}>
+          <Paper
+            sx={{
+              padding: theme.spacing(2),
+              marginBottom: theme.spacing(1),
+              display: 'flex',
+              overflow: 'auto',
+              flexDirection: 'column',
+            }}
+          >
             <CopyPasteMenu
               id={0}
               copyData={() => navigator.clipboard.writeText(input)}
@@ -224,7 +210,7 @@ const Text = () => {
                 disabled={loading}
                 onChange={(e) => d2(setTextInput(e.target.value))}
                 multiline
-                rowsMax={6}
+                maxRows={6}
                 variant="outlined"
               />
             </CopyPasteMenu>
@@ -246,7 +232,10 @@ const Text = () => {
           {hashes && hashes.length > 0 ? (
             <>
               <Button
-                className={classes.button}
+                sx={{
+                  marginTop: theme.spacing(1),
+                  marginBottom: theme.spacing(1),
+                }}
                 color="primary"
                 variant="contained"
                 onClick={() => clearData()}
@@ -256,10 +245,13 @@ const Text = () => {
 
               <CsvExport fileName={`DeadHash Export ${new Date()}.csv`} data={hashes}>
                 <Button
-                  className={classes.button}
+                  sx={{
+                    marginTop: theme.spacing(1),
+                    marginBottom: theme.spacing(1),
+                    marginLeft: 5,
+                  }}
                   color="primary"
                   variant="contained"
-                  style={{ marginLeft: 5 }}
                 >
                   {language.export}
                 </Button>
@@ -268,11 +260,14 @@ const Text = () => {
           ) : null}
           {loading ? null : (
             <Button
-              className={classes.button}
+              sx={{
+                marginTop: theme.spacing(1),
+                marginBottom: theme.spacing(1),
+                float: 'right',
+              }}
               color="primary"
               variant="contained"
               disabled={!input || input.length === 0 || loading}
-              style={{ float: 'right' }}
               onClick={() => calculateHashes()}
             >
               {language.calculate}

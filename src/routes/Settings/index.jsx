@@ -1,32 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import {
-  FormLabel, makeStyles, Radio, RadioGroup,
-} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import blue from '@material-ui/core/colors/blue';
-import purple from '@material-ui/core/colors/purple';
-import deepPurple from '@material-ui/core/colors/deepPurple';
-import lightBlue from '@material-ui/core/colors/lightBlue';
-import red from '@material-ui/core/colors/red';
-import green from '@material-ui/core/colors/green';
-import lightGreen from '@material-ui/core/colors/lightGreen';
-import grey from '@material-ui/core/colors/grey';
-import orange from '@material-ui/core/colors/orange';
-import deepOrange from '@material-ui/core/colors/deepOrange';
-import amber from '@material-ui/core/colors/amber';
-import brown from '@material-ui/core/colors/brown';
-import Paper from '@material-ui/core/Paper';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
-import RefreshIcon from '@material-ui/icons/Refresh';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import FormLabel from '@mui/material/FormLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Grid from '@mui/material/Grid';
+import blue from '@mui/material/colors/blue';
+import purple from '@mui/material/colors/purple';
+import deepPurple from '@mui/material/colors/deepPurple';
+import lightBlue from '@mui/material/colors/lightBlue';
+import red from '@mui/material/colors/red';
+import green from '@mui/material/colors/green';
+import lightGreen from '@mui/material/colors/lightGreen';
+import grey from '@mui/material/colors/grey';
+import orange from '@mui/material/colors/orange';
+import deepOrange from '@mui/material/colors/deepOrange';
+import amber from '@mui/material/colors/amber';
+import brown from '@mui/material/colors/brown';
+import Paper from '@mui/material/Paper';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import { useHistory } from 'react-router';
+import { useTheme } from '@mui/material/styles';
 import Updater from '../../utils/Updater';
 import BackButton from '../../components/BackButton';
 import UpdateDialog from '../../components/UpdateDialog';
@@ -65,31 +66,7 @@ import {
   setCrc24State,
   setCrc32State,
 } from '../../reducers/CryptoReducer/Actions';
-
-const useStyles = makeStyles((theme) => ({
-  content: {
-    flexGrow: 1,
-    overflow: 'auto',
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4, 0, 2),
-  },
-  container: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}));
+import PageHeader from '../../components/PageHeader';
 
 const os = window.require('os');
 
@@ -121,7 +98,7 @@ const Settings = () => {
   const [update, setUpdate] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const classes = useStyles();
+  const theme = useTheme();
   const history = useHistory();
 
   useEffect(() => {
@@ -191,17 +168,13 @@ const Settings = () => {
 
   return (
     <div>
-      <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.settings}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.settingsSubtitle}
-          </Typography>
-        </Container>
-      </div>
-      <main className={classes.content}>
+      <PageHeader title={language.settings} subtitle={language.settingsSubtitle} />
+      <main
+        style={{
+          flexGrow: 1,
+          overflow: 'auto',
+        }}
+      >
         {update && update.updateAvailable ? (
           <UpdateDialog
             downloadUrl={update.updateUrl}
@@ -228,14 +201,27 @@ const Settings = () => {
             ok={language.ok}
           />
         ) : null}
-        <Container maxWidth="lg" className={classes.container}>
+        <Container
+          maxWidth="lg"
+          sx={{
+            paddingTop: theme.spacing(2),
+            paddingBottom: theme.spacing(2),
+          }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} md={12} lg={12}>
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 <BackButton goBack={goBack} />
                 {language.general}
               </Typography>
-              <Paper className={classes.paper}>
+              <Paper
+                sx={{
+                  padding: theme.spacing(2),
+                  display: 'flex',
+                  overflow: 'auto',
+                  flexDirection: 'column',
+                }}
+              >
                 <FormControlLabel
                   control={(
                     <Checkbox
@@ -328,7 +314,14 @@ const Settings = () => {
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 {language.cryptography}
               </Typography>
-              <Paper className={classes.paper}>
+              <Paper
+                sx={{
+                  padding: theme.spacing(2),
+                  display: 'flex',
+                  overflow: 'auto',
+                  flexDirection: 'column',
+                }}
+              >
                 <div>
                   <FormControlLabel
                     control={(
@@ -432,7 +425,14 @@ const Settings = () => {
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 {language.cyclicRedundancyCheck}
               </Typography>
-              <Paper className={classes.paper}>
+              <Paper
+                sx={{
+                  padding: theme.spacing(2),
+                  display: 'flex',
+                  overflow: 'auto',
+                  flexDirection: 'column',
+                }}
+              >
                 <div>
                   <FormControlLabel
                     control={(
@@ -595,7 +595,10 @@ const Settings = () => {
             </Grid>
           </Grid>
           <Button
-            className={classes.button}
+            sx={{
+              marginTop: theme.spacing(1),
+              marginBottom: theme.spacing(1),
+            }}
             color="primary"
             onClick={() => checkForUpdates()}
             disabled={loading}
@@ -607,8 +610,11 @@ const Settings = () => {
             color="primary"
             variant="contained"
             onClick={() => setConfirmOpen(true)}
-            className={classes.button}
-            style={{ float: 'right' }}
+            sx={{
+              marginTop: theme.spacing(1),
+              marginBottom: theme.spacing(1),
+              float: 'right',
+            }}
           >
             {language.reset}
           </Button>

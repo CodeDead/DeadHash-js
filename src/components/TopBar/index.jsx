@@ -1,49 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import LanguageIcon from '@material-ui/icons/Language';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import CloseIcon from '@material-ui/icons/Close';
-import Brightness5Icon from '@material-ui/icons/Brightness5';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import MinimizeIcon from '@material-ui/icons/Minimize';
-import FullScreenIcon from '@material-ui/icons/Fullscreen';
-import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import LanguageIcon from '@mui/icons-material/Language';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import CloseIcon from '@mui/icons-material/Close';
+import Brightness5Icon from '@mui/icons-material/Brightness5';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import MinimizeIcon from '@mui/icons-material/Minimize';
+import FullScreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import Box from '@mui/material/Box';
 import DrawerBar from '../DrawerBar';
 import { setLanguageIndex, setThemeStyle } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
-
-const drawerWidth = 220;
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
-  hide: {
-    display: 'none',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-}));
 
 const { ipcRenderer } = window.require('electron');
 
@@ -64,8 +37,6 @@ const TopBar = () => {
   const [fullScreen, setFullScreen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const languageOpen = Boolean(anchorEl);
-
-  const classes = useStyles();
 
   /**
    * Set full screen to true
@@ -139,23 +110,31 @@ const TopBar = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <Box
+      sx={{
+        flexGrow: 1,
+      }}
+    >
       <AppBar
         position="fixed"
         color="primary"
-        className={drawerOpen ? `${classes.appBarShift} ${classes.appBar}` : classes.appBar}
       >
         <Toolbar>
           <IconButton
             edge="start"
-            className={drawerOpen ? classes.hide : null}
             color="inherit"
             aria-label="menu"
             onClick={openDrawer}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title} style={{ WebkitAppRegion: 'drag' }}>
+          <Typography
+            variant="h6"
+            style={{
+              WebkitAppRegion: 'drag',
+              flexGrow: 1,
+            }}
+          >
             {language.appName}
           </Typography>
 
@@ -286,7 +265,7 @@ const TopBar = () => {
       </AppBar>
       <DrawerBar open={drawerOpen} onClose={() => setDrawerOpen(false)} />
       <Toolbar />
-    </div>
+    </Box>
   );
 };
 
