@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useHistory } from 'react-router';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Hash from '../../components/Hash';
 import GridList from '../../components/GridList';
 import CopyPasteMenu from '../../components/CopyPasteMenu';
@@ -27,6 +26,7 @@ import {
 } from '../../reducers/CryptoReducer/Actions';
 import LoadingBar from '../../components/LoadingBar';
 import AlertDialog from '../../components/AlertDialog';
+import PageHeader from '../../components/PageHeader';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -157,21 +157,7 @@ const Text = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          backgroundColor: 'background.paper',
-          padding: theme.spacing(4, 0, 2),
-        }}
-      >
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.text}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.textSubtitle}
-          </Typography>
-        </Container>
-      </Box>
+      <PageHeader title={language.text} subtitle={language.textSubtitle} />
       <main
         style={{
           flexGrow: 1,
@@ -224,7 +210,7 @@ const Text = () => {
                 disabled={loading}
                 onChange={(e) => d2(setTextInput(e.target.value))}
                 multiline
-                rowsMax={6}
+                maxRows={6}
                 variant="outlined"
               />
             </CopyPasteMenu>

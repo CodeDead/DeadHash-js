@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useHistory } from 'react-router';
-import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import BackButton from '../../components/BackButton';
 import Updater from '../../utils/Updater';
@@ -14,6 +13,7 @@ import UpdateDialog from '../../components/UpdateDialog';
 import AlertDialog from '../../components/AlertDialog';
 import { setActiveListItem } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
+import PageHeader from '../../components/PageHeader';
 
 const os = window.require('os');
 const { ipcRenderer } = window.require('electron');
@@ -72,21 +72,7 @@ const About = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          backgroundColor: 'background.paper',
-          padding: theme.spacing(4, 0, 2),
-        }}
-      >
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.about}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.aboutSubtitle}
-          </Typography>
-        </Container>
-      </Box>
+      <PageHeader title={language.about} subtitle={language.aboutSubtitle} />
       <main
         style={{
           flexGrow: 1,

@@ -28,7 +28,6 @@ import Button from '@mui/material/Button';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useHistory } from 'react-router';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Updater from '../../utils/Updater';
 import BackButton from '../../components/BackButton';
 import UpdateDialog from '../../components/UpdateDialog';
@@ -67,6 +66,7 @@ import {
   setCrc24State,
   setCrc32State,
 } from '../../reducers/CryptoReducer/Actions';
+import PageHeader from '../../components/PageHeader';
 
 const os = window.require('os');
 
@@ -168,21 +168,7 @@ const Settings = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          backgroundColor: 'background.paper',
-          padding: theme.spacing(4, 0, 2),
-        }}
-      >
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.settings}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.settingsSubtitle}
-          </Typography>
-        </Container>
-      </Box>
+      <PageHeader title={language.settings} subtitle={language.settingsSubtitle} />
       <main
         style={{
           flexGrow: 1,

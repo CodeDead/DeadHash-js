@@ -8,13 +8,13 @@ import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
 import { useHistory } from 'react-router';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import blank from '../../components/Theme/blank.png';
 import Updater from '../../utils/Updater';
 import UpdateDialog from '../../components/UpdateDialog';
 import AlertDialog from '../../components/AlertDialog';
 import { setActiveListItem, setUpdateChecked } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
+import PageHeader from '../../components/PageHeader';
 
 const os = window.require('os');
 
@@ -81,21 +81,7 @@ const Home = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          backgroundColor: 'background.paper',
-          padding: theme.spacing(4, 0, 2),
-        }}
-      >
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.cryptography}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.cryptographySubtitle}
-          </Typography>
-        </Container>
-      </Box>
+      <PageHeader title={language.cryptography} subtitle={language.cryptographySubtitle} />
       <main
         style={{
           flexGrow: 1,

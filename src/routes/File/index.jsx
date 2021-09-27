@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useHistory } from 'react-router';
-import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import GridList from '../../components/GridList';
 import Hash from '../../components/Hash';
@@ -24,6 +23,7 @@ import {
 } from '../../reducers/CryptoReducer/Actions';
 import LoadingBar from '../../components/LoadingBar';
 import AlertDialog from '../../components/AlertDialog';
+import PageHeader from '../../components/PageHeader';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -166,21 +166,7 @@ const File = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          backgroundColor: 'background.paper',
-          padding: theme.spacing(4, 0, 2),
-        }}
-      >
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.file}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.fileSubtitle}
-          </Typography>
-        </Container>
-      </Box>
+      <PageHeader title={language.file} subtitle={language.fileSubtitle} />
       <main
         style={{
           flexGrow: 1,
