@@ -1,6 +1,4 @@
-import React, {
-  useContext, useEffect, lazy, Suspense,
-} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -15,13 +13,11 @@ import {
   setFileHashes,
   setFileHashLoading, setTextHashError, setTextHashes, setTextHashLoading,
 } from '../../reducers/CryptoReducer/Actions';
-import LoadingBar from '../LoadingBar';
-
-const Home = lazy(() => import('../../routes/Home'));
-const About = lazy(() => import('../../routes/About'));
-const File = lazy(() => import('../../routes/File'));
-const Text = lazy(() => import('../../routes/Text'));
-const Settings = lazy(() => import('../../routes/Settings'));
+import Home from '../../routes/Home';
+import Text from '../../routes/Text';
+import File from '../../routes/File';
+import About from '../../routes/About';
+import Settings from '../../routes/Settings';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -77,25 +73,23 @@ const App = () => {
         <DropZone enabled={enabled} onDrop={onDrop} reRoute="/file">
           <TopBar />
           <CssBaseline />
-          <Suspense fallback={<LoadingBar />}>
-            <Switch>
-              <Route path="/settings">
-                <Settings />
-              </Route>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/file">
-                <File />
-              </Route>
-              <Route path="/text">
-                <Text />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </Suspense>
+          <Switch>
+            <Route path="/settings">
+              <Settings />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/file">
+              <File />
+            </Route>
+            <Route path="/text">
+              <Text />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
         </DropZone>
       </BrowserRouter>
     </ThemeProvider>
