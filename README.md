@@ -4,7 +4,7 @@
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/CodeDead/DeadHash-js)
 ![GitHub](https://img.shields.io/github/license/CodeDead/DeadHash-Js)
-![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/2.1.3/total)
+![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/v2.2.0/total)
 
 DeadHash is a free and open-source utility to calculate file and text hashes and checksums. The following calculations are supported:
 
