@@ -3,8 +3,9 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
+import BackButton from '../BackButton';
 
-const PageHeader = ({ title, subtitle }) => {
+const PageHeader = ({ title, subtitle, backButton }) => {
   const theme = useTheme();
 
   return (
@@ -16,6 +17,7 @@ const PageHeader = ({ title, subtitle }) => {
     >
       <Container maxWidth="sm">
         <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
+          {backButton ? <BackButton /> : null}
           {title}
         </Typography>
         <Typography variant="h6" align="center" color="textSecondary" paragraph>

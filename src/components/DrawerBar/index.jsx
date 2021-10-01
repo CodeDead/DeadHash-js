@@ -60,7 +60,6 @@ const DrawerBar = ({ open, onClose }) => {
         history.push('/about');
         break;
       default:
-      case 0:
         history.push('/');
         break;
     }
@@ -71,10 +70,6 @@ const DrawerBar = ({ open, onClose }) => {
       anchor="left"
       open={open}
       onClose={handleDrawerClose}
-      sx={{
-        width: 240,
-        flexShrink: 0,
-      }}
     >
       <Box
         sx={{
@@ -92,45 +87,47 @@ const DrawerBar = ({ open, onClose }) => {
 
       <Divider />
 
-      <CryptographyMenu
-        handleIndexChange={handleIndexChange}
-        selectedIndex={selectedItem}
-        cryptography={language.cryptography}
-        file={language.file}
-        text={language.text}
-      />
+      <Box style={{ width: 240 }}>
+        <CryptographyMenu
+          handleIndexChange={handleIndexChange}
+          selectedIndex={selectedItem}
+          cryptography={language.cryptography}
+          file={language.file}
+          text={language.text}
+        />
 
-      <Divider />
+        <Divider />
 
-      <List>
-        <ListItem onClick={() => handleIndexChange(3)} selected={selectedItem === 3} button>
-          <ListItemIcon><BuildIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.settings} />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem onClick={() => handleIndexChange(3)} selected={selectedItem === 3} button>
+            <ListItemIcon><BuildIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.settings} />
+          </ListItem>
+        </List>
 
-      <Divider />
+        <Divider />
 
-      <List>
-        <ListItem onClick={() => handleIndexChange(4)} button>
-          <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.help} />
-        </ListItem>
+        <List>
+          <ListItem onClick={() => handleIndexChange(4)} button>
+            <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.help} />
+          </ListItem>
 
-        <ListItem onClick={() => handleIndexChange(5)} selected={selectedItem === 5} button>
-          <ListItemIcon><InfoIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.about} />
-        </ListItem>
-      </List>
+          <ListItem onClick={() => handleIndexChange(5)} selected={selectedItem === 5} button>
+            <ListItemIcon><InfoIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.about} />
+          </ListItem>
+        </List>
 
-      <Divider />
+        <Divider />
 
-      <List>
-        <ListItem onClick={() => ipcRenderer.send('handle-close')} button>
-          <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.exit} />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem onClick={() => ipcRenderer.send('handle-close')} button>
+            <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.exit} />
+          </ListItem>
+        </List>
+      </Box>
     </Drawer>
   );
 };

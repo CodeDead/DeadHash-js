@@ -46,10 +46,10 @@ const ConfirmationDialog = ({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={cancel} color="primary">
+        <Button onClick={cancel}>
           {no}
         </Button>
-        <Button onClick={accept} color="primary" autoFocus>
+        <Button onClick={accept} autoFocus>
           {yes}
         </Button>
       </DialogActions>

@@ -50,10 +50,10 @@ const UpdateDialog = ({
         <Button onClick={handleClose}>
           {cancel}
         </Button>
-        <Button onClick={() => openInformation()} color="primary">
+        <Button onClick={openInformation}>
           {information}
         </Button>
-        <Button onClick={openDownload} color="primary" autoFocus>
+        <Button onClick={openDownload} autoFocus>
           {download}
         </Button>
       </DialogActions>
