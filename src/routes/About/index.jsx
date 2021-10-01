@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useHistory } from 'react-router';
-import { useTheme } from '@mui/material/styles';
-import BackButton from '../../components/BackButton';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import Updater from '../../utils/Updater';
 import UpdateDialog from '../../components/UpdateDialog';
 import AlertDialog from '../../components/AlertDialog';
@@ -33,9 +31,6 @@ const About = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [update, setUpdate] = useState(null);
-
-  const theme = useTheme();
-  const history = useHistory();
 
   useEffect(() => {
     dispatch(setActiveListItem(5));
@@ -63,16 +58,9 @@ const About = () => {
       });
   };
 
-  /**
-   * Go back to the previous page
-   */
-  const goBack = () => {
-    history.goBack();
-  };
-
   return (
     <div>
-      <PageHeader title={language.about} subtitle={language.aboutSubtitle} />
+      <PageHeader title={language.about} subtitle={language.aboutSubtitle} backButton />
       <main
         style={{
           flexGrow: 1,
@@ -107,62 +95,43 @@ const About = () => {
         ) : null}
         <Container
           maxWidth="lg"
-          sx={{
-            paddingTop: theme.spacing(2),
-            paddingBottom: theme.spacing(2),
-          }}
+          style={{ marginTop: 10 }}
         >
-          <Typography component="h2" variant="h5" color="primary" gutterBottom>
-            <BackButton goBack={goBack} />
-            {language.appName}
-            {' '}
-            -
-            {language.about}
-          </Typography>
-          <Paper
-            sx={{
-              padding: theme.spacing(2),
-              display: 'flex',
-              overflow: 'auto',
-              flexDirection: 'column',
-            }}
-          >
-            <div style={{ whiteSpace: 'pre-wrap' }}>
-              <p>
-                {language.aboutMessage.replace('{x}', appVersion)}
-              </p>
-            </div>
-
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6} lg={6}>
-                <Button
-                  target="_blank"
-                  style={{ width: '100%' }}
-                  href="http://codedead.com/Software/DeadHash/gpl.pdf"
-                  color="primary"
-                  variant="contained"
-                >
-                  {language.license}
-                </Button>
+          <Card>
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={12} lg={12}>
+                  <Typography style={{ whiteSpace: 'pre-wrap' }}>
+                    {language.aboutMessage.replace('{x}', appVersion)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                  <Button
+                    target="_blank"
+                    fullWidth
+                    href="https://codedead.com/Software/DeadHash/gpl.pdf"
+                    variant="contained"
+                  >
+                    {language.license}
+                  </Button>
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                  <Button
+                    target="_blank"
+                    fullWidth
+                    href="https://codedead.com"
+                    variant="contained"
+                  >
+                    {language.codedead}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={6} lg={6}>
-                <Button
-                  target="_blank"
-                  style={{ width: '100%' }}
-                  href="http://codedead.com"
-                  color="primary"
-                  variant="contained"
-                >
-                  {language.codedead}
-                </Button>
-              </Grid>
-            </Grid>
-          </Paper>
+            </CardContent>
+          </Card>
           <Button
-            color="primary"
-            onClick={() => checkForUpdates()}
+            onClick={checkForUpdates}
             disabled={loading}
-            style={{ marginTop: 5 }}
+            style={{ marginTop: 10 }}
           >
             <RefreshIcon />
             {language.checkForUpdates}

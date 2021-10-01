@@ -15,7 +15,7 @@ const Theme = ({
     <Card raised={!selected}>
       <CardActionArea onClick={action}>
         <CardMedia
-          sx={{
+          style={{
             height: 60,
             backgroundColor: color,
           }}

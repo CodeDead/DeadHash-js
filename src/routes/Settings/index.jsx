@@ -17,7 +17,7 @@ import orange from '@mui/material/colors/orange';
 import deepOrange from '@mui/material/colors/deepOrange';
 import amber from '@mui/material/colors/amber';
 import brown from '@mui/material/colors/brown';
-import Paper from '@mui/material/Paper';
+import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -26,10 +26,9 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useHistory } from 'react-router';
-import { useTheme } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Updater from '../../utils/Updater';
-import BackButton from '../../components/BackButton';
 import UpdateDialog from '../../components/UpdateDialog';
 import AlertDialog from '../../components/AlertDialog';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
@@ -98,9 +97,6 @@ const Settings = () => {
   const [update, setUpdate] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const theme = useTheme();
-  const history = useHistory();
-
   useEffect(() => {
     d1(setActiveListItem(3));
   }, []);
@@ -159,16 +155,9 @@ const Settings = () => {
     d1(setThemeStyle(event.target.value));
   };
 
-  /**
-   * Go back to the previous page
-   */
-  const goBack = () => {
-    history.goBack();
-  };
-
   return (
     <div>
-      <PageHeader title={language.settings} subtitle={language.settingsSubtitle} />
+      <PageHeader title={language.settings} subtitle={language.settingsSubtitle} backButton />
       <main
         style={{
           flexGrow: 1,
@@ -203,133 +192,113 @@ const Settings = () => {
         ) : null}
         <Container
           maxWidth="lg"
-          sx={{
-            paddingTop: theme.spacing(2),
-            paddingBottom: theme.spacing(2),
-          }}
+          style={{ marginTop: 10 }}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} md={12} lg={12}>
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                <BackButton goBack={goBack} />
                 {language.general}
               </Typography>
-              <Paper
-                sx={{
-                  padding: theme.spacing(2),
-                  display: 'flex',
-                  overflow: 'auto',
-                  flexDirection: 'column',
-                }}
-              >
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      checked={autoUpdate}
-                      onChange={(e) => d1(setAutoUpdate(e.target.checked))}
-                      value="autoUpdate"
-                      color="primary"
+              <Card>
+                <CardContent>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={(
+                        <Checkbox
+                          checked={autoUpdate}
+                          onChange={(e) => d1(setAutoUpdate(e.target.checked))}
+                          value="autoUpdate"
+                        />
+                      )}
+                      label={language.autoUpdate}
                     />
-                  )}
-                  label={language.autoUpdate}
-                />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      checked={canDragDrop}
-                      onChange={(e) => d1(setCanDragDrop(e.target.checked))}
-                      value="canDragDrop"
-                      color="primary"
+                    <FormControlLabel
+                      control={(
+                        <Checkbox
+                          checked={canDragDrop}
+                          onChange={(e) => d1(setCanDragDrop(e.target.checked))}
+                          value="canDragDrop"
+                        />
+                      )}
+                      label={language.dragAndDrop}
                     />
-                  )}
-                  label={language.dragAndDrop}
-                />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      checked={minimizeEnabled}
-                      onChange={(e) => d1(setMinimizeStatus(e.target.checked))}
-                      value="minimizeEnabled"
-                      color="primary"
+                    <FormControlLabel
+                      control={(
+                        <Checkbox
+                          checked={minimizeEnabled}
+                          onChange={(e) => d1(setMinimizeStatus(e.target.checked))}
+                          value="minimizeEnabled"
+                        />
+                      )}
+                      label={language.minimizeEnabled}
                     />
-                  )}
-                  label={language.minimizeEnabled}
-                />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      checked={maximizeEnabled}
-                      onChange={(e) => d1(setMaximizeStatus(e.target.checked))}
-                      value="maximizeEnabled"
-                      color="primary"
+                    <FormControlLabel
+                      control={(
+                        <Checkbox
+                          checked={maximizeEnabled}
+                          onChange={(e) => d1(setMaximizeStatus(e.target.checked))}
+                          value="maximizeEnabled"
+                        />
+                      )}
+                      label={language.maximizeEnabled}
                     />
-                  )}
-                  label={language.maximizeEnabled}
-                />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      checked={languageEnabled}
-                      onChange={(e) => d1(setLanguageButtonStatus(e.target.checked))}
-                      value="languageEnabled"
-                      color="primary"
+                    <FormControlLabel
+                      control={(
+                        <Checkbox
+                          checked={languageEnabled}
+                          onChange={(e) => d1(setLanguageButtonStatus(e.target.checked))}
+                          value="languageEnabled"
+                        />
+                      )}
+                      label={language.languageEnabled}
                     />
-                  )}
-                  label={language.languageEnabled}
-                />
-                <FormControlLabel
-                  control={(
-                    <Checkbox
-                      checked={themeToggleEnabled}
-                      onChange={(e) => d1(setThemeToggleStatus(e.target.checked))}
-                      value="themeToggleEnabled"
-                      color="primary"
+                    <FormControlLabel
+                      control={(
+                        <Checkbox
+                          checked={themeToggleEnabled}
+                          onChange={(e) => d1(setThemeToggleStatus(e.target.checked))}
+                          value="themeToggleEnabled"
+                        />
+                      )}
+                      label={language.themeToggleEnabled}
                     />
-                  )}
-                  label={language.themeToggleEnabled}
-                />
-                <FormControl variant="outlined" style={{ marginTop: 5 }}>
-                  <InputLabel id="language-label">{language.language}</InputLabel>
-                  <Select
-                    value={languageIndex}
-                    onChange={handleLanguageChange}
-                    id="language-simple"
-                    labelId="language-label"
-                  >
-                    <MenuItem value={0}>Deutsch</MenuItem>
-                    <MenuItem value={1}>English</MenuItem>
-                    <MenuItem value={2}>Español</MenuItem>
-                    <MenuItem value={3}>Français</MenuItem>
-                    <MenuItem value={4}>Italiano</MenuItem>
-                    <MenuItem value={5}>日本語</MenuItem>
-                    <MenuItem value={6}>Nederlands</MenuItem>
-                    <MenuItem value={7}>Português</MenuItem>
-                    <MenuItem value={8}>Pусский</MenuItem>
-                    <MenuItem value={9}>Türkçe</MenuItem>
-                  </Select>
-                </FormControl>
-              </Paper>
+                    <FormControl variant="outlined" style={{ marginTop: 5 }}>
+                      <InputLabel id="language-label">{language.language}</InputLabel>
+                      <Select
+                        value={languageIndex}
+                        onChange={handleLanguageChange}
+                        id="language-simple"
+                        labelId="language-label"
+                        label={language.language}
+                      >
+                        <MenuItem value={0}>Deutsch</MenuItem>
+                        <MenuItem value={1}>English</MenuItem>
+                        <MenuItem value={2}>Español</MenuItem>
+                        <MenuItem value={3}>Français</MenuItem>
+                        <MenuItem value={4}>Italiano</MenuItem>
+                        <MenuItem value={5}>日本語</MenuItem>
+                        <MenuItem value={6}>Nederlands</MenuItem>
+                        <MenuItem value={7}>Português</MenuItem>
+                        <MenuItem value={8}>Pусский</MenuItem>
+                        <MenuItem value={9}>Türkçe</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </FormGroup>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 {language.cryptography}
               </Typography>
-              <Paper
-                sx={{
-                  padding: theme.spacing(2),
-                  display: 'flex',
-                  overflow: 'auto',
-                  flexDirection: 'column',
-                }}
-              >
-                <div>
+              <Card>
+                <CardContent>
                   <FormControlLabel
                     control={(
                       <Checkbox
                         checked={md4}
                         onChange={(e) => d2(setMd4State(e.target.checked))}
                         value="md4"
-                        color="primary"
                       />
                     )}
                     label={language.md4}
@@ -341,7 +310,6 @@ const Settings = () => {
                         checked={md5}
                         onChange={(e) => d2(setMd5State(e.target.checked))}
                         value="md5"
-                        color="primary"
                       />
                     )}
                     label={language.md5}
@@ -353,7 +321,6 @@ const Settings = () => {
                         checked={sha1}
                         onChange={(e) => d2(setSha1State(e.target.checked))}
                         value="sha1"
-                        color="primary"
                       />
                     )}
                     label={language.sha1}
@@ -365,7 +332,6 @@ const Settings = () => {
                         checked={sha224}
                         onChange={(e) => d2(setSha224State(e.target.checked))}
                         value="sha224"
-                        color="primary"
                       />
                     )}
                     label={language.sha224}
@@ -377,7 +343,6 @@ const Settings = () => {
                         checked={sha256}
                         onChange={(e) => d2(setSha256State(e.target.checked))}
                         value="sha256"
-                        color="primary"
                       />
                     )}
                     label={language.sha256}
@@ -389,7 +354,6 @@ const Settings = () => {
                         checked={sha384}
                         onChange={(e) => d2(setSha384State(e.target.checked))}
                         value="sha384"
-                        color="primary"
                       />
                     )}
                     label={language.sha384}
@@ -401,7 +365,6 @@ const Settings = () => {
                         checked={sha512}
                         onChange={(e) => d2(setSha512State(e.target.checked))}
                         value="sha512"
-                        color="primary"
                       />
                     )}
                     label={language.sha512}
@@ -413,34 +376,25 @@ const Settings = () => {
                         checked={ripemd160}
                         onChange={(e) => d2(setRipeMd160State(e.target.checked))}
                         value="ripemd160"
-                        color="primary"
                       />
                     )}
                     label={language.ripemd160}
                   />
-                </div>
-              </Paper>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 {language.cyclicRedundancyCheck}
               </Typography>
-              <Paper
-                sx={{
-                  padding: theme.spacing(2),
-                  display: 'flex',
-                  overflow: 'auto',
-                  flexDirection: 'column',
-                }}
-              >
-                <div>
+              <Card>
+                <CardContent>
                   <FormControlLabel
                     control={(
                       <Checkbox
                         checked={crc1}
                         onChange={(e) => d2(setCrc1State(e.target.checked))}
                         value="crc1"
-                        color="primary"
                       />
                     )}
                     label={language.crc1}
@@ -451,7 +405,6 @@ const Settings = () => {
                         checked={crc8}
                         onChange={(e) => d2(setCrc8State(e.target.checked))}
                         value="crc8"
-                        color="primary"
                       />
                     )}
                     label={language.crc8}
@@ -462,7 +415,6 @@ const Settings = () => {
                         checked={crc16}
                         onChange={(e) => d2(setCrc16State(e.target.checked))}
                         value="crc16"
-                        color="primary"
                       />
                     )}
                     label={language.crc16}
@@ -473,7 +425,6 @@ const Settings = () => {
                         checked={crc24}
                         onChange={(e) => d2(setCrc24State(e.target.checked))}
                         value="crc24"
-                        color="primary"
                       />
                     )}
                     label={language.crc24}
@@ -484,13 +435,12 @@ const Settings = () => {
                         checked={crc32}
                         onChange={(e) => d2(setCrc32State(e.target.checked))}
                         value="crc32"
-                        color="primary"
                       />
                     )}
                     label={language.crc32}
                   />
-                </div>
-              </Paper>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <Typography component="h2" variant="h5" color="primary" gutterBottom>
@@ -585,9 +535,9 @@ const Settings = () => {
               </GridList>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
-              <FormControl style={{ marginTop: 10 }}>
-                <FormLabel>{language.themeStyle}</FormLabel>
-                <RadioGroup value={themeStyle} onChange={changeThemeStyle}>
+              <FormControl style={{ marginTop: 10 }} component="fieldset">
+                <FormLabel component="legend">{language.themeStyle}</FormLabel>
+                <RadioGroup row value={themeStyle} onChange={changeThemeStyle}>
                   <FormControlLabel value="light" control={<Radio />} label={language.light} />
                   <FormControlLabel value="dark" control={<Radio />} label={language.dark} />
                 </RadioGroup>
@@ -595,11 +545,7 @@ const Settings = () => {
             </Grid>
           </Grid>
           <Button
-            sx={{
-              marginTop: theme.spacing(1),
-              marginBottom: theme.spacing(1),
-            }}
-            color="primary"
+            style={{ marginTop: 10 }}
             onClick={() => checkForUpdates()}
             disabled={loading}
           >
@@ -607,14 +553,9 @@ const Settings = () => {
             {language.checkForUpdates}
           </Button>
           <Button
-            color="primary"
             variant="contained"
             onClick={() => setConfirmOpen(true)}
-            sx={{
-              marginTop: theme.spacing(1),
-              marginBottom: theme.spacing(1),
-              float: 'right',
-            }}
+            style={{ marginTop: 10, float: 'right' }}
           >
             {language.reset}
           </Button>

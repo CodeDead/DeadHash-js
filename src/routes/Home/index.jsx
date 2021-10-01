@@ -3,12 +3,9 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import CardActionArea from '@mui/material/CardActionArea';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
 import { useHistory } from 'react-router';
-import { useTheme } from '@mui/material/styles';
-import blank from '../../components/Theme/blank.png';
 import Updater from '../../utils/Updater';
 import UpdateDialog from '../../components/UpdateDialog';
 import AlertDialog from '../../components/AlertDialog';
@@ -29,7 +26,6 @@ const Home = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [update, setUpdate] = useState(null);
 
-  const theme = useTheme();
   const history = useHistory();
 
   /**
@@ -109,19 +105,12 @@ const Home = () => {
         ) : null}
         <Container
           maxWidth="lg"
-          sx={{
-            paddingTop: theme.spacing(2),
-            paddingBottom: theme.spacing(2),
-          }}
+          style={{ marginTop: 10 }}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} md={6} lg={6}>
               <Card>
                 <CardActionArea onClick={() => openFileHasher()}>
-                  <CardMedia
-                    title={language.file}
-                    image={blank}
-                  />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {language.file}
@@ -136,10 +125,6 @@ const Home = () => {
             <Grid item xs={12} md={6} lg={6}>
               <Card>
                 <CardActionArea onClick={() => openTextHasher()}>
-                  <CardMedia
-                    title={language.file}
-                    image={blank}
-                  />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {language.text}

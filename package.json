@@ -38,7 +38,7 @@
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.1",
-    "@mui/material": "^5.0.1",
+    "@mui/material": "^5.0.2",
     "crc": "^3.8.0",
     "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
@@ -72,14 +72,14 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^6.2.1",
+    "concurrently": "^6.2.2",
     "electron": "^15.0.0",
     "electron-builder": "^22.11.7",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.26.0",
+    "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "wait-on": "^6.0.0"
   }
