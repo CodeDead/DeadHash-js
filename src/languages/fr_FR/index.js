@@ -54,7 +54,6 @@ const fr_FR = () => ({
   cancel: 'Annuler',
   ok: 'OK',
   errorTitle: 'Une erreur est survenue!',
-  input: 'Données d\'entrée',
   compare: 'Comparer',
   compareHash: 'Votre hachage ici',
   calculate: 'Calculer',

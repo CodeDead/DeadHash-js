@@ -54,7 +54,6 @@ const ru_RU = () => ({
   cancel: 'Отмена',
   ok: 'хорошо',
   errorTitle: 'Произошла ошибка!',
-  input: 'вход',
   compare: 'сравнить',
   compareHash: 'Ваш хеш здесь',
   calculate: 'Рассчитать',

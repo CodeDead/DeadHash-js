@@ -54,7 +54,6 @@ const de_DE = () => ({
   cancel: 'Stornieren',
   ok: 'OK',
   errorTitle: 'Ein Fehler ist aufgetreten!',
-  input: 'Eingabe',
   compare: 'Vergleichen',
   compareHash: 'Dein Hash hier',
   calculate: 'Berechnung',

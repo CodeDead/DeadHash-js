@@ -54,7 +54,6 @@ const en_US = () => ({
   cancel: 'Cancel',
   ok: 'OK',
   errorTitle: 'An error occurred!',
-  input: 'Input',
   compare: 'Compare',
   compareHash: 'Your hash here',
   calculate: 'Calculate',

@@ -54,7 +54,6 @@ const it_IT = () => ({
   cancel: 'Annulla',
   ok: 'OK',
   errorTitle: 'Si è verificato un errore!',
-  input: 'Ingresso',
   compare: 'Confrontare',
   compareHash: 'Il tuo hash qui',
   calculate: 'Calcolare',

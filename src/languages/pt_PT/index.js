@@ -54,7 +54,6 @@ const pt_PT = () => ({
   cancel: 'Cancelar',
   ok: 'OK',
   errorTitle: 'Um erro ocorreu!',
-  input: 'Entrada',
   compare: 'Comparar',
   compareHash: 'Seu hash aqui',
   calculate: 'Calcular',
