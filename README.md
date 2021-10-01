@@ -1,4 +1,4 @@
-![DeadHash](https://i.imgur.com/PWrqQ67.png)
+![DeadHash](https://i.imgur.com/CkzWk7u.png)
 
 # DeadHash
 
@@ -26,19 +26,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Building
 
-In order to produce binary distributable files or to start a development build, you must first issue the following command,
-in order to ensure that the React build is up-to-date:
-```
-yarn react-build
-```
-
-After running `yarn react-build`, you can issue the following command in order to produce the binary distributable files:
-```
+In order to produce binary distributable files, you must issue the following command:
+```shell
 yarn build
 ```
 
 If you want to start the development version, you can issue the following command, after running `yarn react-build`:
-```
+```shell
 yarn start
 ```
 
