@@ -2,15 +2,11 @@ import React, { useEffect, useRef, useContext } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import GridList from '../../components/GridList';
-import Hash from '../../components/Hash';
 import CopyPasteMenu from '../../components/CopyPasteMenu';
 import CsvExport from '../../components/CsvExport';
 import { setActiveListItem } from '../../reducers/MainReducer/Actions';
@@ -24,6 +20,7 @@ import {
 import LoadingBar from '../../components/LoadingBar';
 import AlertDialog from '../../components/AlertDialog';
 import PageHeader from '../../components/PageHeader';
+import HashList from '../../components/HashList';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -54,23 +51,13 @@ const File = () => {
 
   const output = hashes && hashes.length > 0
     ? (
-      <Box style={{ marginTop: 10 }}>
-        <Typography component="h2" variant="h5" color="primary" gutterBottom>
-          {language.output}
-        </Typography>
-        <GridList md={12} lg={12} xs={12} spacing={2}>
-          {hashes.map((e, i) => (
-            <Hash
-              id={i}
-              key={e.hash}
-              content={e.hash}
-              hashType={e.type}
-              copy={language.copy}
-              compareString={compare ? compareHash : null}
-            />
-          ))}
-        </GridList>
-      </Box>
+      <HashList
+        marginTop={10}
+        compareHash={compare ? compareHash : null}
+        hashes={hashes}
+        copyLabel={language.copy}
+        outputLabel={language.output}
+      />
     )
     : null;
 
@@ -212,7 +199,6 @@ const File = () => {
                         checked={compare}
                         onChange={(e) => d2(setFileHashComparing(e.target.checked))}
                         value="compare"
-                        color="primary"
                       />
                     )}
                     label={language.compare}
@@ -226,7 +212,7 @@ const File = () => {
             <>
               <Button
                 variant="contained"
-                onClick={() => clearData()}
+                onClick={clearData}
                 style={{ marginTop: 10 }}
               >
                 {language.clear}
