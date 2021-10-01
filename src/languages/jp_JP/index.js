@@ -54,7 +54,6 @@ const jp_JP = () => ({
   cancel: 'キャンセル',
   ok: 'オーケー',
   errorTitle: 'エラーが発生しました！',
-  input: '入力',
   compare: '比較する',
   compareHash: 'ここにあなたのハッシュ',
   calculate: '計算する',

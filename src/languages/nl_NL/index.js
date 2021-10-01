@@ -54,7 +54,6 @@ const nl_NL = () => ({
   cancel: 'Annuleren',
   ok: 'OK',
   errorTitle: 'Er is een fout opgetreden!',
-  input: 'Input',
   compare: 'Vergelijken',
   compareHash: 'Jouw hash hier',
   calculate: 'Bereken',

@@ -54,7 +54,6 @@ const tr_TR = () => ({
   cancel: 'İptal etmek',
   ok: 'Tamam',
   errorTitle: 'Bir hata oluştu!',
-  input: 'Giriş',
   compare: 'Karşılaştırmak',
   compareHash: 'Burda',
   calculate: 'Hesaplamak',

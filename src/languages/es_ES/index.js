@@ -54,7 +54,6 @@ const es_ES = () => ({
   cancel: 'Cancelar',
   ok: 'Bueno',
   errorTitle: '¡Ocurrió un error!',
-  input: 'Entrada',
   compare: 'Comparar',
   compareHash: 'Tu hash aquí',
   calculate: 'Calcular',
