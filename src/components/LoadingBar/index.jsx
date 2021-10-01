@@ -1,10 +1,11 @@
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const LoadingBar = () => (
+const LoadingBar = ({ marginTop }) => (
   <div style={{
     display: 'flex',
     justifyContent: 'center',
+    marginTop,
   }}
   >
     <CircularProgress />

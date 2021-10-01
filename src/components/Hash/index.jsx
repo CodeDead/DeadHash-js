@@ -1,26 +1,16 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import CheckIcon from '@material-ui/icons/Check';
+import Typography from '@mui/material/Typography';
+import CheckIcon from '@mui/icons-material/Check';
+import CopyIcon from '@mui/icons-material/FileCopy';
 import { Menu, Item, useContextMenu } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
-import CopyIcon from '@material-ui/icons/FileCopy';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: theme.spacing(2),
-    overflow: 'auto',
-    flex: 'auto',
-    flexDirection: 'column',
-  },
-}));
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const Hash = ({
   hashType, content, compareString, id, copy,
 }) => {
   const MENU_ID = `hashMenu${id}`;
-  const classes = useStyles();
 
   let compareColor = null;
   let compareIcon = null;
@@ -47,22 +37,24 @@ const Hash = ({
   };
 
   return (
-    <Paper className={classes.paper}>
-      <Typography variant="subtitle1" color="primary" gutterBottom>
-        {hashType}
-        {compareIcon}
-      </Typography>
-      <div onContextMenu={handleContextMenu}>
-        <span style={compareColor}>{content}</span>
-      </div>
-      <Menu id={`hashMenu${id}`}>
-        <Item onClick={() => navigator.clipboard.writeText(content)}>
-          <CopyIcon />
-          {' '}
-          {copy}
-        </Item>
-      </Menu>
-    </Paper>
+    <Card>
+      <CardContent>
+        <Typography variant="subtitle1" color="primary" gutterBottom>
+          {hashType}
+          {compareIcon}
+        </Typography>
+        <div onContextMenu={handleContextMenu}>
+          <span style={compareColor}>{content}</span>
+        </div>
+        <Menu id={`hashMenu${id}`}>
+          <Item onClick={() => navigator.clipboard.writeText(content)}>
+            <CopyIcon />
+            {' '}
+            {copy}
+          </Item>
+        </Menu>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -1,16 +1,13 @@
 import React, { useEffect, useRef, useContext } from 'react';
-import {
-  Checkbox, FormControlLabel, makeStyles, Paper,
-} from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { useHistory } from 'react-router';
-import GridList from '../../components/GridList';
-import Hash from '../../components/Hash';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
 import CopyPasteMenu from '../../components/CopyPasteMenu';
-import BackButton from '../../components/BackButton';
 import CsvExport from '../../components/CsvExport';
 import { setActiveListItem } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
@@ -22,32 +19,8 @@ import {
 } from '../../reducers/CryptoReducer/Actions';
 import LoadingBar from '../../components/LoadingBar';
 import AlertDialog from '../../components/AlertDialog';
-
-const useStyles = makeStyles((theme) => ({
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4, 0, 2),
-  },
-  content: {
-    flexGrow: 1,
-    overflow: 'auto',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  container: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}));
+import PageHeader from '../../components/PageHeader';
+import HashList from '../../components/HashList';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -72,58 +45,44 @@ const File = () => {
 
   const fileRef = useRef(null);
 
-  const history = useHistory();
-  const classes = useStyles();
-
   useEffect(() => {
     d1(setActiveListItem(1));
   }, []);
 
   const output = hashes && hashes.length > 0
     ? (
-      <>
-        <Typography component="h2" variant="h5" color="primary" gutterBottom>
-          {language.output}
-        </Typography>
-        <GridList md={12} lg={12} xs={12} spacing={2}>
-          {hashes.map((e, i) => (
-            <Hash
-              id={i}
-              /* eslint-disable-next-line react/no-array-index-key */
-              key={i}
-              content={e.hash}
-              hashType={e.type}
-              copy={language.copy}
-              compareString={compare ? compareHash : null}
-            />
-          ))}
-        </GridList>
-      </>
+      <HashList
+        marginTop={10}
+        compareHash={compare ? compareHash : null}
+        hashes={hashes}
+        copyLabel={language.copy}
+        outputLabel={language.output}
+      />
     )
     : null;
 
   const compareField = compare ? (
-    <CopyPasteMenu
-      id={1}
-      copyData={() => navigator.clipboard.writeText(compareHash)}
-      copy={language.copy}
-      paste={language.paste}
-      pasteData={() => {
-        navigator.clipboard.readText()
-          .then((text) => {
-            d2(setFileCompareHash(text));
-          });
-      }}
-    >
-      <TextField
-        style={{ width: '100%' }}
-        margin="normal"
-        value={compareHash}
-        onChange={(e) => d2(setFileCompareHash(e.target.value))}
-        label={language.compareHash}
-        variant="outlined"
-      />
-    </CopyPasteMenu>
+    <Grid item xs={12} md={12} lg={12}>
+      <CopyPasteMenu
+        id={1}
+        copyData={() => navigator.clipboard.writeText(compareHash)}
+        copy={language.copy}
+        paste={language.paste}
+        pasteData={() => {
+          navigator.clipboard.readText()
+            .then((text) => {
+              d2(setFileCompareHash(text));
+            });
+        }}
+      >
+        <TextField
+          fullWidth
+          value={compareHash}
+          onChange={(e) => d2(setFileCompareHash(e.target.value))}
+          label={language.compareHash}
+        />
+      </CopyPasteMenu>
+    </Grid>
   ) : null;
 
   /**
@@ -175,13 +134,6 @@ const File = () => {
   };
 
   /**
-   * Go back to the previous page
-   */
-  const goBack = () => {
-    history.goBack();
-  };
-
-  /**
    * Method that is called when the error dialog is called
    */
   const onErrorClose = () => {
@@ -190,17 +142,13 @@ const File = () => {
 
   return (
     <div>
-      <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.file}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.fileSubtitle}
-          </Typography>
-        </Container>
-      </div>
-      <main className={classes.content}>
+      <PageHeader title={language.file} subtitle={language.fileSubtitle} backButton />
+      <main
+        style={{
+          flexGrow: 1,
+          overflow: 'auto',
+        }}
+      >
         {errorMessage && errorMessage.length > 0 ? (
           <AlertDialog
             title={language.errorTitle}
@@ -209,85 +157,85 @@ const File = () => {
             onClose={onErrorClose}
           />
         ) : null}
-        <Container className={classes.container}>
-          <Typography component="h2" variant="h5" color="primary" gutterBottom>
-            <BackButton goBack={goBack} />
-            {language.input}
-          </Typography>
-          <Paper className={classes.paper}>
-            <TextField
-              margin="normal"
-              onClick={() => {
-                if (!loading) fileRef.current.click();
-              }}
-              disabled
-              id="filled-disabled"
-              value={file && file.path ? file.path : ''}
-              variant="outlined"
-              label={language.filePath}
-            />
+        <Container style={{ marginTop: 10 }}>
+          <Card>
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={10} lg={10}>
+                  <TextField
+                    fullWidth
+                    onClick={() => {
+                      if (!loading) fileRef.current.click();
+                    }}
+                    disabled
+                    id="filled-disabled"
+                    value={file && file.path ? file.path : ''}
+                    label={language.filePath}
+                  />
 
-            <input
-              ref={fileRef}
-              type="file"
-              onChange={onFileChange}
-              style={{ display: 'none' }}
-            />
+                  <input
+                    ref={fileRef}
+                    type="file"
+                    onChange={onFileChange}
+                    style={{ display: 'none' }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={2} lg={2}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    style={{ height: '100%' }}
+                    disabled={loading}
+                    onClick={() => fileRef.current.click()}
+                  >
+                    {language.select}
+                  </Button>
+                </Grid>
 
-            <Button
-              color="primary"
-              variant="contained"
-              disabled={loading}
-              onClick={() => fileRef.current.click()}
-            >
-              {language.select}
-            </Button>
-
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  checked={compare}
-                  onChange={(e) => d2(setFileHashComparing(e.target.checked))}
-                  value="compare"
-                  color="primary"
-                />
-              )}
-              label={language.compare}
-            />
-            {compareField}
-          </Paper>
-          {loading ? <LoadingBar /> : null}
+                <Grid item xs={12} md={12} lg={12}>
+                  <FormControlLabel
+                    control={(
+                      <Checkbox
+                        checked={compare}
+                        onChange={(e) => d2(setFileHashComparing(e.target.checked))}
+                        value="compare"
+                      />
+                    )}
+                    label={language.compare}
+                  />
+                </Grid>
+                {compareField}
+              </Grid>
+            </CardContent>
+          </Card>
           {hashes && hashes.length > 0 ? (
             <>
               <Button
-                className={classes.button}
-                color="primary"
                 variant="contained"
-                onClick={() => clearData()}
+                onClick={clearData}
+                style={{ marginTop: 10 }}
               >
                 {language.clear}
               </Button>
 
               <CsvExport fileName={`DeadHash Export ${new Date()}.csv`} data={hashes}>
                 <Button
-                  className={classes.button}
-                  color="primary"
                   variant="contained"
-                  style={{ marginLeft: 5 }}
+                  style={{ marginLeft: 5, marginTop: 10 }}
                 >
                   {language.export}
                 </Button>
               </CsvExport>
             </>
-
           ) : null}
-          {loading ? null : (
+          {loading ? <LoadingBar marginTop={10} /> : (
             <Button
-              className={classes.button}
-              color="primary"
+              style={{
+                float: 'right',
+                marginTop: 10,
+              }}
               variant="contained"
               disabled={!file || file.length === 0 || loading}
-              style={{ float: 'right' }}
               onClick={calculateHashes}
             >
               {language.calculate}

@@ -1,15 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import {
-  Checkbox, makeStyles, Paper, FormControlLabel, Button,
-} from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import { useHistory } from 'react-router';
-import Hash from '../../components/Hash';
-import GridList from '../../components/GridList';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
 import CopyPasteMenu from '../../components/CopyPasteMenu';
-import BackButton from '../../components/BackButton';
 import CsvExport from '../../components/CsvExport';
 import { setActiveListItem } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
@@ -24,32 +22,9 @@ import {
 } from '../../reducers/CryptoReducer/Actions';
 import LoadingBar from '../../components/LoadingBar';
 import AlertDialog from '../../components/AlertDialog';
-
-const useStyles = makeStyles((theme) => ({
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4, 0, 2),
-  },
-  content: {
-    flexGrow: 1,
-    overflow: 'auto',
-  },
-  container: {
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  button: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}));
+import PageHeader from '../../components/PageHeader';
+import HashList from '../../components/HashList';
+import CompareField from '../../components/CompareField';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -72,56 +47,34 @@ const Text = () => {
   const loading = crypto.textHashLoading;
   const errorMessage = crypto.textErrorMessage;
 
-  const classes = useStyles();
-  const history = useHistory();
-
   useEffect(() => {
     d1(setActiveListItem(2));
   }, []);
 
   const compareField = compare ? (
-    <CopyPasteMenu
-      id={1}
-      copyData={() => navigator.clipboard.writeText(compareHash)}
-      copy={language.copy}
-      paste={language.paste}
-      pasteData={() => navigator.clipboard.readText()
-        .then((text) => {
+    <Grid item xs={12} md={12} lg={12}>
+      <CompareField
+        copyLabel={language.copy}
+        pasteLabel={language.paste}
+        compareLabel={language.compareHash}
+        onChange={(e) => d2(setTextCompareHash(e))}
+        value={compareHash}
+        onPaste={() => navigator.clipboard.readText().then((text) => {
           d2(setTextCompareHash(text));
         })}
-    >
-      <TextField
-        id="outlined-basic"
-        style={{ width: '100%' }}
-        margin="normal"
-        value={compareHash}
-        onChange={(e) => d2(setTextCompareHash(e.target.value))}
-        label={language.compareHash}
-        variant="outlined"
       />
-    </CopyPasteMenu>
+    </Grid>
   ) : null;
 
   const output = hashes && hashes.length > 0
     ? (
-      <>
-        <Typography component="h2" variant="h5" color="primary" gutterBottom>
-          {language.output}
-        </Typography>
-        <GridList md={12} lg={12} xs={12} spacing={2}>
-          {hashes.map((e, i) => (
-            <Hash
-              id={i}
-              /* eslint-disable-next-line react/no-array-index-key */
-              key={i}
-              content={e.hash}
-              hashType={e.type}
-              copy={language.copy}
-              compareString={compare ? compareHash : null}
-            />
-          ))}
-        </GridList>
-      </>
+      <HashList
+        marginTop={10}
+        compareHash={compare ? compareHash : null}
+        hashes={hashes}
+        copyLabel={language.copy}
+        outputLabel={language.output}
+      />
     )
     : null;
 
@@ -165,13 +118,6 @@ const Text = () => {
   };
 
   /**
-   * Go back to the previous page
-   */
-  const goBack = () => {
-    history.goBack();
-  };
-
-  /**
    * Method that is called when the error dialog is called
    */
   const onErrorClose = () => {
@@ -180,17 +126,13 @@ const Text = () => {
 
   return (
     <div>
-      <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {language.text}
-          </Typography>
-          <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            {language.textSubtitle}
-          </Typography>
-        </Container>
-      </div>
-      <main className={classes.content}>
+      <PageHeader title={language.text} subtitle={language.textSubtitle} backButton />
+      <main
+        style={{
+          flexGrow: 1,
+          overflow: 'auto',
+        }}
+      >
         {errorMessage && errorMessage.length > 0 ? (
           <AlertDialog
             title={language.errorTitle}
@@ -199,81 +141,77 @@ const Text = () => {
             onClose={onErrorClose}
           />
         ) : null}
-        <Container className={classes.container}>
-          <Typography component="h2" variant="h5" color="primary" gutterBottom>
-            <BackButton goBack={goBack} />
-            {language.input}
-          </Typography>
-          <Paper className={classes.paper}>
-            <CopyPasteMenu
-              id={0}
-              copyData={() => navigator.clipboard.writeText(input)}
-              copy={language.copy}
-              paste={language.paste}
-              pasteData={() => navigator.clipboard.readText()
-                .then((text) => {
-                  d2(setTextInput(text));
-                })}
-            >
-              <TextField
-                style={{ width: '100%' }}
-                id="outlined-basic"
-                label={language.yourTextHere}
-                margin="normal"
-                value={input}
-                disabled={loading}
-                onChange={(e) => d2(setTextInput(e.target.value))}
-                multiline
-                rowsMax={6}
-                variant="outlined"
-              />
-            </CopyPasteMenu>
-
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  checked={compare}
-                  onChange={(e) => d2(setTextHashComparing(e.target.checked))}
-                  value="compare"
-                  color="primary"
-                />
-              )}
-              label={language.compare}
-            />
-            {compareField}
-          </Paper>
-          {loading ? <LoadingBar /> : null}
+        <Container style={{ marginTop: 10 }}>
+          <Card>
+            <CardContent>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={12} lg={12}>
+                  <CopyPasteMenu
+                    id={0}
+                    copyData={() => navigator.clipboard.writeText(input)}
+                    copy={language.copy}
+                    paste={language.paste}
+                    pasteData={() => navigator.clipboard.readText()
+                      .then((text) => {
+                        d2(setTextInput(text));
+                      })}
+                  >
+                    <TextField
+                      fullWidth
+                      label={language.yourTextHere}
+                      value={input}
+                      disabled={loading}
+                      onChange={(e) => d2(setTextInput(e.target.value))}
+                      multiline
+                      maxRows={6}
+                    />
+                  </CopyPasteMenu>
+                </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                  <FormControlLabel
+                    control={(
+                      <Checkbox
+                        checked={compare}
+                        onChange={(e) => d2(setTextHashComparing(e.target.checked))}
+                        value="compare"
+                      />
+                    )}
+                    label={language.compare}
+                  />
+                </Grid>
+              </Grid>
+              {compareField}
+            </CardContent>
+          </Card>
           {hashes && hashes.length > 0 ? (
             <>
               <Button
-                className={classes.button}
-                color="primary"
+                style={{ marginTop: 10 }}
                 variant="contained"
-                onClick={() => clearData()}
+                onClick={clearData}
               >
                 {language.clear}
               </Button>
 
               <CsvExport fileName={`DeadHash Export ${new Date()}.csv`} data={hashes}>
                 <Button
-                  className={classes.button}
-                  color="primary"
+                  style={{ marginLeft: 5, marginTop: 10 }}
                   variant="contained"
-                  style={{ marginLeft: 5 }}
                 >
                   {language.export}
                 </Button>
               </CsvExport>
             </>
           ) : null}
-          {loading ? null : (
+          {loading ? (<LoadingBar marginTop={10} />) : (
             <Button
-              className={classes.button}
-              color="primary"
+              style={{
+                float: 'right',
+                marginTop: 10,
+              }}
               variant="contained"
               disabled={!input || input.length === 0 || loading}
-              style={{ float: 'right' }}
-              onClick={() => calculateHashes()}
+              onClick={calculateHashes}
             >
               {language.calculate}
             </Button>

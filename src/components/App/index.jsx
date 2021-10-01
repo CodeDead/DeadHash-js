@@ -1,14 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { CssBaseline } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Home from '../../routes/Home';
-import Settings from '../../routes/Settings';
+import { CssBaseline } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThemeSelector from '../../utils/ThemeSelector';
 import TopBar from '../TopBar';
-import About from '../../routes/About';
-import File from '../../routes/File';
-import Text from '../../routes/Text';
 import DropZone from '../DropZone';
 import { MainContext } from '../../contexts/MainContextProvider';
 import { CryptoContext } from '../../contexts/CryptoContextReducer';
@@ -18,6 +13,11 @@ import {
   setFileHashes,
   setFileHashLoading, setTextHashError, setTextHashes, setTextHashLoading,
 } from '../../reducers/CryptoReducer/Actions';
+import Home from '../../routes/Home';
+import Text from '../../routes/Text';
+import File from '../../routes/File';
+import About from '../../routes/About';
+import Settings from '../../routes/Settings';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -30,10 +30,10 @@ const App = () => {
 
   const color = ThemeSelector(themeIndex);
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       primary: color,
-      type: themeStyle,
+      mode: themeStyle,
     },
   });
 

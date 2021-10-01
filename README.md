@@ -1,10 +1,10 @@
-![DeadHash](https://i.imgur.com/PWrqQ67.png)
+![DeadHash](https://i.imgur.com/CkzWk7u.png)
 
 # DeadHash
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/CodeDead/DeadHash-js)
 ![GitHub](https://img.shields.io/github/license/CodeDead/DeadHash-Js)
-![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/2.1.3/total)
+![GitHub Releases (by Release)](https://img.shields.io/github/downloads/CodeDead/DeadHash-js/v2.2.0/total)
 
 DeadHash is a free and open-source utility to calculate file and text hashes and checksums. The following calculations are supported:
 
@@ -26,19 +26,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Building
 
-In order to produce binary distributable files or to start a development build, you must first issue the following command,
-in order to ensure that the React build is up-to-date:
-```
-yarn react-build
-```
-
-After running `yarn react-build`, you can issue the following command in order to produce the binary distributable files:
-```
+In order to produce binary distributable files, you must issue the following command:
+```shell
 yarn build
 ```
 
-If you want to start the development version, you can issue the following command, after running `yarn react-build`:
-```
+If you want to start the development version, you can issue the following command:
+```shell
 yarn start
 ```
 

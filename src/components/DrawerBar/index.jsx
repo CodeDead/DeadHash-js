@@ -1,39 +1,22 @@
 import React, { useContext } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InfoIcon from '@material-ui/icons/Info';
-import BuildIcon from '@material-ui/icons/Build';
-import HelpIcon from '@material-ui/icons/Help';
-import CloseIcon from '@material-ui/icons/Close';
+import { useTheme } from '@mui/material/styles';
+import Drawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InfoIcon from '@mui/icons-material/Info';
+import BuildIcon from '@mui/icons-material/Build';
+import HelpIcon from '@mui/icons-material/Help';
+import CloseIcon from '@mui/icons-material/Close';
 import { useHistory } from 'react-router-dom';
 import CryptographyMenu from '../CryptographyMenu';
 import { MainContext } from '../../contexts/MainContextProvider';
-
-const drawerWidth = 240;
-const useStyles = makeStyles((theme) => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-}));
 
 const { ipcRenderer } = window.require('electron');
 
@@ -43,7 +26,6 @@ const DrawerBar = ({ open, onClose }) => {
   const selectedItem = state.selectedListItem;
 
   const history = useHistory();
-  const classes = useStyles();
   const theme = useTheme();
 
   /**
@@ -62,10 +44,6 @@ const DrawerBar = ({ open, onClose }) => {
     if (selectedItem === index) return;
 
     switch (index) {
-      default:
-      case 0:
-        history.push('/');
-        break;
       case 1:
         history.push('/file');
         break;
@@ -81,66 +59,75 @@ const DrawerBar = ({ open, onClose }) => {
       case 5:
         history.push('/about');
         break;
+      default:
+        history.push('/');
+        break;
     }
   };
 
   return (
     <Drawer
-      className={classes.drawer}
       anchor="left"
       open={open}
       onClose={handleDrawerClose}
-      classes={{
-        paper: classes.drawerPaper,
-      }}
     >
-      <div className={classes.drawerHeader}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 8px',
+          ...theme.mixins.toolbar,
+          justifyContent: 'flex-end',
+        }}
+      >
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
-      </div>
+      </Box>
 
       <Divider />
 
-      <CryptographyMenu
-        handleIndexChange={handleIndexChange}
-        selectedIndex={selectedItem}
-        cryptography={language.cryptography}
-        file={language.file}
-        text={language.text}
-      />
+      <Box style={{ width: 240 }}>
+        <CryptographyMenu
+          handleIndexChange={handleIndexChange}
+          selectedIndex={selectedItem}
+          cryptography={language.cryptography}
+          file={language.file}
+          text={language.text}
+        />
 
-      <Divider />
+        <Divider />
 
-      <List>
-        <ListItem onClick={() => handleIndexChange(3)} selected={selectedItem === 3} button>
-          <ListItemIcon><BuildIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.settings} />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem onClick={() => handleIndexChange(3)} selected={selectedItem === 3} button>
+            <ListItemIcon><BuildIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.settings} />
+          </ListItem>
+        </List>
 
-      <Divider />
+        <Divider />
 
-      <List>
-        <ListItem onClick={() => handleIndexChange(4)} button>
-          <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.help} />
-        </ListItem>
+        <List>
+          <ListItem onClick={() => handleIndexChange(4)} button>
+            <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.help} />
+          </ListItem>
 
-        <ListItem onClick={() => handleIndexChange(5)} selected={selectedItem === 5} button>
-          <ListItemIcon><InfoIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.about} />
-        </ListItem>
-      </List>
+          <ListItem onClick={() => handleIndexChange(5)} selected={selectedItem === 5} button>
+            <ListItemIcon><InfoIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.about} />
+          </ListItem>
+        </List>
 
-      <Divider />
+        <Divider />
 
-      <List>
-        <ListItem onClick={() => ipcRenderer.send('handle-close')} button>
-          <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
-          <ListItemText primary={language.exit} />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem onClick={() => ipcRenderer.send('handle-close')} button>
+            <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
+            <ListItemText primary={language.exit} />
+          </ListItem>
+        </List>
+      </Box>
     </Drawer>
   );
 };
