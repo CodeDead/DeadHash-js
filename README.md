@@ -31,7 +31,7 @@ In order to produce binary distributable files, you must issue the following com
 yarn build
 ```
 
-If you want to start the development version, you can issue the following command, after running `yarn react-build`:
+If you want to start the development version, you can issue the following command:
 ```shell
 yarn start
 ```
