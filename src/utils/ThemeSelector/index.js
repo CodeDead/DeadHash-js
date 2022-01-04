@@ -19,8 +19,6 @@ import brown from '@mui/material/colors/brown';
  */
 const ThemeSelector = (index) => {
   switch (index) {
-    default:
-      return blue;
     case 1:
       return lightBlue;
     case 2:
@@ -43,6 +41,8 @@ const ThemeSelector = (index) => {
       return amber;
     case 11:
       return brown;
+    default:
+      return blue;
   }
 };
 

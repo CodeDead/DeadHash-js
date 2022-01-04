@@ -14,7 +14,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import BuildIcon from '@mui/icons-material/Build';
 import HelpIcon from '@mui/icons-material/Help';
 import CloseIcon from '@mui/icons-material/Close';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CryptographyMenu from '../CryptographyMenu';
 import { MainContext } from '../../contexts/MainContextProvider';
 
@@ -25,7 +25,7 @@ const DrawerBar = ({ open, onClose }) => {
   const language = state.languages[state.languageIndex];
   const selectedItem = state.selectedListItem;
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const theme = useTheme();
 
   /**
@@ -45,22 +45,22 @@ const DrawerBar = ({ open, onClose }) => {
 
     switch (index) {
       case 1:
-        history.push('/file');
+        navigate('/file');
         break;
       case 2:
-        history.push('/text');
+        navigate('/text');
         break;
       case 3:
-        history.push('/settings');
+        navigate('/settings');
         break;
       case 4:
         window.open('https://codedead.com/Software/DeadHash/help.pdf', '_blank');
         break;
       case 5:
-        history.push('/about');
+        navigate('/about');
         break;
       default:
-        history.push('/');
+        navigate('/');
         break;
     }
   };
