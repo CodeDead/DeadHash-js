@@ -1,6 +1,6 @@
 {
   "name": "deadhash",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "File and text hash calculator",
   "homepage": "./",
   "private": true,
@@ -12,7 +12,7 @@
   "build": {
     "appId": "com.codedead.deadhash",
     "productName": "DeadHash",
-    "copyright": "Copyright © 2021 ${author}",
+    "copyright": "Copyright © 2022 ${author}",
     "win": {
       "target": [
         "nsis",
