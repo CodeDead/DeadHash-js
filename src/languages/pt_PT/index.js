@@ -7,7 +7,7 @@ const pt_PT = () => ({
   help: 'Socorro',
   language: 'Língua',
   aboutSubtitle: 'Saiba mais sobre o DeadHash',
-  aboutMessage: 'DeadHash foi criado por DeadLine.\n\nAlgumas imagens foram fornecidas por icons8: https://icons8.com\nLicença: GPLv3\nVersão: {x}\n\nDireitos autorais © 2021 CodeDead',
+  aboutMessage: 'DeadHash foi criado por DeadLine.\n\nAlgumas imagens foram fornecidas por icons8: https://icons8.com\nLicença: GPLv3\nVersão: {x}\n\nDireitos autorais © 2022 CodeDead',
   codedead: 'CodeDead',
   theme: 'Tema',
   general: 'Geral',

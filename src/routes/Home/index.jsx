@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import Updater from '../../utils/Updater';
 import UpdateDialog from '../../components/UpdateDialog';
 import AlertDialog from '../../components/AlertDialog';
@@ -26,7 +26,7 @@ const Home = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [update, setUpdate] = useState(null);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   /**
    * Check for application updates
@@ -65,14 +65,14 @@ const Home = () => {
    * Open the file hasher page
    */
   const openFileHasher = () => {
-    history.push('/file');
+    navigate('/file');
   };
 
   /**
    * Open the text hasher page
    */
   const openTextHasher = () => {
-    history.push('/text');
+    navigate('/text');
   };
 
   return (
@@ -105,7 +105,10 @@ const Home = () => {
         ) : null}
         <Container
           maxWidth="lg"
-          style={{ marginTop: 10 }}
+          style={{
+            marginTop: 10,
+            marginBottom: 10,
+          }}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} md={6} lg={6}>

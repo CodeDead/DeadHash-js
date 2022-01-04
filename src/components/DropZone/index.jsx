@@ -1,10 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 const DropZone = ({
   children, onDrop, enabled, reRoute,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   /**
    * Event that is fired when one or more files are dropped
@@ -15,7 +15,7 @@ const DropZone = ({
     if (!enabled) return;
 
     if (onDrop) onDrop(e.dataTransfer.files[0]);
-    if (reRoute) history.push(reRoute);
+    if (reRoute) navigate(reRoute);
   };
 
   /**
