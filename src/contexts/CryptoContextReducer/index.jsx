@@ -49,6 +49,7 @@ const CryptoContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CryptoReducer, initState);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <CryptoContext.Provider value={[state, dispatch]}>
       {children}
     </CryptoContext.Provider>

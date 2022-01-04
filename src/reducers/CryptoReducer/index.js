@@ -28,86 +28,85 @@ import {
 } from './Actions/actionTypes';
 
 const CryptoReducer = (state, action) => {
-  switch (action.type) {
-    default:
-      return state;
+  const { type, payload } = action;
+  switch (type) {
     case SET_MD4_STATE:
-      localStorage.md4 = action.payload;
+      localStorage.md4 = payload;
       return {
         ...state,
-        md4: action.payload,
+        md4: payload,
       };
     case SET_MD5_STATE:
-      localStorage.md5 = action.payload;
+      localStorage.md5 = payload;
       return {
         ...state,
-        md5: action.payload,
+        md5: payload,
       };
     case SET_SHA1_STATE:
-      localStorage.sha1 = action.payload;
+      localStorage.sha1 = payload;
       return {
         ...state,
-        sha1: action.payload,
+        sha1: payload,
       };
     case SET_SHA256_STATE:
-      localStorage.sha256 = action.payload;
+      localStorage.sha256 = payload;
       return {
         ...state,
-        sha256: action.payload,
+        sha256: payload,
       };
     case SET_SHA384_STATE:
-      localStorage.sha384 = action.payload;
+      localStorage.sha384 = payload;
       return {
         ...state,
-        sha384: action.payload,
+        sha384: payload,
       };
     case SET_SHA512_STATE:
-      localStorage.sha512 = action.payload;
+      localStorage.sha512 = payload;
       return {
         ...state,
-        sha512: action.payload,
+        sha512: payload,
       };
     case SET_RIPEMD160_STATE:
-      localStorage.ripemd160 = action.payload;
+      localStorage.ripemd160 = payload;
       return {
         ...state,
-        ripemd160: action.payload,
+        ripemd160: payload,
       };
     case SET_SHA224_STATE:
-      localStorage.sha224 = action.payload;
+      localStorage.sha224 = payload;
       return {
         ...state,
-        sha224: action.payload,
+        sha224: payload,
       };
     case SET_CRC1_STATE:
-      localStorage.crc1 = action.payload;
+      localStorage.crc1 = payload;
       return {
         ...state,
-        crc1: action.payload,
+        crc1: payload,
       };
     case SET_CRC8_STATE:
-      localStorage.crc8 = action.payload;
+      localStorage.crc8 = payload;
       return {
         ...state,
-        crc8: action.payload,
+        crc8: payload,
       };
     case SET_CRC16_STATE:
-      localStorage.crc16 = action.payload;
+      localStorage.crc16 = payload;
       return {
         ...state,
-        crc16: action.payload,
+        crc16: payload,
       };
     case SET_CRC24_STATE:
-      localStorage.crc24 = action.payload;
+      localStorage.crc24 = payload;
       return {
         ...state,
-        crc24: action.payload,
+        crc24: payload,
       };
     case SET_CRC32_STATE:
-      localStorage.crc32 = action.payload;
+      localStorage.crc32 = payload;
       return {
         ...state,
-        crc32: action.payload,
+        crc32: payload,
       };
     case RESET_CRYPTO_REDUCER:
       localStorage.md4 = true;
@@ -143,64 +142,66 @@ const CryptoReducer = (state, action) => {
     case SET_TEXT_HASHES:
       return {
         ...state,
-        textHashes: action.payload,
+        textHashes: payload,
       };
     case SET_FILE_HASHES:
       return {
         ...state,
-        fileHashes: action.payload,
+        fileHashes: payload,
       };
     case SET_TEXT_INPUT:
       return {
         ...state,
-        textInput: action.payload,
+        textInput: payload,
       };
     case SET_CURRENT_FILE:
       return {
         ...state,
-        currentFile: action.payload,
+        currentFile: payload,
         fileHashes: null,
       };
     case SET_FILE_COMPARING:
       return {
         ...state,
-        fileComparing: action.payload,
+        fileComparing: payload,
       };
     case SET_FILE_COMPARE_HASH:
       return {
         ...state,
-        fileCompareHash: action.payload,
+        fileCompareHash: payload,
       };
     case SET_FILE_HASH_LOADING:
       return {
         ...state,
-        fileHashLoading: action.payload,
+        fileHashLoading: payload,
       };
     case SET_TEXT_COMPARING:
       return {
         ...state,
-        textComparing: action.payload,
+        textComparing: payload,
       };
     case SET_TEXT_COMPARE_HASH:
       return {
         ...state,
-        textCompareHash: action.payload,
+        textCompareHash: payload,
       };
     case SET_TEXT_HASH_LOADING:
       return {
         ...state,
-        textHashLoading: action.payload,
+        textHashLoading: payload,
       };
     case SET_TEXT_HASH_ERROR:
       return {
         ...state,
-        textErrorMessage: action.payload,
+        textErrorMessage: payload,
       };
     case SET_FILE_HASH_ERROR:
       return {
         ...state,
-        fileErrorMessage: action.payload,
+        fileErrorMessage: payload,
       };
+    default:
+      return state;
   }
 };
 

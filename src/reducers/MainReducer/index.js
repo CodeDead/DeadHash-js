@@ -15,8 +15,6 @@ import {
 
 const MainReducer = (state, action) => {
   switch (action.type) {
-    default:
-      return state;
     case SET_LANGUAGE_INDEX:
       localStorage.languageIndex = action.payload;
       return {
@@ -104,6 +102,8 @@ const MainReducer = (state, action) => {
         ...state,
         canDragDrop: action.payload,
       };
+    default:
+      return state;
   }
 };
 

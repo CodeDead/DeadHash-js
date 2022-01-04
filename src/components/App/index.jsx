@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThemeSelector from '../../utils/ThemeSelector';
@@ -73,23 +73,13 @@ const App = () => {
         <DropZone enabled={enabled} onDrop={onDrop} reRoute="/file">
           <TopBar />
           <CssBaseline />
-          <Switch>
-            <Route path="/settings">
-              <Settings />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/file">
-              <File />
-            </Route>
-            <Route path="/text">
-              <Text />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/file" element={<File />} />
+            <Route path="/text" element={<Text />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
         </DropZone>
       </BrowserRouter>
     </ThemeProvider>

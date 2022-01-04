@@ -64,6 +64,7 @@ const MainContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(MainReducer, initState);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <MainContext.Provider value={[state, dispatch]}>
       {children}
     </MainContext.Provider>
