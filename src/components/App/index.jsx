@@ -74,11 +74,12 @@ const App = () => {
           <TopBar />
           <CssBaseline />
           <Routes>
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/file" element={<File />} />
-            <Route path="/text" element={<Text />} />
-            <Route path="/" element={<Home />} />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/settings" element={<Settings />} />
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/file" element={<File />} />
+            <Route exact path="/text" element={<Text />} />
+            <Route path="*" element={<Home />} />
           </Routes>
         </DropZone>
       </BrowserRouter>
