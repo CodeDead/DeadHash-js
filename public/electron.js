@@ -1,9 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const electron = require('electron');
 
-const { app } = electron;
-const { ipcMain } = electron;
-const { BrowserWindow } = electron;
+const { app, ipcMain, BrowserWindow } = electron;
 const path = require('path');
 const isDev = require('electron-is-dev');
 
