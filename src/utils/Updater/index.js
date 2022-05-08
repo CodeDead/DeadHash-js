@@ -33,7 +33,7 @@ const Updater = (os) => {
       version: null,
     };
 
-    if (isNewer('2.2.1', `${platform.version.majorVersion}.${platform.version.minorVersion}.${platform.version.buildVersion}.${platform.version.revisionVersion}`)) {
+    if (isNewer('2.2.2', `${platform.version.majorVersion}.${platform.version.minorVersion}.${platform.version.buildVersion}.${platform.version.revisionVersion}`)) {
       data.updateAvailable = true;
     }
 
