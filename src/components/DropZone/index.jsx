@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const DropZone = ({
   children, onDrop, enabled, reRoute,

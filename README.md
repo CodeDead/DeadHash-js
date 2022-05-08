@@ -50,4 +50,3 @@ This library is maintained by CodeDead. You can find more about us using the fol
 * [Website](https://codedead.com)
 * [Twitter](https://twitter.com/C0DEDEAD)
 * [Facebook](https://facebook.com/deadlinecodedead)
-* [Reddit](https://reddit.com/r/CodeDead/)
