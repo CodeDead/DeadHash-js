@@ -7,7 +7,6 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InfoIcon from '@mui/icons-material/Info';
@@ -15,6 +14,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import HelpIcon from '@mui/icons-material/Help';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
+import ListItemButton from '@mui/material/ListItemButton';
 import CryptographyMenu from '../CryptographyMenu';
 import { MainContext } from '../../contexts/MainContextProvider';
 
@@ -99,33 +99,33 @@ const DrawerBar = ({ open, onClose }) => {
         <Divider />
 
         <List>
-          <ListItem onClick={() => handleIndexChange(3)} selected={selectedItem === 3} button>
+          <ListItemButton onClick={() => handleIndexChange(3)} selected={selectedItem === 3}>
             <ListItemIcon><BuildIcon color="inherit" /></ListItemIcon>
             <ListItemText primary={language.settings} />
-          </ListItem>
+          </ListItemButton>
         </List>
 
         <Divider />
 
         <List>
-          <ListItem onClick={() => handleIndexChange(4)} button>
+          <ListItemButton onClick={() => handleIndexChange(4)}>
             <ListItemIcon><HelpIcon color="inherit" /></ListItemIcon>
             <ListItemText primary={language.help} />
-          </ListItem>
+          </ListItemButton>
 
-          <ListItem onClick={() => handleIndexChange(5)} selected={selectedItem === 5} button>
+          <ListItemButton onClick={() => handleIndexChange(5)} selected={selectedItem === 5}>
             <ListItemIcon><InfoIcon color="inherit" /></ListItemIcon>
             <ListItemText primary={language.about} />
-          </ListItem>
+          </ListItemButton>
         </List>
 
         <Divider />
 
         <List>
-          <ListItem onClick={() => ipcRenderer.send('handle-close')} button>
+          <ListItemButton onClick={() => ipcRenderer.send('handle-close')}>
             <ListItemIcon><CloseIcon color="inherit" /></ListItemIcon>
             <ListItemText primary={language.exit} />
-          </ListItem>
+          </ListItemButton>
         </List>
       </Box>
     </Drawer>

@@ -27,8 +27,8 @@ const themeIndex = localStorage.themeIndex ? parseFloat(localStorage.themeIndex)
 const autoUpdate = localStorage.autoUpdate && localStorage.autoUpdate === 'true' ? true : !localStorage.autoUpdate;
 const minimizeEnabled = localStorage.minimizeEnabled && localStorage.minimizeEnabled === 'true' ? true : !localStorage.minimizeEnabled;
 const maximizeEnabled = localStorage.maximizeEnabled && localStorage.maximizeEnabled === 'true' ? true : !localStorage.maximizeEnabled;
-const languageEnabled = localStorage.languageEnabled && localStorage.languageEnabled === 'true' ? true : !localStorage.languageEnabled;
-const themeToggleEnabled = localStorage.themeToggleEnabled && localStorage.themeToggleEnabled === 'true' ? true : !localStorage.themeToggleEnabled;
+const languageEnabled = !!(localStorage.languageEnabled && localStorage.languageEnabled === 'true');
+const themeToggleEnabled = !!(localStorage.themeToggleEnabled && localStorage.themeToggleEnabled === 'true');
 const canDragDrop = localStorage.canDragDrop && localStorage.canDragDrop === 'true' ? true : !localStorage.canDragDrop;
 
 const initState = {

@@ -18,7 +18,7 @@ const { ipcRenderer } = window.require('electron');
 
 let appVersion;
 
-ipcRenderer.on('get-version-reply', (e, version) => {
+ipcRenderer.on('get-version-reply', (_e, version) => {
   appVersion = version;
 });
 

@@ -13,7 +13,6 @@ import {
   setFileHashes,
   setFileHashLoading, setTextHashError, setTextHashes, setTextHashLoading,
 } from '../../reducers/CryptoReducer/Actions';
-import Home from '../../routes/Home';
 import Text from '../../routes/Text';
 import File from '../../routes/File';
 import About from '../../routes/About';
@@ -74,12 +73,12 @@ const App = () => {
           <TopBar />
           <CssBaseline />
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<File />} />
             <Route exact path="/settings" element={<Settings />} />
             <Route exact path="/about" element={<About />} />
             <Route exact path="/file" element={<File />} />
             <Route exact path="/text" element={<Text />} />
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={<File />} />
           </Routes>
         </DropZone>
       </BrowserRouter>

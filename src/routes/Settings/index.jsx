@@ -25,7 +25,6 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Updater from '../../utils/Updater';
@@ -545,11 +544,11 @@ const Settings = () => {
             </Grid>
           </Grid>
           <Button
+            variant="contained"
             style={{ marginTop: 10 }}
             onClick={() => checkForUpdates()}
             disabled={loading}
           >
-            <RefreshIcon />
             {language.checkForUpdates}
           </Button>
           <Button
