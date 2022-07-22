@@ -56,9 +56,9 @@ const MainReducer = (state, action) => {
       localStorage.autoUpdate = true;
       localStorage.minimizeEnabled = true;
       localStorage.maximizeEnabled = true;
-      localStorage.languageEnabled = true;
+      localStorage.languageEnabled = false;
       localStorage.canDragDrop = true;
-      localStorage.themeToggleEnabled = true;
+      localStorage.themeToggleEnabled = false;
 
       return {
         ...state,
@@ -68,9 +68,9 @@ const MainReducer = (state, action) => {
         autoUpdate: true,
         minimizeEnabled: true,
         maximizeEnabled: true,
-        languageEnabled: true,
+        languageEnabled: false,
         canDragDrop: true,
-        themeToggleEnabled: true,
+        themeToggleEnabled: false,
       };
     case SET_MINIMIZE_STATUS:
       localStorage.minimizeEnabled = action.payload;
