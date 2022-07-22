@@ -36,13 +36,11 @@ const CopyPasteMenu = ({
       <Menu id={MENU_ID}>
         <Item onClick={() => copyData()}>
           <CopyIcon />
-          {' '}
-          {copy}
+          {` ${copy}`}
         </Item>
         <Item onClick={() => pasteData()}>
           <PasteIcon />
-          {' '}
-          {paste}
+          {` ${paste}`}
         </Item>
       </Menu>
     </>

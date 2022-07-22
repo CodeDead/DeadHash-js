@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ListItem from '@mui/material/ListItem';
 import Collapse from '@mui/material/Collapse';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -7,6 +6,7 @@ import List from '@mui/material/List';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyIcon from '@mui/icons-material/VpnKey';
+import ListItemButton from '@mui/material/ListItemButton';
 import { useTheme } from '@mui/material';
 
 const CryptographyMenu = ({
@@ -24,34 +24,32 @@ const CryptographyMenu = ({
 
   return (
     <List>
-      <ListItem button selected={selectedIndex === 0}>
-        <ListItemIcon onClick={() => handleIndexChange(0)}><KeyIcon /></ListItemIcon>
-        <ListItemText onClick={() => handleIndexChange(0)} primary={cryptography} />
+      <ListItemButton selected={selectedIndex === 0}>
+        <ListItemIcon onClick={handleOpenMenu}><KeyIcon /></ListItemIcon>
+        <ListItemText onClick={handleOpenMenu} primary={cryptography} />
         {openCollapse ? <ExpandLessIcon color="inherit" onClick={handleOpenMenu} />
           : <ExpandMoreIcon color="inherit" onClick={handleOpenMenu} />}
-      </ListItem>
+      </ListItemButton>
       <Collapse in={openCollapse} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem
+          <ListItemButton
             selected={selectedIndex === 1}
-            button
             sx={{
               paddingLeft: theme.spacing(4),
             }}
             onClick={() => handleIndexChange(1)}
           >
             <ListItemText inset primary={file} />
-          </ListItem>
-          <ListItem
+          </ListItemButton>
+          <ListItemButton
             selected={selectedIndex === 2}
-            button
             sx={{
               paddingLeft: theme.spacing(4),
             }}
             onClick={() => handleIndexChange(2)}
           >
             <ListItemText inset primary={text} />
-          </ListItem>
+          </ListItemButton>
         </List>
       </Collapse>
     </List>
