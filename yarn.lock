@@ -5631,7 +5631,7 @@ __metadata:
     concurrently: ^7.3.0
     crc: ^4.1.1
     cross-env: ^7.0.3
-    electron: ^19.0.9
+    electron: ^19.0.11
     electron-builder: ^23.1.0
     electron-is-dev: ^2.0.0
     eslint: ^8.20.0
@@ -6186,16 +6186,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:^19.0.9":
-  version: 19.0.9
-  resolution: "electron@npm:19.0.9"
+"electron@npm:^19.0.11":
+  version: 19.1.8
+  resolution: "electron@npm:19.1.8"
   dependencies:
     "@electron/get": ^1.14.1
     "@types/node": ^16.11.26
     extract-zip: ^1.0.3
   bin:
     electron: cli.js
-  checksum: 662e63216c2802340cd1d2f28664818ec30fade0e1cb9da3a1afb2b13b2c6d920d1506b2c62442ea0118ba8965edee3f1e7c365b8cd1d4060f9a250db1161d47
+  checksum: ea6169002dcb6073c9b32858fbbda6dd51310ab47636a7030437feac7ba7c029b1fa267c5b20f317c05d4a34d974002d205a0bda6ea3289e94dc9438e73835e8
   languageName: node
   linkType: hard
 
