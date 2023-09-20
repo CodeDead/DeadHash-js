@@ -11,7 +11,10 @@ import {
   setCurrentFile,
   setFileHashError,
   setFileHashes,
-  setFileHashLoading, setTextHashError, setTextHashes, setTextHashLoading,
+  setFileHashLoading,
+  setTextHashError,
+  setTextHashes,
+  setTextHashLoading,
 } from '../../reducers/CryptoReducer/Actions';
 import Text from '../../routes/Text';
 import File from '../../routes/File';

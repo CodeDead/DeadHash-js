@@ -2,7 +2,7 @@ const Updater = (os) => {
   /**
    * Check whether version b is newer than version a
    * @param a Version a
-   * @param b Verion b
+   * @param b Version b
    * @returns {boolean} True if version b is newer than version a, otherwise false
    */
   const isNewer = (a, b) => {
