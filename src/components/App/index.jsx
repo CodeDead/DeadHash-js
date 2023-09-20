@@ -1,4 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, {
+  useContext, useEffect, lazy, Suspense,
+} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -16,10 +18,12 @@ import {
   setTextHashes,
   setTextHashLoading,
 } from '../../reducers/CryptoReducer/Actions';
-import Text from '../../routes/Text';
-import File from '../../routes/File';
-import About from '../../routes/About';
-import Settings from '../../routes/Settings';
+import LoadingBar from '../LoadingBar';
+
+const Text = lazy(() => import('../../routes/Text'));
+const File = lazy(() => import('../../routes/File'));
+const About = lazy(() => import('../../routes/About'));
+const Settings = lazy(() => import('../../routes/Settings'));
 
 const { ipcRenderer } = window.require('electron');
 
@@ -75,14 +79,16 @@ const App = () => {
         <DropZone enabled={enabled} onDrop={onDrop} reRoute="/file">
           <TopBar />
           <CssBaseline />
-          <Routes>
-            <Route exact path="/" element={<File />} />
-            <Route exact path="/settings" element={<Settings />} />
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/file" element={<File />} />
-            <Route exact path="/text" element={<Text />} />
-            <Route path="*" element={<File />} />
-          </Routes>
+          <Suspense fallback={<LoadingBar />}>
+            <Routes>
+              <Route exact path="/" element={<File />} />
+              <Route exact path="/settings" element={<Settings />} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/file" element={<File />} />
+              <Route exact path="/text" element={<Text />} />
+              <Route path="*" element={<File />} />
+            </Routes>
+          </Suspense>
         </DropZone>
       </BrowserRouter>
     </ThemeProvider>
