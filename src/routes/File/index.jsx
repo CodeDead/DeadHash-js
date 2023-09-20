@@ -13,7 +13,10 @@ import { setActiveListItem } from '../../reducers/MainReducer/Actions';
 import { MainContext } from '../../contexts/MainContextProvider';
 import { CryptoContext } from '../../contexts/CryptoContextReducer';
 import {
-  setCurrentFile, setFileCompareHash, setFileHashComparing, setFileHashError,
+  setCurrentFile,
+  setFileCompareHash,
+  setFileHashComparing,
+  setFileHashError,
   setFileHashes,
   setFileHashLoading,
 } from '../../reducers/CryptoReducer/Actions';
